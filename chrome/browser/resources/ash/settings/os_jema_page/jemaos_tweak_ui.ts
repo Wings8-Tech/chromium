@@ -1,0 +1,1018 @@
+// os-settings-jemaos-tweak-ui
+import { PolymerElement, mixinBehaviors } from 'chrome://resources/polymer/v3_0/polymer/polymer_bundled.min.js';
+import { sendWithPromise } from 'chrome://resources/js/cr.js';
+import { I18nMixin } from 'chrome://resources/ash/common/cr_elements/i18n_mixin.js';
+import { WebUiListenerMixin } from 'chrome://resources/ash/common/cr_elements/web_ui_listener_mixin.js';
+import { CrDialogElement } from 'chrome://resources/ash/common/cr_elements/cr_dialog/cr_dialog.js';
+import { LifetimeBrowserProxyImpl } from '/shared/settings/lifetime_browser_proxy.js';
+import 'chrome://resources/ash/common/cr_elements/cr_toggle/cr_toggle.js';
+import 'chrome://resources/ash/common/cr_elements/cr_dialog/cr_dialog.js';
+import 'chrome://resources/ash/common/cr_elements/cr_shared_style.css.js';
+import '../settings_shared.css.js';
+import '../common/password_prompt_dialog/password_prompt_dialog.js';
+import './components/backup_intro_dialog.js';
+import './components/restore_password_dialog.js';
+import './components/restore_result_dialog.js';
+import { ShellClient } from './shell_client.js';
+
+import { getTemplate } from './jemaos_tweak_ui.html.js';
+
+class WidevineHelper {
+  private element_: HTMLElement;
+  private shellClient_: ShellClient;
+
+  constructor(ele: HTMLElement) {
+    this.element_ = ele;
+    this.shellClient_ = new ShellClient(ele);
+  }
+
+  static get Command() {
+    return '/usr/bin/enable_libwidevine';
+  }
+
+  static get RunningStateParam() {
+    return '--state';
+  }
+
+  static get StatusParam() {
+    return '--status';
+  }
+
+  static get EnableParam() {
+    return '--file';
+  }
+
+  static get AutoParam() {
+    return '--auto';
+  }
+
+  static get DisableParam() {
+    return '--disable';
+  }
+
+  async auto() {
+    await this.shellClient_.ExecForResult(
+      `${WidevineHelper.Command} ${WidevineHelper.AutoParam}`);
+  }
+
+  async isSupported() {
+    // On JemaOS, enable_libwidevine is installed by chromeos-login /
+    // jemaos-utils, so the Widevine toggle should always be visible.
+    // shellClient_.IsFileExist() is unreliable in some release builds and
+    // would hide the toggle even when the binary is present. The real
+    // presence check is done by the status / enable helpers later.
+    return true;
+  }
+
+  async getRunningState() {
+    const result = await this.shellClient_.SafeExecForResult(`${WidevineHelper.Command} ${WidevineHelper.RunningStateParam}`);
+    return result;
+  }
+
+  async getWidevineStatus() {
+    const result = await this.shellClient_.SafeExecForResult(`${WidevineHelper.Command} ${WidevineHelper.StatusParam}`);
+    return result;
+  }
+
+  async toggle(file: string | null) {
+    if (file) {
+      await this.enable(file);
+    } else {
+      await this.disable();
+    }
+  }
+
+  async install(file: string) {
+    await this.shellClient_.ExecForResult(
+      `${WidevineHelper.Command} ${WidevineHelper.EnableParam} ${file}`);
+  }
+
+  async enable(file: string) {
+    try {
+      await this.install(file);
+    } catch (err) {
+      console.log('enable widevine failed', err);
+      throw err;
+    }
+  }
+
+  async disable() {
+    await this.shellClient_.SafeExecForResult(`${WidevineHelper.Command} ${WidevineHelper.DisableParam}`);
+  }
+}
+
+const WIDEVINE_STATUS_KEY = 'jemaos_libwidevine_enabled';
+
+interface JemaSettingsTweakUiPageElement {
+  $: {
+    widevineErrorDialog: CrDialogElement,
+  };
+}
+
+const JemaSettingsTweakUIPageElementBase =
+  WebUiListenerMixin(I18nMixin(PolymerElement));
+
+class JemaSettingsTweakUiPageElement extends JemaSettingsTweakUIPageElementBase {
+  static get is() {
+    return 'os-settings-jemaos-tweak-ui' as const;
+  }
+
+  static get template() {
+    return getTemplate();
+  }
+
+  static get properties() {
+    return {
+      showRotateScreenButton_: Boolean,
+      isInTabletPhysicalState_: Boolean,
+      showSwitchTabletLaptopButton_: Boolean,
+      canToggleRotateScreenButton_: {
+        type: Boolean,
+        computed: 'computeCanToggleRotateScreenButton_(isInTabletPhysicalState_)',
+      },
+      showToggleWidevine_: {
+        type: Boolean,
+        value: false,
+      },
+      libwidevineEnabled_: {
+        type: Boolean,
+        value: false,
+      },
+      togglingWidevine_: {
+        type: Boolean,
+        value: false,
+      },
+      showWidevineErrorDialog_: {
+        type: Boolean,
+        value: false,
+      },
+      rebootRequiredForWidevine_: {
+        type: Boolean,
+        value: false,
+      },
+      showToggleCpuTurbo_: {
+        type: Boolean,
+        value: false,
+      },
+      cpuTurboEnabled_: {
+        type: Boolean,
+        value: false,
+      },
+      togglingCpuTurbo_: {
+        type: Boolean,
+        value: false,
+      },
+      showCpuTurboErrorDialog_: {
+        type: Boolean,
+        value: false,
+      },
+      showBackup_: {
+        type: Boolean,
+        value: false,
+      },
+      backupRunning_: {
+        type: Boolean,
+        value: false,
+      },
+      showPasswordPromptDialog_: {
+        type: Boolean,
+        value: false,
+      },
+      showBackupIntroDialog_: {
+        type: Boolean,
+        value: false,
+      },
+      showRestorePasswordDialog_: {
+        type: Boolean,
+        value: false,
+      },
+      showRestoreResultDialog_: {
+        type: Boolean,
+        value: false,
+      },
+      restoreRunning_: {
+        type: Boolean,
+        value: false,
+      },
+      restoreSuccess_: {
+        type: Boolean,
+        value: false,
+      },
+      restoreMessage_: {
+        type: String,
+        value: '',
+      },
+      cloudBackupRunning_: {
+        type: Boolean,
+        value: false,
+      },
+      isLocalAccount_: {
+        type: Boolean,
+        value: false,
+      },
+      cloudFeaturesAvailable_: {
+        type: Boolean,
+        value: false,
+      },
+      cloudRestoreRunning_: {
+        type: Boolean,
+        value: false,
+      },
+      showCloudBackupResultDialog_: {
+        type: Boolean,
+        value: false,
+      },
+      cloudBackupSuccess_: {
+        type: Boolean,
+        value: false,
+      },
+      cloudBackupMessage_: {
+        type: String,
+        value: '',
+      },
+      authFactorHasPassword: Boolean,
+
+      authFactorHasPasswordOrPin: Boolean,
+
+      connectApiUserId_: {
+        type: String,
+        value: '',
+      },
+      // Renseigne quand la recuperation du user_id SaaS a echoue : l UI
+      // affiche "Information indisponible" au lieu de charger sans fin.
+      connectApiError_: {
+        type: String,
+        value: '',
+      },
+
+      connectApiStatus_: {
+        type: String,
+        value: '',
+      },
+
+      backupAnalysis_: {
+        type: Object,
+        value: null,
+      },
+
+      backupAnalysisLoading_: {
+        type: Boolean,
+        value: false,
+      },
+
+      arcMediaAutoScanEnabled_: {
+        type: Boolean,
+        value: true,
+      },
+      savedArcMediaAutoScanEnabled_: {
+        type: Number,
+        value: -1,
+      },
+      rebootRequiredForToggleArcMediaAutoScan_: {
+        type: Boolean,
+        computed: 'computeRebootRequiredForToggleArcMediaAutoScan_(arcMediaAutoScanEnabled_, savedArcMediaAutoScanEnabled_)',
+      },
+    };
+  }
+
+  private showRotateScreenButton_: boolean;
+  private isInTabletPhysicalState_: boolean;
+  private showSwitchTabletLaptopButton_: boolean;
+  private canToggleRotateScreenButton_: boolean;
+
+  private arcMediaAutoScanEnabled_: boolean;
+  private savedArcMediaAutoScanEnabled_: number;
+  private rebootRequiredForToggleArcMediaAutoScan_: boolean;
+  private togglingArcMediaAutoScan_: boolean;
+
+  private showToggleWidevine_: boolean;
+  private libwidevineEnabled_: boolean;
+  private togglingWidevine_: boolean;
+
+  private showBackup_: boolean;
+  private backupRunning_: boolean;
+  private showPasswordPromptDialog_: boolean;
+  private showBackupIntroDialog_: boolean;
+  private showRestorePasswordDialog_: boolean;
+  private showRestoreResultDialog_: boolean;
+  private restoreRunning_: boolean;
+  private restoreSuccess_: boolean;
+  private restoreMessage_: string;
+  private cloudBackupRunning_: boolean;
+  private isLocalAccount_: boolean;
+  private cloudFeaturesAvailable_: boolean;
+  private cloudRestoreRunning_: boolean;
+  private showCloudBackupResultDialog_: boolean;
+  private cloudBackupSuccess_: boolean;
+  private cloudBackupMessage_: string;
+  private isCloudBackup_: boolean = false;
+  private isCloudRestore_: boolean = false;
+  private authFactorHasPassword: boolean;
+  private authFactorHasPasswordOrPin: boolean;
+  private connectApiUserId_: string;
+  private connectApiError_: string;
+  private connectApiStatus_: string;
+  private backupAnalysis_: any;
+  private backupAnalysisLoading_: boolean;
+
+  private client_: WidevineHelper;
+
+  private backupEmail_: string;
+  private backupFilePassword_: string;
+  private backupCanceled_: boolean;
+  private restoreFilePath_: string;
+  private restorePassword_: string;
+  private cloudRestoreFileKey_: string;
+
+  private showWidevineErrorDialog_: boolean;
+  private rebootRequiredForWidevine_: boolean;
+
+  private showToggleCpuTurbo_: boolean;
+  private cpuTurboEnabled_: boolean;
+  private togglingCpuTurbo_: boolean;
+  private showCpuTurboErrorDialog_: boolean;
+
+  constructor() {
+    super();
+    this.client_ = new WidevineHelper(this);
+    this.backupEmail_ = '';
+    this.backupFilePassword_ = '';
+    this.restoreFilePath_ = '';
+    this.restorePassword_ = '';
+    this.cloudRestoreFileKey_ = '';
+    this.togglingArcMediaAutoScan_ = false;
+  }
+
+  override connectedCallback() {
+    super.connectedCallback();
+    this.getShowRotateScreenButton();
+    this.getIsInTabletPhysicalState();
+    this.getShowSwitchTabletLaptopButton();
+    this.getArcMediaAutoScanEnabled();
+    this.addWebUiListener('show-rotate-screen-button-changed', this.onShowRotateScreenButtonChanged_.bind(this));
+    this.addWebUiListener('is-in-tablet-physical-state-changed', this.onIsInTabletPhysicalStateChanged_.bind(this));
+    this.addWebUiListener('show-switch-tablet-laptop-button-changed', this.onShowSwitchTabletLaptopButtonChanged_.bind(this));
+
+    this.addWebUiListener('jemaos-backup-file-selected', this.onBackupFileSelected_.bind(this));
+    this.addWebUiListener('jemaos-backup-task-finished', this.onBackupDone_.bind(this));
+
+    this.addWebUiListener('jemaos-restore-file-selected', this.onRestoreFileSelected_.bind(this));
+    this.addWebUiListener('jemaos-restore-task-finished', this.onRestoreDone_.bind(this));
+
+    this.addWebUiListener('jemaos-cloud-backup-task-finished', this.onCloudBackupDone_.bind(this));
+    this.addWebUiListener('jemaos-cloud-restore-task-finished', this.onCloudRestoreDone_.bind(this));
+
+    this.addWebUiListener('jemaos-arc-media-auto-scan-changed', this.onArcMediaAutoScanStateChanged_.bind(this));
+
+    this.addWebUiListener('connect-api-user-id-fetched', this.onConnectApiUserIdFetched_.bind(this));
+
+    this.checkLibwidevineStatus_();
+    this.checkCpuTurboStatus_();
+    this.checkBackupSupported_();
+
+    // Cloud backup/restore availability depends on the account tier
+    // (local and Freemium accounts are excluded by the backend).
+    sendWithPromise('getJemaCloudBackupAvailable').then((available) => {
+      this.cloudFeaturesAvailable_ = !!available;
+    });
+
+    // Fetch user_id when component is ready
+    setTimeout(() => {
+      this.fetchConnectApiUserId_();
+    }, 1000);
+  }
+
+  getShowRotateScreenButton() {
+    sendWithPromise('getShowRotateScreenButton').then((visible) => {
+      this.showRotateScreenButton_ = visible;
+    });
+  }
+
+  getIsInTabletPhysicalState() {
+    sendWithPromise('getIsInTabletPhysicalState').then((enabled) => {
+      this.isInTabletPhysicalState_ = enabled;
+    });
+  }
+
+  onShowRotateScreenButtonChanged_(visible: boolean) {
+    this.showRotateScreenButton_ = visible;
+  }
+
+  onIsInTabletPhysicalStateChanged_(enabled: boolean) {
+    this.isInTabletPhysicalState_ = enabled;
+  }
+
+  computeCanToggleRotateScreenButton_(isInTabletPhysicalState: boolean) {
+    const canToggleRotateScreenButton = isInTabletPhysicalState;
+    return canToggleRotateScreenButton;
+  }
+
+  onToggleShowRotateScreenButton_() {
+    this.showRotateScreenButton_ = !this.showRotateScreenButton_;
+    chrome.send('setShowRotateScreenButton', [this.showRotateScreenButton_]);
+  }
+
+  shouldShowRotateScreenButton_() {
+    return this.showRotateScreenButton_ && this.canToggleRotateScreenButton_;
+  }
+
+  getShowRotateScreenButtonMessage_() {
+    if (!this.isInTabletPhysicalState_) {
+      return this.i18nAdvanced('notTabletPhysicalStateDisableJemaOsRotateScreen');
+    }
+    return this.i18nAdvanced('displayJemaOsRotateScreenButton');
+  }
+
+  getShowSwitchTabletLaptopButton() {
+    sendWithPromise('getShowSwitchTabletLaptopButton').then((enabled) => {
+      console.log('getShowSwitchTabletLaptopButton', enabled);
+      this.showSwitchTabletLaptopButton_ = enabled;
+    });
+  }
+
+  onToggleShowSwitchTabletLaptopButton_() {
+    this.showSwitchTabletLaptopButton_ = !this.showSwitchTabletLaptopButton_;
+    chrome.send('setShowSwitchTabletLaptopButton', [this.showSwitchTabletLaptopButton_]);
+  }
+
+  onShowSwitchTabletLaptopButtonChanged_(visible: boolean) {
+    console.log('onShowSwitchTabletLaptopButtonChanged_', visible);
+    this.showSwitchTabletLaptopButton_ = visible;
+  }
+
+  async checkLibwidevineStatus_() {
+    // On some JemaOS builds the shell-client based file existence check
+    // incorrectly reports that enable_libwidevine is not supported, even
+    // though the binary is installed and Widevine already works. As a
+    // robust fallback, also use the actual script status output.
+    let support = false;
+    try {
+      support = await this.client_.isSupported();
+    } catch (e) {
+      support = false;
+    }
+
+    let status = '';
+    try {
+      status = await this.client_.getWidevineStatus();
+    } catch (e) {
+      status = '';
+    }
+
+    if (support || status === 'yes') {
+      this.showToggleWidevine_ = true;
+      this.libwidevineEnabled_ = (status === 'yes');
+      this.getRebootRequiredForWidevine_();
+    } else {
+      this.showToggleWidevine_ = false;
+    }
+  }
+
+  async getLibwidevineEnabled_() {
+    const result = await this.client_.getWidevineStatus();
+    const enabled = (result === 'yes');
+    this.libwidevineEnabled_ = enabled;
+    return result;
+  }
+
+  async getLibwidevineScriptRunningState_() {
+    const result = await this.client_.getRunningState();
+    this.togglingWidevine_ = (result === 'yes');
+  }
+
+  async onToggleLibwidevine_() {
+    if (this.togglingWidevine_) {
+      return;
+    }
+    const enabled = !this.libwidevineEnabled_;
+    this.libwidevineEnabled_ = enabled;
+    if (enabled) {
+      await this.enableLibwidevineAuto_();
+    } else {
+      await this.disableLibwidevine_();
+    }
+  }
+
+  async enableLibwidevineAuto_() {
+    this.togglingWidevine_ = true;
+    try {
+      const result = await sendWithPromise('triggerWidevineUpdate', true);
+      if (!result) {
+        this.libwidevineEnabled_ = false;
+        this.showWidevineErrorDialog_ = true;
+        return;
+      }
+      // The component update was triggered. A reboot is required for the
+      // zygote to load the downloaded Widevine CDM.
+      this.toggleRebootRequiredForWidevine_(true);
+    } catch (e) {
+      this.libwidevineEnabled_ = false;
+      this.showWidevineErrorDialog_ = true;
+    } finally {
+      this.togglingWidevine_ = false;
+    }
+  }
+
+  async disableLibwidevine_() {
+    this.togglingWidevine_ = true;
+    try {
+      const result = await sendWithPromise('triggerWidevineUpdate', false);
+      if (!result) {
+        this.libwidevineEnabled_ = true;
+        this.showWidevineErrorDialog_ = true;
+        return;
+      }
+      this.toggleRebootRequiredForWidevine_(false);
+    } catch (e) {
+      this.libwidevineEnabled_ = true;
+      this.showWidevineErrorDialog_ = true;
+    } finally {
+      this.togglingWidevine_ = false;
+    }
+  }
+
+  getRebootRequiredForWidevine_() {
+    sendWithPromise('getRebootRequiredForWidevine').then((required: boolean) => {
+      this.rebootRequiredForWidevine_ = required;
+    });
+  }
+
+  toggleRebootRequiredForWidevine_(force: boolean) {
+    sendWithPromise('toggleRebootRequiredForWidevine', force).then((required: boolean) => {
+      this.rebootRequiredForWidevine_ = required;
+    });
+  }
+
+  shouldShowRebootButtonForWidevine_(toggling: boolean, required: boolean) {
+    return !toggling && required;
+  }
+
+  onRestartForWidevineTap_() {
+    LifetimeBrowserProxyImpl.getInstance().signOutAndRestart();
+  }
+
+  toggleWidevineHelpMsg_() {
+    return this.i18nAdvanced('toggleWidevineHelpMessage');
+  }
+
+  onWidevineErrorDialogClose_() {
+    this.showWidevineErrorDialog_ = false;
+  }
+
+  async checkCpuTurboStatus_() {
+    // The toggle is always offered: cpu_turbo.sh fails at apply time
+    // on devices without boost support, which the error dialog shows.
+    this.showToggleCpuTurbo_ = true;
+    try {
+      this.cpuTurboEnabled_ = await sendWithPromise('getCpuTurboEnabled');
+    } catch (e) {
+      this.cpuTurboEnabled_ = true;
+    }
+  }
+
+  async onToggleCpuTurbo_() {
+    if (this.togglingCpuTurbo_) {
+      return;
+    }
+    const enabled = !this.cpuTurboEnabled_;
+    this.cpuTurboEnabled_ = enabled;
+    this.togglingCpuTurbo_ = true;
+    try {
+      const result = await sendWithPromise('triggerCpuTurbo', enabled);
+      if (!result) {
+        this.cpuTurboEnabled_ = !enabled;
+        this.showCpuTurboErrorDialog_ = true;
+      }
+    } catch (e) {
+      this.cpuTurboEnabled_ = !enabled;
+      this.showCpuTurboErrorDialog_ = true;
+    } finally {
+      this.togglingCpuTurbo_ = false;
+    }
+  }
+
+  onCpuTurboErrorDialogClose_() {
+    this.showCpuTurboErrorDialog_ = false;
+  }
+
+  async checkBackupSupported_() {
+    sendWithPromise('jemaosBackupSupported').then((supported) => {
+      if (!supported) {
+        this.showBackup_ = false;
+        return;
+      }
+      chrome.usersPrivate.getCurrentUser().then((user) => {
+        this.backupEmail_ = user && user.email;
+        if (this.backupEmail_) {
+          // Local Jema accounts (@jemaos.local) have no access to cloud
+          // backup/restore; these features require an online Jema account.
+          this.isLocalAccount_ = this.backupEmail_.endsWith('@jemaos.local');
+          this.showBackup_ = true;
+          this.getJemaosBackupState_();
+        } else {
+          console.error('failed to get current user, backup is disabled');
+          this.showBackup_ = false;
+        }
+      });
+    })
+  }
+
+  backupDisabled_() {
+    return this.backupRunning_ || !this.authFactorHasPasswordOrPin;
+  }
+
+  // Les sections "Informations utilisateur de l'API Connect" et "Analyse du
+  // stockage de sauvegarde" n'ont de sens que pour un compte en ligne lie au
+  // SaaS : pour un compte local (@jemaos.local) il n'existe aucun user_id
+  // cote serveur, l'affichage resterait bloque sur "Chargement en cours".
+  showConnectApiSections_(showBackup: boolean, isLocalAccount: boolean): boolean {
+    return showBackup && !isLocalAccount;
+  }
+
+  isConnectApiLoading_(userId: string, error: string): boolean {
+    return !userId && !error;
+  }
+
+  showUserIdRequired_(userId: string, error: string): boolean {
+    return !userId && !error;
+  }
+
+  getJemaosBackupState_() {
+    sendWithPromise('getJemaosBackupState').then((state) => {
+      this.backupRunning_ = (state === 'running');
+    });
+  }
+
+  generateDefaultFilename(email: string) {
+    const date = new Date();
+    const year = date.getFullYear().toString().padStart(4, '0');
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const day = date.getDate().toString().padStart(2, '0');
+    const hour = date.getHours().toString().padStart(2, '0');
+    const minute = date.getMinutes().toString().padStart(2, '0');
+
+    const regex = /[^A-Za-z0-9]/g;
+    const name = email.split('@')[0];
+    const filename = `jemaos_${name.replace(regex, '_')}_${year}${month}${day}_${hour}${minute}.bak`;
+    return filename;
+  }
+
+  onBackupClick_() {
+    // this.showPasswordPromptDialog_ = true;
+    this.backupCanceled_ = false;
+    this.showBackupIntroDialog_ = true;
+  }
+
+
+  openSelectBackupFileDialog_() {
+    const defaultFilename = this.generateDefaultFilename(this.backupEmail_);
+    console.log('defaultFilename', defaultFilename);
+    chrome.send('jemaosBackupSelectFile', [defaultFilename]);
+  }
+
+  onBackupFileSelected_(canceled: boolean) {
+    if (canceled) {
+      this.backupFilePassword_ = '';
+      return;
+    }
+    this.startBackup_();
+  }
+
+  startBackup_() {
+    this.backupRunning_ = true;
+    chrome.send('jemaosBackupStarted', [this.backupEmail_, this.backupFilePassword_]);
+  }
+
+  onBackupDone_(success: boolean) {
+    console.log('onBackupDone_, result', success);
+    this.backupRunning_ = false;
+  }
+
+  onBackupIntroDialogClosed_(e: Event) {
+    console.log('intro dialog closed', e);
+    this.showBackupIntroDialog_ = false;
+    if (!this.backupCanceled_) {
+      console.log('prompt for password');
+      this.backupFilePassword_ = '';
+      this.showPasswordPromptDialog_ = true;
+    }
+  }
+
+  onBackupIntroDialogCanceled_(e: Event) {
+    console.log('intro dialog canceled', e);
+    this.backupCanceled_ = true;
+  }
+
+  onBackupPasswordObtained_(e: Event) {
+    console.log('onBackupPasswordObtained_', e);
+    const { detail } = e as CustomEvent;
+    this.backupFilePassword_ = detail;
+  }
+
+  onPasswordPromptClosed_(e: Event) {
+    this.showPasswordPromptDialog_ = false;
+    console.log('password prompt closed', e);
+    if (this.backupFilePassword_) {
+      if (this.isCloudBackup_) {
+        console.log('starting cloud backup');
+        this.isCloudBackup_ = false;
+        this.startCloudBackup_();
+      } else {
+        console.log('continue to select file');
+        this.openSelectBackupFileDialog_();
+      }
+    } else {
+      this.isCloudBackup_ = false;
+    }
+  }
+
+  onPasswordPromptCanceled_(e: Event) {
+    console.log('password prompt cancel', e);
+    this.isCloudBackup_ = false;
+  }
+
+  restoreDisabled_() {
+    return this.restoreRunning_ || !this.authFactorHasPasswordOrPin;
+  }
+
+  onRestoreClick_() {
+    console.log('restore click');
+    this.showRestorePasswordDialog_ = true;
+  }
+
+  onRestorePasswordObtained_(e: Event) {
+    console.log('onRestorePasswordObtained_', e);
+    const { detail } = e as CustomEvent;
+    // Handle both old format (string) and new format (object with password and fileKey)
+    if (typeof detail === 'string') {
+      this.restorePassword_ = detail;
+      this.cloudRestoreFileKey_ = '';
+    } else {
+      this.restorePassword_ = detail.password;
+      this.cloudRestoreFileKey_ = detail.fileKey || '';
+    }
+  }
+
+  onRestorePasswordDialogClosed_(e: Event) {
+    this.showRestorePasswordDialog_ = false;
+    console.log('restore password dialog closed', e);
+    if (this.restorePassword_) {
+      if (this.isCloudRestore_) {
+        console.log('starting cloud restore');
+        this.isCloudRestore_ = false;
+        this.startCloudRestore_();
+      } else {
+        console.log('continue to select restore file');
+        this.openSelectRestoreFileDialog_();
+      }
+    } else {
+      this.isCloudRestore_ = false;
+    }
+  }
+
+  onRestorePasswordDialogCanceled_(e: Event) {
+    console.log('restore password dialog cancel', e);
+    this.restorePassword_ = '';
+    this.isCloudRestore_ = false;
+  }
+
+  openSelectRestoreFileDialog_() {
+    chrome.send('jemaosRestoreSelectFile', []);
+  }
+
+  onRestoreFileSelected_(canceled: boolean, filePath: string) {
+    if (canceled) {
+      this.restorePassword_ = '';
+      return;
+    }
+    this.restoreFilePath_ = filePath;
+    this.startRestore_();
+  }
+
+  startRestore_() {
+    this.restoreRunning_ = true;
+    chrome.send('jemaosRestoreStarted', [this.backupEmail_, this.restorePassword_, this.restoreFilePath_]);
+  }
+
+  onRestoreDone_(success: boolean, message: string) {
+    console.log('onRestoreDone_, result', success, message);
+    this.restoreRunning_ = false;
+    this.restoreSuccess_ = success;
+    this.restoreMessage_ = message;
+    this.showRestoreResultDialog_ = true;
+  }
+
+  onRestoreResultDialogClosed_(e: Event) {
+    console.log('restore result dialog closed', e);
+    this.showRestoreResultDialog_ = false;
+    this.restorePassword_ = '';
+    this.restoreFilePath_ = '';
+  }
+
+  // Cloud Backup handlers
+  cloudBackupDisabled_() {
+    return this.cloudBackupRunning_ || !this.authFactorHasPassword ||
+        this.isLocalAccount_ || !this.cloudFeaturesAvailable_;
+  }
+
+  cloudRestoreDisabled_() {
+    return this.cloudRestoreRunning_ || !this.authFactorHasPassword ||
+        this.isLocalAccount_ || !this.cloudFeaturesAvailable_;
+  }
+
+  onCloudBackupClick_() {
+    console.log('cloud backup click');
+    this.isCloudBackup_ = true;
+    this.showPasswordPromptDialog_ = true;
+  }
+
+  onCloudRestoreClick_() {
+    console.log('cloud restore click');
+    this.isCloudRestore_ = true;
+    this.showRestorePasswordDialog_ = true;
+  }
+
+  startCloudBackup_() {
+    this.cloudBackupRunning_ = true;
+    chrome.send('jemaosCloudBackupStarted', [this.backupEmail_, this.backupFilePassword_]);
+  }
+
+  onCloudBackupDone_(success: boolean, message: string) {
+    console.log('onCloudBackupDone_, result', success, message);
+    this.cloudBackupRunning_ = false;
+    this.cloudBackupSuccess_ = success;
+    this.cloudBackupMessage_ = message;
+    this.showCloudBackupResultDialog_ = true;
+  }
+
+  onCloudBackupResultDialogClosed_(e: Event) {
+    console.log('cloud backup result dialog closed', e);
+    this.showCloudBackupResultDialog_ = false;
+    this.backupFilePassword_ = '';
+  }
+
+  startCloudRestore_() {
+    this.cloudRestoreRunning_ = true;
+    // Send the fileKey directly to the backend (it already contains the full path)
+    chrome.send('jemaosCloudRestoreStarted', [this.backupEmail_, this.restorePassword_, this.cloudRestoreFileKey_]);
+  }
+
+  onCloudRestoreDone_(success: boolean, message: string) {
+    console.log('onCloudRestoreDone_, result', success, message);
+    this.cloudRestoreRunning_ = false;
+    this.restoreSuccess_ = success;
+    this.restoreMessage_ = message;
+    this.showRestoreResultDialog_ = true;
+  }
+
+  getArcMediaAutoScanEnabled() {
+    sendWithPromise('getArcMediaAutoScanState').then((result: { enabled: boolean, saved: number }) => {
+      const { enabled, saved } = result;
+      console.log('getArcMediaAutoScanState', result);
+      this.arcMediaAutoScanEnabled_ = enabled;
+      this.savedArcMediaAutoScanEnabled_ = saved;
+      if (saved === -1) {
+        chrome.send('setArcMediaAutoScanStateForCurrentSession', [enabled]);
+      }
+    });
+  }
+
+  async onToggleArcMediaAutoScan_() {
+    if (this.togglingArcMediaAutoScan_) {
+      return;
+    }
+    this.togglingArcMediaAutoScan_ = true;
+    this.arcMediaAutoScanEnabled_ = !this.arcMediaAutoScanEnabled_;
+    chrome.send('setArcMediaAutoScanState', [this.arcMediaAutoScanEnabled_]);
+    this.togglingArcMediaAutoScan_ = false;
+  }
+
+  onArcMediaAutoScanStateChanged_(result: { enabled: boolean, saved: number }) {
+    const { enabled, saved } = result;
+    console.log('onArcMediaAutoScanStateChanged_', result);
+    this.arcMediaAutoScanEnabled_ = enabled;
+    this.savedArcMediaAutoScanEnabled_ = saved;
+  }
+
+  computeRebootRequiredForToggleArcMediaAutoScan_(enabled: boolean, saved: number) {
+    if (saved === -1) return false;
+    return enabled !== (!!saved);
+  }
+
+  onRestartForToggleArcMediaAutoScanTap_() {
+    LifetimeBrowserProxyImpl.getInstance().relaunch();
+  }
+
+  fetchConnectApiUserId_() {
+    try {
+      sendWithPromise('getConnectApiUserId').then((result) => {
+        console.log('getConnectApiUserId result:', result);
+        if (result && result.error) {
+          this.connectApiError_ = String(result.error);
+          return;
+        }
+        if (result && result.user_id) {
+          this.connectApiUserId_ = result.user_id;
+          console.log('User ID set:', this.connectApiUserId_);
+          // Fetch backup analysis when user_id is available
+          setTimeout(() => this.fetchBackupAnalysis_(), 500);
+        }
+        if (result && result.status) {
+          this.connectApiStatus_ = result.status;
+          console.log('Status set:', this.connectApiStatus_);
+        }
+      }).catch((error) => {
+        console.error('Error fetching user_id:', error);
+      });
+    } catch (error) {
+      console.error('Exception in fetchConnectApiUserId_:', error);
+    }
+  }
+
+  onConnectApiUserIdFetched_(result: any) {
+    try {
+      console.log('onConnectApiUserIdFetched_ called with:', result);
+      if (result && result.error) {
+        this.connectApiError_ = String(result.error);
+        return;
+      }
+      if (result && result.user_id) {
+        this.connectApiUserId_ = result.user_id;
+        console.log('User ID received from event:', this.connectApiUserId_);
+        // Fetch backup analysis when user_id is received
+        setTimeout(() => this.fetchBackupAnalysis_(), 500);
+      }
+      if (result && result.status) {
+        this.connectApiStatus_ = result.status;
+        console.log('Status received from event:', this.connectApiStatus_);
+      }
+    } catch (error) {
+      console.error('Error in onConnectApiUserIdFetched_:', error);
+    }
+  }
+
+  fetchBackupAnalysis_() {
+    if (!this.connectApiUserId_ || this.backupAnalysisLoading_) {
+      return;
+    }
+
+    try {
+      this.backupAnalysisLoading_ = true;
+      sendWithPromise('getBackupAnalysis').then((result) => {
+        this.backupAnalysisLoading_ = false;
+        console.log('getBackupAnalysis result:', result);
+        if (result && result.success) {
+          this.backupAnalysis_ = result;
+        } else {
+          console.error('Failed to fetch backup analysis:', result?.error);
+          this.backupAnalysis_ = null;
+        }
+      }).catch((error) => {
+        this.backupAnalysisLoading_ = false;
+        console.error('Error fetching backup analysis:', error);
+        this.backupAnalysis_ = null;
+      });
+    } catch (error) {
+      this.backupAnalysisLoading_ = false;
+      console.error('Exception in fetchBackupAnalysis_:', error);
+    }
+  }
+
+  getBackupStorageLimit_(): string {
+    if (!this.backupAnalysis_ || !this.backupAnalysis_.storage) return '';
+    const limitGB = (this.backupAnalysis_.storage.limit / (1024 * 1024 * 1024)).toFixed(2);
+    return `${limitGB} GB`;
+  }
+
+  getBackupStorageUsed_(): string {
+    if (!this.backupAnalysis_ || !this.backupAnalysis_.storage) return '';
+    const usedGB = (this.backupAnalysis_.storage.used / (1024 * 1024 * 1024)).toFixed(2);
+    return `${usedGB} GB`;
+  }
+
+  getBackupStoragePercentage_(): string {
+    if (!this.backupAnalysis_ || !this.backupAnalysis_.storage) return '0';
+    const { limit, used } = this.backupAnalysis_.storage;
+    if (limit === 0) return '0';
+    return ((used / limit) * 100).toFixed(2);
+  }
+
+  getLastUpdated_(): string {
+    return this.backupAnalysis_?.last_updated || '';
+  }
+
+  getHardwareDevicesCount_(): number {
+    return this.backupAnalysis_?.hardware_devices?.length || 0;
+  }
+
+  shouldShowLoadingMessage_(): boolean {
+    return this.backupAnalysisLoading_ && !!this.connectApiUserId_;
+  }
+
+  shouldShowNoDataMessage_(): boolean {
+    return !this.backupAnalysisLoading_ && !!this.connectApiUserId_ && !this.backupAnalysis_;
+  }
+}
+
+customElements.define(
+  JemaSettingsTweakUiPageElement.is, JemaSettingsTweakUiPageElement);

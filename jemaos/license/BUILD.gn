@@ -1,0 +1,43 @@
+# Copyright 2020 The JemaOS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+import("//build/config/chromeos/rules.gni")
+import("//jemaos/build/config/buildflags.gni")
+
+assert(is_chromeos, "Non-Chrome-OS builds must not depend on //chromeos")
+assert(use_jemaos_license)
+
+source_set("license") {
+  deps = [
+    "//base",
+    "//crypto",
+    "//net",
+    "//content/public/browser",
+    "//dbus",
+    "//chromeos/ash/components/dbus/update_engine",
+    "//chrome/browser/ash/policy/enrollment",
+    "//chrome/browser/ash/login",
+    "//chrome/browser/ash/profiles",
+    "//components/user_manager",
+    "//jemaos/chromeos/ash/components/dbus/jemaos_shell_client",
+    "//jemaos/constants",
+    "//jemaos/prefs",
+  ]
+
+  sources = [
+    "jemaos_callback_status.h",
+    "jemaos_license_validator.cc",
+    "jemaos_license_validator.h",
+    "jemaos_license_fetcher.cc",
+    "jemaos_license_fetcher.h",
+    "jemaos_license_manager.cc",
+    "jemaos_license_manager.h",
+    "jemaos_license_enforcement.cc",
+    "jemaos_license_enforcement.h",
+    "jemaos_license_user_util.cc",
+    "jemaos_license_user_util.h",
+  ]
+
+  defines = [ "CHROMEOS_IMPLEMENTATION" ]
+}
