@@ -68,7 +68,7 @@
 #include "ui/aura/window.h"
 #include "ui/base/l10n/l10n_util.h"
 #include "url/gurl.h"
-#include "jemaos/switches/misc/misc_switches.h"
+#include "wings8os/switches/misc/misc_switches.h"
 
 // Enable VLOG level 1.
 #undef ENABLED_VLOG_LEVEL
@@ -747,7 +747,7 @@ bool IsPlayStoreAvailable() {
     return false;
   }
 
-  if (jemaos::switches::IsJemaCustomEnabled()) {
+  if (wings8os::switches::IsWings8CustomEnabled()) {
     return false;
   }
 

@@ -1,4 +1,4 @@
-// Copyright 2025 jema technology. All rights reserved
+// Copyright 2025 wings8 technology. All rights reserved
 #ifndef CHROME_BROWSER_ASH_LOGIN_SCREENS_DATA_RESTORE_SCREEN_H_
 #define CHROME_BROWSER_ASH_LOGIN_SCREENS_DATA_RESTORE_SCREEN_H_
 

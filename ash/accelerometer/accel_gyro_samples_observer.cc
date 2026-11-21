@@ -13,7 +13,7 @@
 
 #include "ash/accelerometer/accelerometer_constants.h"
 #include "base/functional/bind.h"
-#include "jemaos/switches/accelerometer/accelerometer_switches.h"
+#include "wings8os/switches/accelerometer/accelerometer_switches.h"
 
 namespace ash {
 
@@ -21,7 +21,7 @@ namespace {
 
 constexpr int kTimeoutToleranceInMilliseconds = 500;
 
-const char kJemaOSConfig[6][3][8] = {
+const char kWings8OSConfig[6][3][8] = {
   {"accel_x", "accel_y", "accel_z"},
   {"accel_y", "accel_x", "accel_z"},
   {"accel_z", "accel_y", "accel_x"},
@@ -52,9 +52,9 @@ AccelGyroSamplesObserver::AccelGyroSamplesObserver(
   sensor_device_remote_->GetAllChannelIds(
       base::BindOnce(&AccelGyroSamplesObserver::GetAllChannelIdsCallback,
                      weak_factory_.GetWeakPtr()));
-  revert_[0] = jemaos::switches::IsAccelRevertX() ? -1 : 1;
-  revert_[1] = jemaos::switches::IsAccelRevertY() ? -1 : 1;
-  revert_[2] = jemaos::switches::IsAccelRevertZ() ? -1 : 1;
+  revert_[0] = wings8os::switches::IsAccelRevertX() ? -1 : 1;
+  revert_[1] = wings8os::switches::IsAccelRevertY() ? -1 : 1;
+  revert_[2] = wings8os::switches::IsAccelRevertZ() ? -1 : 1;
 }
 
 AccelGyroSamplesObserver::~AccelGyroSamplesObserver() = default;
@@ -177,7 +177,7 @@ void AccelGyroSamplesObserver::GetAllChannelIdsCallback(
   DCHECK(sensor_device_remote_.is_bound());
 
   iio_channel_ids_ = std::move(iio_channel_ids);
-  int config = jemaos::switches::GetAccelConfig();
+  int config = wings8os::switches::GetAccelConfig();
   /*
   std::vector<std::string> channels;
   if (device_type_ == chromeos::sensors::mojom::DeviceType::ACCEL){
@@ -194,7 +194,7 @@ void AccelGyroSamplesObserver::GetAllChannelIdsCallback(
     bool found = false;
     for (size_t channel_index = 0; channel_index < iio_channel_ids_.size();
          ++channel_index) {
-      if (iio_channel_ids_[channel_index].compare(kJemaOSConfig[config][axis]) == 0) {
+      if (iio_channel_ids_[channel_index].compare(kWings8OSConfig[config][axis]) == 0) {
         found = true;
         channel_indices_[axis] = channel_index;
         break;

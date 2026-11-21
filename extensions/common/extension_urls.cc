@@ -19,7 +19,7 @@
 #include "net/base/url_util.h"
 #include "url/gurl.h"
 #include "url/origin.h"
-#include "jemaos/switches/services/services_switches.h"
+#include "wings8os/switches/services/services_switches.h"
 
 namespace extensions {
 
@@ -79,8 +79,8 @@ std::string GetWebstoreExtensionsCategoryURL() {
   return GetWebstoreLaunchURL().spec() + "/category/extensions";
 }
 
-std::string GetJemaWebstoreExtensionsCategoryURL() {
-  return jemaos::switches::GetJemaOSAppStoreURL() + "/?init=extensions";
+std::string GetWings8WebstoreExtensionsCategoryURL() {
+  return wings8os::switches::GetWings8OSAppStoreURL() + "/?init=extensions";
 }
 
 std::string GetWebstoreItemDetailURLPrefix() {
@@ -152,12 +152,12 @@ bool IsWebstoreUpdateUrl(const GURL& update_url) {
           update_url.path_piece() == store_url.path_piece());
 }
 
-// ---***JEMAOS BEGIN***---
-bool IsJemaOSWebstoreUpdateUrl(const GURL& update_url) {
-  GURL store_url = GURL(jemaos::switches::GetJemaOSWebStoreUpdateUrl());
+// ---***WINGS8OS BEGIN***---
+bool IsWings8OSWebstoreUpdateUrl(const GURL& update_url) {
+  GURL store_url = GURL(wings8os::switches::GetWings8OSWebStoreUpdateUrl());
   return update_url.host_piece() == store_url.host_piece();
 }
-// ---***JEMAOS END***---
+// ---***WINGS8OS END***---
 
 bool IsBlocklistUpdateUrl(const GURL& url) {
   extensions::ExtensionsClient* client = extensions::ExtensionsClient::Get();

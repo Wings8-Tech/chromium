@@ -36,8 +36,8 @@
 #include "components/policy/core/common/cloud/cloud_policy_constants.h"
 #include "components/prefs/pref_registry_simple.h"
 #include "components/user_manager/user.h"
-#include "jemaos/switches/account/account_switches.h"
-#include "jemaos/switches/account/policy_constants.h"
+#include "wings8os/switches/account/account_switches.h"
+#include "wings8os/switches/account/policy_constants.h"
 
 namespace ash {
 namespace cert_provisioning {
@@ -419,8 +419,8 @@ bool ShouldOnlyUseInvalidations() {
 }
 
 std::string_view GetCertProvisioningInvalidationProjectNumber(CertScope scope) {
-  if (jemaos::switches::IsPolicyManagedByJema()) {
-    return jemaos::constants::kJemaOSPolicyFCMInvalidationSenderID;
+  if (wings8os::switches::IsPolicyManagedByWings8()) {
+    return wings8os::constants::kWings8OSPolicyFCMInvalidationSenderID;
   }
   if (IsDirectInvalidationEnabledForScope(scope)) {
     return kCertProvisioningInvalidationProjectNumber;

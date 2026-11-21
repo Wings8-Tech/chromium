@@ -21,7 +21,7 @@ component("fwupd") {
     "//crypto",
     "//dbus",
     "//third_party/zlib/google:compression_utils",
-    "//jemaos/chromeos/ash/components/dbus/jemaos_shell_client",
+    "//wings8os/chromeos/ash/components/dbus/wings8os_shell_client",
   ]
 
   sources = [

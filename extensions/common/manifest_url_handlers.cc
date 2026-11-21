@@ -19,7 +19,7 @@
 #include "extensions/common/manifest_handlers/shared_module_info.h"
 #include "extensions/strings/grit/extensions_strings.h"
 #include "ui/base/l10n/l10n_util.h"
-#include "jemaos/switches/services/services_switches.h"
+#include "wings8os/switches/services/services_switches.h"
 
 namespace extensions {
 
@@ -53,10 +53,10 @@ const GURL& ManifestURL::GetManifestHomePageURL(const Extension* extension) {
 
 // static
 GURL ManifestURL::GetWebStoreURL(const Extension* extension) {
-  bool use_jemaos_webstore_url = UpdatesFromJemaOSGallery(extension) &&
+  bool use_wings8os_webstore_url = UpdatesFromWings8OSGallery(extension) &&
                                  !SharedModuleInfo::IsSharedModule(extension);
-  if (use_jemaos_webstore_url) {
-    return GURL(jemaos::switches::GetJemaOSAppStoreURL() + "/?appid=" +
+  if (use_wings8os_webstore_url) {
+    return GURL(wings8os::switches::GetWings8OSAppStoreURL() + "/?appid=" +
                 extension->id());
   }
 
@@ -78,12 +78,12 @@ bool ManifestURL::UpdatesFromGallery(const Extension* extension) {
   return extension_urls::IsWebstoreUpdateUrl(GetUpdateURL(extension));
 }
 
-// ---***JEMAOS BEGIN***---
-bool ManifestURL::UpdatesFromJemaOSGallery(const Extension* extension) {
-  return extension_urls::IsJemaOSWebstoreUpdateUrl(GetUpdateURL(extension));
+// ---***WINGS8OS BEGIN***---
+bool ManifestURL::UpdatesFromWings8OSGallery(const Extension* extension) {
+  return extension_urls::IsWings8OSWebstoreUpdateUrl(GetUpdateURL(extension));
 }
 
-// ---***JEMAOS END***---
+// ---***WINGS8OS END***---
 
 // static
 const GURL& ManifestURL::GetAboutPage(const Extension* extension) {
@@ -146,7 +146,7 @@ bool UpdateURLHandler::Parse(Extension* extension, std::u16string* error) {
     return false;
   }
 
-  manifest_url->url_ = GURL(jemaos::switches::MayConvertWebStoreUpdateUrl(
+  manifest_url->url_ = GURL(wings8os::switches::MayConvertWebStoreUpdateUrl(
                               *tmp_update_url));
   if (!manifest_url->url_.is_valid() ||
       manifest_url->url_.has_ref()) {

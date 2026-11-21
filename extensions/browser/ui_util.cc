@@ -7,7 +7,7 @@
 #include "base/command_line.h"
 #include "extensions/common/extension.h"
 #include "extensions/common/switches.h"
-#include "jemaos/constants/jemaos_constants.h"
+#include "wings8os/constants/wings8os_constants.h"
 
 namespace extensions {
 namespace ui_util {
@@ -41,7 +41,7 @@ bool ShouldDisplayInExtensionSettings(Manifest::Type type,
 }
 
 bool ShouldDisplayInExtensionSettings(const Extension& extension) {
-  if (jemaos::constants::ShouldHideExtensionById(extension.id())) {
+  if (wings8os::constants::ShouldHideExtensionById(extension.id())) {
     return false;
   }
   return ShouldDisplayInExtensionSettings(extension.GetType(),

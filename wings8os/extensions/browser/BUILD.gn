@@ -1,0 +1,90 @@
+# Copyright 2018 The Wings8OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+# Author: Wings8 Technology
+
+import("//build/config/features.gni")
+import("//extensions/buildflags/buildflags.gni")
+import("//wings8os/extensions/common/api/wings8os_schema.gni")
+import("//mojo/public/tools/bindings/mojom.gni")
+import("//rlz/buildflags/buildflags.gni")
+import("//tools/json_schema_compiler/json_schema_api.gni")
+import("//wings8os/build/config/buildflags.gni")
+
+assert(enable_extensions)
+assert(is_chromeos)
+
+static_library("wings8os_extensions_api") {
+  sources = [
+    "api/native_windows/native_windows_api.cc",
+    "api/native_windows/native_windows_api.h",
+    "api/app_management/app_management_api.cc",
+    "api/app_management/app_management_api.h",
+    "api/command_line/command_line_api.cc",
+    "api/command_line/command_line_api.h",
+    "api/shell_client/shell_client_api.cc",
+    "api/shell_client/shell_client_api.h",
+    "api/wings8os_arc_status/wings8os_arc_status_api.cc",
+    "api/wings8os_arc_status/wings8os_arc_status_api.h",
+    "api/wings8os_private/wings8os_private_api.cc",
+    "api/wings8os_private/wings8os_private_api.h",
+  ]
+
+  if (use_wings8os_license) {
+    sources += [
+      "api/license_management/license_management_api.cc",
+      "api/license_management/license_management_api.h",
+    ]
+  }
+
+  configs += [
+    "//build/config:precompiled_headers",
+    "//build/config/compiler:wexit_time_destructors",
+  ]
+  defines = []
+
+  public_deps = [
+    "//wings8os/extensions/common/api",
+    "//ipc:ipc_buildflags",
+  ]
+
+  deps = [
+    "//extensions/browser",
+    "//ash/public/cpp",
+    "//ash",
+    "//ui/aura",
+    "//wings8os/switches",
+    "//wings8os/build/config:buildflags",
+  ]
+  if (use_wings8os_license) {
+    deps += [
+      "//wings8os/license",
+    ]
+  }
+}
+
+function_registration("wings8os_extensions_api_registration") {
+  sources = extensions_api_schema_files
+  impl_dir = "//wings8os/extensions/browser/api"
+  bundle_name = "Wings8OS"
+  root_namespace = extensions_api_root_namespace
+  schema_include_rules = extensions_api_schema_include_rules
+  deps = [
+    "//base",
+    "//extensions/buildflags",
+    "//skia",
+    "//extensions/browser",
+    "//wings8os/extensions/common/api",
+  ]
+}
+
+group("browser"){
+  deps = [
+    ":wings8os_extensions_api",
+    ":wings8os_extensions_api_registration",
+  ]
+
+  public_deps = [
+    "//wings8os/extensions/common/api",
+  ]
+}

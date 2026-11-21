@@ -29,8 +29,8 @@
 #include "components/prefs/scoped_user_pref_update.h"
 #include "google_apis/gaia/gaia_constants.h"
 #include "base/command_line.h"
-#include "jemaos/switches/account/account_switches.h"
-#include "jemaos/switches/account/account_constants.h"
+#include "wings8os/switches/account/account_switches.h"
+#include "wings8os/switches/account/account_constants.h"
 
 namespace invalidation {
 
@@ -49,12 +49,12 @@ const char kInvalidationRegistrationScope[] =
 
 std::string GetInvalidationRegistrationScope() {
   std::string scope;
-  if (jemaos::switches::IsPolicyManagedByJema()) {
+  if (wings8os::switches::IsPolicyManagedByWings8()) {
     base::CommandLine* command_line = base::CommandLine::ForCurrentProcess();
-    if (command_line->HasSwitch(jemaos::switches::kJemaOSDeviceManagementUrl)) {
-      scope = command_line->GetSwitchValueASCII(jemaos::switches::kJemaOSDeviceManagementUrl);
+    if (command_line->HasSwitch(wings8os::switches::kWings8OSDeviceManagementUrl)) {
+      scope = command_line->GetSwitchValueASCII(wings8os::switches::kWings8OSDeviceManagementUrl);
     } else {
-      scope = jemaos::constants::kDefaultJemaOSDeviceManagementServerUrl;
+      scope = wings8os::constants::kDefaultWings8OSDeviceManagementServerUrl;
     }
     if (scope[scope.size() - 1] != '/') {
       return scope + "/api/messenger";

@@ -100,7 +100,7 @@
 #include "components/user_manager/user.h"
 #include "components/user_manager/user_manager.h"
 #include "ui/events/ash/pref_names.h"
-#include "jemaos/prefs/jemaos_pref_names.h"
+#include "wings8os/prefs/wings8os_pref_names.h"
 #endif
 
 namespace {
@@ -872,10 +872,10 @@ const PrefsUtil::TypedPrefMap& PrefsUtil::GetAllowlistedKeys() {
   (*s_allowlist)[ash::ambient::prefs::kAmbientModeRunningDurationMinutes] =
       settings_api::PrefType::kNumber;
 
-  // Jema Assistant.
-  (*s_allowlist)[jemaos::prefs::kJemaAssistantEnabled] =
+  // Wings8 Assistant.
+  (*s_allowlist)[wings8os::prefs::kWings8AssistantEnabled] =
       settings_api::PrefType::kBoolean;
-  (*s_allowlist)[jemaos::prefs::kJemaAssistantExtraAcceleratorEnabled] =
+  (*s_allowlist)[wings8os::prefs::kWings8AssistantExtraAcceleratorEnabled] =
       settings_api::PrefType::kBoolean;
   // Google Assistant.
   (*s_allowlist)[ash::assistant::prefs::kAssistantConsentStatus] =

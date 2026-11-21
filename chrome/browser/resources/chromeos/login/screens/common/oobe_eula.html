@@ -5,17 +5,17 @@ found in the LICENSE file.
 -->
 
 <style include="oobe-dialog-host-styles">
-  #jemaosPrivacyFrame,
+  #wings8osPrivacyFrame,
   #crosEulaFrame {
     min-height: 200px;
   }
 
 </style>
 <oobe-adaptive-dialog id="eulaLoadingDialog" for-step="loading" role="dialog"
-  jemaos-layout
+  wings8os-layout
   aria-label$="[[i18nDynamic(locale, 'termsOfServiceLoading')]]">
   <img src="images/eula_illustration.svg"
-      slot="jemaos-illustration"
+      slot="wings8os-illustration"
       class="illustration-jelly">
   <h1 slot="title">
     [[i18nDynamic(locale, 'termsOfServiceLoading')]]
@@ -24,11 +24,11 @@ found in the LICENSE file.
 <!-- As this dialog have pre-loading logic that require access to elements,
       dialog is marked as no-lazy. -->
 <oobe-adaptive-dialog id="eulaDialog" for-step="eula" role="dialog"
-  jemaos-layout
+  wings8os-layout
   aria-label$="[[i18nDynamic(locale, 'oobeEulaSectionTitle')]]"
   aria-describedby="crosEulaFrame" no-lazy>
   <img src="images/eula_illustration.svg"
-      slot="jemaos-illustration"
+      slot="wings8os-illustration"
       class="illustration-jelly">
   <h1 slot="title">
     [[i18nDynamic(locale, 'oobeEulaSectionTitle')]]
@@ -53,17 +53,17 @@ found in the LICENSE file.
   </div>
 </oobe-adaptive-dialog>
 <oobe-adaptive-dialog id="privacyDialog" for-step="privacy" role="dialog"
-    jemaos-layout
+    wings8os-layout
     aria-label$="[[i18nDynamic(locale, 'oobePrivacySectionTitle')]]"
-    aria-describedby="jemaosPrivacyFrame" no-lazy>
+    aria-describedby="wings8osPrivacyFrame" no-lazy>
   <img src="images/eula_illustration.svg"
-      slot="jemaos-illustration"
+      slot="wings8os-illustration"
       class="illustration-jelly">
   <h1 slot="title">
     [[i18nDynamic(locale, 'oobePrivacySectionTitle')]]
   </h1>
   <div slot="content" class="flex layout vertical">
-    <webview id="jemaosPrivacyFrame"
+    <webview id="wings8osPrivacyFrame"
         role="document" class="flex oobe-tos-webview focus-on-show"
         aria-label$="[[i18nDynamic(locale, 'oobePrivacyIframeLabel')]]"
         on-contentload="onPrivacyFrameLoad_">

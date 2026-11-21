@@ -1,4 +1,4 @@
-// Copyright 2025 jema technology. All rights reserved.
+// Copyright 2025 wings8 technology. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
@@ -25,7 +25,7 @@ import {OobeI18nMixin} from '../../components/mixins/oobe_i18n_mixin.js';
 import {OobeDialogHostMixin} from '../../components/mixins/oobe_dialog_host_mixin.js';
 import {MultiStepMixin} from '../../components/mixins/multi_step_mixin.js';
 import {getSelectedTitle, getSelectedValue, SelectListType, setupSelect} from '../../components/oobe_select.js';
-import {JemaOSShellClient} from '../../jemaos_shell_client.js';
+import {Wings8OSShellClient} from '../../wings8os_shell_client.js';
 
 import {getTemplate} from './data_restore.html.js';
 
@@ -48,7 +48,7 @@ class DataRestoreHelper {
     RESTORE_FAILED: 'restore-failed',
     RESTORE_PROGRESS: 'restore-progress',
   };
-  static COMMAND  = '/usr/bin/jemaos-backup';
+  static COMMAND  = '/usr/bin/wings8os-backup';
   static generate_key(salt: string, password: string) {
     const str = `${salt}${password}`;
     const hash = btoa(str);
@@ -77,12 +77,12 @@ class DataRestoreHelper {
     return `${this.COMMAND} peek --file ${encodedFilePath}`;
   }
 
-  private client_: JemaOSShellClient;
+  private client_: Wings8OSShellClient;
   private element_: HTMLElement;
   private tmpLogFile_: string;
 
   constructor(element: HTMLElement) {
-    this.client_ = new JemaOSShellClient();
+    this.client_ = new Wings8OSShellClient();
     this.element_ = element;
     this.tmpLogFile_ = '';
   }

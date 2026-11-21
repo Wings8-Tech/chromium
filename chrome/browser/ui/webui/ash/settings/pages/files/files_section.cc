@@ -27,7 +27,7 @@
 #include "ui/base/l10n/l10n_util.h"
 #include "ui/base/webui/web_ui_util.h"
 #include "base/strings/utf_string_conversions.h"
-#include "jemaos/switches/urls/urls_constants.h"
+#include "wings8os/switches/urls/urls_constants.h"
 
 namespace ash::settings {
 
@@ -262,7 +262,7 @@ void FilesSection::AddLoadTimeData(content::WebUIDataSource* html_source) {
   smb_dialog::AddLocalizedStrings(html_source);
 
   html_source->AddString("smbSharesLearnMoreURL",
-                         base::ASCIIToUTF16(jemaos::constants::kSmbSharesLearnMoreURL));
+                         base::ASCIIToUTF16(wings8os::constants::kSmbSharesLearnMoreURL));
 
   html_source->AddString(
       "googleDriveCleanUpStorageLearnMoreLink",

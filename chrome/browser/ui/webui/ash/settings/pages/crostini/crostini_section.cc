@@ -36,7 +36,7 @@
 #include "ui/base/text/bytes_formatting.h"
 #include "ui/base/webui/web_ui_util.h"
 #include "ui/chromeos/devicetype_utils.h"
-#include "jemaos/switches/urls/urls_constants.h"
+#include "wings8os/switches/urls/urls_constants.h"
 
 namespace ash::settings {
 
@@ -538,16 +538,16 @@ void CrostiniSection::AddLoadTimeData(content::WebUIDataSource* html_source) {
       kIsRevampEnabled
           ? l10n_util::GetStringFUTF16(
                 IDS_OS_SETTINGS_REVAMP_CROSTINI_SUBTEXT,
-                base::ASCIIToUTF16(jemaos::constants::kLinuxAppsLearnMoreURL))
+                base::ASCIIToUTF16(wings8os::constants::kLinuxAppsLearnMoreURL))
           : l10n_util::GetStringFUTF16(
                 IDS_SETTINGS_CROSTINI_SUBTEXT, ui::GetChromeOSDeviceName(),
-                base::ASCIIToUTF16(jemaos::constants::kLinuxAppsLearnMoreURL)));
+                base::ASCIIToUTF16(wings8os::constants::kLinuxAppsLearnMoreURL)));
   html_source->AddString(
       "crostiniSubtextNotSupported",
       l10n_util::GetStringFUTF16(
           IDS_SETTINGS_CROSTINI_SUBTEXT_NOT_SUPPORTED,
           ui::GetChromeOSDeviceName(),
-          base::ASCIIToUTF16(jemaos::constants::kLinuxAppsLearnMoreURL)));
+          base::ASCIIToUTF16(wings8os::constants::kLinuxAppsLearnMoreURL)));
   html_source->AddString(
       "crostiniArcAdbPowerwashRequiredSublabel",
       l10n_util::GetStringFUTF16(

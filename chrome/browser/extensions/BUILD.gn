@@ -970,8 +970,8 @@ source_set("extensions") {
     "//ui/shell_dialogs",
     "//ui/strings",
     "//url",
-    "//jemaos/build/config:buildflags",
-    "//jemaos/switches",
+    "//wings8os/build/config:buildflags",
+    "//wings8os/switches",
   ]
 
   if (is_linux || is_mac || is_win) {
@@ -1473,11 +1473,11 @@ source_set("extensions") {
     ]
   }
 
-#---***JEMAOS BEGIN***---
+#---***WINGS8OS BEGIN***---
   if (is_chromeos) {
-    deps += [ "//jemaos/extensions/browser" ]
+    deps += [ "//wings8os/extensions/browser" ]
   }
-#---***JEMAOS END***---
+#---***WINGS8OS END***---
 }
 
 # KeyedService factories initialization.

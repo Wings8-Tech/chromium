@@ -56,12 +56,12 @@ class LocalPasswordSetupScreen : public BaseOSAuthSetupScreen {
   void PreDoShow();
   void InspectContext(UserContext* user_context);
   void AfterContextInspected();
-  void SetJemaLocalPassword();
+  void SetWings8LocalPassword();
 
   void OnUpdateLocalPassword(auth::mojom::ConfigureResult result);
   void OnSetLocalPassword(auth::mojom::ConfigureResult result);
 
-  std::optional<std::string> jema_local_password_;
+  std::optional<std::string> wings8_local_password_;
   bool update_modified_factors_ = false;
 
   base::WeakPtr<LocalPasswordSetupView> view_;

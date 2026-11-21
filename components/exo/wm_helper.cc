@@ -39,7 +39,7 @@
 #include "ui/wm/core/capture_controller.h"
 #include "ui/wm/public/activation_client.h"
 #include "ui/wm/public/tooltip_observer.h"
-#include "jemaos/switches/display/display_switches.h"
+#include "wings8os/switches/display/display_switches.h"
 
 namespace exo {
 
@@ -461,7 +461,7 @@ void WMHelper::RemoveExoWindowObserver(ExoWindowObserver* observer) {
 }
 
 float GetDefaultDeviceScaleFactor() {
-  float factor = jemaos::switches::GetDefaultDSF(0);
+  float factor = wings8os::switches::GetDefaultDSF(0);
   if (factor) {
     return factor;
   }

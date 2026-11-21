@@ -211,7 +211,7 @@ class MetricReportingManager : public policy::ManagedSessionService::Observer,
                                       base::TimeDelta default_rate,
                                       int rate_unit_to_ms,
                                       base::TimeDelta init_delay,
-                                      bool should_send_to_jema = false);
+                                      bool should_send_to_wings8 = false);
 
   // Initializes an event data collector that collects periodically.
   //

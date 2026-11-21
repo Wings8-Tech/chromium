@@ -15,7 +15,7 @@
 #include "base/task/thread_pool.h"
 #include "chromeos/ash/components/system/statistics_provider.h"
 #include "third_party/re2/src/re2/re2.h"
-#include "jemaos/switches/misc/misc_switches.h"
+#include "wings8os/switches/misc/misc_switches.h"
 
 namespace borealis {
 
@@ -90,7 +90,7 @@ bool InTargetSegment() {
 }
 
 bool Check() {
-  if (jemaos::switches::IsJemaCustomEnabled()) {
+  if (wings8os::switches::IsWings8CustomEnabled()) {
     return HasMemory(7 * kGibi) && (CpuRegexMatches(kIntelCpuRegex) || CpuRegexMatches(kAmdCpuRegex));
   }
   if (BoardIn({"hatch", "drallion", "puff"})) {

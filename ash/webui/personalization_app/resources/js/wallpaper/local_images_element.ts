@@ -26,10 +26,10 @@ import {CurrentWallpaper, WallpaperProviderInterface, WallpaperType} from '../..
 import {WithPersonalizationStore} from '../personalization_store.js';
 
 import {DefaultImageSymbol, DisplayableImage, kDefaultImageSymbol} from './constants.js';
-import {JemaImage} from './constants.js';
+import {Wings8Image} from './constants.js';
 import {getTemplate} from './local_images_element.html.js';
 import {getPathOrSymbol, isDefaultImage} from './utils.js';
-import {toggleLightDarkImagePath, generateJemaImage, isJemaImage} from './utils.js';
+import {toggleLightDarkImagePath, generateWings8Image, isWings8Image} from './utils.js';
 import {selectWallpaper} from './wallpaper_controller.js';
 import {getWallpaperProvider} from './wallpaper_interface_provider.js';
 
@@ -84,7 +84,7 @@ export class LocalImagesElement extends WithPersonalizationStore {
   private currentSelected_: CurrentWallpaper|null;
   private pendingSelected_: DisplayableImage|null;
   private imagesToDisplay_: Array<FilePath|DefaultImageSymbol>;
-  private finalImagesToDisplay_: Array<JemaImage|FilePath|DefaultImageSymbol>;
+  private finalImagesToDisplay_: Array<Wings8Image|FilePath|DefaultImageSymbol>;
 
   constructor() {
     super();
@@ -168,9 +168,9 @@ export class LocalImagesElement extends WithPersonalizationStore {
 
       const find = images.find((item) => getPathOrSymbol(item) === pairPath);
       if (find) {
-        const jemaImage = generateJemaImage(image, find);
-        if (jemaImage) {
-          finalImagesToDisplay.push(jemaImage);
+        const wings8Image = generateWings8Image(image, find);
+        if (wings8Image) {
+          finalImagesToDisplay.push(wings8Image);
         } else {
           finalImagesToDisplay.push(image);
           finalImagesToDisplay.push(find);
@@ -189,7 +189,7 @@ export class LocalImagesElement extends WithPersonalizationStore {
    }
 
   private isImageSelected_(
-      image: JemaImage|FilePath|DefaultImageSymbol|null,
+      image: Wings8Image|FilePath|DefaultImageSymbol|null,
       currentSelected: LocalImagesElement['currentSelected_'],
       pendingSelected: LocalImagesElement['pendingSelected_']): boolean {
     if (!image || (!currentSelected && !pendingSelected)) {
@@ -201,7 +201,7 @@ export class LocalImagesElement extends WithPersonalizationStore {
           (!pendingSelected && !!currentSelected &&
            currentSelected.type === WallpaperType.kDefault));
     }
-    if (isJemaImage(image)) {
+    if (isWings8Image(image)) {
       const lightSelected = isNonEmptyFilePath(pendingSelected) && image.light.path === pendingSelected.path ||
           !!currentSelected && image.light.path === currentSelected.key &&
             !pendingSelected;
@@ -218,7 +218,7 @@ export class LocalImagesElement extends WithPersonalizationStore {
   }
 
   private getAriaLabel_(
-      image: JemaImage|FilePath|DefaultImageSymbol|null,
+      image: Wings8Image|FilePath|DefaultImageSymbol|null,
       imageDataLoading: LocalImagesElement['imageDataLoading_']): string {
     if (this.isImageLoading_(image, imageDataLoading)) {
       return this.i18n('ariaLabelLoading');
@@ -226,7 +226,7 @@ export class LocalImagesElement extends WithPersonalizationStore {
     if (isDefaultImage(image)) {
       return this.i18n('defaultWallpaper');
     }
-    if (isJemaImage(image)) {
+    if (isWings8Image(image)) {
       return image.name;
     }
     if (!isNonEmptyFilePath(image)) {
@@ -237,12 +237,12 @@ export class LocalImagesElement extends WithPersonalizationStore {
   }
 
   private isImageLoading_(
-      image: JemaImage|FilePath|DefaultImageSymbol|null,
+      image: Wings8Image|FilePath|DefaultImageSymbol|null,
       imageDataLoading: LocalImagesElement['imageDataLoading_']): boolean {
     if (!image || !imageDataLoading) {
       return true;
     }
-    if (isJemaImage(image)) {
+    if (isWings8Image(image)) {
       return this.isImageLoading_(image.dark, imageDataLoading) ||
           this.isImageLoading_(image.light, imageDataLoading);
     }
@@ -254,13 +254,13 @@ export class LocalImagesElement extends WithPersonalizationStore {
   }
 
   private getImageData_(
-      image: JemaImage|FilePath|DefaultImageSymbol|null,
+      image: Wings8Image|FilePath|DefaultImageSymbol|null,
       imageData: LocalImagesElement['imageData_'],
       imageDataLoading: LocalImagesElement['imageDataLoading_']): Url[]|Url|null {
     if (!image || this.isImageLoading_(image, imageDataLoading)) {
       return null;
     }
-    if (isJemaImage(image)) {
+    if (isWings8Image(image)) {
       let dark = imageData[getPathOrSymbol(image.dark)];
       let light = imageData[getPathOrSymbol(image.light)];
       if (!isImageDataUrl(dark)) {
@@ -282,21 +282,21 @@ export class LocalImagesElement extends WithPersonalizationStore {
     return data;
   }
 
-  private getImageDataId_(image: JemaImage|FilePath|DefaultImageSymbol|null): string {
+  private getImageDataId_(image: Wings8Image|FilePath|DefaultImageSymbol|null): string {
     if (!image) {
       return '';
     }
-    if (isJemaImage(image)) {
+    if (isWings8Image(image)) {
       return image.name;
     }
     return isNonEmptyFilePath(image) ? image.path : image.toString();
   }
 
   private onImageSelected_(event: WallpaperGridItemSelectedEvent&
-                           {model: {item: JemaImage | FilePath | DefaultImageSymbol}}) {
+                           {model: {item: Wings8Image | FilePath | DefaultImageSymbol}}) {
     assert(
         event.model.item === kDefaultImageSymbol ||
-            isJemaImage(event.model.item) ||
+            isWings8Image(event.model.item) ||
             isNonEmptyFilePath(event.model.item),
         'local image is a file path or default image');
     selectWallpaper(event.model.item, this.wallpaperProvider_, this.getStore());

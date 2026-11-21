@@ -97,7 +97,7 @@
 #include "ui/base/clipboard/clipboard.h"
 #include "ui/base/clipboard/clipboard_buffer.h"
 #include "url/gurl.h"
-#include "jemaos/switches/urls/urls_constants.h"
+#include "wings8os/switches/urls/urls_constants.h"
 
 namespace {
 
@@ -242,7 +242,7 @@ ChromeShellDelegate::GetBrowserProcessUrlLoaderFactory() const {
 
 void ChromeShellDelegate::OpenKeyboardShortcutHelpPage() const {
   ash::NewWindowDelegate::GetPrimary()->OpenUrl(
-      GURL(jemaos::constants::kKeyboardShortcutHelpPageUrl),
+      GURL(wings8os::constants::kKeyboardShortcutHelpPageUrl),
       ash::NewWindowDelegate::OpenUrlFrom::kUserInteraction,
       ash::NewWindowDelegate::Disposition::kNewForegroundTab);
 }

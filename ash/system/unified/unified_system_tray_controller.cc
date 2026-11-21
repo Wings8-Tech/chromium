@@ -64,10 +64,10 @@
 #include "ash/system/unified/unified_system_tray_bubble.h"
 #include "ash/system/unified/unified_system_tray_model.h"
 #include "ash/system/unified/user_chooser_detailed_view_controller.h"
-// ---***JEMAOS BEGIN***---
-#include "jemaos/ash/system/unified/rotate_screen_feature_pod_controller.h"
-#include "jemaos/ash/system/unified/switch_tablet_laptop_feature_pod_controller.h"
-// ---***JEMAOS END***---
+// ---***WINGS8OS BEGIN***---
+#include "wings8os/ash/system/unified/rotate_screen_feature_pod_controller.h"
+#include "wings8os/ash/system/unified/switch_tablet_laptop_feature_pod_controller.h"
+// ---***WINGS8OS END***---
 #include "ash/wm/lock_state_controller.h"
 #include "base/memory/scoped_refptr.h"
 #include "base/metrics/histogram_macros.h"

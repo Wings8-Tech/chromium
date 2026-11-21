@@ -150,10 +150,10 @@ export class SettingsPersonalizationOptionsElement extends
           return loadTimeData.getBoolean('showHistorySearchControl');
         },
       },
-      isJemaProfile_: {
+      isWings8Profile_: {
         type: Boolean,
         value() {
-          return loadTimeData.getBoolean('isJemaProfile');
+          return loadTimeData.getBoolean('isWings8Profile');
         },
       },
     };

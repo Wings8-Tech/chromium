@@ -303,9 +303,9 @@ class ASH_EXPORT AcceleratorControllerImpl
       notification_controller_;
 };
 
-// ---***JEMAOS BEGIN***---
-void RotateScreenJemaOS();
-// ---***JEMAOS END***---
+// ---***WINGS8OS BEGIN***---
+void RotateScreenWings8OS();
+// ---***WINGS8OS END***---
 
 }  // namespace ash
 

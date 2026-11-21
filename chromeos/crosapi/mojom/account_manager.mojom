@@ -23,10 +23,10 @@ enum AccountType {
   [Default] kUnspecified = 0,
   kGaia = 1,
   kActiveDirectory = 2,
-  // ---***JEMAOS BEGIN***---
+  // ---***WINGS8OS BEGIN***---
   kFlint = 3,
-  kJema = 4,
-  // ---***JEMAOS END***---
+  kWings8 = 4,
+  // ---***WINGS8OS END***---
 };
 
 // Uniquely identifies an account in Account Manager.

@@ -262,7 +262,7 @@
 #include "components/os_crypt/async/browser/secret_portal_key_provider.h"
 #endif
 
-#include "jemaos/prefs/jemaos_prefs.h"
+#include "wings8os/prefs/wings8os_prefs.h"
 
 #if BUILDFLAG(IS_WIN) || (BUILDFLAG(IS_LINUX) || BUILDFLAG(IS_CHROMEOS_LACROS))
 // How often to check if the persistent instance of Chrome needs to restart
@@ -928,9 +928,9 @@ void BrowserProcessImpl::CreateDevToolsProtocolHandler() {
   }
 #endif
 
-  // ---***JEMAOS BEGIN***---
-  jemaos::prefs::KeepCurrentPrefs(local_state());
-  // ---***JEMAOS END***---
+  // ---***WINGS8OS BEGIN***---
+  wings8os::prefs::KeepCurrentPrefs(local_state());
+  // ---***WINGS8OS END***---
 }
 
 void BrowserProcessImpl::CreateDevToolsAutoOpener() {

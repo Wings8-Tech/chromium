@@ -37,7 +37,7 @@
 #include "chrome/browser/ui/browser_window.h"
 #include "chrome/browser/ui/ash/system_web_apps/system_web_app_ui_utils.h"
 #include "ash/webui/system_apps/public/system_web_app_type.h"
-#include "ash/webui/jema_assistant_app_ui/url_constants.h"
+#include "ash/webui/wings8_assistant_app_ui/url_constants.h"
 #include "net/base/url_util.h"
 
 #if BUILDFLAG(ENABLE_CROS_LIBASSISTANT)
@@ -64,7 +64,7 @@ AssistantBrowserDelegateImpl::~AssistantBrowserDelegateImpl() {
 void AssistantBrowserDelegateImpl::MaybeInit(Profile* profile) {
   if (assistant::IsAssistantAllowedForProfile(profile) !=
       ash::assistant::AssistantAllowedState::ALLOWED) {
-    profile_for_jema_assistant_ = profile;
+    profile_for_wings8_assistant_ = profile;
     return;
   }
 
@@ -172,10 +172,10 @@ void AssistantBrowserDelegateImpl::OpenUrl(GURL url) {
       ash::NewWindowDelegate::Disposition::kNewForegroundTab);
 }
 
-bool AssistantBrowserDelegateImpl::HandleQueryByJemaAssistant(const std::string& query) {
-  GURL url_with_query = GURL(ash::kChromeUIJemaAssistantAppURL);
+bool AssistantBrowserDelegateImpl::HandleQueryByWings8Assistant(const std::string& query) {
+  GURL url_with_query = GURL(ash::kChromeUIWings8AssistantAppURL);
   url_with_query = net::AppendQueryParameter(url_with_query, "initQuery", query);
-  Browser* browser = FindSystemWebAppBrowser(profile_for_jema_assistant_, ash::SystemWebAppType::JEMA_ASSISTANT);
+  Browser* browser = FindSystemWebAppBrowser(profile_for_wings8_assistant_, ash::SystemWebAppType::WINGS8_ASSISTANT);
   if (browser) {
     browser->window()->Show();
     return false;

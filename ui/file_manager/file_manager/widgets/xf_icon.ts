@@ -267,8 +267,8 @@ function getCSS() {
       -webkit-mask-image: url(../foreground/images/volumes/usb.svg);
     }
 
-    :host([type="jemadrop"]) span {
-      -webkit-mask-image: url(../foreground/images/volumes/jemadrop.svg);
+    :host([type="wings8drop"]) span {
+      -webkit-mask-image: url(../foreground/images/volumes/wings8drop.svg);
     }
 
     :host([type="drive_recent"]) span, :host([type="recent"]) span {

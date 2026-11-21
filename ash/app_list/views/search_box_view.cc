@@ -825,7 +825,7 @@ void SearchBoxView::OnThemeChanged() {
       ui::ImageModel::FromImageSkia(
           gfx::ImageSkiaOperations::CreateResizedImage(
               ui::ResourceBundle::GetSharedInstance()
-                  .GetImageNamed(IDR_JEMAOS_AI_ICON_40)
+                  .GetImageNamed(IDR_WINGS8OS_AI_ICON_40)
                   .AsImageSkia(),
               skia::ImageOperations::RESIZE_BEST,
               gfx::Size(GetSearchBoxIconSize(), GetSearchBoxIconSize()))));
@@ -1265,7 +1265,7 @@ void SearchBoxView::UpdateSearchIcon() {
   SetSearchIconImage(
       gfx::ImageSkiaOperations::CreateResizedImage(
           ui::ResourceBundle::GetSharedInstance()
-          .GetImageNamed(IDR_JEMAOS_AI_ICON_40)
+          .GetImageNamed(IDR_WINGS8OS_AI_ICON_40)
               .AsImageSkia(),
           skia::ImageOperations::RESIZE_BEST,
           gfx::Size(GetSearchBoxIconSize(), GetSearchBoxIconSize())));

@@ -162,14 +162,14 @@ void AssistantControllerImpl::OpenUrl(const GURL& url,
                                       bool from_server) {
   // app_list search result will be opened by `OpenUrl()`. However, the
   // `assistant_` may not be ready. Show a toast to indicate it.
-  if (!IsAssistantReady() && !ash::features::IsJemaAssistantEnabled()) {
+  if (!IsAssistantReady() && !ash::features::IsWings8AssistantEnabled()) {
     assistant_ui_controller_.ShowUnboundErrorToast();
     return;
   }
 
   if (assistant::util::IsDeepLinkUrl(url)) {
-    if (ash::features::IsJemaAssistantEnabled() && assistant::util::GetDeepLinkType(url) == assistant::util::DeepLinkType::kQuery &&
-        AssistantState::Get()->jema_assistant_enabled().value_or(false)) {
+    if (ash::features::IsWings8AssistantEnabled() && assistant::util::GetDeepLinkType(url) == assistant::util::DeepLinkType::kQuery &&
+        AssistantState::Get()->wings8_assistant_enabled().value_or(false)) {
       const std::map<std::string, std::string> params =
         assistant::util::GetDeepLinkParams(url);
       const std::optional<std::string>& query =
@@ -177,7 +177,7 @@ void AssistantControllerImpl::OpenUrl(const GURL& url,
       if (!query.has_value()) {
         return;
       }
-      const bool new_window_created = assistant::AssistantBrowserDelegate::Get()->HandleQueryByJemaAssistant(query.value());
+      const bool new_window_created = assistant::AssistantBrowserDelegate::Get()->HandleQueryByWings8Assistant(query.value());
       if (!new_window_created) {
         NotifyDeepLinkReceived(url);
       }

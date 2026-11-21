@@ -104,7 +104,7 @@ class XtbContentHandler(xml.sax.handler.ContentHandler):
       # This naive way of handling characters is OK because in the XTB format,
       # <ph> nodes are always empty (always <ph name="XXX"/>) and whitespace
       # inside the <translation> node should be preserved.
-      # ***JEMAOS BEGIN***
+      # ***WINGS8OS BEGIN***
       # replace double quotation(\u201c, \u201d) with Chinese quotation (\u300c, \u300d)
       if self.language == 'zh-CN':
         if self.shouldRemoveSpaceAfterDeviceType(content):
@@ -116,7 +116,7 @@ class XtbContentHandler(xml.sax.handler.ContentHandler):
           .replace(u'\u5e10\u53f7', u'\u8d26\u53f7')))
       else:
         self.current_structure.append((False, content))
-      #  ***JEMAOS END***
+      #  ***WINGS8OS END***
 
 
 class XtbErrorHandler(xml.sax.handler.ErrorHandler):

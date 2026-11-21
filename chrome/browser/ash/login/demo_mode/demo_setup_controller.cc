@@ -42,7 +42,7 @@
 #include "components/prefs/pref_service.h"
 #include "google_apis/gaia/google_service_auth_error.h"
 #include "ui/base/l10n/l10n_util.h"
-#include "jemaos/switches/misc/misc_switches.h"
+#include "wings8os/switches/misc/misc_switches.h"
 
 namespace ash {
 
@@ -406,7 +406,7 @@ void DemoSetupController::ClearDemoRequisition() {
 
 // static
 bool DemoSetupController::IsDemoModeAllowed() {
-  if (jemaos::switches::IsJemaCustomEnabled()) {
+  if (wings8os::switches::IsWings8CustomEnabled()) {
     return false;
   }
   // Demo mode is only allowed on devices that support ARC++.

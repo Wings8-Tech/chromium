@@ -39,7 +39,7 @@
 #include "chrome/browser/ash/login/error_screens_histogram_helper.h"
 #include "chrome/browser/ash/login/helper.h"
 #include "chrome/browser/ash/login/login_pref_names.h"
-#include "jemaos/prefs/jemaos_prefs.h"
+#include "wings8os/prefs/wings8os_prefs.h"
 #include "chrome/browser/ash/login/profile_auth_data.h"
 #include "chrome/browser/ash/login/reauth_stats.h"
 #include "chrome/browser/ash/login/saml/public_saml_url_fetcher.h"
@@ -74,7 +74,7 @@
 #include "chrome/browser/ui/webui/ash/login/enrollment_screen_handler.h"
 #include "chrome/browser/ui/webui/ash/login/error_screen_handler.h"
 #include "chrome/browser/ui/webui/ash/login/network_state_informer.h"
-#include "chrome/browser/ui/webui/ash/login/jema_local_signin_screen_handler.h"
+#include "chrome/browser/ui/webui/ash/login/wings8_local_signin_screen_handler.h"
 #include "chrome/browser/ui/webui/ash/login/online_login_utils.h"
 #include "chrome/browser/ui/webui/ash/login/reset_screen_handler.h"
 #include "chrome/browser/ui/webui/ash/login/saml_challenge_key_handler.h"
@@ -140,9 +140,9 @@
 #include "third_party/re2/src/re2/re2.h"
 #include "ui/base/l10n/l10n_util.h"
 #include "ui/chromeos/devicetype_utils.h"
-#include "jemaos/switches/account/account_switches.h"
-#include "jemaos/switches/account/toggle/account_type_toggle.h"
-#include "jemaos/switches/misc/misc_switches.h"
+#include "wings8os/switches/account/account_switches.h"
+#include "wings8os/switches/account/toggle/account_type_toggle.h"
+#include "wings8os/switches/misc/misc_switches.h"
 
 // Enable VLOG level 1.
 #undef ENABLED_VLOG_LEVEL
@@ -337,8 +337,8 @@ std::string GetOrGenerateDeviceId(const user_manager::KnownUser& known_user,
   return device_id;
 }
 
-//---***JEMAOS BEGIN***---
-// The Jema web login payload sometimes delivers the password base64-encoded
+//---***WINGS8OS BEGIN***---
+// The Wings8 web login payload sometimes delivers the password base64-encoded
 // (in a field the JS does not flag as such), while the pod and the local
 // signin form always use plaintext. Decode the value only when it is valid
 // base64 that decodes to printable UTF-8 text; otherwise keep it as-is.
@@ -362,11 +362,11 @@ std::string DecodePasswordIfBase64(const std::string& value) {
       return value;
     }
   }
-  LOG(WARNING) << "[JEMAOS] Password arrived base64-encoded, decoded "
+  LOG(WARNING) << "[WINGS8OS] Password arrived base64-encoded, decoded "
                << value.size() << " -> " << decoded.size() << " chars";
   return decoded;
 }
-//---***JEMAOS END***---
+//---***WINGS8OS END***---
 
 }  // namespace
 
@@ -503,13 +503,13 @@ void GaiaScreenHandler::LoadGaiaWithPartitionAndVersionAndConsent(
     if (owner_user && owner_user->GetType() == user_manager::UserType::kChild) {
       params.Set("obfuscatedOwnerId", owner_account_id.GetGaiaId());
     }
-    // ---***JEMAOS BEGIN***---
+    // ---***WINGS8OS BEGIN***---
     if (owner_user &&
-        owner_user->GetType() == user_manager::UserType::kJemaChild) {
-      params.Set("obfuscatedOwnerId", owner_account_id.GetJemaId());
+        owner_user->GetType() == user_manager::UserType::kWings8Child) {
+      params.Set("obfuscatedOwnerId", owner_account_id.GetWings8Id());
     }
 
-    // ---***JEMAOS END***---
+    // ---***WINGS8OS END***---
   }
 
   const GaiaUrls& gaia_urls = *GaiaUrls::GetInstance();
@@ -580,8 +580,8 @@ void GaiaScreenHandler::LoadGaiaWithPartitionAndVersionAndConsent(
   params.Set("recordAccountCreation",
              ash::features::IsGaiaRecordAccountCreationEnabled());
 
-  // ---***JEMAOS BEGIN***---
-  params.Set("enableJemaAccount", jemaos::switches::IsJemaAccountEnabled());
+  // ---***WINGS8OS BEGIN***---
+  params.Set("enableWings8Account", wings8os::switches::IsWings8AccountEnabled());
   // add all user email and account_type
   user_manager::KnownUser known_user(g_browser_process->local_state());
   const std::vector<AccountId> known_account_ids =
@@ -597,7 +597,7 @@ void GaiaScreenHandler::LoadGaiaWithPartitionAndVersionAndConsent(
     emailList.Append(std::move(account));
   }
   params.Set("knownAccountList", std::move(emailList));
-  // ---***JEMAOS END***---
+  // ---***WINGS8OS END***---
 
   if (public_saml_url_fetcher_) {
     params.Set("startsOnSamlPage", true);
@@ -620,7 +620,7 @@ void GaiaScreenHandler::LoadGaiaWithPartitionAndVersionAndConsent(
   bool is_reauth = !context.email.empty();
   if (is_reauth) {
     const AccountId account_id = login::GetAccountId(
-        context.email, context.gaia_id, jemaos::switches::IsJemaAccountEnabled() ? AccountType::JEMA_ACCOUNT : AccountType::GOOGLE);
+        context.email, context.gaia_id, wings8os::switches::IsWings8AccountEnabled() ? AccountType::WINGS8_ACCOUNT : AccountType::GOOGLE);
     auto* user = user_manager::UserManager::Get()->FindUser(account_id);
     DCHECK(user);
     bool is_child_account = user && user->IsChild();
@@ -721,18 +721,18 @@ void GaiaScreenHandler::DeclareLocalizedValues(
   builder->Add("signinScreenQuickStart",
                IDS_LOGIN_QUICK_START_SETUP_SIGNIN_SCREEN_ENTRY_POINT);
 
-  builder->Add("jemaosAddUserDupEmailErrorMessage",
-               IDS_JEMAOS_ADD_USER_DUP_EMAIL_ERROR_MESSAGE);
-  builder->Add("jemaosConfirmGotoLocalAccountTitle",
-							 IDS_JEMAOS_CONFIRM_GOTO_LOCAL_ACCOUNT_TITLE);
-  builder->Add("jemaosUseLocalAccount",
-							 IDS_JEMAOS_USE_LOCAL_ACCOUNT_BUTTON_TEXT);
-  builder->Add("jemaosUseOnlineAccount",
-						   IDS_JEMAOS_USE_ONLINE_ACCOUNT_BUTTON_TEXT);
-  builder->Add("jemaosConfirmGotoLocalAccountHintMessage1",
-							 IDS_JEMAOS_CONFIRM_GOTO_LOCAL_HINT_MESSAGE_1);
-  builder->Add("jemaosConfirmGotoLocalAccountHintMessage2",
-					     IDS_JEMAOS_CONFIRM_GOTO_LOCAL_HINT_MESSAGE_2);
+  builder->Add("wings8osAddUserDupEmailErrorMessage",
+               IDS_WINGS8OS_ADD_USER_DUP_EMAIL_ERROR_MESSAGE);
+  builder->Add("wings8osConfirmGotoLocalAccountTitle",
+							 IDS_WINGS8OS_CONFIRM_GOTO_LOCAL_ACCOUNT_TITLE);
+  builder->Add("wings8osUseLocalAccount",
+							 IDS_WINGS8OS_USE_LOCAL_ACCOUNT_BUTTON_TEXT);
+  builder->Add("wings8osUseOnlineAccount",
+						   IDS_WINGS8OS_USE_ONLINE_ACCOUNT_BUTTON_TEXT);
+  builder->Add("wings8osConfirmGotoLocalAccountHintMessage1",
+							 IDS_WINGS8OS_CONFIRM_GOTO_LOCAL_HINT_MESSAGE_1);
+  builder->Add("wings8osConfirmGotoLocalAccountHintMessage2",
+					     IDS_WINGS8OS_CONFIRM_GOTO_LOCAL_HINT_MESSAGE_2);
 }
 
 void GaiaScreenHandler::InitAfterJavascriptAllowed() {
@@ -744,12 +744,12 @@ void GaiaScreenHandler::InitAfterJavascriptAllowed() {
 }
 
 void GaiaScreenHandler::DeclareJSCallbacks() {
-  // ---***JEMAOS BEGIN***---
+  // ---***WINGS8OS BEGIN***---
   AddCallback("userSelectGoogleAccount",
               &GaiaScreenHandler::HandleUserSelectGoogleAccount);
   AddCallback("resetAccountFlag",
               &GaiaScreenHandler::HandleResetAccountFlag);
-  // ---***JEMAOS END***---
+  // ---***WINGS8OS END***---
   AddCallback("webviewLoadAborted",
               &GaiaScreenHandler::HandleWebviewLoadAborted);
   AddCallback("launchSAMLPublicSession",
@@ -775,13 +775,13 @@ void GaiaScreenHandler::DeclareJSCallbacks() {
   AddCallback("showLoadingTimeoutError",
               &GaiaScreenHandler::HandleShowLoadingTimeoutError);
   AddCallback("getDeviceIdForLogin", &GaiaScreenHandler::HandleGetDeviceId);
-  AddCallback("jemaLocalSignin", &GaiaScreenHandler::HandleJemaLocalSignin);
+  AddCallback("wings8LocalSignin", &GaiaScreenHandler::HandleWings8LocalSignin);
 }
 
-void GaiaScreenHandler::HandleJemaLocalSignin() {
+void GaiaScreenHandler::HandleWings8LocalSignin() {
   HideOfflineMessage(NetworkStateInformer::OFFLINE,
                      NetworkError::ERROR_REASON_NONE);
-  LoginDisplayHost::default_host()->StartWizard(JemaLocalSigninView::kScreenId);
+  LoginDisplayHost::default_host()->StartWizard(Wings8LocalSigninView::kScreenId);
 }
 
 void GaiaScreenHandler::HandleAuthenticatorLoaded() {
@@ -856,36 +856,36 @@ void GaiaScreenHandler::HandleCompleteAuthenticationEvent(
     auth_flow_auto_reload_manager_.Terminate();
   };
 
-  // Check for JemaOS or Flint service
-  bool is_jemaos = false;
-  LOG(WARNING) << "[JEMAOS] Checking services_list, count: " << services_list.size();
+  // Check for Wings8OS or Flint service
+  bool is_wings8os = false;
+  LOG(WARNING) << "[WINGS8OS] Checking services_list, count: " << services_list.size();
   for (const auto& service : services_list) {
-    LOG(WARNING) << "[JEMAOS] Service: " << service.GetString();
+    LOG(WARNING) << "[WINGS8OS] Service: " << service.GetString();
     if (service.is_string() && 
-        (service.GetString() == "jemaos" || service.GetString() == "flint")) {
-      is_jemaos = true;
-      LOG(WARNING) << "[JEMAOS] Found matching service: " << service.GetString();
+        (service.GetString() == "wings8os" || service.GetString() == "flint")) {
+      is_wings8os = true;
+      LOG(WARNING) << "[WINGS8OS] Found matching service: " << service.GetString();
     }
   }
   
   // Also check gaia_id prefix as fallback in case services_list is empty
-  if (!is_jemaos && (gaia_id.find("jema_id_") == 0 || gaia_id.find("ft_id_") == 0)) {
-    is_jemaos = true;
-    LOG(WARNING) << "[JEMAOS] Detected JEMA/Flint account by gaia_id prefix: " << gaia_id;
+  if (!is_wings8os && (gaia_id.find("wings8_id_") == 0 || gaia_id.find("ft_id_") == 0)) {
+    is_wings8os = true;
+    LOG(WARNING) << "[WINGS8OS] Detected WINGS8/Flint account by gaia_id prefix: " << gaia_id;
   }
 
-  if (is_jemaos) {
-    LOG(WARNING) << "[JEMAOS] Starting session for JemaOS/Flint user: " << email
-            << " with IsJemaAccountEnabled: " << jemaos::switches::IsJemaAccountEnabled();
+  if (is_wings8os) {
+    LOG(WARNING) << "[WINGS8OS] Starting session for Wings8OS/Flint user: " << email
+            << " with IsWings8AccountEnabled: " << wings8os::switches::IsWings8AccountEnabled();
 
     std::string raw_password;
-    //---***JEMAOS BEGIN***---
-    // The Jema web login payload may deliver the password base64-encoded;
+    //---***WINGS8OS BEGIN***---
+    // The Wings8 web login payload may deliver the password base64-encoded;
     // decode it only when it is provably base64 wrapping printable text
     // (see DecodePasswordIfBase64). Plaintext passwords pass through
     // unchanged, so the cryptohome vault always seals the real password.
     raw_password = DecodePasswordIfBase64(password_value);
-    //---***JEMAOS END***---
+    //---***WINGS8OS END***---
 
      bool exist = false;
      bool newUser = false;
@@ -907,17 +907,17 @@ void GaiaScreenHandler::HandleCompleteAuthenticationEvent(
 
       Key key(raw_password);
       key.SetLabel(kCryptohomeGaiaKeyLabel);
-      // Use AccountType::GOOGLE instead of JEMA_ACCOUNT so cryptohome allows password auth factors
-      // JEMA accounts are treated like regular Google accounts for authentication purposes
+      // Use AccountType::GOOGLE instead of WINGS8_ACCOUNT so cryptohome allows password auth factors
+      // WINGS8 accounts are treated like regular Google accounts for authentication purposes
       const AccountId account_id(known_user.GetAccountId(
-            email, "jema_id_" + email , AccountType::GOOGLE));
+            email, "wings8_id_" + email , AccountType::GOOGLE));
       LoginDisplayHost::default_host()->SetDisplayEmail(email);
       // Ensure next sign-ins show local password input instead of forcing online sign-in.
       user_manager::UserManager::Get()->SaveForceOnlineSignin(account_id, false);
       // Clear any stored reauth reason so the pod doesn't route back to online flow.
       known_user.UpdateReauthReason(account_id, 0);
 
-      LOG(ERROR) << "[JEMAOS] Account ID: " << account_id 
+      LOG(ERROR) << "[WINGS8OS] Account ID: " << account_id 
               << ", Email: " << email
               << ", New User: " << newUser
               << ", Existing User: " << exist
@@ -929,12 +929,12 @@ void GaiaScreenHandler::HandleCompleteAuthenticationEvent(
                                                                  : "absent");
       const std::string* confirm_token = password_attributes.FindString("confirmToken");
       UserContext user_context(
-          user_manager::UserType::kJemaAccount, account_id);
+          user_manager::UserType::kWings8Account, account_id);
       user_context.SetKey(key);
       // Set the password from external source (JavaScript) similar to local accounts
-      user_context.SetJemaLocalPasswordInput(LocalPasswordInput{raw_password});
-      //---***JEMAOS BEGIN***---
-      // The password was just verified online by the Jema auth host. Record it
+      user_context.SetWings8LocalPasswordInput(LocalPasswordInput{raw_password});
+      //---***WINGS8OS BEGIN***---
+      // The password was just verified online by the Wings8 auth host. Record it
       // as the online/Gaia password so that, if it no longer matches the local
       // cryptohome key (the user changed it in the SaaS), the standard
       // password-change flow can re-seal the cryptohome key with this value.
@@ -942,38 +942,38 @@ void GaiaScreenHandler::HandleCompleteAuthenticationEvent(
       // Remember (OSCrypt-encrypted) the password that currently locks this
       // account's cryptohome so the vault can be re-sealed automatically after
       // a SaaS password change, without asking for the old password.
-      jemaos::prefs::SaveJemaAccountPassword(g_browser_process->local_state(),
+      wings8os::prefs::SaveWings8AccountPassword(g_browser_process->local_state(),
                                              email, raw_password);
-      //---***JEMAOS END***---
+      //---***WINGS8OS END***---
       
-      LOG(WARNING) << "[JEMAOS] UserContext after SetKey - has password: " 
+      LOG(WARNING) << "[WINGS8OS] UserContext after SetKey - has password: " 
                    << !user_context.GetKey()->GetSecret().empty()
                    << ", password: [redacted]"
                    << ", label: " << user_context.GetKey()->GetLabel();
       if (confirm_token)
         user_context.SetRefreshToken(*confirm_token);
-      user_context.SetAuthFlow(UserContext::AUTH_FLOW_JEMA_ONLINE);
+      user_context.SetAuthFlow(UserContext::AUTH_FLOW_WINGS8_ONLINE);
       user_context.SetIsUsingOAuth(false);
       if (newUser) {
-        LOG(ERROR) << "[JEMAOS] Account ID: newUser true " << newUser;
+        LOG(ERROR) << "[WINGS8OS] Account ID: newUser true " << newUser;
         LoginDisplayHost::default_host()->CompleteLogin(user_context);
       } else {
-        //---***JEMAOS BEGIN***---
-        // Existing account whose password was just verified online by the Jema
+        //---***WINGS8OS BEGIN***---
+        // Existing account whose password was just verified online by the Wings8
         // auth host. Complete the login in external/online-verified mode (like
         // the standard Gaia flow at the end of this function) instead of the
         // internal pod path: this enables cryptohome password-change detection
         // (AuthSessionAuthenticator::CompleteLogin -> HandlePasswordChangeDetected),
         // so a password changed in the SaaS re-seals the local key rather than
         // failing with a generic authentication error.
-        LOG(ERROR) << "[JEMAOS] Account ID: newUser false " << newUser
+        LOG(ERROR) << "[WINGS8OS] Account ID: newUser false " << newUser
                    << " -> CompleteLogin (online-verified)";
         LoginDisplayHost::default_host()->CompleteLogin(user_context);
-        //---***JEMAOS END***---
+        //---***WINGS8OS END***---
       }
     
 
-    VLOG(1) << "[JEMAOS] SessionManagerClient::StartSession called for: " << email;
+    VLOG(1) << "[WINGS8OS] SessionManagerClient::StartSession called for: " << email;
     return;
   }
 
@@ -1108,7 +1108,7 @@ void GaiaScreenHandler::CompleteAuthentication(
   RecordCompleteAuthenticationMetrics(signin_artifacts);
   
   // Log signin artifacts for debugging
-  LOG(WARNING) << "[JEMAOS] CompleteAuthentication called for email: " << signin_artifacts.email
+  LOG(WARNING) << "[WINGS8OS] CompleteAuthentication called for email: " << signin_artifacts.email
                << ", gaia_id: " << signin_artifacts.gaia_id
                << ", has password: " << signin_artifacts.password.has_value()
                << ", password value: " << (signin_artifacts.password.has_value() ? signin_artifacts.password.value() : "NONE")
@@ -1130,7 +1130,7 @@ void GaiaScreenHandler::CompleteAuthentication(
   }
 
   const AccountId account_id = login::GetAccountId(
-      signin_artifacts.email, signin_artifacts.gaia_id, jemaos::switches::IsJemaAccountEnabled() ? AccountType::JEMA_ACCOUNT : AccountType::GOOGLE);
+      signin_artifacts.email, signin_artifacts.gaia_id, wings8os::switches::IsWings8AccountEnabled() ? AccountType::WINGS8_ACCOUNT : AccountType::GOOGLE);
   // Execute delayed allowlist check that is based on user type. If Gaia done
   // times out and doesn't provide us with services list try to use a saved
   // UserType.
@@ -1165,7 +1165,7 @@ void GaiaScreenHandler::CompleteAuthentication(
   signin_artifacts.cookies->TransferCookiesToUserContext(*user_context);
   
   // Log UserContext details for debugging
-  LOG(WARNING) << "[JEMAOS] UserContext built - account_id: " << user_context->GetAccountId()
+  LOG(WARNING) << "[WINGS8OS] UserContext built - account_id: " << user_context->GetAccountId()
                << ", has key: " << (user_context->GetKey() != nullptr)
                << ", key secret: '" << (user_context->GetKey() ? user_context->GetKey()->GetSecret() : "NULL") << "'"
                << ", key label: " << (user_context->GetKey() ? user_context->GetKey()->GetLabel() : "NULL")
@@ -1183,7 +1183,7 @@ void GaiaScreenHandler::CompleteAuthentication(
     LoginDisplayHost::default_host()->GetSigninUI()->SAMLConfirmPassword(
         std::move(scraped_saml_passwords), std::move(user_context));
   } else {
-    LOG(WARNING) << "[JEMAOS] Calling CompleteLogin with UserContext";
+    LOG(WARNING) << "[WINGS8OS] Calling CompleteLogin with UserContext";
     LoginDisplayHost::default_host()->CompleteLogin(*user_context);
   }
 
@@ -1205,7 +1205,7 @@ void GaiaScreenHandler::OnCookieWaitTimeout() {
       SigninError::kCookieWaitTimeout, /*details=*/std::string());
 }
 
-// ---***JEMAOS BEGIN***---
+// ---***WINGS8OS BEGIN***---
 void GaiaScreenHandler::SetupCertificateCacheForOnlineAuth() {
   if (!untrusted_authority_certs_cache_) {
     // Make additional untrusted authority certificates available for client
@@ -1229,7 +1229,7 @@ void GaiaScreenHandler::HandleUserSelectGoogleAccount() {
     return;
   }
   
-  jemaos::switches::DisableJemaAccountFlag();
+  wings8os::switches::DisableWings8AccountFlag();
   
   // Setup certificate cache only when user selects Google account
   SetupCertificateCacheForOnlineAuth();
@@ -1245,17 +1245,17 @@ void GaiaScreenHandler::HandleResetAccountFlag() {
   if (g_browser_process->platform_part()
       ->browser_policy_connector_ash()
       ->IsDeviceEnterpriseManaged()) return;
-  // Check network availability before proceeding with JemaOS online account
+  // Check network availability before proceeding with Wings8OS online account
   if (!CheckNetworkAndShowErrorIfOffline()) {
     return;
   }
   
-  jemaos::switches::EnableJemaAccountFlag();
+  wings8os::switches::EnableWings8AccountFlag();
   
-  // Setup certificate cache only when user selects JemaOS online account
+  // Setup certificate cache only when user selects Wings8OS online account
   SetupCertificateCacheForOnlineAuth();
   
-  // Load authenticator only when user selects JemaOS online account
+  // Load authenticator only when user selects Wings8OS online account
   LoadAuthenticator(/* force=*/true);
 
   ReloadGaia(true/* force_reload */);
@@ -1536,9 +1536,9 @@ void GaiaScreenHandler::Show() {
     show_account_type_selection_ = false; // Reset the flag
   }
 
-  // JemaOS: optionally hide the Google account login option.
+  // Wings8OS: optionally hide the Google account login option.
   data.Set("hideGoogleLoginButton",
-           jemaos::switches::IsGoogleLoginButtonHidden());
+           wings8os::switches::IsGoogleLoginButtonHidden());
 
   ShowInWebUI(std::move(data));
   elapsed_timer_ = std::make_unique<base::ElapsedTimer>();
@@ -1749,10 +1749,10 @@ void GaiaScreenHandler::LoadAuthenticator(bool force) {
     // TODO(http://b/314902371): Figure out if we can read
     // `populated_account_id_.GetGaiaId()` instead of searching inside
     // `known_user`.
-    if (jemaos::switches::IsJemaAccountEnabled()) {
-      if (const std::string* jema_id =
-            known_user.FindJemaID(AccountId::FromUserEmail(context.email))) {
-        context.gaia_id = *jema_id;
+    if (wings8os::switches::IsWings8AccountEnabled()) {
+      if (const std::string* wings8_id =
+            known_user.FindWings8ID(AccountId::FromUserEmail(context.email))) {
+        context.gaia_id = *wings8_id;
       }
     } else {
       if (const std::string* gaia_id =

@@ -34,11 +34,11 @@ bool ShouldSync(content::BrowserContext* context, const Extension* extension) {
         << "Update URL cannot be overridden to be the webstore URL!";
     return false;
   }
-  // ---***JEMAOS BEGIN***---
+  // ---***WINGS8OS BEGIN***---
   Profile* profile = Profile::FromBrowserContext(context);
   return sync_helper::IsSyncable(extension, profile) &&
          !ExtensionPrefs::Get(context)->DoNotSync(extension->id());
-  // ---***JEMAOS END***---
+  // ---***WINGS8OS END***---
 }
 
 bool IsSyncingExtensionsEnabled(Profile* profile) {

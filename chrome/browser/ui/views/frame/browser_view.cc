@@ -3372,7 +3372,7 @@ content::KeyboardEventProcessingResult BrowserView::PreHandleKeyboardEvent(
 
   // we still need ctrl+c for triggering ai bubble
 #if BUILDFLAG(IS_CHROMEOS_ASH)
-  const bool accelerator_for_ai = ash::features::IsJemaAssistantEnabled() && ash::AssistantState::Get()->jema_assistant_enabled().value_or(false) && accelerator.key_code() == ui::VKEY_C;
+  const bool accelerator_for_ai = ash::features::IsWings8AssistantEnabled() && ash::AssistantState::Get()->wings8_assistant_enabled().value_or(false) && accelerator.key_code() == ui::VKEY_C;
 #else
   const bool accelerator_for_ai = false;
 #endif

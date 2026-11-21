@@ -107,8 +107,8 @@ export class ExtensionsSidebarElement extends ExtensionsSidebarElementBase {
 
   protected onMoreExtensionsClick_(e: Event) {
     if ((e.target as HTMLElement).tagName === 'A') {
-      if (loadTimeData.valueExists('jemaosAccountEnabled')
-          && loadTimeData.getBoolean('jemaosAccountEnabled')) {
+      if (loadTimeData.valueExists('wings8osAccountEnabled')
+          && loadTimeData.getBoolean('wings8osAccountEnabled')) {
         e.preventDefault();
         chrome.management
           .get('hidnajblbifdkmheebalalchohohmaef')

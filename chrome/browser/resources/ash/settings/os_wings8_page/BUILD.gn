@@ -1,0 +1,131 @@
+import("//third_party/closure_compiler/compile_js.gni")
+import("//wings8os/build/config/buildflags.gni")
+import("//tools/polymer/html_to_js.gni")
+import("../os_settings.gni")
+
+polymer_element_files = [
+  "wings8os_account.js",
+  "wings8os_drivers.js",
+  "wings8os_more_info.js",
+  "wings8os_remoting.js",
+  "wings8os_tweak_ui.js",
+  "wings8os_experiment.js",
+  "os_wings8_page.js",
+]
+if (use_wings8os_license) {
+  polymer_element_files += [
+    "wings8os_license_info.js",
+  ]
+}
+
+js_type_check("closure_compile_module") {
+  closure_flags = os_settings_closure_flags
+  is_polymer3 = true
+  deps = [
+    ":shell_client",
+    ":wings8os_account",
+    ":wings8os_drivers",
+    ":wings8os_remoting",
+    ":wings8os_more_info",
+    ":wings8os_tweak_ui",
+    ":wings8os_experiment",
+    ":os_wings8_page",
+  ]
+  if (use_wings8os_license) {
+    deps += [
+      ":wings8os_license_info",
+    ]
+  }
+}
+
+js_library("shell_client") {
+  deps = [
+    "//ui/webui/resources/js:cr.m"
+  ]
+}
+
+js_library("wings8os_account") {
+  deps = [
+    "//third_party/polymer/v3_0/components-chromium/polymer:polymer_bundled",
+    "//ui/webui/resources/js:i18n_behavior.m",
+    "//ui/webui/resources/js:cr.m",
+    "../os_people_page:account_manager_browser_proxy",
+    "//ui/webui/resources/js:load_time_data.m",
+    "//ui/webui/resources/js:web_ui_listener_behavior.m",
+    "//ui/webui/resources/cr_elements/chromeos/cr_picture:png",
+    "//ui/webui/resources/js:icon",
+  ]
+}
+
+js_library("wings8os_drivers") {
+  deps = [
+    "..:os_route",
+    "../..:router",
+    "..:route_observer_behavior",
+    ":shell_client",
+    "//third_party/polymer/v3_0/components-chromium/polymer:polymer_bundled",
+    "//ui/webui/resources/js:i18n_behavior.m",
+     "//ui/webui/resources/js:web_ui_listener_behavior.m",
+  ]
+}
+
+js_library("wings8os_remoting") {
+  deps = [
+    "//third_party/polymer/v3_0/components-chromium/polymer:polymer_bundled",
+    "//ui/webui/resources/js:i18n_behavior.m",
+    "..:os_route",
+    "../..:router",
+    ":shell_client",
+  ]
+}
+
+js_library("wings8os_more_info") {
+  deps = [
+    "../os_about_page:about_page_browser_proxy",
+    "//third_party/polymer/v3_0/components-chromium/polymer:polymer_bundled",
+  ]
+}
+
+js_library("wings8os_tweak_ui") {
+  deps = [
+    "..:route_observer_behavior",
+     "//ui/webui/resources/js:cr.m",
+     "//ui/webui/resources/js:load_time_data.m",
+     "//ui/webui/resources/js:i18n_behavior.m",
+     "//ui/webui/resources/js:web_ui_listener_behavior.m",
+    "//third_party/polymer/v3_0/components-chromium/polymer:polymer_bundled",
+    ":shell_client",
+  ]
+}
+
+js_library("wings8os_experiment") {
+  deps = [
+    "//ui/webui/resources/js:cr.m",
+    "//ui/webui/resources/js:load_time_data.m",
+    "../..:lifetime_browser_proxy",
+    "//third_party/polymer/v3_0/components-chromium/polymer:polymer_bundled",
+  ]
+}
+
+if (use_wings8os_license) {
+  js_library("wings8os_license_info") {
+    deps = [
+      "//third_party/polymer/v3_0/components-chromium/polymer:polymer_bundled",
+      "//ui/webui/resources/js:i18n_behavior.m",
+      ":shell_client",
+    ]
+  }
+}
+
+js_library("os_wings8_page") {
+  deps = [
+    "//ash/webui/common/resources:i18n_behavior",
+    "..:route_observer_behavior",
+    "..:os_route",
+    "../..:router",
+  ]
+}
+
+html_to_js("web_components") {
+  js_files = polymer_element_files
+}

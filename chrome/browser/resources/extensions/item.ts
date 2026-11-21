@@ -309,10 +309,10 @@ export class ExtensionsItemElement extends ExtensionsItemElementBase {
       case SourceType.WEBSTORE:
       case SourceType.INSTALLED_BY_DEFAULT:
         return '';
-      //---***JEMAOS BEGIN***---
-      case SourceType.JEMAOS_STORE:
+      //---***WINGS8OS BEGIN***---
+      case SourceType.WINGS8OS_STORE:
         return '';
-      //---***JEMAOS END***---
+      //---***WINGS8OS END***---
       default:
         assertNotReached();
     }
@@ -324,7 +324,7 @@ export class ExtensionsItemElement extends ExtensionsItemElementBase {
     }
 
     const sourceType = getItemSource(this.data);
-    return sourceType === SourceType.JEMAOS_STORE ? '' :
+    return sourceType === SourceType.WINGS8OS_STORE ? '' :
                                                 getItemSourceString(sourceType);
   }
 

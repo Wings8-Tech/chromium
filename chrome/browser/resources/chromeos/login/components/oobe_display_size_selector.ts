@@ -105,12 +105,12 @@ export class OobeDisplaySizeSelector extends OobeDisplaySizeSelectorBase {
     this.markerCounts = this.availableSizesTicks.length;
 
     this.apps = [
-      {icon: 'images/app_icons/jemaos/files.svg', name: 'displaySizeFilesApp'},
-      {icon: 'images/app_icons/jemaos/rdp.svg', name: 'displaySizeRdpApp'},
-      {icon: 'images/app_icons/jemaos/store.svg', name: 'displaySizeStoreApp'},
-      {icon: 'images/app_icons/jemaos/camera.svg', name: 'displaySizeCameraApp'},
-      {icon: 'images/app_icons/jemaos/settings.svg', name: 'displaySizeSettingsApp'},
-      {icon: 'images/app_icons/jemaos/ai.svg', name: 'displaySizeJemaosAiApp'},
+      {icon: 'images/app_icons/wings8os/files.svg', name: 'displaySizeFilesApp'},
+      {icon: 'images/app_icons/wings8os/rdp.svg', name: 'displaySizeRdpApp'},
+      {icon: 'images/app_icons/wings8os/store.svg', name: 'displaySizeStoreApp'},
+      {icon: 'images/app_icons/wings8os/camera.svg', name: 'displaySizeCameraApp'},
+      {icon: 'images/app_icons/wings8os/settings.svg', name: 'displaySizeSettingsApp'},
+      {icon: 'images/app_icons/wings8os/ai.svg', name: 'displaySizeWings8osAiApp'},
     ];
   }
 

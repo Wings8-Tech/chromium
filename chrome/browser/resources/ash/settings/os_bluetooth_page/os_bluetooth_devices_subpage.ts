@@ -300,7 +300,7 @@ export class SettingsBluetoothDevicesSubpageElement extends
     return loadTimeData.getBoolean('enableFastPairFlag') &&
         loadTimeData.getBoolean('enableSavedDevicesFlag') &&
         !loadTimeData.getBoolean('isGuest') &&
-        !loadTimeData.getBoolean('isJemaLocalAccount') &&
+        !loadTimeData.getBoolean('isWings8LocalAccount') &&
         loadTimeData.getBoolean('isCrossDeviceFeatureSuiteEnabled');
   }
 

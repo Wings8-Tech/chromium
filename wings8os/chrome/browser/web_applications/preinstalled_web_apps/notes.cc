@@ -1,0 +1,23 @@
+// Copyright 2022 Wings8 Technology. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+#include "wings8os/chrome/browser/web_applications/preinstalled_web_apps/community.h"
+#include "wings8os/switches/urls/urls_constants.h"
+
+namespace web_app {
+
+ExternalInstallOptions GetConfigForWings8Notes() {
+  ExternalInstallOptions options(
+      /*install_url=*/GURL(wings8os::constants::kWings8OSNotesAppURL),
+      /*user_display_mode=*/mojom::UserDisplayMode::kStandalone,
+      /*install_source=*/ExternalInstallSource::kExternalDefault);
+
+  // Exclude managed users until we have a way for admins to block the app.
+  options.user_type_allowlist = {"unmanaged", "managed", "child"};
+  options.add_to_quick_launch_bar = false;
+
+  return options;
+}
+
+}  // namespace web_app

@@ -73,11 +73,11 @@ void AddCoreDefaultColorMixer(ColorProvider* provider,
       AlphaBlend(kColorAccentWithGuaranteedContrastAtopPrimaryBackground,
                  kColorPrimaryBackground, gfx::kGoogleGreyAlpha500);
   // change the background color of ime candidate_view here
-  // mixer[kJemaColorTextSelectionBackground] = AlphaBlend(
+  // mixer[kWings8ColorTextSelectionBackground] = AlphaBlend(
   //     dark_mode ? gfx::kGoogleBlue500 : gfx::kGoogleBlue200,
   //     dark_mode ? SkColorSetRGB(0x29, 0x2A, 0x2D) : SK_ColorWHITE,
   //     gfx::kGoogleGreyAlpha700);
-  mixer[kJemaColorTextSelectionBackground] =
+  mixer[kWings8ColorTextSelectionBackground] =
       {dark_mode
         ? SkColorSetRGB(0x3C, 0x8A, 0xFF)
         : SkColorSetRGB(0xC2, 0xDB, 0xFF)};

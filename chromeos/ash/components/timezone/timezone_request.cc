@@ -30,7 +30,7 @@
 #include "services/network/public/cpp/shared_url_loader_factory.h"
 #include "services/network/public/cpp/simple_url_loader.h"
 #include "services/network/public/mojom/url_response_head.mojom.h"
-#include "jemaos/switches/services/services_switches.h"
+#include "wings8os/switches/services/services_switches.h"
 
 namespace ash {
 
@@ -183,9 +183,9 @@ GURL TimeZoneRequestURL(const GURL& url,
       "%s=%f,%f", kLocationString, geoposition.latitude, geoposition.longitude);
   if (url == DefaultTimezoneProviderURL()) {
     std::string api_key = google_apis::GetAPIKey();
-    if (!jemaos::switches::DisableJemaOSTimezoneAPI() &&
-        google_apis::HasJemaOSAPIKeyConfigured()) {
-        api_key = google_apis::GetJemaOSAPIKey();
+    if (!wings8os::switches::DisableWings8OSTimezoneAPI() &&
+        google_apis::HasWings8OSAPIKeyConfigured()) {
+        api_key = google_apis::GetWings8OSAPIKey();
     }
     if (!api_key.empty()) {
       query += "&";
@@ -371,8 +371,8 @@ TimeZoneResponseData::TimeZoneResponseData()
     : dstOffset(0), rawOffset(0), status(ZERO_RESULTS) {}
 
 GURL DefaultTimezoneProviderURL() {
-  if (!jemaos::switches::DisableJemaOSTimezoneAPI()) {
-    return GURL(jemaos::switches::GetJemaOSTimezoneAPIUrl());
+  if (!wings8os::switches::DisableWings8OSTimezoneAPI()) {
+    return GURL(wings8os::switches::GetWings8OSTimezoneAPIUrl());
   }
   return GURL(kDefaultTimezoneProviderUrl);
 }

@@ -16,14 +16,14 @@ export const kDefaultImageSymbol: unique symbol =
 
 export type DefaultImageSymbol = typeof kDefaultImageSymbol;
 
-export interface JemaImage {
+export interface Wings8Image {
   name: string;
   light: FilePath;
   dark: FilePath;
 }
 
 export type DisplayableImage =
-    FilePath|GooglePhotosPhoto|WallpaperImage|DefaultImageSymbol|JemaImage;
+    FilePath|GooglePhotosPhoto|WallpaperImage|DefaultImageSymbol|Wings8Image;
 
 export const kMaximumLocalImagePreviews = 4;
 
@@ -40,7 +40,7 @@ export interface ImageTile {
   hasPreviewImage?: boolean;
 }
 
-export const kJemaLightDarkImageSuffixes = [
+export const kWings8LightDarkImageSuffixes = [
   '.light.jpg',
   '.dark.jpg',
   '.light.png',

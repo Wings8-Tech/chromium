@@ -40,8 +40,8 @@
 #include "components/sync_preferences/pref_service_syncable.h"
 #include "ui/base/l10n/l10n_util.h"
 
-#include "jemaos/misc/jemaos_email_subscription.h"
-#include "jemaos/prefs/jemaos_pref_names.h"
+#include "wings8os/misc/wings8os_email_subscription.h"
+#include "wings8os/prefs/wings8os_pref_names.h"
 
 namespace ash {
 
@@ -51,7 +51,7 @@ constexpr char kUserActionGetStarted[] = "get-started";
 constexpr char kUserActionSetA11yNavigationButtonsEnabled[] =
     "set-a11y-button-enable";
 
-bool IsJemaOSBuild() {
+bool IsWings8OSBuild() {
   return true;
 }
 
@@ -137,17 +137,17 @@ void MarketingOptInScreen::ShowImpl() {
   DCHECK(initialized_);
 
   // Show a verbose legal footer for Canada. (https://crbug.com/1124956)
-  const bool legal_footer_visible = !IsJemaOSBuild() &&
+  const bool legal_footer_visible = !IsWings8OSBuild() &&
       email_opt_in_visible_ && countries_with_legal_footer.count(country_);
 
-  const bool cloud_gaming_enabled = !IsJemaOSBuild() &&
+  const bool cloud_gaming_enabled = !IsWings8OSBuild() &&
       chromeos::features::IsCloudGamingDeviceEnabled();
 
   if (view_) {
     view_->Show(/*opt_in_visible=*/email_opt_in_visible_,
                 /*opt_in_default_state=*/IsDefaultOptInCountry(),
-                /*jema_opt_in_visible=*/jema_email_opt_in_visible_,
-                /*jema_opt_in_default_state=*/jema_email_opt_in_visible_,
+                /*wings8_opt_in_visible=*/wings8_email_opt_in_visible_,
+                /*wings8_opt_in_default_state=*/wings8_email_opt_in_visible_,
                 /*legal_footer_visible=*/legal_footer_visible,
                 /*cloud_gaming_enabled=*/cloud_gaming_enabled);
   }
@@ -190,8 +190,8 @@ void MarketingOptInScreen::OnUserAction(const base::Value::List& args) {
   if (action_id == kUserActionGetStarted) {
     CHECK_EQ(args.size(), 3u);
     const bool chromebook_email_opt_in = args[1].GetBool();
-    const bool jemaos_improvement_plan_opt_in = args[2].GetBool();
-    OnJemaGetStarted(chromebook_email_opt_in, jemaos_improvement_plan_opt_in);
+    const bool wings8os_improvement_plan_opt_in = args[2].GetBool();
+    OnWings8GetStarted(chromebook_email_opt_in, wings8os_improvement_plan_opt_in);
     return;
   }
   if (action_id == kUserActionSetA11yNavigationButtonsEnabled) {
@@ -203,19 +203,19 @@ void MarketingOptInScreen::OnUserAction(const base::Value::List& args) {
   BaseScreen::OnUserAction(args);
 }
 
-void MarketingOptInScreen::OnJemaGetStarted(bool email_opt_in, bool improvement_plan_opt_in) {
+void MarketingOptInScreen::OnWings8GetStarted(bool email_opt_in, bool improvement_plan_opt_in) {
   if (is_hidden())
     return;
   DCHECK(initialized_);
 
-  if (jema_email_opt_in_visible_) {
+  if (wings8_email_opt_in_visible_) {
     Profile* profile = ProfileManager::GetActiveUserProfile();
     DCHECK(profile);
     profile->GetPrefs()->SetBoolean(prefs::kOobeMarketingOptInChoice, email_opt_in);
-    profile->GetPrefs()->SetBoolean(jemaos::prefs::kJemaOSImprovementPlanEnabled,
+    profile->GetPrefs()->SetBoolean(wings8os::prefs::kWings8OSImprovementPlanEnabled,
                                     improvement_plan_opt_in);
   }
-  jemaos::misc::Subscribe(ProfileManager::GetActiveUserProfile(),
+  wings8os::misc::Subscribe(ProfileManager::GetActiveUserProfile(),
                           email_opt_in, improvement_plan_opt_in);
 
   exit_callback_.Run(Result::NEXT);
@@ -276,9 +276,9 @@ void MarketingOptInScreen::Initialize() {
 
   // Only show the opt in option if this is a supported region, and if the user
   // never made a choice regarding emails.
-  email_opt_in_visible_ = !IsJemaOSBuild() && !country_.empty() && ShouldShowOptionToSubscribe();
+  email_opt_in_visible_ = !IsWings8OSBuild() && !country_.empty() && ShouldShowOptionToSubscribe();
 
-  jema_email_opt_in_visible_ = IsJemaOSBuild() && ShouldShowOptionToSubscribe();
+  wings8_email_opt_in_visible_ = IsWings8OSBuild() && ShouldShowOptionToSubscribe();
 
   initialized_ = true;
 }
@@ -317,9 +317,9 @@ void MarketingOptInScreen::SetA11yNavigationButtonsEnabled(bool enabled) {
 bool MarketingOptInScreen::ShouldShowOptionToSubscribe() {
   // Directly access PrefServiceSyncable instead of PrefService because
   // we need to know whether the prefs have been loaded.
-  if (IsJemaOSBuild()) {
+  if (IsWings8OSBuild()) {
     const std::string email = ProfileManager::GetActiveUserProfile()->GetProfileUserName();
-    return !base::EndsWith(email, "@jemaos.local", base::CompareCase::INSENSITIVE_ASCII);
+    return !base::EndsWith(email, "@wings8os.local", base::CompareCase::INSENSITIVE_ASCII);
   }
   sync_preferences::PrefServiceSyncable* prefs =
       PrefServiceSyncableFromProfile(ProfileManager::GetActiveUserProfile());

@@ -35,7 +35,7 @@ class ErrorScreenView {
   // Is guest signin allowed?
   virtual void SetGuestSigninAllowed(bool value) = 0;
 
-  virtual void SetJemaLocalSigninAllowed(bool value) = 0;
+  virtual void SetWings8LocalSigninAllowed(bool value) = 0;
 
   // Is offline signin allowed?
   virtual void SetOfflineSigninAllowed(bool value) = 0;
@@ -70,7 +70,7 @@ class ErrorScreenHandler final : public BaseScreenHandler,
   void SetErrorStateCode(NetworkError::ErrorState error_state) override;
   void SetErrorStateNetwork(const std::string& network_name) override;
   void SetGuestSigninAllowed(bool value) override;
-  void SetJemaLocalSigninAllowed(bool value) override;
+  void SetWings8LocalSigninAllowed(bool value) override;
   void SetOfflineSigninAllowed(bool value) override;
   void SetShowConnectingIndicator(bool value) override;
   void SetUIState(NetworkError::UIState ui_state) override;

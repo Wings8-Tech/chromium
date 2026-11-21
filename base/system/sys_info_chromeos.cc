@@ -243,23 +243,23 @@ std::string SysInfo::GetLsbReleaseBoardWithoutSuffix() {
   return board;
 }
 
-// ---***JEMAOS BEGIN***---
-std::string SysInfo::GetLsbJemaReleaseVersion() {
-  const char kJemaReleaseVersion[] = "CHROMEOS_RELEASE_BUILD_TYPE";
+// ---***WINGS8OS BEGIN***---
+std::string SysInfo::GetLsbWings8ReleaseVersion() {
+  const char kWings8ReleaseVersion[] = "CHROMEOS_RELEASE_BUILD_TYPE";
   std::string version;
-  char jemaosVersion[16 + 1] = {'\0'};
-  if (!GetLsbReleaseValue(kJemaReleaseVersion, &version)) {
+  char wings8osVersion[16 + 1] = {'\0'};
+  if (!GetLsbReleaseValue(kWings8ReleaseVersion, &version)) {
     return "unknown";
   }
-  if (sscanf(version.c_str(), "Release Build v%16s",  jemaosVersion) != 1) {
+  if (sscanf(version.c_str(), "Release Build v%16s",  wings8osVersion) != 1) {
     return "unknown";
   }
-  if (strlen(jemaosVersion) < 1) {
+  if (strlen(wings8osVersion) < 1) {
     return "unknown";
   }
-  return std::string(jemaosVersion);
+  return std::string(wings8osVersion);
 }
-// ---***JEMAOS END***---
+// ---***WINGS8OS END***---
 
 // static
 Time SysInfo::GetLsbReleaseTime() {

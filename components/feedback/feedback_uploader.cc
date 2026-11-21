@@ -19,7 +19,7 @@
 #include "services/network/public/cpp/resource_request.h"
 #include "services/network/public/cpp/simple_url_loader.h"
 #include "services/network/public/mojom/url_response_head.mojom.h"
-#include "jemaos/switches/services/services_constants.h"
+#include "wings8os/switches/services/services_constants.h"
 
 namespace feedback {
 
@@ -64,8 +64,8 @@ GURL GetFeedbackPostGURL() {
       *base::CommandLine::ForCurrentProcess();
   std::string feedback_post_url = command_line.HasSwitch(switches::kFeedbackServer)
                   ? command_line.GetSwitchValueASCII(switches::kFeedbackServer)
-                  : jemaos::constants::kJemaOSFeedbackPostUrl;
-  VLOG(1) << "[JEMA URL SERVICE] FeedbackUploader: Using feedback post URL: " << feedback_post_url;
+                  : wings8os::constants::kWings8OSFeedbackPostUrl;
+  VLOG(1) << "[WINGS8 URL SERVICE] FeedbackUploader: Using feedback post URL: " << feedback_post_url;
   return GURL(feedback_post_url);
 }
 

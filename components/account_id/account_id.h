@@ -24,7 +24,7 @@ enum class AccountType {
   // b/263367348).
   ACTIVE_DIRECTORY,
   FLINT_ACCOUNT = 99,
-  JEMA_ACCOUNT = 100,
+  WINGS8_ACCOUNT = 100,
 };
 
 // Type that contains enough information to identify user.
@@ -101,16 +101,16 @@ class AccountId {
   std::string Serialize() const;
   static std::optional<AccountId> Deserialize(std::string_view serialized);
 
-  //---***JEMAOS BEGIN***---
+  //---***WINGS8OS BEGIN***---
   const std::string& GetFlintId() const;
   static AccountId FtFromUserEmailFlintId(const std::string& email,
                                           const std::string& flint_id);
   static AccountId FtFromFlintId(const std::string& flint_id);
-  const std::string& GetJemaId() const;
-  static AccountId FyFromUserEmailJemaId(const std::string& email,
-                                          const std::string& jema_id);
-  static AccountId FyFromJemaId(const std::string& jema_id);
-  //---***JEMAOS END***---
+  const std::string& GetWings8Id() const;
+  static AccountId FyFromUserEmailWings8Id(const std::string& email,
+                                          const std::string& wings8_id);
+  static AccountId FyFromWings8Id(const std::string& wings8_id);
+  //---***WINGS8OS END***---
  private:
   friend std::ostream& operator<<(std::ostream&, const AccountId&);
 

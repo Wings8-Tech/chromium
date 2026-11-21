@@ -112,7 +112,7 @@
 #include "ui/strings/grit/ui_strings.h"
 #include "ui/wm/core/coordinate_conversion.h"
 #include "ui/wm/core/cursor_manager.h"
-#include "jemaos/build/config/buildflags.h"
+#include "wings8os/build/config/buildflags.h"
 
 using session_manager::SessionState;
 
@@ -939,7 +939,7 @@ void AccessibilityController::Feature::SetEnabled(bool enabled) {
   if (!prefs) {
     return;
   }
-#if BUILDFLAG(USE_JEMAOS_COM)
+#if BUILDFLAG(USE_WINGS8OS_COM)
   if (type_ == FeatureType::kDictation) {
     enabled = false;
   }
@@ -1816,7 +1816,7 @@ bool AccessibilityController::IsEnterpriseIconVisibleForCursorHighlight() {
 }
 
 bool AccessibilityController::IsDictationSettingVisibleInTray() {
-#if BUILDFLAG(USE_JEMAOS_COM)
+#if BUILDFLAG(USE_WINGS8OS_COM)
   return false;
 #else
   return dictation().IsVisibleInTray();

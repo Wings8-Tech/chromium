@@ -124,7 +124,7 @@ export class OsSettingsAppsPageElement extends OsSettingsAppsPageElementBase {
         },
       },
 
-      jemaosArcSettingsExists_: {
+      wings8osArcSettingsExists_: {
         type: Boolean,
         value: false,
       },
@@ -299,7 +299,7 @@ export class OsSettingsAppsPageElement extends OsSettingsAppsPageElementBase {
   private showParentalControlsVerifyPinDialog_: boolean;
   private isParentalControlsSetupCompleted_: boolean;
   private readonly shouldShowStartup_: boolean;
-  private jemaosArcSettingsExists_: boolean;
+  private wings8osArcSettingsExists_: boolean;
 
   constructor() {
     super();
@@ -318,7 +318,7 @@ export class OsSettingsAppsPageElement extends OsSettingsAppsPageElementBase {
       return getSelectedApp(state) || undefined;
     });
 
-    this.checkJemaOSArcSettingsExists_();
+    this.checkWings8OSArcSettingsExists_();
 
     this.mojoInterfaceProvider_ = getAppNotificationProvider();
 
@@ -482,7 +482,7 @@ export class OsSettingsAppsPageElement extends OsSettingsAppsPageElementBase {
   }
 
   private onManageAndroidAppsClick_(event: MouseEvent): void {
-    if (this.jemaosArcSettingsExists_) {
+    if (this.wings8osArcSettingsExists_) {
       const ANDROID_APPID = 'iakadpgajjigiaojnbdmodlngmbkfhag';
       chrome.nativeWindows.create(ANDROID_APPID);
       return;
@@ -493,11 +493,11 @@ export class OsSettingsAppsPageElement extends OsSettingsAppsPageElementBase {
         isKeyboardAction);
   }
 
-  private checkJemaOSArcSettingsExists_() {
+  private checkWings8OSArcSettingsExists_() {
     const ANDROID_APPID = 'iakadpgajjigiaojnbdmodlngmbkfhag';
     chrome.appManagement.getAppList(apps => {
       const androidApp = apps.find(item => item.appId === ANDROID_APPID);
-      this.jemaosArcSettingsExists_ = !!androidApp;
+      this.wings8osArcSettingsExists_ = !!androidApp;
     });
   }
 

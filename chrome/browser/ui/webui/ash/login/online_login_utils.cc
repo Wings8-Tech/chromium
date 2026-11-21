@@ -26,9 +26,9 @@
 #include "content/public/browser/storage_partition.h"
 #include "google_apis/gaia/gaia_urls.h"
 #include "ui/base/l10n/l10n_util.h"
-// ---***JEMAOS BEGIN***---
-#include "jemaos/switches/account/account_switches.h"
-// ---***JEMAOS END***---
+// ---***WINGS8OS BEGIN***---
+#include "wings8os/switches/account/account_switches.h"
+// ---***WINGS8OS END***---
 
 namespace ash {
 namespace login {
@@ -139,9 +139,9 @@ user_manager::UserType GetUsertypeFromServicesString(
     }
   }
 
-  if (jemaos::switches::IsJemaAccountEnabled()) {
-    return is_child ? user_manager::UserType::kJemaChild
-                    : user_manager::UserType::kJemaAccount;
+  if (wings8os::switches::IsWings8AccountEnabled()) {
+    return is_child ? user_manager::UserType::kWings8Child
+                    : user_manager::UserType::kWings8Account;
   }
 
   return is_child ? user_manager::UserType::kChild
@@ -202,11 +202,11 @@ std::unique_ptr<UserContext> BuildUserContextForGaiaSignIn(
   user_context->SetAuthFlow(using_saml
                                 ? UserContext::AUTH_FLOW_GAIA_WITH_SAML
                                 : UserContext::AUTH_FLOW_GAIA_WITHOUT_SAML);
-  //---***JEMAOS BEGIN***---
-  if (account_id.GetAccountType() == AccountType::JEMA_ACCOUNT) {
-    user_context->SetAuthFlow(UserContext::AUTH_FLOW_JEMA_ONLINE);
+  //---***WINGS8OS BEGIN***---
+  if (account_id.GetAccountType() == AccountType::WINGS8_ACCOUNT) {
+    user_context->SetAuthFlow(UserContext::AUTH_FLOW_WINGS8_ONLINE);
   }
-  //---***JEMAOS END***---
+  //---***WINGS8OS END***---
   if (using_saml) {
     user_context->SetIsUsingSamlPrincipalsApi(using_saml_api);
     if (ExtractSamlPasswordAttributesEnabled()) {

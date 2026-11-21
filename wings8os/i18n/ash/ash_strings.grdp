@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- extend ash/ash_strings.grd -->
+<grit-part>
+  <!-- rotate screen button -->
+  <message name="IDS_ASH_WINGS8OS_UNIFIED_MENU_LABEL_ROTATE_SCREEN" desc="label of unified menu rotate screen">
+    Rotate Screen
+  </message>
+  <!-- switch tablet/laptop mode -->
+  <message name="IDS_ASH_WINGS8OS_UNIFIED_MENU_LABEL_SWITCH_TO_TABLET_MODE" desc="label of unified menu switch to tablet mode">
+    Tablet mode
+  </message>
+  <message name="IDS_ASH_WINGS8OS_UNIFIED_MENU_LABEL_SWITCH_TO_LAPTOP_MODE" desc="label of unified menu switch to laptop mode">
+    Laptop mode
+  </message>
+  <message name="IDS_ASH_WINGS8OS_UNIFIED_MENU_LABEL_SWITCH_TO_DEFAULT_MODE" desc="label of unified menu switch to default mode">
+    Default mode
+  </message>
+  <if expr="use_wings8os_license">
+    <!-- wings8os license -->
+    <message name="IDS_ASH_WINGS8OS_ENFORCEMENT_FORCE_QUIT_NOTIFICATION_TITLE" desc="title of license enforcement for quit notification">
+      Important information
+    </message>
+    <message name="IDS_ASH_WINGS8OS_ENFORCEMENT_FORCE_QUIT_NOTIFICATION_MESSAGE" desc="message of license enforcement for quit notification">
+      Apologies, your subscription has ended. Your current Wings8OS session will be signed out in <ph name="LOGOUT_DELAY">$1<ex>900</ex></ph> seconds.
+    </message>
+    <message name="IDS_ASH_WINGS8OS_ENFORCEMENT_EXPIRED_NOTIFICATION_MESSAGE" desc="one-time notification shown when the license is expired; no automatic sign-out">
+      Your subscription has ended. Renew it to keep receiving updates and support. You can continue working and save your files.
+    </message>
+  </if>
+  <if expr="use_wings8os_com">
+    <message name="IDS_ASH_WINGS8OS_CROSTINI_INSTALL_NOTIFICATION_TITLE" desc="title of crostini install notification">
+      Activate the Linux subsystem
+    </message>
+    <if expr="openwings8">
+      <message name="IDS_ASH_WINGS8OS_CROSTINI_INSTALL_NOTIFICATION_MESSAGE" desc="message of crostini install notification">
+        Configure the Linux subsystem module on your openWings8 device, so that you can use common Linux applications and developer tools.
+      </message>
+    </if>
+    <if expr="not openwings8">
+      <message name="IDS_ASH_WINGS8OS_CROSTINI_INSTALL_NOTIFICATION_MESSAGE" desc="message of crostini install notification">
+        Configure the Linux subsystem module on your Wings8OS device, so that you can use common Linux applications and developer tools.
+      </message>
+    </if>
+  </if>
+  <message name="IDS_ASH_LOGIN_ERROR_RECOVER_USER_WINGS8OS" desc="Message to let the user know what to do when the user couldn't sign in because password or PIN is invalid for the 2nd time">
+    If you forgot your PIN and password or changed your Wings8OS Account password recently, try recovering this user.
+  </message>
+  <message name="IDS_ASH_LOGIN_ERROR_RECOVER_USER_PWD_WINGS8OS" desc="Message to let the user know what to do when the user couldn't sign in because password is invalid for the 2nd time">
+    If you forgot your password or changed your Wings8OS Account password recently, try recovering this user.
+  </message>
+</grit-part>

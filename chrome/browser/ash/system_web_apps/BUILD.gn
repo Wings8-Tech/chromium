@@ -74,7 +74,7 @@ static_library("system_web_apps") {
     "//ui/native_theme",
   ]
 
-  deps += [ "//ash/webui/jema_assistant_app_ui" ]
+  deps += [ "//ash/webui/wings8_assistant_app_ui" ]
 
   allow_circular_includes_from = [
     "//chrome/browser/ash/login/demo_mode",

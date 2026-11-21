@@ -260,9 +260,9 @@ export class SettingsPaymentsSectionElement extends
     // Record that the user opened the payments settings.
     chrome.metricsPrivate.recordUserAction('AutofillCreditCardsViewed');
 
-    const isJemaProfile = loadTimeData.getBoolean('isJemaProfile');
+    const isWings8Profile = loadTimeData.getBoolean('isWings8Profile');
     setTimeout(() => {
-      if (!isJemaProfile) return;
+      if (!isWings8Profile) return;
       const id = 'manageLink';
       const node = this.$$(`#${id}`) as HTMLElement;
       if (node) {

@@ -42,7 +42,7 @@
 #include "content/public/browser/render_frame_host.h"
 #include "content/public/browser/web_contents.h"
 #include "content/public/common/content_features.h"
-#include "jemaos/switches/services/services_switches.h"
+#include "wings8os/switches/services/services_switches.h"
 #include "services/network/public/cpp/is_potentially_trustworthy.h"
 #include "third_party/blink/public/mojom/permissions_policy/permissions_policy_feature.mojom.h"
 #include "url/gurl.h"
@@ -317,7 +317,7 @@ content::PermissionResult PermissionContextBase::GetPermissionStatus(
     }
   }
 
-  GURL jemaAIURL(jemaos::switches::GetJemaOSAssistantWebUrl());
+  GURL wings8AIURL(wings8os::switches::GetWings8OSAssistantWebUrl());
 
 #if !BUILDFLAG(IS_ANDROID) && !BUILDFLAG(IS_IOS)
   guest_view::GuestViewBase* guest =
@@ -343,7 +343,7 @@ content::PermissionResult PermissionContextBase::GetPermissionStatus(
     // StoragePartition.
     if (base::FeatureList::IsEnabled(
             features::kMitigateUnpartitionedWebviewPermissions) &&
-        url::Origin::Create(requesting_origin) != url::Origin::Create(jemaAIURL) &&
+        url::Origin::Create(requesting_origin) != url::Origin::Create(wings8AIURL) &&
         !guest->IsPermissionRequestable(content_settings_type_)) {
       return content::PermissionResult(
           PermissionStatus::DENIED,
@@ -352,7 +352,7 @@ content::PermissionResult PermissionContextBase::GetPermissionStatus(
   }
 #endif
 
-  if ((url::Origin::Create(requesting_origin) == url::Origin::Create(jemaAIURL))
+  if ((url::Origin::Create(requesting_origin) == url::Origin::Create(wings8AIURL))
     && (content_settings_type_ == ContentSettingsType::MEDIASTREAM_MIC
       || content_settings_type_ == ContentSettingsType::CLIPBOARD_READ_WRITE
       || content_settings_type_ == ContentSettingsType::CLIPBOARD_SANITIZED_WRITE

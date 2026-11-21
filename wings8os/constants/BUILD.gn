@@ -1,0 +1,21 @@
+# Copyright 2024 The Wings8 Technology Limited. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+import("//build/config/chromeos/ui_mode.gni")
+
+assert(is_chromeos_ash, "Non-Chrome-OS builds must not depend on //ash")
+
+source_set("constants") {
+  defines = [ "IS_WINGS8OS_CONSTANTS_IMPL" ]
+  sources = [
+    "wings8os_constants.cc",
+    "wings8os_constants.h",
+  ]
+  public_deps = [
+    "//base",
+  ]
+  deps = [
+    "//wings8os/build/config:buildflags",
+  ]
+}

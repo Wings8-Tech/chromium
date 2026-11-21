@@ -1,0 +1,43 @@
+# Copyright 2020 The Wings8OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+import("//build/config/chromeos/rules.gni")
+import("//wings8os/build/config/buildflags.gni")
+
+assert(is_chromeos, "Non-Chrome-OS builds must not depend on //chromeos")
+
+static_library("misc") {
+  deps = [
+    "//base",
+    "//net",
+    "//content/public/browser",
+    "//wings8os/build/config:buildflags",
+  ]
+
+  sources = [
+    "wings8os_email_subscription.cc",
+    "wings8os_email_subscription.h",
+    "wings8os_misc_scheduler.cc",
+    "wings8os_misc_scheduler.h",
+    "wings8os_device_uid.cc",
+    "wings8os_device_uid.h",
+    "wings8os_statistics_collector.cc",
+    "wings8os_statistics_collector.h",
+    "wings8os_release_note_url.cc",
+    "wings8os_release_note_url.h",
+    "wings8os_toggle_ota.cc",
+    "wings8os_toggle_ota.h",
+    "wings8os_dev_mode.cc",
+    "wings8os_dev_mode.h",
+  ]
+
+  if (use_wings8os_com) {
+    sources += [
+      "wings8os_crostini_notifier.cc",
+      "wings8os_crostini_notifier.h",
+    ]
+  }
+
+  defines = [ "CHROMEOS_IMPLEMENTATION" ]
+}

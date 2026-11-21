@@ -148,8 +148,8 @@ export class SettingsPeoplePageElement extends SettingsPeoplePageElementBase {
             // Opens profile manager.
             return true;
           }
-          if (loadTimeData.getBoolean('isJemaProfile')) {
-            return !loadTimeData.getBoolean('isJemaLocalAccount');
+          if (loadTimeData.getBoolean('isWings8Profile')) {
+            return !loadTimeData.getBoolean('isWings8LocalAccount');
           }
           // Post-SplitSettings links out to account manager if it is available.
           return loadTimeData.getBoolean('isAccountManagerEnabled');
@@ -157,10 +157,10 @@ export class SettingsPeoplePageElement extends SettingsPeoplePageElementBase {
         readOnly: true,
       },
 
-      isJemaLocalAccount_: {
+      isWings8LocalAccount_: {
         type: Boolean,
         value() {
-          return loadTimeData.getBoolean('isJemaLocalAccount');
+          return loadTimeData.getBoolean('isWings8LocalAccount');
         },
       },
 
@@ -231,7 +231,7 @@ export class SettingsPeoplePageElement extends SettingsPeoplePageElementBase {
   private profileName_: string;
   private enableAiSettingsPageRefresh_: boolean;
   private showHistorySearchControl_: boolean;
-  private isJemaLocalAccount_: boolean;
+  private isWings8LocalAccount_: boolean;
 
   // <if expr="not chromeos_ash">
   storedAccounts: StoredAccount[]|null;
@@ -381,11 +381,11 @@ export class SettingsPeoplePageElement extends SettingsPeoplePageElementBase {
 
   private onProfileClick_() {
     // <if expr="chromeos_ash">
-    if (loadTimeData.getBoolean('isJemaProfile')) {
-      if (loadTimeData.getBoolean('isJemaLocalAccount')) {
+    if (loadTimeData.getBoolean('isWings8Profile')) {
+      if (loadTimeData.getBoolean('isWings8LocalAccount')) {
         return;
       }
-      const baseUrl = loadTimeData.getString('jemaosAccountBaseUrl');
+      const baseUrl = loadTimeData.getString('wings8osAccountBaseUrl');
       const url = `${baseUrl}/personalInfo/`;
       window.open(url);
       return;

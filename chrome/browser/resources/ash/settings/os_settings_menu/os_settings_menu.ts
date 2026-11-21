@@ -191,9 +191,9 @@ export class OsSettingsMenuElement extends OsSettingsMenuElementBase {
         value: `/${routesMojom.ABOUT_CHROME_OS_SECTION_PATH}`,
       },
 
-      jemaosMenuItemPath_: {
+      wings8osMenuItemPath_: {
         type: String,
-        value: `/${routesMojom.JEMA_OS_SECTION_PATH}`,
+        value: `/${routesMojom.WINGS8_OS_SECTION_PATH}`,
       },
 
       isRevampWayfindingEnabled_: {
@@ -269,7 +269,7 @@ export class OsSettingsMenuElement extends OsSettingsMenuElementBase {
   private isRtl_: boolean;
   private selectedItemPath_: string;
   private aboutMenuItemPath_: string;
-  private jemaosMenuItemPath_: string;
+  private wings8osMenuItemPath_: string;
 
   // Accounts section members.
   private accountsMenuItemDescription_: string;
@@ -498,11 +498,11 @@ export class OsSettingsMenuElement extends OsSettingsMenuElementBase {
               this.i18n('appsmenuItemDescriptionArcUnavailable'),
         },
         {
-          section: Section.kJemaAssistant,
-          path: `/${routesMojom.JEMA_ASSISTANT_SECTION_PATH}`,
-          icon: 'os-settings:jemaos-ai',
-          label: this.i18n('jemaAssistantPageTitle'),
-          sublabel: this.i18n('jemaAssistantMenuItemDescription'),
+          section: Section.kWings8Assistant,
+          path: `/${routesMojom.WINGS8_ASSISTANT_SECTION_PATH}`,
+          icon: 'os-settings:wings8os-ai',
+          label: this.i18n('wings8AssistantPageTitle'),
+          sublabel: this.i18n('wings8AssistantMenuItemDescription'),
         },
         {
           section: Section.kAccessibility,
@@ -526,11 +526,11 @@ export class OsSettingsMenuElement extends OsSettingsMenuElementBase {
           sublabel: this.i18n('crostiniMenuItemDescription'),
         },
         {
-          section: Section.kJemaOs,
-          path: this.jemaosMenuItemPath_,
-          icon: 'os-settings:jemaos',
-          label: this.i18n('jemaosSettingsPageTitle'),
-          sublabel: this.i18n('jemaosSettingsMenuItemDescription'),
+          section: Section.kWings8Os,
+          path: this.wings8osMenuItemPath_,
+          icon: 'os-settings:wings8os',
+          label: this.i18n('wings8osSettingsPageTitle'),
+          sublabel: this.i18n('wings8osSettingsMenuItemDescription'),
         },
         {
           section: Section.kAboutChromeOs,

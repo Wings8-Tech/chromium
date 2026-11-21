@@ -112,7 +112,7 @@ class ProfileHelper {
   // Returns true when |profile| is for an ephemeral user.
   static bool IsEphemeralUserProfile(const Profile* profile);
 
-  static bool IsJemaProfile(const Profile* profile);
+  static bool IsWings8Profile(const Profile* profile);
 
   // DEPRECATED. Please use ash::IsUserBrowserContext() instead.
   // Returns true if profile or profile_path has corresponding chrome os user.

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- override ui/chromeos/ui_chromeos_strings.grd -->
+<grit-part>
+  <if expr="openwings8">
+    <message name="IDS_CHROMEBASE_DEVICE_NAME" desc="The device name for a Chromebase (versus say Chromebox)">
+      openWings8 device
+    </message>
+    <message name="IDS_CHROMEBIT_DEVICE_NAME" desc="The device name for a Chromebit (versus say Chromebox)">
+      openWings8 device
+    </message>
+    <message name="IDS_CHROMEBOOK_DEVICE_NAME" desc="The device name for a Chromebook (versus say Chromebox)">
+      openWings8 device
+    </message>
+    <message name="IDS_CHROMEBOX_DEVICE_NAME" desc="The device name for a Chromebox (versus say Chromebook)">
+      openWings8 device
+    </message>
+    <message name="IDS_GENERIC_CHROMEOS_DEVICE_NAME" desc="The device name for a generic Chrome device">
+      openWings8 device
+    </message>
+    <message name="IDS_CHROMEBASE_DEVICE_NAME_IN_PLURAL" desc="The device name (plural) for Chromebase (versus say Chromeboxes)">
+      openWings8 devices
+    </message>
+    <message name="IDS_CHROMEBIT_DEVICE_NAME_IN_PLURAL" desc="The device name (plural) for Chromebit (versus say Chromeboxes)">
+      openWings8 devices
+    </message>
+    <message name="IDS_CHROMEBOOK_DEVICE_NAME_IN_PLURAL" desc="The device name (plural) for Chromebook (versus say Chromeboxes)">
+      openWings8 devices
+    </message>
+    <message name="IDS_CHROMEBOX_DEVICE_NAME_IN_PLURAL" desc="The device name (plural) for Chromebox (versus say Chromebooks)">
+      openWings8 devices
+    </message>
+    <message name="IDS_GENERIC_CHROMEOS_DEVICE_NAME_IN_PLURAL" desc="The device name (plural) for generic Chrome device">
+      openWings8 devices
+    </message>
+  </if>
+  <if expr="not openwings8">
+    <message name="IDS_CHROMEBASE_DEVICE_NAME" desc="The device name for a Chromebase (versus say Chromebox)">
+      Wings8OS device
+    </message>
+    <message name="IDS_CHROMEBIT_DEVICE_NAME" desc="The device name for a Chromebit (versus say Chromebox)">
+      Wings8OS device
+    </message>
+    <message name="IDS_CHROMEBOOK_DEVICE_NAME" desc="The device name for a Chromebook (versus say Chromebox)">
+      Wings8OS device
+    </message>
+    <message name="IDS_CHROMEBOX_DEVICE_NAME" desc="The device name for a Chromebox (versus say Chromebook)">
+      Wings8OS device
+    </message>
+    <message name="IDS_GENERIC_CHROMEOS_DEVICE_NAME" desc="The device name for a generic Chrome device">
+      Wings8OS device
+    </message>
+    <message name="IDS_CHROMEBASE_DEVICE_NAME_IN_PLURAL" desc="The device name (plural) for Chromebase (versus say Chromeboxes)">
+      Wings8OS devices
+    </message>
+    <message name="IDS_CHROMEBIT_DEVICE_NAME_IN_PLURAL" desc="The device name (plural) for Chromebit (versus say Chromeboxes)">
+      Wings8OS devices
+    </message>
+    <message name="IDS_CHROMEBOOK_DEVICE_NAME_IN_PLURAL" desc="The device name (plural) for Chromebook (versus say Chromeboxes)">
+      Wings8OS devices
+    </message>
+    <message name="IDS_CHROMEBOX_DEVICE_NAME_IN_PLURAL" desc="The device name (plural) for Chromebox (versus say Chromebooks)">
+      Wings8OS devices
+    </message>
+    <message name="IDS_GENERIC_CHROMEOS_DEVICE_NAME_IN_PLURAL" desc="The device name (plural) for generic Chrome device">
+      Wings8OS devices
+    </message>
+  </if>
+</grit-part>

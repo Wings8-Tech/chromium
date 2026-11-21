@@ -13,7 +13,7 @@ import {CurrentAttribution, CurrentWallpaper, GooglePhotosAlbum, GooglePhotosPho
 import {getNumberOfGridItemsPerRow, isNonEmptyString} from '../utils.js';
 
 import {DefaultImageSymbol, DisplayableImage, kDefaultImageSymbol} from './constants.js';
-import {kJemaLightDarkImageSuffixes, JemaImage} from './constants.js';
+import {kWings8LightDarkImageSuffixes, Wings8Image} from './constants.js';
 import {DailyRefreshState} from './wallpaper_state.js';
 
 export function isWallpaperImage(obj: any): obj is WallpaperImage {
@@ -41,7 +41,7 @@ export function isImageAMatchForKey(
   if (isNonEmptyFilePath(image)) {
     return key === image.path;
   }
-  if (isJemaImage(image)) {
+  if (isWings8Image(image)) {
     return key === image.dark.path || key === image.light.path;
   }
   assert(isGooglePhotosPhoto(image));
@@ -207,10 +207,10 @@ export function toggleLightDarkImagePath(image: FilePath|DefaultImageSymbol): st
   if (!isNonEmptyFilePath(image)) {
     return null;
   }
-  if (!image.path.startsWith('/usr/share/chromeos-assets/jemaos_wallpapers')) {
+  if (!image.path.startsWith('/usr/share/chromeos-assets/wings8os_wallpapers')) {
     return null;
   }
-  const suffix = kJemaLightDarkImageSuffixes.find(
+  const suffix = kWings8LightDarkImageSuffixes.find(
     suffix => image.path.endsWith(suffix));
   if (!suffix) return null;
 
@@ -222,7 +222,7 @@ export function toggleLightDarkImagePath(image: FilePath|DefaultImageSymbol): st
   return prefix + newSuffix;
 }
 
-class JemaImageImpl implements JemaImage {
+class Wings8ImageImpl implements Wings8Image {
   name: string;
   light: FilePath;
   dark: FilePath;
@@ -233,15 +233,15 @@ class JemaImageImpl implements JemaImage {
   }
 }
 
-export function generateJemaImage(image1: FilePath|DefaultImageSymbol, image2: FilePath|DefaultImageSymbol): JemaImage | null {
+export function generateWings8Image(image1: FilePath|DefaultImageSymbol, image2: FilePath|DefaultImageSymbol): Wings8Image | null {
   if (!isNonEmptyFilePath(image1) || !isNonEmptyFilePath(image2)) {
     return null;
   }
-  const suffix1 = kJemaLightDarkImageSuffixes.find(
+  const suffix1 = kWings8LightDarkImageSuffixes.find(
     suffix => image1.path.endsWith(suffix));
   if (!suffix1) return null;
 
-  const suffix2 = kJemaLightDarkImageSuffixes.find(
+  const suffix2 = kWings8LightDarkImageSuffixes.find(
     suffix => image2.path.endsWith(suffix));
   if (!suffix2) return null;
 
@@ -251,9 +251,9 @@ export function generateJemaImage(image1: FilePath|DefaultImageSymbol, image2: F
   const name = image1.path.slice(0, -suffix1.length);
   const light = isLight1 ? image1: image2;
   const dark = isLight1 ? image2: image1;
-  return new JemaImageImpl(name, light, dark);
+  return new Wings8ImageImpl(name, light, dark);
 }
 
-export function isJemaImage(obj: any): obj is JemaImage {
-  return obj instanceof JemaImageImpl;
+export function isWings8Image(obj: any): obj is Wings8Image {
+  return obj instanceof Wings8ImageImpl;
 }

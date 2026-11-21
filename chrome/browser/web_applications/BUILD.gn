@@ -557,7 +557,7 @@ source_set("web_applications") {
   }
 
   if (is_chromeos) {
-    deps += [ "//jemaos/prefs" ]
+    deps += [ "//wings8os/prefs" ]
   }
 
   if (is_mac) {
@@ -578,8 +578,8 @@ source_set("web_applications") {
     "preinstalled_web_apps/mistral.h",
     "preinstalled_web_apps/qwant.cc",
     "preinstalled_web_apps/qwant.h",
-    "preinstalled_web_apps/jema_calculator.cc",
-    "preinstalled_web_apps/jema_calculator.h",
+    "preinstalled_web_apps/wings8_calculator.cc",
+    "preinstalled_web_apps/wings8_calculator.h",
     "preinstalled_web_apps/bentopdf.cc",
     "preinstalled_web_apps/bentopdf.h",
     "preinstalled_web_apps/screennow.cc",
@@ -594,16 +594,16 @@ source_set("web_applications") {
     "preinstalled_web_apps/osivibe.h",
     "preinstalled_web_apps/nephtys.cc",
     "preinstalled_web_apps/nephtys.h",
-    "preinstalled_web_apps/jemachess.cc",
-    "preinstalled_web_apps/jemachess.h",
+    "preinstalled_web_apps/wings8chess.cc",
+    "preinstalled_web_apps/wings8chess.h",
     "preinstalled_web_apps/setsound.cc",
     "preinstalled_web_apps/setsound.h",
     "preinstalled_web_apps/anima.cc",
     "preinstalled_web_apps/anima.h",
-    "preinstalled_web_apps/jemapdf.cc",
-    "preinstalled_web_apps/jema_saas.cc",
-    "preinstalled_web_apps/jemapdf.h",
-    "preinstalled_web_apps/jema_saas.h",
+    "preinstalled_web_apps/wings8pdf.cc",
+    "preinstalled_web_apps/wings8_saas.cc",
+    "preinstalled_web_apps/wings8pdf.h",
+    "preinstalled_web_apps/wings8_saas.h",
     "preinstalled_web_apps/quicktext.cc",
     "preinstalled_web_apps/quicktext.h",
     "preinstalled_web_apps/gmail.cc",
@@ -630,8 +630,8 @@ source_set("web_applications") {
     "preinstalled_web_apps/google_sheets.h",
     "preinstalled_web_apps/google_meet.cc",
     "preinstalled_web_apps/google_meet.h",
-    "preinstalled_web_apps/jema_youtube.cc",
-    "preinstalled_web_apps/jema_youtube.h",
+    "preinstalled_web_apps/wings8_youtube.cc",
+    "preinstalled_web_apps/wings8_youtube.h",
   ]
 
   if (is_win) {

@@ -507,7 +507,7 @@ ProfileImpl::ProfileImpl(
   // ProfileUserManagerController::OnProfileCreationStarted().
   if (ash::ProfileHelper::IsUserProfile(this)) {
     auto user = ash::ProfileHelper::Get()->GetUserByProfile(this);
-    set_is_jema_profile(user->IsJemaExtendAccountUser());
+    set_is_wings8_profile(user->IsWings8ExtendAccountUser());
     // |ash::InitializeAccountManager| is called during a User's session
     // initialization but some tests do not properly login to a User Session.
     // This invocation of |ash::InitializeAccountManager| is used only during
@@ -980,13 +980,13 @@ ProfileImpl::~ProfileImpl() {
 }
 
 std::string ProfileImpl::GetProfileUserName() const {
-  // ---***JEMAOS BEGIN***---
+  // ---***WINGS8OS BEGIN***---
   const user_manager::User* user =
       ash::ProfileHelper::Get()->GetUserByProfile(this);
   if (user && user->IsFlintAccountUser()) {
     return user->display_email();
   }
-  // ---***JEMAOS END***---
+  // ---***WINGS8OS END***---
   const signin::IdentityManager* identity_manager =
       IdentityManagerFactory::GetForProfileIfExists(this);
   if (identity_manager) {

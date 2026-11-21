@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE translationbundle>
+<translationbundle lang="ja">
+
+
+
+<!-- wings8os_menus -->
+<translation id="5027700305690795897">Wings8OS の初期セットアップが完了していません。</translation>
+<translation id="4257170804800372451">Wings8OS と Thot は、<ph name="BEGIN_LINK_CHROMIUM" />Chromium<ph name="END_LINK_CHROMIUM" /> オープンソース プロジェクトとその他の<ph name="BEGIN_LINK_OSS" />オープンソース ソフトウェア<ph name="END_LINK_OSS" />によって実現しました。</translation>
+</translationbundle>

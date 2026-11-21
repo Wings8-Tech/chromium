@@ -14,7 +14,7 @@ import {assert} from 'chrome://resources/js/assert.js';
 import {loadTimeData} from 'chrome://resources/js/load_time_data.js';
 
 import {androidAppsVisible, isAppParentalControlsFeatureAvailable, isArcVmEnabled, isCrostiniSupported, isGuest, isInputDeviceSettingsSplitEnabled, isKerberosEnabled, isPluginVmAvailable, isPowerwashAllowed, isRevampWayfindingEnabled} from './common/load_time_booleans.js';
-import {isJemaAssistantFeatureEnabled} from './common/load_time_booleans.js';
+import {isWings8AssistantFeatureEnabled} from './common/load_time_booleans.js';
 import * as routesMojom from './mojom-webui/routes.mojom-webui.js';
 
 /**
@@ -187,9 +187,9 @@ export interface OsSettingsRoutes extends MinimumRoutes {
   EXTERNAL_STORAGE_PREFERENCES: Route;
   FINGERPRINT: Route;
   FILES: Route;
-  JEMAOS: Route,
-// <if expr="use_jemaos_license">
-  JEMAOS_LICENSE_INFO: Route,
+  WINGS8OS: Route,
+// <if expr="use_wings8os_license">
+  WINGS8OS_LICENSE_INFO: Route,
 // </if>
   GOOGLE_ASSISTANT: Route;
   GOOGLE_DRIVE: Route;
@@ -214,7 +214,7 @@ export interface OsSettingsRoutes extends MinimumRoutes {
   OFFICE: Route;
   ON_STARTUP: Route;
   ONE_DRIVE: Route;
-  OS_JEMA_ASSISTANT: Route;
+  OS_WINGS8_ASSISTANT: Route;
   OS_ACCESSIBILITY: Route;
   OS_LANGUAGES: Route;
   OS_LANGUAGES_APP_LANGUAGES: Route;
@@ -470,10 +470,10 @@ export function createRoutes(): OsSettingsRoutes {
         Subpage.kAppParentalControls);
   }
 
-  // Jema Assistant section.
-  if (!isGuest() && isJemaAssistantFeatureEnabled()) {
-    r.OS_JEMA_ASSISTANT = createSection(
-        r.BASIC, routesMojom.JEMA_ASSISTANT_SECTION_PATH, Section.kJemaAssistant);
+  // Wings8 Assistant section.
+  if (!isGuest() && isWings8AssistantFeatureEnabled()) {
+    r.OS_WINGS8_ASSISTANT = createSection(
+        r.BASIC, routesMojom.WINGS8_ASSISTANT_SECTION_PATH, Section.kWings8Assistant);
   }
 
 
@@ -563,11 +563,11 @@ export function createRoutes(): OsSettingsRoutes {
       r.ABOUT, routesMojom.INTERNAL_STORYBOOK_SUBPAGE_PATH,
       Subpage.kInternalStorybook);
 
-  r.JEMAOS = createSection(null, routesMojom.JEMA_OS_SECTION_PATH, Section.kJemaOs);
-// <if expr="use_jemaos_license">
-  r.JEMAOS_LICENSE_INFO = createSubpage(
-      r.JEMAOS, routesMojom.JEMA_OS_LICENSE_INFO_SUBPAGE_PATH,
-      Subpage.kJemaOsLicenseInfo);
+  r.WINGS8OS = createSection(null, routesMojom.WINGS8_OS_SECTION_PATH, Section.kWings8Os);
+// <if expr="use_wings8os_license">
+  r.WINGS8OS_LICENSE_INFO = createSubpage(
+      r.WINGS8OS, routesMojom.WINGS8_OS_LICENSE_INFO_SUBPAGE_PATH,
+      Subpage.kWings8OsLicenseInfo);
 // </if>
 
   if (isRevampWayfindingEnabled()) {

@@ -62,7 +62,7 @@
 #include "ui/base/l10n/l10n_util.h"
 #include "ui/base/models/image_model.h"
 #include "ui/base/models/menu_separator_types.h"
-#include "jemaos/switches/urls//urls_constants.h"
+#include "wings8os/switches/urls//urls_constants.h"
 
 namespace extensions {
 
@@ -504,7 +504,7 @@ void ExtensionContextMenuModel::ExecuteCommand(int command_id,
       OpenUrl(
           *browser_,
           GURL(
-              jemaos::constants::kRuntimeHostPermissionsHelpURL));
+              wings8os::constants::kRuntimeHostPermissionsHelpURL));
 
       break;
     default:

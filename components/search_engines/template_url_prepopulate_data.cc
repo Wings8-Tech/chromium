@@ -317,7 +317,7 @@ void ClearPrepopulatedEnginesInPrefs(PrefService* prefs) {
 std::unique_ptr<TemplateURLData> GetPrepopulatedFallbackSearch(
     PrefService* prefs,
     search_engines::SearchEngineChoiceService* search_engine_choice_service) {
-  // Prefer Qwant as the fallback search engine for JemaOS profiles. If Qwant is
+  // Prefer Qwant as the fallback search engine for Wings8OS profiles. If Qwant is
   // not in the country-specific list, look it up in the full engine list.
   auto qwant_engine = GetPrepopulatedEngineFromFullList(
       prefs, search_engine_choice_service, qwant.id);

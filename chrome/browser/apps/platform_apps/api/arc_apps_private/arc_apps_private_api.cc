@@ -33,13 +33,13 @@ using namespace file_manager::util;
 
 namespace {
 
-  constexpr char kInstallAction[] = "io.jemaos.arc.ArcGateway.action.INSTALL_PACKAGE";
+  constexpr char kInstallAction[] = "io.wings8os.arc.ArcGateway.action.INSTALL_PACKAGE";
 
-  constexpr char kInstallPackageName[] = "io.jemaos.arc.ArcGateway";
+  constexpr char kInstallPackageName[] = "io.wings8os.arc.ArcGateway";
   constexpr char kTypeName[] = "application/vnd.android.package-archive";
-  constexpr char KInstallActivityName[] = "io.jemaos.arc.ArcGateway.InstallationActivity";
-//  constexpr char kInstallServiceClassName[] = "io.jemaos.arc.ArcGateway.InstallationService";
-  constexpr char kInstallExtraVerifyUrl[] = "io.jemaos.arc.ArcGateway.extra.VERIFY_URL";
+  constexpr char KInstallActivityName[] = "io.wings8os.arc.ArcGateway.InstallationActivity";
+//  constexpr char kInstallServiceClassName[] = "io.wings8os.arc.ArcGateway.InstallationService";
+  constexpr char kInstallExtraVerifyUrl[] = "io.wings8os.arc.ArcGateway.extra.VERIFY_URL";
 
   ArcIntentHelperMojoDelegate::IntentInfo CreateIntentInfo(const GURL& arc_url, const std::string& verify_url) {
     base::flat_map<std::string, std::string> extra = {

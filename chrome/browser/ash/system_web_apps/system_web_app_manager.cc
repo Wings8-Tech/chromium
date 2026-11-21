@@ -99,7 +99,7 @@
 #if !defined(OFFICIAL_BUILD)
 #include "chrome/browser/ash/system_web_apps/apps/sample_system_web_app_info.h"
 #endif  // !defined(OFFICIAL_BUILD)
-#include "chrome/browser/ash/system_web_apps/apps/jema_assistant_app_info.h"
+#include "chrome/browser/ash/system_web_apps/apps/wings8_assistant_app_info.h"
 
 namespace ash {
 
@@ -163,8 +163,8 @@ SystemWebAppDelegateMap CreateSystemWebApps(Profile* profile) {
 #if !defined(OFFICIAL_BUILD)
   info_vec.push_back(std::make_unique<SampleSystemAppDelegate>(profile));
 #endif  // !defined(OFFICIAL_BUILD)
-  if (base::FeatureList::IsEnabled(features::kJemaAssistant)) {
-    info_vec.push_back(std::make_unique<JemaAssistantAppDelegate>(profile));
+  if (base::FeatureList::IsEnabled(features::kWings8Assistant)) {
+    info_vec.push_back(std::make_unique<Wings8AssistantAppDelegate>(profile));
   }
 
   SystemWebAppDelegateMap delegate_map;

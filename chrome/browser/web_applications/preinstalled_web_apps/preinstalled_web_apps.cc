@@ -20,7 +20,7 @@
 #include "chrome/common/chrome_switches.h"
 #if BUILDFLAG(IS_CHROMEOS)
 #include "components/prefs/pref_service.h"
-#include "jemaos/prefs/jemaos_pref_names.h"
+#include "wings8os/prefs/wings8os_pref_names.h"
 #endif  // BUILDFLAG(IS_CHROMEOS)
 
 #if BUILDFLAG(GOOGLE_CHROME_BRANDING)
@@ -54,7 +54,7 @@
 #include "chrome/browser/web_applications/preinstalled_web_apps/notes.h"
 #include "chrome/browser/web_applications/preinstalled_web_apps/mistral.h"
 #include "chrome/browser/web_applications/preinstalled_web_apps/qwant.h"
-#include "chrome/browser/web_applications/preinstalled_web_apps/jema_calculator.h"
+#include "chrome/browser/web_applications/preinstalled_web_apps/wings8_calculator.h"
 #include "chrome/browser/web_applications/preinstalled_web_apps/bentopdf.h"
 #include "chrome/browser/web_applications/preinstalled_web_apps/screennow.h"
 #include "chrome/browser/web_applications/preinstalled_web_apps/proton_mail.h"
@@ -62,13 +62,13 @@
 #include "chrome/browser/web_applications/preinstalled_web_apps/galerie.h"
 #include "chrome/browser/web_applications/preinstalled_web_apps/osivibe.h"
 #include "chrome/browser/web_applications/preinstalled_web_apps/nephtys.h"
-#include "chrome/browser/web_applications/preinstalled_web_apps/jemachess.h"
+#include "chrome/browser/web_applications/preinstalled_web_apps/wings8chess.h"
 #include "chrome/browser/web_applications/preinstalled_web_apps/setsound.h"
 #include "chrome/browser/web_applications/preinstalled_web_apps/anima.h"
 #include "chrome/browser/web_applications/preinstalled_web_apps/gmail.h"
 #include "chrome/browser/web_applications/preinstalled_web_apps/office365.h"
-#include "chrome/browser/web_applications/preinstalled_web_apps/jemapdf.h"
-#include "chrome/browser/web_applications/preinstalled_web_apps/jema_saas.h"
+#include "chrome/browser/web_applications/preinstalled_web_apps/wings8pdf.h"
+#include "chrome/browser/web_applications/preinstalled_web_apps/wings8_saas.h"
 #include "chrome/browser/web_applications/preinstalled_web_apps/quicktext.h"
 #include "chrome/browser/web_applications/preinstalled_web_apps/toffeeshare.h"
 #include "chrome/browser/web_applications/preinstalled_web_apps/excalidraw.h"
@@ -80,7 +80,7 @@
 #include "chrome/browser/web_applications/preinstalled_web_apps/google_docs.h"
 #include "chrome/browser/web_applications/preinstalled_web_apps/google_sheets.h"
 #include "chrome/browser/web_applications/preinstalled_web_apps/google_meet.h"
-#include "chrome/browser/web_applications/preinstalled_web_apps/jema_youtube.h"
+#include "chrome/browser/web_applications/preinstalled_web_apps/wings8_youtube.h"
 
 #if BUILDFLAG(IS_CHROMEOS)
 #include "chrome/browser/ash/profiles/profile_helper.h"
@@ -96,19 +96,19 @@ std::vector<ExternalInstallOptions>* g_preinstalled_app_data_for_testing =
     nullptr;
 
 #if BUILDFLAG(IS_CHROMEOS)
-// JemaOS: returns true for Jema local (Flint) accounts. Local accounts have no
-// Jema subscription/license: they must not receive the preinstalled premium
-// Jema PWAs (OEM folder) that online Jema accounts get at first login.
-bool IsJemaLocalAccount(Profile& profile) {
-  // Primary check: local Jema accounts always use the @jemaos.local domain.
+// Wings8OS: returns true for Wings8 local (Flint) accounts. Local accounts have no
+// Wings8 subscription/license: they must not receive the preinstalled premium
+// Wings8 PWAs (OEM folder) that online Wings8 accounts get at first login.
+bool IsWings8LocalAccount(Profile& profile) {
+  // Primary check: local Wings8 accounts always use the @wings8os.local domain.
   // This is available as soon as the profile exists and does not depend on
   // the ProfileHelper user association timing during profile startup.
-  if (base::EndsWith(profile.GetProfileUserName(), "@jemaos.local",
+  if (base::EndsWith(profile.GetProfileUserName(), "@wings8os.local",
                      base::CompareCase::INSENSITIVE_ASCII)) {
     return true;
   }
-  // A known, non-local email means an online (Jema or Google) account: older
-  // builds mislabeled online Jema accounts with the local "ft_id_"/"flint_id_"
+  // A known, non-local email means an online (Wings8 or Google) account: older
+  // builds mislabeled online Wings8 accounts with the local "ft_id_"/"flint_id_"
   // prefixes and the kFlintAccount type; those must NOT be treated as local.
   if (!profile.GetProfileUserName().empty()) {
     return false;
@@ -133,11 +133,11 @@ bool IsJemaLocalAccount(Profile& profile) {
           account_id.GetGaiaId().starts_with("flint_id_"));
 }
 
-// JemaOS: returns true for Jema online accounts (the subscription-based
+// Wings8OS: returns true for Wings8 online accounts (the subscription-based
 // tiers: Freemium, Pro, Pro+). Google accounts and other account types
 // return false.
-bool IsJemaOnlineAccount(Profile& profile) {
-  if (IsJemaLocalAccount(profile)) {
+bool IsWings8OnlineAccount(Profile& profile) {
+  if (IsWings8LocalAccount(profile)) {
     return false;
   }
   ash::ProfileHelper* profile_helper = ash::ProfileHelper::Get();
@@ -148,31 +148,31 @@ bool IsJemaOnlineAccount(Profile& profile) {
   if (!user) {
     return false;
   }
-  if (user->IsJemaAccountUser()) {
+  if (user->IsWings8AccountUser()) {
     return true;
   }
-  // Jema online accounts may be stored as GOOGLE accounts with the
-  // "jema_id_" gaia id prefix (cryptohome compatibility). Older builds
-  // mislabeled online Jema accounts with the local "ft_id_"/"flint_id_"
-  // prefixes; count those as online too (their email is not @jemaos.local,
-  // so IsJemaLocalAccount above already returned false for them).
+  // Wings8 online accounts may be stored as GOOGLE accounts with the
+  // "wings8_id_" gaia id prefix (cryptohome compatibility). Older builds
+  // mislabeled online Wings8 accounts with the local "ft_id_"/"flint_id_"
+  // prefixes; count those as online too (their email is not @wings8os.local,
+  // so IsWings8LocalAccount above already returned false for them).
   const AccountId& account_id = user->GetAccountId();
   return account_id.GetAccountType() == AccountType::GOOGLE &&
-         (account_id.GetGaiaId().starts_with("jema_id_") ||
+         (account_id.GetGaiaId().starts_with("wings8_id_") ||
           account_id.GetGaiaId().starts_with("ft_id_") ||
           account_id.GetGaiaId().starts_with("flint_id_"));
 }
 
-// JemaOS: returns true when the premium OEM PWAs (Jema apps bundle) may be
-// installed for this profile. Only Jema online accounts with an active
+// Wings8OS: returns true when the premium OEM PWAs (Wings8 apps bundle) may be
+// installed for this profile. Only Wings8 online accounts with an active
 // Pro/Pro+ subscription qualify; Freemium accounts get the root bundle plus
 // QuickText and Galerie only. The subscription state is cached in a profile
 // pref by UserSessionManager (fail-closed default: false).
 bool MayInstallPremiumOemApps(Profile& profile) {
-  if (!IsJemaOnlineAccount(profile)) {
+  if (!IsWings8OnlineAccount(profile)) {
     return true;
   }
-  return profile.GetPrefs()->GetBoolean(jemaos::prefs::kJemaSubscriptionActive);
+  return profile.GetPrefs()->GetBoolean(wings8os::prefs::kWings8SubscriptionActive);
 }
 #endif  // BUILDFLAG(IS_CHROMEOS)
 
@@ -204,27 +204,27 @@ std::vector<ExternalInstallOptions> GetChromeBrandedApps(
     Profile& profile,
     const std::optional<DeviceInfo>& device_info,
     bool include_premium_oem) {
-  // JemaOS: We replace Google's default apps with our own selection.
+  // Wings8OS: We replace Google's default apps with our own selection.
   // This avoids conflicts and ensures our configuration is used.
   std::vector<ExternalInstallOptions> apps;
   if (include_premium_oem) {
-    // Jema Apps (OEM Folder) - requires an active Pro/Pro+ subscription.
-    apps.push_back(GetConfigForJemaNotes());
+    // Wings8 Apps (OEM Folder) - requires an active Pro/Pro+ subscription.
+    apps.push_back(GetConfigForWings8Notes());
     apps.push_back(GetConfigForAnima());
     apps.push_back(GetConfigForOsivibe());
     apps.push_back(GetConfigForSetSound());
-    apps.push_back(GetConfigForJemaChess());
+    apps.push_back(GetConfigForWings8Chess());
     apps.push_back(GetConfigForNephtys());
-    apps.push_back(GetConfigForJemaPDF());
-    apps.push_back(GetConfigForJemaSaas());
+    apps.push_back(GetConfigForWings8PDF());
+    apps.push_back(GetConfigForWings8Saas());
   }
   apps.insert(apps.end(), {
       // QuickText remains available for every tier (including Freemium).
       GetConfigForQuickText(),
 
       // Root Apps
-      GetConfigForJemaCommunity(),
-      GetConfigForJemaRemoteDesktop(),
+      GetConfigForWings8Community(),
+      GetConfigForWings8RemoteDesktop(),
       GetConfigForMistral(),
       GetConfigForQwant(),
       GetConfigForBentoPDF(),
@@ -233,7 +233,7 @@ std::vector<ExternalInstallOptions> GetChromeBrandedApps(
       GetConfigForProtonDrive(),
       GetConfigForGalerie(),
       GetConfigForGmail(),
-      GetConfigForJemaCalculator(),
+      GetConfigForWings8Calculator(),
       GetConfigForOffice365(),
       GetConfigForToffeeShare(),
       GetConfigForExcalidraw(),
@@ -279,11 +279,11 @@ std::vector<ExternalInstallOptions> GetPreinstalledWebApps(
     return {};
 
 #if BUILDFLAG(IS_CHROMEOS)
-  // JemaOS: local (Flint) accounts have no Jema subscription, so no Jema web
+  // Wings8OS: local (Flint) accounts have no Wings8 subscription, so no Wings8 web
   // apps are preinstalled for them. The only exception is the Remote Desktop
   // client, which is free and must be available on every account.
-  if (IsJemaLocalAccount(profile))
-    return {GetConfigForJemaRemoteDesktop()};
+  if (IsWings8LocalAccount(profile))
+    return {GetConfigForWings8RemoteDesktop()};
 
   const bool include_premium_oem = MayInstallPremiumOemApps(profile);
 #else
@@ -306,15 +306,15 @@ std::vector<ExternalInstallOptions> GetPreinstalledWebApps(
   std::vector<ExternalInstallOptions> apps;
 #if BUILDFLAG(IS_CHROMEOS)
   if (include_premium_oem) {
-    // Jema Apps (OEM Folder) - requires an active Pro/Pro+ subscription.
-    apps.push_back(GetConfigForJemaNotes());
+    // Wings8 Apps (OEM Folder) - requires an active Pro/Pro+ subscription.
+    apps.push_back(GetConfigForWings8Notes());
     apps.push_back(GetConfigForAnima());
     apps.push_back(GetConfigForOsivibe());
     apps.push_back(GetConfigForSetSound());
-    apps.push_back(GetConfigForJemaChess());
+    apps.push_back(GetConfigForWings8Chess());
     apps.push_back(GetConfigForNephtys());
-    apps.push_back(GetConfigForJemaPDF());
-    apps.push_back(GetConfigForJemaSaas());
+    apps.push_back(GetConfigForWings8PDF());
+    apps.push_back(GetConfigForWings8Saas());
   }
 #endif  // BUILDFLAG(IS_CHROMEOS)
   apps.insert(apps.end(), {
@@ -322,8 +322,8 @@ std::vector<ExternalInstallOptions> GetPreinstalledWebApps(
       GetConfigForQuickText(),
 
       // Root Apps
-      GetConfigForJemaCommunity(),
-      GetConfigForJemaRemoteDesktop(),
+      GetConfigForWings8Community(),
+      GetConfigForWings8RemoteDesktop(),
       GetConfigForMistral(),
       GetConfigForQwant(),
       GetConfigForBentoPDF(),
@@ -332,7 +332,7 @@ std::vector<ExternalInstallOptions> GetPreinstalledWebApps(
       GetConfigForProtonDrive(),
       GetConfigForGalerie(),
       GetConfigForGmail(),
-      GetConfigForJemaCalculator(),
+      GetConfigForWings8Calculator(),
       GetConfigForOffice365(),
       GetConfigForToffeeShare(),
       GetConfigForExcalidraw(),
@@ -344,7 +344,7 @@ std::vector<ExternalInstallOptions> GetPreinstalledWebApps(
       GetConfigForGoogleDocs(),
       GetConfigForGoogleSheets(),
       GetConfigForGoogleMeet(),
-      GetConfigForJemaYouTube(),
+      GetConfigForWings8YouTube(),
   });
   return apps;
 #endif  // BUILDFLAG(GOOGLE_CHROME_BRANDING)

@@ -50,7 +50,7 @@ class StatusAreaWidget;
 class ShelfObserver;
 class WorkAreaInsets;
 class ShelfTooltipManager;
-class JemaAssistantView;
+class Wings8AssistantView;
 
 // TODO(oshima) : move to .cc
 
@@ -272,8 +272,8 @@ class ASH_EXPORT Shelf : public ShelfLayoutManagerObserver {
   StatusAreaWidget* status_area_widget() const {
     return status_area_widget_.get();
   }
-  JemaAssistantView* jema_assistant_view() const {
-    return jema_assistant_view_.get();
+  Wings8AssistantView* wings8_assistant_view() const {
+    return wings8_assistant_view_.get();
   }
   LoginShelfWidget* login_shelf_widget() { return login_shelf_widget_.get(); }
 
@@ -389,7 +389,7 @@ class ASH_EXPORT Shelf : public ShelfLayoutManagerObserver {
   // Used by `ScopedDisableAutoHide` to disable auto-hide shelf behavior.
   int disable_auto_hide_ = 0;
 
-  std::unique_ptr<JemaAssistantView> jema_assistant_view_;
+  std::unique_ptr<Wings8AssistantView> wings8_assistant_view_;
 
   std::unique_ptr<ShelfTooltipManager> tooltip_;
 

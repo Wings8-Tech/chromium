@@ -355,11 +355,11 @@ export function isAboutRoute(route: Route|null): boolean {
   return routes.ABOUT.contains(route);
 }
 
-export function isJemaOsSettingsRoute(route: Route|null): boolean {
+export function isWings8OsSettingsRoute(route: Route|null): boolean {
   if (!route) {
     return false;
   }
-  return routes.JEMAOS.contains(route);
+  return routes.WINGS8OS.contains(route);
 }
 
 /**

@@ -106,8 +106,8 @@
 #include "components/variations/pref_names.h"
 #include "google_apis/gaia/gaia_auth_util.h"
 #include "services/network/public/cpp/shared_url_loader_factory.h"
-#include "jemaos/switches/account/toggle/account_type_toggle.h"
-#include "jemaos/switches/account/policy_constants.h"
+#include "wings8os/switches/account/toggle/account_type_toggle.h"
+#include "wings8os/switches/account/policy_constants.h"
 
 namespace policy {
 
@@ -123,7 +123,7 @@ std::set<std::string> GetAllInvalidationProjectNumbers() {
   // Cannot be a static constant because project number is decided by feature,
   // which is not available during static initialization.
   return {
-      std::string(jemaos::constants::kJemaOSPolicyFCMInvalidationSenderID),
+      std::string(wings8os::constants::kWings8OSPolicyFCMInvalidationSenderID),
       std::string(policy::GetPolicyInvalidationProjectNumber(
           PolicyInvalidationScope::kDevice)),
       std::string(policy::GetPolicyInvalidationProjectNumber(
@@ -247,23 +247,23 @@ BrowserPolicyConnectorAsh::~BrowserPolicyConnectorAsh() = default;
 void BrowserPolicyConnectorAsh::Init(
     PrefService* local_state,
     scoped_refptr<network::SharedURLLoaderFactory> url_loader_factory) {
-  if (base::PathExists(base::FilePath(jemaos::constants::kJemaOSOobeZteConfigFile))) {
-    jemaos::switches::EnableJemaAccountFlag();
+  if (base::PathExists(base::FilePath(wings8os::constants::kWings8OSOobeZteConfigFile))) {
+    wings8os::switches::EnableWings8AccountFlag();
   }
   local_state_ = local_state;
-  // ---***JEMAOS BEGIN***---
+  // ---***WINGS8OS BEGIN***---
   auto install_attributes = ash::InstallAttributes::Get();
   if (install_attributes &&(install_attributes->IsCloudManaged()
                             || install_attributes->IsEnterpriseManaged())) {
     const std::string management_service = install_attributes->GetServiceName();
     VLOG(2) << "enterprise management_service: " << management_service;
-    if (management_service == "jemaos") {
-      jemaos::switches::EnableJemaAccountFlagForManagedDevice();
+    if (management_service == "wings8os") {
+      wings8os::switches::EnableWings8AccountFlagForManagedDevice();
     } else {
-      jemaos::switches::DisableJemaAccountFlagForManagedDevice();
+      wings8os::switches::DisableWings8AccountFlagForManagedDevice();
     }
   }
-  // ---***JEMAOS END***---
+  // ---***WINGS8OS END***---
   ChromeBrowserPolicyConnector::Init(local_state, url_loader_factory);
 
   instance_id_driver_ = std::make_unique<instance_id::InstanceIDDriver>(

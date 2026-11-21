@@ -35,7 +35,7 @@
 #include "google_apis/gaia/google_service_auth_error.h"
 #include "net/http/http_request_headers.h"
 #include "services/network/public/cpp/shared_url_loader_factory.h"
-#include "jemaos/switches/misc/misc_switches.h"
+#include "wings8os/switches/misc/misc_switches.h"
 
 namespace {
 
@@ -113,7 +113,7 @@ AmbientClientImpl::AmbientClientImpl() = default;
 AmbientClientImpl::~AmbientClientImpl() = default;
 
 bool AmbientClientImpl::IsAmbientModeAllowed() {
-  if (jemaos::switches::IsJemaCustomEnabled()) {
+  if (wings8os::switches::IsWings8CustomEnabled()) {
     return false;
   }
 

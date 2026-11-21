@@ -1,0 +1,57 @@
+<style include="cr-shared-style settings-shared os-settings-page-styles"></style>
+<!-- <os-settings-wings8os-drivers class="wings8settings-card-wrapper"></os-settings-wings8os-drivers> -->
+<os-settings-animated-pages id="pages" section="[[section_]]">
+  <div route-path="default">
+    <settings-card header-text="$i18n{wings8osSettingsAccountTitle}" section="wings8osAccount" hidden="[[!isWings8Account_]]">
+      <os-settings-wings8os-account
+        on-auth-factor-has-password-changed="onAuthFactorHasPasswordChanged_"
+        on-auth-factor-has-password-or-pin-changed="onAuthFactorHasPasswordOrPinChanged_">
+      </os-settings-wings8os-account>
+    </settings-card>
+    <if expr="use_wings8os_license">
+      <settings-card
+        header-text="$i18n{wings8osSettingsLicenseTitle}"
+        section="wings8osLicense"
+        hidden="[[!showWings8OsLicense_]]"
+      >
+        <cr-link-row class="hr" id="license-info-trigger"
+                                on-click="onLicenseInfoClick_"
+                                label="$i18n{wings8osSettingsLicenseLabel}">
+        </cr-link-row>
+      </settings-card>
+    </if>
+    <settings-card header-text="$i18n{wings8osSettingsRemoteAssistanceTitle}" section="remoteAssistance">
+      <os-settings-wings8os-remoting>
+      </os-settings-wings8os-remoting>
+    </settings-card>
+<template is="dom-if" if="[[!isGuest_]]">
+    <os-settings-wings8os-dev-mode></os-settings-wings8os-dev-mode>
+    <settings-card header-text="$i18n{wings8osSettingsOtherTweaksTitle}" section="tweakUI"
+                        hidden="[[!showWings8OsTweakUi_(showToggleRebootButtonInTray, showToggleRotateScreenButton, showToggleSwitchTabletLaptopButton)]]">
+      <os-settings-wings8os-tweak-ui
+        auth-factor-has-password="[[authFactorHasPassword_]]"
+        auth-factor-has-password-or-pin="[[authFactorHasPasswordOrPin_]]"
+        show-toggle-rotate-screen-button="[[showToggleRotateScreenButton]]"
+        show-toggle-reboot-button-in-tray="[[showToggleRebootButtonInTray]]"
+        show-toggle-switch-tablet-laptop-button="[[showToggleSwitchTabletLaptopButton]]">
+      </os-settings-wings8os-tweak-ui>
+    </settings-card>
+    <os-settings-wings8os-experiment class="wings8os-settings-section-wrapper"></os-settings-wings8os-experiment>
+</template>
+    <settings-card header-text="$i18n{wings8osSettingsMoreInfoTitle}" section="moreInfo">
+      <os-settings-wings8os-more-info>
+      </os-settings-wings8os-more-info>
+    </settings-card>
+    <if expr="_google_chrome">
+    <div>this is a test for build tools</div>
+    </if>
+  </div>
+  <if expr="use_wings8os_license">
+    <template is="dom-if" route-path="/wings8os/license">
+      <os-settings-subpage page-title="$i18n{wings8osSettingsLicenseTitle}">
+        <os-settings-wings8os-license-info>
+        </os-settings-wings8os-license-info>
+      </os-settings-subpage>
+    </template>
+  </if>
+</os-settings-animated-pages>

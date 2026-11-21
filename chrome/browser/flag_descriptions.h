@@ -4414,8 +4414,8 @@ extern const char kSysUiShouldHoldbackTaskManagementDescription[];
 extern const char kTetheringExperimentalFunctionalityName[];
 extern const char kTetheringExperimentalFunctionalityDescription[];
 
-extern const char kJemaOsAIName[];
-extern const char kJemaOsAIDescription[];
+extern const char kWings8OsAIName[];
+extern const char kWings8OsAIDescription[];
 // Prefer keeping this section sorted to adding new declarations down here.
 
 #endif  // #if BUILDFLAG(IS_CHROMEOS_ASH)

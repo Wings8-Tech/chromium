@@ -51,7 +51,7 @@
 #include "chrome/browser/ui/ash/login/login_display_host.h"
 #include "chrome/browser/ui/webui/about/about_ui.h"
 #include "chrome/browser/ui/webui/ash/login/add_child_screen_handler.h"
-#include "chrome/browser/ui/webui/ash/login/jema_local_signin_screen_handler.h"
+#include "chrome/browser/ui/webui/ash/login/wings8_local_signin_screen_handler.h"
 #include "chrome/browser/ui/webui/ash/login/data_restore_screen_handler.h"
 #include "chrome/browser/ui/webui/ash/login/ai_intro_screen_handler.h"
 #include "chrome/browser/ui/webui/ash/login/app_downloading_screen_handler.h"
@@ -610,7 +610,7 @@ void OobeUI::ConfigureOobeDisplay() {
 
   AddScreenHandler(std::make_unique<AddChildScreenHandler>());
 
-  AddScreenHandler(std::make_unique<JemaLocalSigninScreenHandler>());
+  AddScreenHandler(std::make_unique<Wings8LocalSigninScreenHandler>());
 
   if (drive::util::IsOobeDrivePinningScreenEnabled()) {
     AddScreenHandler(std::make_unique<DrivePinningScreenHandler>());

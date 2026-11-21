@@ -105,13 +105,13 @@ found in the LICENSE file.
     border-bottom: var(--oobe-a11y-dialog-list-item-border);
   }
 
-  .jemaos-toggle-row {
+  .wings8os-toggle-row {
     margin-bottom: 12px;
   }
 </style>
 <oobe-adaptive-dialog id="marketingOptInOverviewDialog" role="dialog"
-    jemaos-layout
-    animation-url="animations/jemaos_done.json"
+    wings8os-layout
+    animation-url="animations/wings8os_done.json"
     for-step="overview"
     aria-label$="[[i18nDynamic(locale, 'marketingOptInScreenTitle')]]"
     aria-describedby="marketing-opt-in-subtitle">
@@ -181,32 +181,32 @@ found in the LICENSE file.
 
   <div hidden="[[isCloudGamingDevice]]" id="contentArea"
         slot="content" class="layout flex vertical landscape-header-aligned">
-    <div class="layout horizontal center jemaos-toggle-row"
-        hidden="[[!jemaMarketingOptInVisible]]"
-        id="jemaGetUpdatesToggleRow">
-      <cr-checkbox id="jemaUpdatesOption" checked
-          class="jemaos-toggle-option"
-          jemaos-style
-          aria-labelledby="jemaUpdatesOptionLabel">
+    <div class="layout horizontal center wings8os-toggle-row"
+        hidden="[[!wings8MarketingOptInVisible]]"
+        id="wings8GetUpdatesToggleRow">
+      <cr-checkbox id="wings8UpdatesOption" checked
+          class="wings8os-toggle-option"
+          wings8os-style
+          aria-labelledby="wings8UpdatesOptionLabel">
       </cr-checkbox>
-      <div id="jemaUpdatesOptionLabel" class="flex layout vertical"
+      <div id="wings8UpdatesOptionLabel" class="flex layout vertical"
           aria-hidden="true">
         <div class="toggle-title">
-          [[i18nDynamic(locale, 'marketingOptInGetJemaUpdates')]]
+          [[i18nDynamic(locale, 'marketingOptInGetWings8Updates')]]
         </div>
       </div>
     </div>
-    <div class="layout horizontal center jemaos-toggle-row"
-        id="jemaOSImprovementPlanToggleRow">
-      <cr-checkbox id="jemaOSImprovementPlanOption" checked
-          class="jemaos-toggle-option"
-          jemaos-style
-          aria-labelledby="jemaOSImprovementPlanOptionLabel">
+    <div class="layout horizontal center wings8os-toggle-row"
+        id="wings8OSImprovementPlanToggleRow">
+      <cr-checkbox id="wings8OSImprovementPlanOption" checked
+          class="wings8os-toggle-option"
+          wings8os-style
+          aria-labelledby="wings8OSImprovementPlanOptionLabel">
       </cr-checkbox>
-      <div id="jemaOSImprovementPlanOptionLabel" class="flex layout vertical"
+      <div id="wings8OSImprovementPlanOptionLabel" class="flex layout vertical"
           aria-hidden="true">
         <div class="toggle-title">
-          [[i18nDynamic(locale, 'jemaOSImprovementPlanOptionLabel')]]
+          [[i18nDynamic(locale, 'wings8OSImprovementPlanOptionLabel')]]
         </div>
       </div>
     </div>

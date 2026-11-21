@@ -231,7 +231,7 @@ export class SettingsSecurityPageElement extends
       shouldHideGoogle_: {
         type: Boolean,
         value() {
-          return loadTimeData.getBoolean('isJemaProfile');
+          return loadTimeData.getBoolean('isWings8Profile');
         },
       },
 
@@ -722,8 +722,8 @@ export class SettingsSecurityPageElement extends
 
   override connectedCallback() {
     super.connectedCallback();
-    const isJemaProfile = loadTimeData.getBoolean('isJemaProfile');
-    if (!isJemaProfile) return;
+    const isWings8Profile = loadTimeData.getBoolean('isWings8Profile');
+    if (!isWings8Profile) return;
     setTimeout(() => {
       [
         '#advanced-protection-program-link',
@@ -746,16 +746,16 @@ export class SettingsSecurityPageElement extends
   }
 
   private safeBrowsingEnhancedDesc_(): string {
-    if (loadTimeData.getBoolean('isJemaProfile')) {
-      return this.i18n('safeBrowsingEnhancedJemaDesc');
+    if (loadTimeData.getBoolean('isWings8Profile')) {
+      return this.i18n('safeBrowsingEnhancedWings8Desc');
     } else {
       return this.i18n('safeBrowsingEnhancedDesc');
     }
   }
 
   private safeBrowsingNoneDesc_(): string {
-    if (loadTimeData.getBoolean('isJemaProfile')) {
-      return this.i18n('safeBrowsingNoneJemaDesc');
+    if (loadTimeData.getBoolean('isWings8Profile')) {
+      return this.i18n('safeBrowsingNoneWings8Desc');
     } else {
       return this.i18n('safeBrowsingNoneDesc');
     }

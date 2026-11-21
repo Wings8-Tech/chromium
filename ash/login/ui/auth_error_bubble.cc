@@ -140,13 +140,13 @@ void AuthErrorBubble::ShowAuthError(base::WeakPtr<views::View> anchor_view,
   }
 
   if (unlock_attempt > 1 && account_type != AccountType::FLINT_ACCOUNT) {
-    if (account_type == AccountType::JEMA_ACCOUNT) {
+    if (account_type == AccountType::WINGS8_ACCOUNT) {
       base::StrAppend(
           &error_text,
           {u"\n\n", l10n_util::GetStringUTF16(
                         authenticated_by_pin
-                            ? IDS_ASH_LOGIN_ERROR_RECOVER_USER_JEMAOS
-                            : IDS_ASH_LOGIN_ERROR_RECOVER_USER_PWD_JEMAOS)});
+                            ? IDS_ASH_LOGIN_ERROR_RECOVER_USER_WINGS8OS
+                            : IDS_ASH_LOGIN_ERROR_RECOVER_USER_PWD_WINGS8OS)});
     } else {
       base::StrAppend(
           &error_text,

@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- override chrome/app/chromium_strings.grd -->
+<grit-part>
+  <if expr="chromeos_ash">
+    <if expr="openwings8">
+      <message name="IDS_PRODUCT_OS_NAME" desc="The Chrome OS application name">
+        openWings8
+      </message>
+      <message name="IDS_SHORT_PRODUCT_OS_NAME" desc="The Chrome OS application short name">
+        openWings8
+      </message>
+      <message name="IDS_INSTALLED_PRODUCT_OS_NAME" desc="Installed OS name">
+        openWings8
+      </message>
+    </if>
+    <if expr="not openwings8">
+      <message name="IDS_PRODUCT_OS_NAME" desc="The Chrome OS application name">
+        Wings8OS
+      </message>
+      <message name="IDS_SHORT_PRODUCT_OS_NAME" desc="The Chrome OS application short name">
+        Wings8OS
+      </message>
+      <message name="IDS_INSTALLED_PRODUCT_OS_NAME" desc="Installed OS name">
+        Wings8OS
+      </message>
+    </if>
+  </if>
+  <message name="IDS_PRODUCT_NAME" desc="The Chrome application name" translateable="false">
+    Thot
+  </message>
+  <message name="IDS_SHORT_PRODUCT_NAME" desc="The Chrome application short name." translateable="false">
+    Thot
+  </message>
+  <if expr="lang == 'fr' or lang == 'fr-CA'">
+    <message name="IDS_ABOUT" desc="The text label of the About Chrome menu item">
+      À propos de &amp;Thot
+    </message>
+    <message name="IDS_OPEN_IN_CHROME" desc="The text label of the Open in Chrome menu item for the Hosted App app menu">
+      &amp;Ouvrir dans Thot
+    </message>
+    <message name="IDS_SESSION_CRASHED_VIEW_UMA_OPTIN" desc="Text besides the checkbox to let users optin to UMA in the restore from previous crash bubble.">
+      Aidez à améliorer Thot en envoyant les rapports de plantage et les <ph name="UMA_LINK">$1<ex>statistiques d'utilisation</ex></ph> à Wings8 Technology
+    </message>
+    <message name="IDS_ABOUT_VERSION_COMPANY_NAME" desc="Company name on the about pages">
+      Wings8 Technology, Les auteurs de Chromium
+    </message>
+    <message name="IDS_ABOUT_VERSION_COPYRIGHT" desc="Copyright information on the about pages">
+      Copyright <ph name="YEAR">{0,date,y}<ex>2016</ex></ph> Wings8 Technology, Les auteurs de Chromium. Tous droits réservés.
+    </message>
+  </if>
+  <if expr="lang != 'fr' and lang != 'fr-CA'">
+    <message name="IDS_ABOUT" desc="The text label of the About Chrome menu item">
+      About &amp;Thot
+    </message>
+    <message name="IDS_OPEN_IN_CHROME" desc="The text label of the Open in Chrome menu item for the Hosted App app menu">
+      &amp;Open in Thot
+    </message>
+    <message name="IDS_SESSION_CRASHED_VIEW_UMA_OPTIN" desc="Text besides the checkbox to let users optin to UMA in the restore from previous crash bubble.">
+      Help make Thot better by sending crash reports and <ph name="UMA_LINK">$1<ex>usage statistics</ex></ph> to Wings8 Technology
+    </message>
+    <message name="IDS_ABOUT_VERSION_COMPANY_NAME" desc="Company name on the about pages">
+      Wings8 Technology, The Chromium Authors
+    </message>
+    <message name="IDS_ABOUT_VERSION_COPYRIGHT" desc="Copyright information on the about pages">
+      Copyright <ph name="YEAR">{0,date,y}<ex>2016</ex></ph> Wings8 Technology, The Chromium Authors. All rights reserved.
+    </message>
+  </if>
+  <if expr="chromeos_ash">
+    <!-- Strings for the OOBE user selection screen -->
+    <if expr="lang == 'fr' or lang == 'fr-CA'">
+      <message name="IDS_OOBE_ACCOUNT_TYPE_SELECTION_TITLE" desc="Title of the screen which allows users to select account type.">
+          Choisir le type de compte
+      </message>
+    </if>
+    <if expr="lang != 'fr' and lang != 'fr-CA'">
+      <message name="IDS_OOBE_ACCOUNT_TYPE_SELECTION_TITLE" desc="Title of the screen which allows users to select account type.">
+          Choose account type
+      </message>
+    </if>
+    <if expr="not openwings8">
+      <if expr="lang == 'fr' or lang == 'fr-CA'">
+        <message name="IDS_OOBE_ACCOUNT_TYPE_SELECTION_SUBTITLE" desc="Subtitle of the screen which allows users to select account type.">
+          <ph name="BEGIN_PARAGRAPH1">&lt;p&gt;</ph>Veuillez choisir votre compte Wings8 pour vous connecter à Wings8OS. Notez qu'une fois connecté(e), vous ne pourrez plus modifier le type de compte.<ph name="END_PARAGRAPH1">&lt;/p&gt;</ph>
+          <ph name="BEGIN_PARAGRAPH2">&lt;p&gt;</ph>Vous pourrez toutefois vous connecter avec un nouveau compte d'un type différent.<ph name="END_PARAGRAPH2">&lt;/p&gt;</ph>
+        </message>
+      </if>
+      <if expr="lang != 'fr' and lang != 'fr-CA'">
+        <message name="IDS_OOBE_ACCOUNT_TYPE_SELECTION_SUBTITLE" desc="Subtitle of the screen which allows users to select account type.">
+          <ph name="BEGIN_PARAGRAPH1">&lt;p&gt;</ph>Please choose your Wings8 account to sign in to Wings8OS. Note that once signed in, you will not be able to change the account type.<ph name="END_PARAGRAPH1">&lt;/p&gt;</ph>
+          <ph name="BEGIN_PARAGRAPH2">&lt;p&gt;</ph>However, you can sign in with a new account of a different type.<ph name="END_PARAGRAPH2">&lt;/p&gt;</ph>
+        </message>
+      </if>
+    </if>
+    <if expr="openwings8">
+      <if expr="lang == 'fr' or lang == 'fr-CA'">
+        <message name="IDS_OOBE_ACCOUNT_TYPE_SELECTION_SUBTITLE" desc="Subtitle of the screen which allows users to select account type.">
+          <ph name="BEGIN_PARAGRAPH1">&lt;p&gt;</ph>Veuillez choisir votre compte Wings8 pour vous connecter à openWings8. Notez qu'une fois connecté(e), vous ne pourrez plus modifier le type de compte.<ph name="END_PARAGRAPH1">&lt;/p&gt;</ph>
+          <ph name="BEGIN_PARAGRAPH2">&lt;p&gt;</ph>Vous pourrez toutefois vous connecter avec un nouveau compte d'un type différent.<ph name="END_PARAGRAPH2">&lt;/p&gt;</ph>
+        </message>
+      </if>
+      <if expr="lang != 'fr' and lang != 'fr-CA'">
+        <message name="IDS_OOBE_ACCOUNT_TYPE_SELECTION_SUBTITLE" desc="Subtitle of the screen which allows users to select account type.">
+          <ph name="BEGIN_PARAGRAPH1">&lt;p&gt;</ph>Please choose your Wings8 account to sign in to openWings8. Note that once signed in, you will not be able to change the account type.<ph name="END_PARAGRAPH1">&lt;/p&gt;</ph>
+          <ph name="BEGIN_PARAGRAPH2">&lt;p&gt;</ph>However, you can sign in with a new account of a different type.<ph name="END_PARAGRAPH2">&lt;/p&gt;</ph>
+        </message>
+      </if>
+    </if>
+    <!-- Local Wings8OS account ** START -->
+    <if expr="lang == 'fr' or lang == 'fr-CA'">
+      <message name="IDS_OOBE_ACCOUNT_TYPE_SELECTION_LOCAL_WINGS8OS_TITLE" desc="Title of user select Wings8OS account type.">
+          Compte local Wings8OS
+      </message>
+      <message name="IDS_OOBE_ACCOUNT_TYPE_SELECTION_LOCAL_WINGS8OS_SUBTITLE" desc="Subtitle of user select Wings8OS account type.">
+          Créer un compte local qui ne sera pas synchronisé avec l'API Wings8OS.
+      </message>
+    </if>
+    <if expr="lang != 'fr' and lang != 'fr-CA'">
+      <message name="IDS_OOBE_ACCOUNT_TYPE_SELECTION_LOCAL_WINGS8OS_TITLE" desc="Title of user select Wings8OS account type.">
+          Local Wings8OS account
+      </message>
+      <message name="IDS_OOBE_ACCOUNT_TYPE_SELECTION_LOCAL_WINGS8OS_SUBTITLE" desc="Subtitle of user select Wings8OS account type.">
+          Create a local account that will not be synchronized with the Wings8OS API.
+      </message>
+    </if>
+    <!-- Local Wings8OS account ** END -->
+    <if expr="lang == 'fr' or lang == 'fr-CA'">
+      <message name="IDS_OOBE_ACCOUNT_TYPE_SELECTION_WINGS8OS_TITLE" desc="Title of user select Wings8OS account type.">
+          Compte Wings8
+      </message>
+      <message name="IDS_OOBE_ACCOUNT_TYPE_SELECTION_WINGS8OS_SUBTITLE" desc="Subtitle of user select Wings8OS account type.">
+          Connectez-vous avec un compte Wings8 et utilisez les services cloud associés à votre compte Wings8.
+      </message>
+      <message name="IDS_OOBE_ACCOUNT_TYPE_SELECTION_GOOGLE_TITLE" desc="Title of user select Google account type.">
+          Compte Google
+      </message>
+      <message name="IDS_OOBE_ACCOUNT_TYPE_SELECTION_GOOGLE_SUBTITLE" desc="Subtitle of user select Google account type.">
+          Connectez-vous avec un compte Google et utilisez les services cloud fournis par Google.
+      </message>
+    </if>
+    <if expr="lang != 'fr' and lang != 'fr-CA'">
+      <message name="IDS_OOBE_ACCOUNT_TYPE_SELECTION_WINGS8OS_TITLE" desc="Title of user select Wings8OS account type.">
+          Wings8 account
+      </message>
+      <message name="IDS_OOBE_ACCOUNT_TYPE_SELECTION_WINGS8OS_SUBTITLE" desc="Subtitle of user select Wings8OS account type.">
+          Sign in with a Wings8 account and use cloud services associated with your Wings8 account.
+      </message>
+      <message name="IDS_OOBE_ACCOUNT_TYPE_SELECTION_GOOGLE_TITLE" desc="Title of user select Google account type.">
+          Google account
+      </message>
+      <message name="IDS_OOBE_ACCOUNT_TYPE_SELECTION_GOOGLE_SUBTITLE" desc="Subtitle of user select Google account type.">
+          Sign in with a Google account and use cloud services provided by Google.
+      </message>
+    </if>
+    <if expr="openwings8">
+      <if expr="lang == 'fr' or lang == 'fr-CA'">
+        <message name="IDS_ABOUT_CROS_VERSION_LICENSE" desc="Additional text displayed beneath the Chromium open source URLs for Chrome OS.">
+          openWings8 est rendu possible grâce à des <ph name="BEGIN_LINK_CROS_OSS">&lt;a target="_blank" href="$1"&gt;</ph>logiciels open source<ph name="END_LINK_CROS_OSS">&lt;/a&gt;</ph> supplémentaires.
+        </message>
+        <message name="IDS_ABOUT_CROS_WITH_LINUX_VERSION_LICENSE" desc="Additional text displayed beneath the Chromium open source URLs for Chrome OS when Crostini is installed.">
+          openWings8 est rendu possible grâce à des <ph name="BEGIN_LINK_CROS_OSS">&lt;a target="_blank" href="$1"&gt;</ph>logiciels open source<ph name="END_LINK_CROS_OSS">&lt;/a&gt;</ph> supplémentaires, tout comme <ph name="BEGIN_LINK_LINUX_OSS">&lt;a target="_blank" href="$2"&gt;</ph>Linux (Bêta)<ph name="END_LINK_LINUX_OSS">&lt;/a&gt;</ph>.
+        </message>
+        <message name="IDS_EXTERNAL_PROTOCOL_NO_HANDLER_TITLE" desc="External Protocol Dialog Title">
+          openWings8 ne peut pas ouvrir cette page.
+        </message>
+        <message name="IDS_SYNC_SIGN_IN_ERROR_BUBBLE_VIEW_MESSAGE" desc="Message in the sign-in error notification when the user's sign-in credentials are out of date.">
+          openWings8 n'a pas pu synchroniser vos données car les informations de connexion de votre compte ne sont plus à jour.
+        </message>
+        <message name="IDS_SYNC_UNAVAILABLE_ERROR_BUBBLE_VIEW_MESSAGE" desc="Message in the sign-in error notification when sync is not available for their domain.">
+          openWings8 n'a pas pu synchroniser vos données car la synchronisation n'est pas disponible pour votre domaine.
+        </message>
+        <message name="IDS_SYNC_OTHER_SIGN_IN_ERROR_BUBBLE_VIEW_MESSAGE" desc="Message in the sign-in error notification when there's an error signing in.">
+          openWings8 n'a pas pu synchroniser vos données en raison d'une erreur de connexion.
+        </message>
+        <message name="IDS_UPDATE_RECOMMENDED_DIALOG_TITLE" desc="The window title for the Update Recommended dialog.">
+          Redémarrer openWings8
+        </message>
+        <message name="IDS_UPDATE_RECOMMENDED" desc="The main text of the Update Recommended dialog.">
+          openWings8 doit être redémarré pour appliquer la mise à jour.
+        </message>
+        <message name="IDS_INSTALLING_UPDATE" desc="Label shown on the updates installation screen during OOBE">
+          Veuillez patienter pendant qu'openWings8 installe les dernières mises à jour du système.
+        </message>
+        <message name="IDS_EULA_SCREEN_ACCESSIBLE_TITLE" desc="Title to be spoken on opening the OOBE EULA screen">
+          Conditions d'utilisation d'openWings8
+        </message>
+        <message name="IDS_EULA_CHECKBOX_ENABLE_LOGGING" desc="The label of the checkbox to enable/disable crash and user metrics logging">
+          Facultatif : Aidez à améliorer openWings8 en envoyant automatiquement les statistiques d'utilisation et les rapports de plantage à Wings8 Technology.
+        </message>
+        <message name="IDS_TERMS_OF_SERVICE_SCREEN_SUBHEADING" desc="Subheading at the top of the Terms of Service screen.">
+          <ph name="DOMAIN">$1<ex>example.com</ex></ph> exige que vous lisiez et acceptiez les conditions d'utilisation suivantes avant d'utiliser cet appareil. Ces conditions ne modifient ni n'étendent les conditions du CLUF d'openWings8.
+        </message>
+        <message name="IDS_RESTORE_NOTIFICATION_DISPLAY_SOURCE" desc="This is the string shown as the display source of the notification for the user to select restore or not on startup.">
+          openWings8
+        </message>
+      </if>
+      <if expr="lang != 'fr' and lang != 'fr-CA'">
+        <message name="IDS_ABOUT_CROS_VERSION_LICENSE" desc="Additional text displayed beneath the Chromium open source URLs for Chrome OS.">
+          openWings8 is made possible by additional <ph name="BEGIN_LINK_CROS_OSS">&lt;a target="_blank" href="$1"&gt;</ph>open source software<ph name="END_LINK_CROS_OSS">&lt;/a&gt;</ph>.
+        </message>
+        <message name="IDS_ABOUT_CROS_WITH_LINUX_VERSION_LICENSE" desc="Additional text displayed beneath the Chromium open source URLs for Chrome OS when Crostini is installed.">
+          openWings8 is made possible by additional <ph name="BEGIN_LINK_CROS_OSS">&lt;a target="_blank" href="$1"&gt;</ph>open source software<ph name="END_LINK_CROS_OSS">&lt;/a&gt;</ph>, as is <ph name="BEGIN_LINK_LINUX_OSS">&lt;a target="_blank" href="$2"&gt;</ph>Linux (Beta)<ph name="END_LINK_LINUX_OSS">&lt;/a&gt;</ph>.
+        </message>
+        <message name="IDS_EXTERNAL_PROTOCOL_NO_HANDLER_TITLE" desc="External Protocol Dialog Title">
+          openWings8 can't open this page.
+        </message>
+        <message name="IDS_SYNC_SIGN_IN_ERROR_BUBBLE_VIEW_MESSAGE" desc="Message in the sign-in error notification when the user's sign-in credentials are out of date.">
+          openWings8 could not sync your data because your account sign-in details are out of date.
+        </message>
+        <message name="IDS_SYNC_UNAVAILABLE_ERROR_BUBBLE_VIEW_MESSAGE" desc="Message in the sign-in error notification when sync is not available for their domain.">
+          openWings8 could not sync your data because Sync is not available for your domain.
+        </message>
+        <message name="IDS_SYNC_OTHER_SIGN_IN_ERROR_BUBBLE_VIEW_MESSAGE" desc="Message in the sign-in error notification when there's an error signing in.">
+          openWings8 could not sync your data due to an error signing in.
+        </message>
+        <message name="IDS_UPDATE_RECOMMENDED_DIALOG_TITLE" desc="The window title for the Update Recommended dialog.">
+          Restart openWings8
+        </message>
+        <message name="IDS_UPDATE_RECOMMENDED" desc="The main text of the Update Recommended dialog.">
+          openWings8 needs to be restarted to apply the update.
+        </message>
+        <message name="IDS_INSTALLING_UPDATE" desc="Label shown on the updates installation screen during OOBE">
+          Please wait while openWings8 installs the latest system updates.
+        </message>
+        <message name="IDS_EULA_SCREEN_ACCESSIBLE_TITLE" desc="Title to be spoken on opening the OOBE EULA screen">
+          openWings8 terms
+        </message>
+        <message name="IDS_EULA_CHECKBOX_ENABLE_LOGGING" desc="The label of the checkbox to enable/disable crash and user metrics logging">
+          Optional: Help make openWings8 better by automatically sending usage statistics and crash reports to Wings8 Technology.
+        </message>
+        <message name="IDS_TERMS_OF_SERVICE_SCREEN_SUBHEADING" desc="Subheading at the top of the Terms of Service screen.">
+          <ph name="DOMAIN">$1<ex>example.com</ex></ph> requires that you read and accept the following Terms of Service before using this device. These terms do not expand, modify or limit the openWings8 EULA Terms.
+        </message>
+        <message name="IDS_RESTORE_NOTIFICATION_DISPLAY_SOURCE" desc="This is the string shown as the display source of the notification for the user to select restore or not on startup.">
+          openWings8
+        </message>
+      </if>
+    </if>
+    <if expr="not openwings8">
+      <if expr="lang == 'fr' or lang == 'fr-CA'">
+        <message name="IDS_ABOUT_CROS_VERSION_LICENSE" desc="Additional text displayed beneath the Chromium open source URLs for Chrome OS.">
+          Wings8OS est rendu possible grâce à des <ph name="BEGIN_LINK_CROS_OSS">&lt;a target="_blank" href="$1"&gt;</ph>logiciels open source<ph name="END_LINK_CROS_OSS">&lt;/a&gt;</ph> supplémentaires.
+        </message>
+        <message name="IDS_ABOUT_CROS_WITH_LINUX_VERSION_LICENSE" desc="Additional text displayed beneath the Chromium open source URLs for Chrome OS when Crostini is installed.">
+          Wings8OS est rendu possible grâce à des <ph name="BEGIN_LINK_CROS_OSS">&lt;a target="_blank" href="$1"&gt;</ph>logiciels open source<ph name="END_LINK_CROS_OSS">&lt;/a&gt;</ph> supplémentaires, tout comme <ph name="BEGIN_LINK_LINUX_OSS">&lt;a target="_blank" href="$2"&gt;</ph>Linux (Bêta)<ph name="END_LINK_LINUX_OSS">&lt;/a&gt;</ph>.
+        </message>
+        <message name="IDS_EXTERNAL_PROTOCOL_NO_HANDLER_TITLE" desc="External Protocol Dialog Title">
+          Wings8OS ne peut pas ouvrir cette page.
+        </message>
+        <message name="IDS_SYNC_SIGN_IN_ERROR_BUBBLE_VIEW_MESSAGE" desc="Message in the sign-in error notification when the user's sign-in credentials are out of date.">
+          Wings8OS n'a pas pu synchroniser vos données car les informations de connexion de votre compte ne sont plus à jour.
+        </message>
+        <message name="IDS_SYNC_UNAVAILABLE_ERROR_BUBBLE_VIEW_MESSAGE" desc="Message in the sign-in error notification when sync is not available for their domain.">
+          Wings8OS n'a pas pu synchroniser vos données car la synchronisation n'est pas disponible pour votre domaine.
+        </message>
+        <message name="IDS_SYNC_OTHER_SIGN_IN_ERROR_BUBBLE_VIEW_MESSAGE" desc="Message in the sign-in error notification when there's an error signing in.">
+          Wings8OS n'a pas pu synchroniser vos données en raison d'une erreur de connexion.
+        </message>
+        <message name="IDS_UPDATE_RECOMMENDED_DIALOG_TITLE" desc="The window title for the Update Recommended dialog.">
+          Redémarrer Wings8OS
+        </message>
+        <message name="IDS_UPDATE_RECOMMENDED" desc="The main text of the Update Recommended dialog.">
+          Wings8OS doit être redémarré pour appliquer la mise à jour.
+        </message>
+        <message name="IDS_INSTALLING_UPDATE" desc="Label shown on the updates installation screen during OOBE">
+          Veuillez patienter pendant que Wings8OS installe les dernières mises à jour du système.
+        </message>
+        <message name="IDS_EULA_SCREEN_ACCESSIBLE_TITLE" desc="Title to be spoken on opening the OOBE EULA screen">
+          Conditions d'utilisation de Wings8OS
+        </message>
+        <message name="IDS_EULA_CHECKBOX_ENABLE_LOGGING" desc="The label of the checkbox to enable/disable crash and user metrics logging">
+          Facultatif : Aidez à améliorer Wings8OS en envoyant automatiquement les statistiques d'utilisation et les rapports de plantage à Wings8 Technology.
+        </message>
+        <message name="IDS_TERMS_OF_SERVICE_SCREEN_SUBHEADING" desc="Subheading at the top of the Terms of Service screen.">
+          <ph name="DOMAIN">$1<ex>example.com</ex></ph> exige que vous lisiez et acceptiez les conditions d'utilisation suivantes avant d'utiliser cet appareil. Ces conditions ne modifient ni n'étendent les conditions du CLUF de Wings8OS.
+        </message>
+        <message name="IDS_RESTORE_NOTIFICATION_DISPLAY_SOURCE" desc="This is the string shown as the display source of the notification for the user to select restore or not on startup.">
+          Wings8OS
+        </message>
+      </if>
+      <if expr="lang != 'fr' and lang != 'fr-CA'">
+        <message name="IDS_ABOUT_CROS_VERSION_LICENSE" desc="Additional text displayed beneath the Chromium open source URLs for Chrome OS.">
+          Wings8OS is made possible by additional <ph name="BEGIN_LINK_CROS_OSS">&lt;a target="_blank" href="$1"&gt;</ph>open source software<ph name="END_LINK_CROS_OSS">&lt;/a&gt;</ph>.
+        </message>
+        <message name="IDS_ABOUT_CROS_WITH_LINUX_VERSION_LICENSE" desc="Additional text displayed beneath the Chromium open source URLs for Chrome OS when Crostini is installed.">
+          Wings8OS is made possible by additional <ph name="BEGIN_LINK_CROS_OSS">&lt;a target="_blank" href="$1"&gt;</ph>open source software<ph name="END_LINK_CROS_OSS">&lt;/a&gt;</ph>, as is <ph name="BEGIN_LINK_LINUX_OSS">&lt;a target="_blank" href="$2"&gt;</ph>Linux (Beta)<ph name="END_LINK_LINUX_OSS">&lt;/a&gt;</ph>.
+        </message>
+        <message name="IDS_EXTERNAL_PROTOCOL_NO_HANDLER_TITLE" desc="External Protocol Dialog Title">
+          Wings8OS can't open this page.
+        </message>
+        <message name="IDS_SYNC_SIGN_IN_ERROR_BUBBLE_VIEW_MESSAGE" desc="Message in the sign-in error notification when the user's sign-in credentials are out of date.">
+          Wings8OS could not sync your data because your account sign-in details are out of date.
+        </message>
+        <message name="IDS_SYNC_UNAVAILABLE_ERROR_BUBBLE_VIEW_MESSAGE" desc="Message in the sign-in error notification when sync is not available for their domain.">
+          Wings8OS could not sync your data because Sync is not available for your domain.
+        </message>
+        <message name="IDS_SYNC_OTHER_SIGN_IN_ERROR_BUBBLE_VIEW_MESSAGE" desc="Message in the sign-in error notification when there's an error signing in.">
+          Wings8OS could not sync your data due to an error signing in.
+        </message>
+        <message name="IDS_UPDATE_RECOMMENDED_DIALOG_TITLE" desc="The window title for the Update Recommended dialog.">
+          Restart Wings8OS
+        </message>
+        <message name="IDS_UPDATE_RECOMMENDED" desc="The main text of the Update Recommended dialog.">
+          Wings8OS needs to be restarted to apply the update.
+        </message>
+        <message name="IDS_INSTALLING_UPDATE" desc="Label shown on the updates installation screen during OOBE">
+          Please wait while Wings8OS installs the latest system updates.
+        </message>
+        <message name="IDS_EULA_SCREEN_ACCESSIBLE_TITLE" desc="Title to be spoken on opening the OOBE EULA screen">
+          Wings8OS terms
+        </message>
+        <message name="IDS_EULA_CHECKBOX_ENABLE_LOGGING" desc="The label of the checkbox to enable/disable crash and user metrics logging">
+          Optional: Help make Wings8OS better by automatically sending usage statistics and crash reports to Wings8 Technology.
+        </message>
+        <message name="IDS_TERMS_OF_SERVICE_SCREEN_SUBHEADING" desc="Subheading at the top of the Terms of Service screen.">
+          <ph name="DOMAIN">$1<ex>example.com</ex></ph> requires that you read and accept the following Terms of Service before using this device. These terms do not expand, modify or limit the Wings8OS EULA Terms.
+        </message>
+        <message name="IDS_RESTORE_NOTIFICATION_DISPLAY_SOURCE" desc="This is the string shown as the display source of the notification for the user to select restore or not on startup.">
+          Wings8OS
+        </message>
+      </if>
+    </if>
+  </if>
+</grit-part>

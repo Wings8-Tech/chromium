@@ -34,7 +34,7 @@
 #include "ui/strings/grit/ui_strings.h"
 #include "ui/web_dialogs/web_dialog_ui.h"
 #include "ui/webui/mojo_web_ui_controller.h"
-#include "jemaos/switches/urls/urls_constants.h"
+#include "wings8os/switches/urls/urls_constants.h"
 
 namespace {
 void AddStringResources(content::WebUIDataSource* source) {
@@ -101,9 +101,9 @@ void AddStringResources(content::WebUIDataSource* source) {
                             crostini::disk::kDownloadSizeBytes,
                             ui::DATA_UNITS_MEBIBYTE, /*show_units=*/true)));
   source->AddString("learnMoreUrl",
-  //---***JEMAOS BEGIN***---
-                    std::string{jemaos::constants::kLinuxAppsLearnMoreURL} +
-  //---***JEMAOS END***---
+  //---***WINGS8OS BEGIN***---
+                    std::string{wings8os::constants::kLinuxAppsLearnMoreURL} +
+  //---***WINGS8OS END***---
                         "&b=" + base::SysInfo::GetLsbReleaseBoard());
 
   source->AddString(

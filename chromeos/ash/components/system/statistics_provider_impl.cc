@@ -48,7 +48,7 @@ const char kCrosSystemValueError[] = "(error)";
 // Path to the tool to get VPD info.
 const char kFilteredVpdTool[] = "/usr/sbin/dump_filtered_vpd";
 
-const char kJemaosHardwareIdTool[] = "/usr/sbin/jemaos_hardware_id";
+const char kWings8osHardwareIdTool[] = "/usr/sbin/wings8os_hardware_id";
 
 // Exit codes for the dump_filtered_vpd tool.
 enum class DumpVpdExitCodes : int {
@@ -188,7 +188,7 @@ StatisticsProviderImpl::StatisticsSources CreateDefaultSources() {
   StatisticsProviderImpl::StatisticsSources sources;
   sources.crossystem_tool = base::CommandLine(base::FilePath(kCrosSystemTool));
   sources.vpd_tool = base::CommandLine(base::FilePath(kFilteredVpdTool));
-  sources.jemaos_hardward_id_tool = base::CommandLine(base::FilePath(kJemaosHardwareIdTool));
+  sources.wings8os_hardward_id_tool = base::CommandLine(base::FilePath(kWings8osHardwareIdTool));
   sources.machine_info_filepath = GetFilePathIgnoreFailure(FILE_MACHINE_INFO);
   sources.oem_manifest_filepath = base::FilePath(kOemManifestFilePath);
   sources.cros_regions_filepath = base::FilePath(kCrosRegions);
@@ -730,8 +730,8 @@ std::optional<std::string_view> StatisticsProviderImpl::GetRegionalInformation(
 std::string StatisticsProviderImpl::GetFallbackHardwareClass() const {
   std::string output;
   int exit_code;
-  if (!base::GetAppOutputWithExitCode(sources_.jemaos_hardward_id_tool, &output, &exit_code)) {
-    LOG(ERROR) << "Failed to run jemaos hardware_id tool: " << sources_.jemaos_hardward_id_tool.GetProgram();
+  if (!base::GetAppOutputWithExitCode(sources_.wings8os_hardward_id_tool, &output, &exit_code)) {
+    LOG(ERROR) << "Failed to run wings8os hardware_id tool: " << sources_.wings8os_hardward_id_tool.GetProgram();
     return kHardwareClassValueUnknown;
   }
   if (exit_code != 0) {
@@ -739,7 +739,7 @@ std::string StatisticsProviderImpl::GetFallbackHardwareClass() const {
     return kHardwareClassValueUnknown;
   }
   if (output.empty()) {
-    LOG(ERROR) << "Get empty result from jemaos hardware_id tool";
+    LOG(ERROR) << "Get empty result from wings8os hardware_id tool";
     return kHardwareClassValueUnknown;
   }
   std::string trimmed_output;

@@ -2444,13 +2444,13 @@ Pour éteindre l'appareil, appuyez à nouveau de manière prolongée sur le bout
 <translation id="996204416024568215">Bénéficiez des dernières fonctionnalités et améliorations de sécurité. Les mises à jour s'effectuent en arrière-plan.</translation>
 <translation id="3304408958020366228">Information importante</translation>
 <translation id="4765916776236035838">Votre abonnement est terminé. Renouvelez-le pour continuer à recevoir les mises à jour et l'assistance. Vous pouvez continuer à travailler et enregistrer vos fichiers.</translation>
-<translation id="6039952262958224683">Votre abonnement est terminé. Votre session JemaOS actuelle sera déconnectée dans <ph name="LOGOUT_DELAY" /> secondes.</translation>
+<translation id="6039952262958224683">Votre abonnement est terminé. Votre session Wings8OS actuelle sera déconnectée dans <ph name="LOGOUT_DELAY" /> secondes.</translation>
 <translation id="5367350932098892883">Mode tablette</translation>
 <translation id="4463105096332878535">Mode ordinateur portable</translation>
 <translation id="102310946874312210">Mode par défaut</translation>
-<translation id="4463887394493577195">Si vous avez oublié votre code PIN et votre mot de passe, ou si vous avez récemment changé le mot de passe de votre compte JemaOS, essayez de récupérer cet utilisateur.</translation>
-<translation id="7270650281617815143">Si vous avez oublié votre mot de passe ou si vous avez récemment changé le mot de passe de votre compte JemaOS, essayez de récupérer cet utilisateur.</translation>
+<translation id="4463887394493577195">Si vous avez oublié votre code PIN et votre mot de passe, ou si vous avez récemment changé le mot de passe de votre compte Wings8OS, essayez de récupérer cet utilisateur.</translation>
+<translation id="7270650281617815143">Si vous avez oublié votre mot de passe ou si vous avez récemment changé le mot de passe de votre compte Wings8OS, essayez de récupérer cet utilisateur.</translation>
 <translation id="1158692750402729892">Activer le sous-système Linux</translation>
-<translation id="8170668972580161149">Configurez le module du sous-système Linux sur votre appareil JemaOS afin d'utiliser les applications Linux courantes et les outils de développement.</translation>
-<translation id="5923764747080724081">Configurez le module du sous-système Linux sur votre appareil openJema afin d'utiliser les applications Linux courantes et les outils de développement.</translation>
+<translation id="8170668972580161149">Configurez le module du sous-système Linux sur votre appareil Wings8OS afin d'utiliser les applications Linux courantes et les outils de développement.</translation>
+<translation id="5923764747080724081">Configurez le module du sous-système Linux sur votre appareil openWings8 afin d'utiliser les applications Linux courantes et les outils de développement.</translation>
 </translationbundle>

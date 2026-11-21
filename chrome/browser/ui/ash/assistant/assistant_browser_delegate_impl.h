@@ -68,7 +68,7 @@ class AssistantBrowserDelegateImpl
           receiver) override;
   void OpenUrl(GURL url) override;
 
-  bool HandleQueryByJemaAssistant(const std::string& query) override;
+  bool HandleQueryByWings8Assistant(const std::string& query) override;
 #if BUILDFLAG(ENABLE_CROS_LIBASSISTANT)
   void RequestLibassistantService(
       mojo::PendingReceiver<ash::libassistant::mojom::LibassistantService>
@@ -105,7 +105,7 @@ class AssistantBrowserDelegateImpl
 
   // Non-owning pointers.
   raw_ptr<Profile> profile_ = nullptr;
-  raw_ptr<Profile> profile_for_jema_assistant_ = nullptr;
+  raw_ptr<Profile> profile_for_wings8_assistant_ = nullptr;
   raw_ptr<signin::IdentityManager> identity_manager_ = nullptr;
 
   base::ScopedObservation<ash::AssistantStateBase, ash::AssistantStateObserver>

@@ -50,7 +50,7 @@
 #include "content/public/browser/web_contents.h"
 #include "content/public/browser/web_ui.h"
 #include "content/public/browser/web_ui_data_source.h"
-#include "jemaos/switches/misc/misc_constants.h"
+#include "wings8os/switches/misc/misc_constants.h"
 #include "ui/base/l10n/l10n_util.h"
 #include "v8/include/v8-version-string.h"
 
@@ -86,13 +86,13 @@
 #include "components/user_manager/user_manager.h"
 #include "third_party/icu/source/i18n/unicode/timezone.h"
 #include "ui/chromeos/devicetype_utils.h"
-// ---***JEMAOS BEGIN***---
-#include "jemaos/misc/jemaos_toggle_ota.h"
-#include "jemaos/prefs/jemaos_pref_names.h"
+// ---***WINGS8OS BEGIN***---
+#include "wings8os/misc/wings8os_toggle_ota.h"
+#include "wings8os/prefs/wings8os_pref_names.h"
 #include "components/prefs/pref_service.h"
-#include "jemaos/switches/urls/urls_constants.h"
-#include "jemaos/misc/jemaos_release_note_url.h"
-// ---***JEMAOS END***---
+#include "wings8os/switches/urls/urls_constants.h"
+#include "wings8os/misc/wings8os_release_note_url.h"
+// ---***WINGS8OS END***---
 #endif
 
 namespace {
@@ -151,13 +151,13 @@ bool CanChangeChannel(Profile* profile) {
     return user && user->IsAffiliated();
   }
 
-  // ---***JEMAOS BEGIN***---
+  // ---***WINGS8OS BEGIN***---
   PrefService* local_state = g_browser_process->local_state();
-  bool tpm_fallback = local_state->GetBoolean(jemaos::prefs::kCurrentForceTpmFallback);
+  bool tpm_fallback = local_state->GetBoolean(wings8os::prefs::kCurrentForceTpmFallback);
   if (tpm_fallback) {
     return user_manager::UserManager::Get()->IsCurrentUserOwner();
   }
-  // ---***JEMAOS END***---
+  // ---***WINGS8OS END***---
   // On non-managed machines, only the local owner can change the channel.
   ash::OwnerSettingsServiceAsh* service =
       ash::OwnerSettingsServiceAshFactory::GetInstance()->GetForBrowserContext(
@@ -408,16 +408,16 @@ void AboutHandler::RegisterMessages() {
       "recordExtendedUpdatesShown",
       base::BindRepeating(&AboutHandler::HandleRecordExtendedUpdatesShown,
                           base::Unretained(this)));
-  // ---***JEMAOS BEGIN***---
+  // ---***WINGS8OS BEGIN***---
   web_ui()->RegisterMessageCallback(
-      "enableJemaOTA",
-      base::BindRepeating(&AboutHandler::HandleEnableJemaOTA,
+      "enableWings8OTA",
+      base::BindRepeating(&AboutHandler::HandleEnableWings8OTA,
                           base::Unretained(this)));
   web_ui()->RegisterMessageCallback(
-      "getEnabledJemaOTA",
-      base::BindRepeating(&AboutHandler::HandleGetEnabledJemaOTA,
+      "getEnabledWings8OTA",
+      base::BindRepeating(&AboutHandler::HandleGetEnabledWings8OTA,
                           base::Unretained(this)));
-  // ---***JEMAOS END***---
+  // ---***WINGS8OS END***---
 #endif
 #if BUILDFLAG(IS_MAC)
   web_ui()->RegisterMessageCallback(
@@ -554,51 +554,51 @@ void AboutHandler::HandleCheckInternetConnection(
                             base::Value(network && network->IsOnline()));
 }
 
-// ---***JEMAOS BEGIN***---
-void AboutHandler::HandleEnableJemaOTA(const base::Value::List& args) {
+// ---***WINGS8OS BEGIN***---
+void AboutHandler::HandleEnableWings8OTA(const base::Value::List& args) {
   CHECK_EQ(1U, args.size());
   bool enabled = args[0].GetBool();
   /*
   if (!user_manager::UserManager::Get()->IsCurrentUserOwner()) {
-    LOG(WARNING) << "Non-owner tried to set jemaos ota permission";
-    jemaos::misc::GetEnabledJemaOTA(
-        base::BindOnce(&AboutHandler::OnEnableJemaOTA,
+    LOG(WARNING) << "Non-owner tried to set wings8os ota permission";
+    wings8os::misc::GetEnabledWings8OTA(
+        base::BindOnce(&AboutHandler::OnEnableWings8OTA,
                        weak_factory_.GetWeakPtr()));
     return;
   }
   */
-  jemaos::misc::EnableJemaOTA(enabled,
-      base::BindOnce(&AboutHandler::OnEnableJemaOTA,
+  wings8os::misc::EnableWings8OTA(enabled,
+      base::BindOnce(&AboutHandler::OnEnableWings8OTA,
                      weak_factory_.GetWeakPtr()));
 }
 
-void AboutHandler::OnEnableJemaOTA() {
+void AboutHandler::OnEnableWings8OTA() {
   base::ThreadPool::PostTaskAndReplyWithResult(
       FROM_HERE, {base::MayBlock(), base::TaskPriority::USER_VISIBLE},
-      base::BindOnce(&jemaos::misc::GetEnabledJemaOTA),
-      base::BindOnce(&AboutHandler::RefreshEnableJemaOTA,
+      base::BindOnce(&wings8os::misc::GetEnabledWings8OTA),
+      base::BindOnce(&AboutHandler::RefreshEnableWings8OTA,
                      weak_factory_.GetWeakPtr()));
 }
 
-void AboutHandler::RefreshEnableJemaOTA(const bool enabled) {
-  FireWebUIListener("jema-ota-enabled-changed", base::Value(enabled));
+void AboutHandler::RefreshEnableWings8OTA(const bool enabled) {
+  FireWebUIListener("wings8-ota-enabled-changed", base::Value(enabled));
 }
 
-void AboutHandler::HandleGetEnabledJemaOTA(const base::Value::List& args) {
+void AboutHandler::HandleGetEnabledWings8OTA(const base::Value::List& args) {
   CHECK_EQ(1U, args.size());
   std::string callback_id = args[0].GetString();
 
   base::ThreadPool::PostTaskAndReplyWithResult(
       FROM_HERE, {base::MayBlock(), base::TaskPriority::USER_VISIBLE},
-      base::BindOnce(&jemaos::misc::GetEnabledJemaOTA),
-      base::BindOnce(&AboutHandler::OnGetEnabledJemaOTA,
+      base::BindOnce(&wings8os::misc::GetEnabledWings8OTA),
+      base::BindOnce(&AboutHandler::OnGetEnabledWings8OTA,
                      weak_factory_.GetWeakPtr(), callback_id));
 }
 
-void AboutHandler::OnGetEnabledJemaOTA(const std::string callback_id, const bool enabled) {
+void AboutHandler::OnGetEnabledWings8OTA(const std::string callback_id, const bool enabled) {
   ResolveJavascriptCallback(base::Value(callback_id), base::Value(enabled));
 }
-// ---***JEMAOS END***---
+// ---***WINGS8OS END***---
 
 void AboutHandler::HandleLaunchReleaseNotes(const base::Value::List& args) {
   DCHECK(args.empty());
@@ -661,12 +661,12 @@ void AboutHandler::HandleGetIsFirmwareUpdateSupported(const base::Value::List& a
       FROM_HERE, {base::MayBlock(), base::TaskPriority::USER_VISIBLE},
       base::BindOnce(
         &base::PathExists,
-        base::FilePath(jemaos::constants::kJemaOSFirmwareUpdateBinPath)),
-      base::BindOnce(&AboutHandler::OnJemaOSUpdateBinCheckedChecked,
+        base::FilePath(wings8os::constants::kWings8OSFirmwareUpdateBinPath)),
+      base::BindOnce(&AboutHandler::OnWings8OSUpdateBinCheckedChecked,
                      weak_factory_.GetWeakPtr(), callback_id));
 }
 
-void AboutHandler::OnJemaOSUpdateBinCheckedChecked(const std::string& callback_id,
+void AboutHandler::OnWings8OSUpdateBinCheckedChecked(const std::string& callback_id,
                                                    bool is_supported) {
   ResolveJavascriptCallback(
       base::Value(callback_id), base::Value(is_supported));
@@ -848,7 +848,7 @@ std::u16string AboutHandler::GetEndOfLifeMessage(base::Time eol_date) const {
                           ? IDS_SETTINGS_ABOUT_PAGE_END_OF_LIFE_MESSAGE_PAST
                           : IDS_SETTINGS_ABOUT_PAGE_END_OF_LIFE_MESSAGE_FUTURE;
   const std::u16string eol_url =
-      eol_passed ? base::UTF8ToUTF16(jemaos::constants::kEolNotificationURL) : base::UTF8ToUTF16(jemaos::misc::BuildJemaReleaseNoteUrlWithPath());
+      eol_passed ? base::UTF8ToUTF16(wings8os::constants::kEolNotificationURL) : base::UTF8ToUTF16(wings8os::misc::BuildWings8ReleaseNoteUrlWithPath());
   return l10n_util::GetStringFUTF16(eol_string_id,
                                     base::TimeFormatMonthAndYearForTimeZone(
                                         eol_date, icu::TimeZone::getGMT()),

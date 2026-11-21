@@ -1012,7 +1012,7 @@ void ChooseAndSetDefaultTask(Profile* profile,
     }
   }
 
-  // JemaOS: prefer Microsoft 365 as the default handler for Office files.
+  // Wings8OS: prefer Microsoft 365 as the default handler for Office files.
   // No default task. If the "Open in Microsoft 365" workflow is available for
   // Office files, set as default.
   for (FullTaskDescriptor& task : tasks) {

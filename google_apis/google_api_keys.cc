@@ -80,8 +80,8 @@ bool HasAPIKeyConfigured() {
   return GetApiKeyCacheInstance().HasAPIKeyConfigured();
 }
 
-bool HasJemaOSAPIKeyConfigured() {
-  return GetApiKeyCacheInstance().HasJemaOSAPIKeyConfigured();
+bool HasWings8OSAPIKeyConfigured() {
+  return GetApiKeyCacheInstance().HasWings8OSAPIKeyConfigured();
 }
 
 const std::string& GetAPIKey(version_info::Channel channel) {
@@ -94,8 +94,8 @@ const std::string& GetAPIKey() {
   return GetApiKeyCacheInstance().api_key();
 }
 
-const std::string& GetJemaOSAPIKey() {
-  return GetApiKeyCacheInstance().jemaos_api_key();
+const std::string& GetWings8OSAPIKey() {
+  return GetApiKeyCacheInstance().wings8os_api_key();
 }
 
 const std::string& GetRemotingAPIKey() {
@@ -138,9 +138,9 @@ bool HasOAuthClientConfigured() {
   return GetApiKeyCacheInstance().HasOAuthClientConfigured();
 }
 
-#if BUILDFLAG(IS_OPENJEMA)
-bool HasJemaOAuthClientConfigured() {
-  return GetApiKeyCacheInstance().HasJemaOAuthClientConfigured();
+#if BUILDFLAG(IS_OPENWINGS8)
+bool HasWings8OAuthClientConfigured() {
+  return GetApiKeyCacheInstance().HasWings8OAuthClientConfigured();
 }
 #endif
 

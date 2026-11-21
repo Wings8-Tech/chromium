@@ -307,10 +307,10 @@ class NetworkScreen extends NetworkScreenBase {
   }
 
   /**
-   * Local connect link click handler. Navigates to jema local signin.
+   * Local connect link click handler. Navigates to wings8 local signin.
    */
   private onLocalConnectClicked_() {
-    chrome.send('jemaLocalSignin');
+    chrome.send('wings8LocalSignin');
   }
 
   /**

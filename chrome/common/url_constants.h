@@ -646,7 +646,7 @@ inline constexpr char kChromeOSDefaultWebcalHandler[] =
 #if BUILDFLAG(IS_CHROMEOS_ASH)
 // Help center URL for Chrome OS Account Manager.
 inline constexpr char kAccountManagerLearnMoreURL[] =
-    "https://jematechnology.fr/?ref=os&path=accountlearnmore";
+    "https://wings8.org/?ref=os&path=accountlearnmore";
 
 // The URL for the "Account recovery" page.
 inline constexpr char kAccountRecoveryURL[] =

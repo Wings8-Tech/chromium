@@ -72,7 +72,7 @@
 #include "components/policy/core/common/proxy_policy_provider.h"
 #endif
 
-#include "jemaos/switches/account/toggle/account_type_toggle.h"
+#include "wings8os/switches/account/toggle/account_type_toggle.h"
 
 namespace policy {
 namespace {
@@ -109,7 +109,7 @@ void ChromeBrowserPolicyConnector::Init(
     PrefService* local_state,
     scoped_refptr<network::SharedURLLoaderFactory> url_loader_factory) {
   PolicyLogger::GetInstance()->EnableLogDeletion();
-  jemaos::switches::ToggleJemaAccountFlagByActiveUser();
+  wings8os::switches::ToggleWings8AccountFlagByActiveUser();
   auto configuration = std::make_unique<DeviceManagementServiceConfiguration>(
       GetDeviceManagementUrl(), GetRealtimeReportingUrl(),
       GetEncryptedReportingUrl());
@@ -168,7 +168,7 @@ void ChromeBrowserPolicyConnector::Shutdown() {
   BrowserPolicyConnector::Shutdown();
 }
 
-// ---***JEMAOS BEGIN***---
+// ---***WINGS8OS BEGIN***---
 void ChromeBrowserPolicyConnector::ResetDeviceManagementServiceConfiguration() {
   std::unique_ptr<DeviceManagementService::Configuration> configuration(
       new DeviceManagementServiceConfiguration(
@@ -178,7 +178,7 @@ void ChromeBrowserPolicyConnector::ResetDeviceManagementServiceConfiguration() {
 
   BrowserPolicyConnector::ResetDeviceManagementServiceConfiguration(std::move(configuration));
 }
-// ---***JEMAOS END***---
+// ---***WINGS8OS END***---
 
 ConfigurationPolicyProvider*
 ChromeBrowserPolicyConnector::GetPlatformProvider() {

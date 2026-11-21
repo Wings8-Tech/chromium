@@ -88,7 +88,7 @@ export class OobeAdaptiveDialog extends PolymerElement {
         value: false,
       },
 
-      jemaosLayout: {
+      wings8osLayout: {
         type: Boolean,
         value: false,
       },
@@ -106,7 +106,7 @@ export class OobeAdaptiveDialog extends PolymerElement {
       /**
        * Whether to show a "local connect" link when there is no network.
        * When true and networkConnectionStatus is false, a local connect
-       * link replaces the animation in the jemaos illustration area.
+       * link replaces the animation in the wings8os illustration area.
        * @type {boolean}
        */
       showLocalConnectWhenOffline: {
@@ -169,7 +169,7 @@ export class OobeAdaptiveDialog extends PolymerElement {
         value() {
           // Fallback to the source language (English); the FR/EN string is
           // provided by loadTimeData for the WiFi screen, never hardcoded here.
-          return loadTimeData.getString('jemaosLocalConnectLink') ||
+          return loadTimeData.getString('wings8osLocalConnectLink') ||
               'Sign in with a local account';
         },
       },
@@ -180,7 +180,7 @@ export class OobeAdaptiveDialog extends PolymerElement {
   private readMore: boolean;
   private singleColumn: boolean;
   private showReadMoreButton: boolean;
-  private jemaosLayout: boolean;
+  private wings8osLayout: boolean;
   private animationUrl: string;
   private animationLoop: boolean;
   private showLocalConnectWhenOffline: boolean;
@@ -336,12 +336,12 @@ export class OobeAdaptiveDialog extends PolymerElement {
   onBeforeShow(): void {
     this.getLazyRender().get();
     this.addResizeObserver();
-    window.setTimeout(() => void this.playJemaAnimation(), 0);
+    window.setTimeout(() => void this.playWings8Animation(), 0);
   }
 
-  private playJemaAnimation(): void {
+  private playWings8Animation(): void {
     const animation =
-      this.shadowRoot?.querySelector('#jemaos-illustration-animation');
+      this.shadowRoot?.querySelector('#wings8os-illustration-animation');
     if (animation instanceof OobeCrLottie) {
       animation.playing = true;
     }

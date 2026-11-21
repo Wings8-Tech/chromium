@@ -94,10 +94,10 @@ export class HistorySideBarElement extends PolymerElement {
             'historyClustersEnabled, historyClustersVisible)',
       },
 
-      isJemaLocalAccount_: {
+      isWings8LocalAccount_: {
         type: Boolean,
         value: () => {
-          return loadTimeData.getBoolean('isJemaLocalAccount');
+          return loadTimeData.getBoolean('isWings8LocalAccount');
         },
       },
 

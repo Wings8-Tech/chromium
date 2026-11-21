@@ -354,11 +354,11 @@ static_library("common_lib") {
       "//components/printing/common",
       "//printing",
     ]
-    #---***JEMAOS BEGIN***--- add jemaos extensions api provider
+    #---***WINGS8OS BEGIN***--- add wings8os extensions api provider
     if (is_chromeos) {
-      public_deps += [ "//jemaos/extensions/common" ]
+      public_deps += [ "//wings8os/extensions/common" ]
     }
-    #---***JEMAOS END***---
+    #---***WINGS8OS END***---
   }
 
   if (is_android) {

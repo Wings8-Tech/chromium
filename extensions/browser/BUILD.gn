@@ -576,7 +576,7 @@ source_set("browser_sources") {
     "//ui/display",
     "//ui/menus",
     "//url",
-    "//jemaos/constants",
+    "//wings8os/constants",
   ]
 
   public_deps = [

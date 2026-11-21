@@ -12,7 +12,7 @@
 #include "build/chromeos_buildflags.h"
 #include "google_apis/buildflags.h"
 #include "google_apis/google_api_keys.h"
-#include "jemaos/build/config/buildflags.h"
+#include "wings8os/build/config/buildflags.h"
 
 namespace google_apis {
 
@@ -31,7 +31,7 @@ class COMPONENT_EXPORT(GOOGLE_APIS) ApiKeyCache {
   ~ApiKeyCache();
 
   const std::string& api_key() const { return api_key_; }
-  const std::string& jemaos_api_key() const { return jemaos_api_key_; }
+  const std::string& wings8os_api_key() const { return wings8os_api_key_; }
   const std::string& api_key_non_stable() const { return api_key_non_stable_; }
   const std::string& api_key_remoting() const { return api_key_remoting_; }
   const std::string& api_key_soda() const { return api_key_soda_; }
@@ -53,10 +53,10 @@ class COMPONENT_EXPORT(GOOGLE_APIS) ApiKeyCache {
   bool HasAPIKeyConfigured() const;
   bool HasOAuthClientConfigured() const;
 
-  bool HasJemaOSAPIKeyConfigured() const;
+  bool HasWings8OSAPIKeyConfigured() const;
 
-#if BUILDFLAG(IS_OPENJEMA)
-  bool HasJemaOAuthClientConfigured() const;
+#if BUILDFLAG(IS_OPENWINGS8)
+  bool HasWings8OAuthClientConfigured() const;
 #endif
 
 #if BUILDFLAG(SUPPORT_EXTERNAL_GOOGLE_API_KEY)
@@ -67,7 +67,7 @@ class COMPONENT_EXPORT(GOOGLE_APIS) ApiKeyCache {
 
  private:
   std::string api_key_;
-  std::string jemaos_api_key_;
+  std::string wings8os_api_key_;
   std::string api_key_non_stable_;
   std::string api_key_remoting_;
   std::string api_key_soda_;

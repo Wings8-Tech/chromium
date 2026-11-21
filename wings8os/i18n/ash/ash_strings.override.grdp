@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<grit-part>
+
+  <if expr="openwings8">
+    <if expr="lang == 'fr' or lang == 'fr-CA'">
+      <message name="IDS_GESTURE_NOTIFICATION_MESSAGE_LEARN_MORE" desc="The body of the notification to show off new gestures. This notification body links to the help page for the gestures.">
+        Utilisez les gestes pour basculer rapidement entre les applications et interagir avec votre appareil openWings8 en mode tablette.
+      </message>
+    </if>
+    <if expr="lang != 'fr' and lang != 'fr-CA'">
+      <message name="IDS_GESTURE_NOTIFICATION_MESSAGE_LEARN_MORE" desc="The body of the notification to show off new gestures. This notification body links to the help page for the gestures.">
+        Use gestures to quickly switch between apps and interact with your openWings8 device in tablet mode.
+      </message>
+    </if>
+  </if>
+  <if expr="not openwings8">
+    <if expr="lang == 'fr' or lang == 'fr-CA'">
+      <message name="IDS_GESTURE_NOTIFICATION_MESSAGE_LEARN_MORE" desc="The body of the notification to show off new gestures. This notification body links to the help page for the gestures.">
+        Utilisez les gestes pour basculer rapidement entre les applications et interagir avec votre appareil Wings8OS en mode tablette.
+      </message>
+    </if>
+    <if expr="lang != 'fr' and lang != 'fr-CA'">
+      <message name="IDS_GESTURE_NOTIFICATION_MESSAGE_LEARN_MORE" desc="The body of the notification to show off new gestures. This notification body links to the help page for the gestures.">
+        Use gestures to quickly switch between apps and interact with your Wings8OS device in tablet mode.
+      </message>
+    </if>
+  </if>
+  <if expr="not _google_chrome">
+    <if expr="openwings8">
+      <message name="IDS_ASH_MESSAGE_CENTER_SYSTEM_APP_NAME" desc="The source of a system-generated notification, as displayed to the user.">
+        openWings8
+      </message>
+    </if>
+    <if expr="not openwings8">
+      <message name="IDS_ASH_MESSAGE_CENTER_SYSTEM_APP_NAME" desc="The source of a system-generated notification, as displayed to the user.">
+        Wings8OS
+      </message>
+    </if>
+  </if>
+
+  <message name="IDS_APP_LIST_START_ASSISTANT" desc="Tooltip for the button that starts Wings8OS AI from the search box in the app list.">
+    Wings8OS AI
+  </message>
+
+  <if expr="openwings8">
+    <if expr="lang == 'fr' or lang == 'fr-CA'">
+      <message name="IDS_ASH_STATUS_TRAY_CAST_ZERO_STATE_TITLE" desc="The main label for the system tray Cast view when no Chromecast devices are available.">
+        Diffusez votre écran depuis votre appareil openWings8
+      </message>
+      <message name="IDS_ASH_STATUS_TRAY_CAST_ZERO_STATE_SUBTITLE" desc="The secondary label for the system tray Cast view when no Chromecast devices are available.">
+        Assurez-vous que votre appareil openWings8 est connecté au même réseau Wi-Fi que votre appareil Chromecast.
+      </message>
+      <message name="IDS_ASH_STATUS_TRAY_AUDIO_NBS_MESSAGE" desc="label used to warn that NBS is in use">
+        Votre appareil openWings8 ou Bluetooth utilise une ancienne version du Bluetooth. Utilisez le microphone interne pour une meilleure qualité audio.
+      </message>
+      <message name="IDS_ASH_BIRCH_RELEASE_NOTES_TITLE" desc="Title for the suggestion chip that links to release notes">
+        Mise à jour d'openWings8
+      </message>
+      <message name="IDS_ASH_IN_SESSION_AUTH_SETTINGS_PROMPT" desc="Text shown in the settings auth dialog.">
+        Les paramètres openWings8 souhaitent confirmer votre identité
+      </message>
+      <message name="IDS_ASH_INFORMED_RESTORE_DIALOG_CRASH_DESCRIPTION" desc="Label of the description for the informed restore dialog, if the previous session ended with a crash. Gives a little more information than the title.">
+        Votre openWings8 a redémarré de manière inattendue. Ouvrez vos fenêtres et applications précédentes.
+      </message>
+      <message name="IDS_ASH_INFORMED_RESTORE_DIALOG_UPDATE_DESCRIPTION" desc="Label of the description for the informed restore dialog, if the previous session was on a earlier version.">
+        Votre openWings8 a été mis à jour. Ouvrez vos fenêtres et applications précédentes.
+      </message>
+    </if>
+    <if expr="lang != 'fr' and lang != 'fr-CA'">
+      <message name="IDS_ASH_STATUS_TRAY_CAST_ZERO_STATE_TITLE" desc="The main label for the system tray Cast view when no Chromecast devices are available.">
+        Cast your screen from your openWings8 device
+      </message>
+      <message name="IDS_ASH_STATUS_TRAY_CAST_ZERO_STATE_SUBTITLE" desc="The secondary label for the system tray Cast view when no Chromecast devices are available.">
+        Make sure your openWings8 device is on the same Wi-Fi network as your Chromecast device.
+      </message>
+      <message name="IDS_ASH_STATUS_TRAY_AUDIO_NBS_MESSAGE" desc="label used to warn that NBS is in use">
+        Your openWings8 or Bluetooth device is using an older version of Bluetooth. Use the internal microphone for better audio quality.
+      </message>
+      <message name="IDS_ASH_BIRCH_RELEASE_NOTES_TITLE" desc="Title for the suggestion chip that links to release notes">
+        openWings8 Updated
+      </message>
+      <message name="IDS_ASH_IN_SESSION_AUTH_SETTINGS_PROMPT" desc="Text shown in the settings auth dialog.">
+        openWings8 Settings would like to confirm it's you
+      </message>
+      <message name="IDS_ASH_INFORMED_RESTORE_DIALOG_CRASH_DESCRIPTION" desc="Label of the description for the informed restore dialog, if the previous session ended with a crash. Gives a little more information than the title.">
+        Your openWings8 restarted unexpectedly. Open your previous windows and apps.
+      </message>
+      <message name="IDS_ASH_INFORMED_RESTORE_DIALOG_UPDATE_DESCRIPTION" desc="Label of the description for the informed restore dialog, if the previous session was on a earlier version.">
+        Your openWings8 has been updated. Open your previous windows and apps.
+      </message>
+    </if>
+  </if>
+  <if expr="not openwings8">
+    <if expr="lang == 'fr' or lang == 'fr-CA'">
+      <message name="IDS_ASH_STATUS_TRAY_CAST_ZERO_STATE_TITLE" desc="The main label for the system tray Cast view when no Chromecast devices are available.">
+        Diffusez votre écran depuis votre appareil Wings8OS
+      </message>
+      <message name="IDS_ASH_STATUS_TRAY_CAST_ZERO_STATE_SUBTITLE" desc="The secondary label for the system tray Cast view when no Chromecast devices are available.">
+        Assurez-vous que votre appareil Wings8OS est connecté au même réseau Wi-Fi que votre appareil Chromecast.
+      </message>
+      <message name="IDS_ASH_STATUS_TRAY_AUDIO_NBS_MESSAGE" desc="label used to warn that NBS is in use">
+        Votre appareil Wings8OS ou Bluetooth utilise une ancienne version du Bluetooth. Utilisez le microphone interne pour une meilleure qualité audio.
+      </message>
+      <message name="IDS_ASH_BIRCH_RELEASE_NOTES_TITLE" desc="Title for the suggestion chip that links to release notes">
+        Mise à jour de Wings8OS
+      </message>
+      <message name="IDS_ASH_IN_SESSION_AUTH_SETTINGS_PROMPT" desc="Text shown in the settings auth dialog.">
+        Les paramètres Wings8OS souhaitent confirmer votre identité
+      </message>
+      <message name="IDS_ASH_INFORMED_RESTORE_DIALOG_CRASH_DESCRIPTION" desc="Label of the description for the informed restore dialog, if the previous session ended with a crash. Gives a little more information than the title.">
+        Votre Wings8OS a redémarré de manière inattendue. Ouvrez vos fenêtres et applications précédentes.
+      </message>
+      <message name="IDS_ASH_INFORMED_RESTORE_DIALOG_UPDATE_DESCRIPTION" desc="Label of the description for the informed restore dialog, if the previous session was on a earlier version.">
+        Votre Wings8OS a été mis à jour. Ouvrez vos fenêtres et applications précédentes.
+      </message>
+    </if>
+    <if expr="lang != 'fr' and lang != 'fr-CA'">
+      <message name="IDS_ASH_STATUS_TRAY_CAST_ZERO_STATE_TITLE" desc="The main label for the system tray Cast view when no Chromecast devices are available.">
+        Cast your screen from your Wings8OS device
+      </message>
+      <message name="IDS_ASH_STATUS_TRAY_CAST_ZERO_STATE_SUBTITLE" desc="The secondary label for the system tray Cast view when no Chromecast devices are available.">
+        Make sure your Wings8OS device is on the same Wi-Fi network as your Chromecast device.
+      </message>
+      <message name="IDS_ASH_STATUS_TRAY_AUDIO_NBS_MESSAGE" desc="label used to warn that NBS is in use">
+        Your Wings8OS or Bluetooth device is using an older version of Bluetooth. Use the internal microphone for better audio quality.
+      </message>
+      <message name="IDS_ASH_BIRCH_RELEASE_NOTES_TITLE" desc="Title for the suggestion chip that links to release notes">
+        Wings8OS Updated
+      </message>
+      <message name="IDS_ASH_IN_SESSION_AUTH_SETTINGS_PROMPT" desc="Text shown in the settings auth dialog.">
+        Wings8OS Settings would like to confirm it's you
+      </message>
+      <message name="IDS_ASH_INFORMED_RESTORE_DIALOG_CRASH_DESCRIPTION" desc="Label of the description for the informed restore dialog, if the previous session ended with a crash. Gives a little more information than the title.">
+        Your Wings8OS restarted unexpectedly. Open your previous windows and apps.
+      </message>
+      <message name="IDS_ASH_INFORMED_RESTORE_DIALOG_UPDATE_DESCRIPTION" desc="Label of the description for the informed restore dialog, if the previous session was on a earlier version.">
+        Your Wings8OS has been updated. Open your previous windows and apps.
+      </message>
+    </if>
+  </if>
+
+  <if expr="lang == 'fr' or lang == 'fr-CA'">
+    <message name="IDS_ASH_LOGIN_ERROR_SERVER_NO_RESPONSE" desc="Error message shown when the authentication server does not respond">
+      Le serveur n'a pas répondu. Veuillez réessayer plus tard.
+    </message>
+  </if>
+  <if expr="lang != 'fr' and lang != 'fr-CA'">
+    <message name="IDS_ASH_LOGIN_ERROR_SERVER_NO_RESPONSE" desc="Error message shown when the authentication server does not respond">
+      Could not reach the server. Please try again later.
+    </message>
+  </if>
+
+</grit-part>

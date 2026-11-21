@@ -69,7 +69,7 @@ component("manager") {
     "//ui/events:platform_event",
     "//ui/events/devices",
     "//ui/strings",
-    "//jemaos/switches",
+    "//wings8os/switches",
   ]
 
   defines = [ "DISPLAY_MANAGER_IMPLEMENTATION" ]

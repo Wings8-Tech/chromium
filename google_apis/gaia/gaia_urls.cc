@@ -18,9 +18,9 @@
 #include "google_apis/google_api_keys.h"
 #include "url/url_canon.h"
 #include "url/url_constants.h"
-#include "jemaos/switches/account/account_switches.h"
-#include "jemaos/switches/account/account_constants.h"
-#include "jemaos/build/config/buildflags.h"
+#include "wings8os/switches/account/account_switches.h"
+#include "wings8os/switches/account/account_constants.h"
+#include "wings8os/build/config/buildflags.h"
 
 #define URL_KEY_AND_PTR(name) #name, &BASE_CONCAT(name, _)
 
@@ -359,21 +359,21 @@ GURL GaiaUrls::LogOutURLWithContinueURL(const GURL& continue_url) {
   return service_logout_url_.Resolve(params);
 }
 
-// ---***JEMAOS BEGIN***---
+// ---***WINGS8OS BEGIN***---
 void GaiaUrls::Reset() {
   g_require_reset = true;
   InitializeDefault();
   g_require_reset = false;
 }
-// ---***JEMAOS END***---
+// ---***WINGS8OS END***---
 
 void GaiaUrls::InitializeDefault() {
   SetDefaultURLIfInvalid(&google_url_, switches::kGoogleUrl, kDefaultGoogleUrl);
-  if (jemaos::switches::IsJemaAccountEnabled()) {
-    SetDefaultOriginIfOpaqueOrInvalidScheme(&gaia_origin_, jemaos::switches::kJemaOSGaiaUrl,
-                                            jemaos::constants::kDefaultJemaOSGaiaUrl);
-    SetDefaultURLIfInvalid(&google_apis_origin_url_, jemaos::switches::kJemaOSApisUrl,
-                           jemaos::constants::kDefaultJemaOSApisBaseUrl);
+  if (wings8os::switches::IsWings8AccountEnabled()) {
+    SetDefaultOriginIfOpaqueOrInvalidScheme(&gaia_origin_, wings8os::switches::kWings8OSGaiaUrl,
+                                            wings8os::constants::kDefaultWings8OSGaiaUrl);
+    SetDefaultURLIfInvalid(&google_apis_origin_url_, wings8os::switches::kWings8OSApisUrl,
+                           wings8os::constants::kDefaultWings8OSApisBaseUrl);
   } else {
     SetDefaultOriginIfOpaqueOrInvalidScheme(&gaia_origin_, switches::kGaiaUrl,
                                             kDefaultGaiaUrl);

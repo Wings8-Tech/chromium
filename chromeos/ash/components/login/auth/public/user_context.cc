@@ -23,7 +23,7 @@ UserContext::UserContext(const UserContext& other) = default;
 UserContext::UserContext(const user_manager::User& user)
     : account_id_(user.GetAccountId()), user_type_(user.GetType()) {
   if (user_type_ == user_manager::UserType::kRegular ||
-      user_type_ == user_manager::UserType::kJemaAccount ||
+      user_type_ == user_manager::UserType::kWings8Account ||
       user_type_ == user_manager::UserType::kFlintAccount) {
     account_id_.SetUserEmail(
         user_manager::CanonicalizeUserID(account_id_.GetUserEmail()));
@@ -34,7 +34,7 @@ UserContext::UserContext(user_manager::UserType user_type,
                          const AccountId& account_id)
     : account_id_(account_id), user_type_(user_type) {
   if (user_type_ == user_manager::UserType::kRegular ||
-      user_type_ == user_manager::UserType::kJemaAccount ||
+      user_type_ == user_manager::UserType::kWings8Account ||
       user_type_ == user_manager::UserType::kFlintAccount) {
     account_id_.SetUserEmail(
         user_manager::CanonicalizeUserID(account_id_.GetUserEmail()));
@@ -196,7 +196,7 @@ const AccountId& UserContext::GetAccountId() const {
 }
 
 const std::string& UserContext::GetGaiaID() const {
-  return account_id_.GetAccountType() == AccountType::JEMA_ACCOUNT ? account_id_.GetJemaId() : account_id_.GetGaiaId();
+  return account_id_.GetAccountType() == AccountType::WINGS8_ACCOUNT ? account_id_.GetWings8Id() : account_id_.GetGaiaId();
 }
 
 const Key* UserContext::GetKey() const {
@@ -387,11 +387,11 @@ std::optional<PasswordInput> UserContext::GetPassword() const {
   }
 }
 
-void UserContext::SetJemaLocalPasswordInput(const LocalPasswordInput& password) {
+void UserContext::SetWings8LocalPasswordInput(const LocalPasswordInput& password) {
   SetLocalPasswordInput(password);
 }
 
-std::optional<LocalPasswordInput> UserContext::GetJemaLocalPassword() const {
+std::optional<LocalPasswordInput> UserContext::GetWings8LocalPassword() const {
   return local_input_;
 }
 

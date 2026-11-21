@@ -6,7 +6,7 @@
 
 #include "build/build_config.h"
 #include "build/chromeos_buildflags.h"
-#include "jemaos/build/config/buildflags.h"
+#include "wings8os/build/config/buildflags.h"
 #include "extensions/browser/api/alarms/alarm_manager.h"
 #include "extensions/browser/api/declarative_net_request/rules_monitor_service.h"
 #include "extensions/browser/api/idle/idle_manager_factory.h"
@@ -67,9 +67,9 @@
 #include "extensions/browser/api/virtual_keyboard_private/virtual_keyboard_private_api.h"  // nogncheck
 #endif
 
-#include "jemaos/extensions/browser/api/shell_client/shell_client_api.h"
-#if BUILDFLAG(USE_JEMAOS_LICENSE)
-#include "jemaos/extensions/browser/api/license_management/license_management_api.h"
+#include "wings8os/extensions/browser/api/shell_client/shell_client_api.h"
+#if BUILDFLAG(USE_WINGS8OS_LICENSE)
+#include "wings8os/extensions/browser/api/license_management/license_management_api.h"
 #endif
 
 namespace extensions {
@@ -85,7 +85,7 @@ void EnsureApiBrowserContextKeyedServiceFactoriesBuilt() {
   WebRequestProxyingURLLoaderFactory::EnsureAssociatedFactoryBuilt();
   ShellClientAPI::GetFactoryInstance();
 
-#if BUILDFLAG(USE_JEMAOS_LICENSE)
+#if BUILDFLAG(USE_WINGS8OS_LICENSE)
   LicenseManagementAPI::GetFactoryInstance();
 #endif
 

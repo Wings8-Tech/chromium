@@ -54,7 +54,7 @@
 #include "crypto/nss_util_internal.h"
 #include "crypto/scoped_nss_types.h"
 #include "crypto/signature_creator.h"
-#include "jemaos/prefs/jemaos_pref_names.h"
+#include "wings8os/prefs/wings8os_pref_names.h"
 
 namespace em = enterprise_management;
 
@@ -236,7 +236,7 @@ bool OwnerSettingsServiceAsh::IsOwner() {
 void OwnerSettingsServiceAsh::IsOwnerAsync(IsOwnerCallback callback) {
   PrefService* local_state = g_browser_process->local_state();
   bool tpm_fallback = local_state->GetBoolean(
-      jemaos::prefs::kCurrentForceTpmFallback);
+      wings8os::prefs::kCurrentForceTpmFallback);
   if (InstallAttributes::Get()->IsEnterpriseManaged() || tpm_fallback) {
     base::SingleThreadTaskRunner::GetCurrentDefault()->PostTask(
         FROM_HERE, base::BindOnce(std::move(callback), false));

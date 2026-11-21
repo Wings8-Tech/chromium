@@ -85,8 +85,8 @@
 #include "ui/gfx/image/image_skia.h"
 #include "ui/gfx/image/image_util.h"
 #include "url/gurl.h"
-#include "jemaos/switches/misc/misc_constants.h"
-#include "jemaos/switches/misc/misc_switches.h"
+#include "wings8os/switches/misc/misc_constants.h"
+#include "wings8os/switches/misc/misc_switches.h"
 
 using color_utils::ColorProfile;
 
@@ -337,7 +337,7 @@ std::string MaybeGetNewWallpaperImagePath(
     const std::string& file_path, bool force) {
   std::string new_path = "";
   if (!base::StartsWith(file_path,
-        jemaos::constants::kJemaOSWallpapersBasePath) ||
+        wings8os::constants::kWings8OSWallpapersBasePath) ||
       (!base::EndsWith(file_path, kWallpaperImageSuffixDarkPng) &&
       !base::EndsWith(file_path, kWallpaperImageSuffixLightPng) &&
       !base::EndsWith(file_path, kWallpaperImageSuffixDarkJpg) &&
@@ -370,12 +370,12 @@ std::string MaybeGetNewWallpaperImagePath(
       return force ? file_path : "";
     }
   }
-  VLOG(3) << "MaybeGetNewWallpaperImagePath from jemaos wallpapers: "
+  VLOG(3) << "MaybeGetNewWallpaperImagePath from wings8os wallpapers: "
           << new_path;
   if (base::PathExists(base::FilePath(new_path))) {
     return new_path;
   } else {
-    LOG(WARNING) << "Expect jemaos wallpaper" << new_path
+    LOG(WARNING) << "Expect wings8os wallpaper" << new_path
                  << ", but not exists";
     return force ? file_path : "";
   }
@@ -386,12 +386,12 @@ std::string GetDefaultDarkLightWallpaperPath(
     const bool customized_default,
     const bool is_oobe,
     const base::FilePath& path) {
-  if (!jemaos::switches::IsDynamicDefaultWallpaperSupported()) {
+  if (!wings8os::switches::IsDynamicDefaultWallpaperSupported()) {
     return path.value();
   }
   if (user_type == user_manager::UserType::kGuest ||
       user_type == user_manager::UserType::kChild ||
-      user_type == user_manager::UserType::kJemaChild ||
+      user_type == user_manager::UserType::kWings8Child ||
       customized_default) {
     return path.value();
   }
@@ -1070,7 +1070,7 @@ base::FilePath WallpaperControllerImpl::GetDefaultWallpaperPath(
                                                ? switches::kGuestWallpaperSmall
                                                : switches::kGuestWallpaperLarge;
     return command_line->GetSwitchValuePath(switch_string);
-  } else if (user_type == user_manager::UserType::kChild || user_type == user_manager::UserType::kJemaChild) {
+  } else if (user_type == user_manager::UserType::kChild || user_type == user_manager::UserType::kWings8Child) {
     const std::string_view switch_string = use_small
                                                ? switches::kChildWallpaperSmall
                                                : switches::kChildWallpaperLarge;

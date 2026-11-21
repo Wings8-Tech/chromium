@@ -28,20 +28,20 @@ bool AuthErrorObserver::ShouldObserve(Profile* profile) {
   if (!user || !user->HasGaiaAccount()) {
     return false;
   }
-  //---***JEMAOS BEGIN***---
-  // Jema/Flint accounts hold no Google credential: observing Sync/Google auth
+  //---***WINGS8OS BEGIN***---
+  // Wings8/Flint accounts hold no Google credential: observing Sync/Google auth
   // errors for them drives the OAuth status machinery with a non-Google token
   // ("incorrectly invalidated token case") and participates in the post-login
-  // crash. They are authenticated by the Jema API, not Google.
-  if (user->IsJemaAccountUser() || user->IsFlintAccountUser()) {
+  // crash. They are authenticated by the Wings8 API, not Google.
+  if (user->IsWings8AccountUser() || user->IsFlintAccountUser()) {
     return false;
   }
   const std::string gaia_id = user->GetAccountId().GetGaiaId();
-  if (gaia_id.find("jema_id_") == 0 || gaia_id.find("ft_id_") == 0 ||
+  if (gaia_id.find("wings8_id_") == 0 || gaia_id.find("ft_id_") == 0 ||
       gaia_id.find("flint_id_") == 0) {
     return false;
   }
-  //---***JEMAOS END***---
+  //---***WINGS8OS END***---
   return true;
 }
 

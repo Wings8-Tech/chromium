@@ -137,7 +137,7 @@ export class OsSettingsPeoplePageElement extends
       shouldUseNewUI_: {
         type: Boolean,
         value: () => {
-          return isRevampWayfindingEnabled() && !loadTimeData.getBoolean('isJemaProfile');
+          return isRevampWayfindingEnabled() && !loadTimeData.getBoolean('isWings8Profile');
         }
       },
 
@@ -146,8 +146,8 @@ export class OsSettingsPeoplePageElement extends
         value() {
           return loadTimeData.valueExists('showParentalControls') &&
               loadTimeData.getBoolean('showParentalControls') &&
-             (!loadTimeData.valueExists('isJemaProfile') ||
-              !loadTimeData.getBoolean('isJemaProfile'));
+             (!loadTimeData.valueExists('isWings8Profile') ||
+              !loadTimeData.getBoolean('isWings8Profile'));
         },
       },
 
@@ -193,8 +193,8 @@ export class OsSettingsPeoplePageElement extends
       isProfileActionable_: {
         type: Boolean,
         value: function() {
-          if (loadTimeData.getBoolean('isJemaProfile')) {
-            return !loadTimeData.getBoolean('isJemaLocalAccount');
+          if (loadTimeData.getBoolean('isWings8Profile')) {
+            return !loadTimeData.getBoolean('isWings8LocalAccount');
           }
           return loadTimeData.getBoolean('isAccountManagerEnabled');
         },
@@ -203,17 +203,17 @@ export class OsSettingsPeoplePageElement extends
       profileActionButtonIcon_: {
         type: String,
           value: function() {
-            if (loadTimeData.getBoolean('isJemaProfile')) {
+            if (loadTimeData.getBoolean('isWings8Profile')) {
               return 'icon-external';
             }
             return 'subpage-arrow';
           },
       },
 
-      isJemaLocalAccount_: {
+      isWings8LocalAccount_: {
         type: Boolean,
         value() {
-          return loadTimeData.getBoolean('isJemaLocalAccount');
+          return loadTimeData.getBoolean('isWings8LocalAccount');
         },
       },
 
@@ -466,11 +466,11 @@ export class OsSettingsPeoplePageElement extends
   }
 
   private onAccountManagerClick_(): void {
-    if (loadTimeData.getBoolean('isJemaProfile')) {
-      if (loadTimeData.getBoolean('isJemaLocalAccount')) {
+    if (loadTimeData.getBoolean('isWings8Profile')) {
+      if (loadTimeData.getBoolean('isWings8LocalAccount')) {
         return;
       }
-      const baseUrl = loadTimeData.getString('jemaosAccountBaseUrl');
+      const baseUrl = loadTimeData.getString('wings8osAccountBaseUrl');
       const url = `${baseUrl}/personalInfo/`;
       window.open(url);
       return;

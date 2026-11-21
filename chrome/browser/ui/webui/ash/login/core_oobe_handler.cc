@@ -25,8 +25,8 @@
 #include "ui/aura/window_tree_host.h"
 #include "ui/display/screen.h"
 #include "ui/events/event_sink.h"
-#include "jemaos/switches/account/account_constants.h"
-#include "jemaos/build/config/buildflags.h"
+#include "wings8os/switches/account/account_constants.h"
+#include "wings8os/build/config/buildflags.h"
 
 // Enable VLOG level 1.
 #undef ENABLED_VLOG_LEVEL
@@ -50,18 +50,18 @@ void CoreOobeHandler::DeclareLocalizedValues(
 
   const bool has_api_keys_configured = google_apis::HasAPIKeyConfigured() &&
                                        google_apis::HasOAuthClientConfigured();
-#if BUILDFLAG(IS_OPENJEMA)
-  const bool has_jema_oauth_client_configured =
-      google_apis::HasJemaOAuthClientConfigured();
-  if (!has_api_keys_configured && !has_jema_oauth_client_configured) {
+#if BUILDFLAG(IS_OPENWINGS8)
+  const bool has_wings8_oauth_client_configured =
+      google_apis::HasWings8OAuthClientConfigured();
+  if (!has_api_keys_configured && !has_wings8_oauth_client_configured) {
     builder->AddF("missingAPIKeysNotice", IDS_LOGIN_API_KEYS_NOTICE,
-                  base::ASCIIToUTF16(jemaos::constants::kJemaAPIKeysDevelopersHowToURL));
-  } else if (has_api_keys_configured && !has_jema_oauth_client_configured) {
-    builder->AddF("missingAPIKeysNotice", IDS_LOGIN_JEMA_API_KEYS_NOTICE,
-                  base::ASCIIToUTF16(jemaos::constants::kJemaAPIKeysDevelopersHowToURL));
-  } else if (!has_api_keys_configured && has_jema_oauth_client_configured) {
+                  base::ASCIIToUTF16(wings8os::constants::kWings8APIKeysDevelopersHowToURL));
+  } else if (has_api_keys_configured && !has_wings8_oauth_client_configured) {
+    builder->AddF("missingAPIKeysNotice", IDS_LOGIN_WINGS8_API_KEYS_NOTICE,
+                  base::ASCIIToUTF16(wings8os::constants::kWings8APIKeysDevelopersHowToURL));
+  } else if (!has_api_keys_configured && has_wings8_oauth_client_configured) {
     builder->AddF("missingAPIKeysNotice", IDS_LOGIN_GOOGLE_API_KEYS_NOTICE,
-                  base::ASCIIToUTF16(jemaos::constants::kJemaAPIKeysDevelopersHowToURL));
+                  base::ASCIIToUTF16(wings8os::constants::kWings8APIKeysDevelopersHowToURL));
   }
 #else
   if (!has_api_keys_configured) {

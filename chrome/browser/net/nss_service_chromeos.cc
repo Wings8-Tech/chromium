@@ -36,7 +36,7 @@
 #include "crypto/nss_util.h"
 #include "crypto/nss_util_internal.h"
 #include "net/cert/nss_cert_database_chromeos.h"
-#include "jemaos/prefs/jemaos_pref_names.h"
+#include "wings8os/prefs/wings8os_pref_names.h"
 #include "components/prefs/pref_service.h"
 #include "chrome/browser/browser_process.h"
 
@@ -329,7 +329,7 @@ NssService::NssService(content::BrowserContext* context) {
     username_hash = user->username_hash();
     DCHECK(!username_hash.empty());
     PrefService* prefs = g_browser_process->local_state();
-    bool tpm_fallback = prefs->GetBoolean(jemaos::prefs::kCurrentForceTpmFallback);
+    bool tpm_fallback = prefs->GetBoolean(wings8os::prefs::kCurrentForceTpmFallback);
     content::GetIOThreadTaskRunner({})->PostTask(
         FROM_HERE, base::BindOnce(&StartNSSInitOnIOThread, tpm_fallback, user->GetAccountId(),
                                   username_hash, profile->GetPath(),

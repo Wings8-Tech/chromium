@@ -30,8 +30,8 @@ enum Section {
   kAboutChromeOs = 17,
   kKerberos = 18,
   kSystemPreferences = 19,
-  kJemaOs = 20,
-  kJemaAssistant = 21,
+  kWings8Os = 20,
+  kWings8Assistant = 21,
 };
 
 // Chrome OS Settings subpages (i.e., nested pages within a section). Each
@@ -194,10 +194,10 @@ enum Subpage {
   // Kerberos section.
   kKerberosAccountsV2 = 1800,
 
-  //---***JEMAOS BEGIN***---
-  kJemaOsMain = 1900,
-  kJemaOsLicenseInfo = 1901,
-  //---***JEMAOS END***---
+  //---***WINGS8OS BEGIN***---
+  kWings8OsMain = 1900,
+  kWings8OsLicenseInfo = 1901,
+  //---***WINGS8OS END***---
 };
 
 // Network section.
@@ -337,8 +337,8 @@ const string kNetworkFileSharesSubpagePath = "smbShares";
 const string kPrintingSectionPath = "osPrinting";
 const string kPrintingDetailsSubpagePath = "cupsPrinters";
 
-// Jema Assistant section.
-const string kJemaAssistantSectionPath = "osJemaAssistant";
+// Wings8 Assistant section.
+const string kWings8AssistantSectionPath = "osWings8Assistant";
 
 // Accessibility section.
 const string kAccessibilitySectionPath = "osAccessibility";
@@ -373,7 +373,7 @@ const string kSystemPreferencesSectionPath = "systemPreferences";
 // Internal pages (under About section).
 const string kInternalStorybookSubpagePath = "_internal/_storybook";
 
-// JemaOS section.
-const string kJemaOsSectionPath = "jemaos";
-const string kJemaOsSubpagePath = "jemaos/main";
-const string kJemaOsLicenseInfoSubpagePath = "jemaos/license";
+// Wings8OS section.
+const string kWings8OsSectionPath = "wings8os";
+const string kWings8OsSubpagePath = "wings8os/main";
+const string kWings8OsLicenseInfoSubpagePath = "wings8os/license";

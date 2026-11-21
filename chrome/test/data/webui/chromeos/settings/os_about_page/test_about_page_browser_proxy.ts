@@ -24,7 +24,7 @@ export class TestAboutPageBrowserProxy extends TestBrowserProxy implements
     targetChannel: BrowserChannel.BETA,
     isLts: false,
   };
-  private jemaOtaEnabled_ = false;
+  private wings8OtaEnabled_ = false;
   private firmwareUpdateSupported_ = false;
   private canChangeChannel_ = true;
   private regulatoryInfo_: RegulatoryInfo|null = null;
@@ -56,7 +56,7 @@ export class TestAboutPageBrowserProxy extends TestBrowserProxy implements
       'getChannelInfo',
       'getVersionInfo',
       'getRegulatoryInfo',
-      'getEnabledJemaOTA',
+      'getEnabledWings8OTA',
       'getIsFirmwareUpdateSupported',
       'checkInternetConnection',
       'getEndOfLifeInfo',
@@ -68,7 +68,7 @@ export class TestAboutPageBrowserProxy extends TestBrowserProxy implements
       'refreshTpmFirmwareUpdateStatus',
       'requestUpdate',
       'requestUpdateOverCellular',
-      'enableJemaOTA',
+      'enableWings8OTA',
       'setChannel',
       'getFirmwareUpdateCount',
       'openFirmwareUpdatesPage',
@@ -189,9 +189,9 @@ export class TestAboutPageBrowserProxy extends TestBrowserProxy implements
     return Promise.resolve(this.regulatoryInfo_);
   }
 
-  getEnabledJemaOTA(): Promise<boolean> {
-    this.methodCalled('getEnabledJemaOTA');
-    return Promise.resolve(this.jemaOtaEnabled_);
+  getEnabledWings8OTA(): Promise<boolean> {
+    this.methodCalled('getEnabledWings8OTA');
+    return Promise.resolve(this.wings8OtaEnabled_);
   }
 
   getIsFirmwareUpdateSupported(): Promise<boolean> {
@@ -212,8 +212,8 @@ export class TestAboutPageBrowserProxy extends TestBrowserProxy implements
     this.methodCalled('setChannel', [channel, isPowerwashAllowed]);
   }
 
-  enableJemaOTA(enabled: boolean) {
-    this.methodCalled('enableJemaOTA', [enabled]);
+  enableWings8OTA(enabled: boolean) {
+    this.methodCalled('enableWings8OTA', [enabled]);
   }
 
   setTpmFirmwareUpdateStatus(status: TpmFirmwareUpdateStatusChangedEvent):

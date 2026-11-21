@@ -1387,17 +1387,17 @@
     "messages": [10080],
   },
 
-  #//---***JEMAOS BEGIN***---
-  "jemaos/extensions/common/jemaos_extensions_resources.grd": {
+  #//---***WINGS8OS BEGIN***---
+  "wings8os/extensions/common/wings8os_extensions_resources.grd": {
     "includes": [10100],
     "messages": [10120],
   },
 
-  "<(SHARED_INTERMEDIATE_DIR)/ash/webui/jema_assistant_app_ui/resources/resources.grd": {
+  "<(SHARED_INTERMEDIATE_DIR)/ash/webui/wings8_assistant_app_ui/resources/resources.grd": {
     "META": {"sizes": {"includes": [50],}},
     "includes": [10140],
   },
-  #//---***JEMAOS END***---
+  #//---***WINGS8OS END***---
 
   # END "everything else" section.
   # Everything but chrome/, components/, content/, and ios/

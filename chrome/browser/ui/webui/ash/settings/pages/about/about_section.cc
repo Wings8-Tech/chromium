@@ -44,18 +44,18 @@
 #include "components/version_info/version_info.h"
 #include "components/version_ui/version_ui_constants.h"
 #include "content/public/browser/web_ui_data_source.h"
-#include "jemaos/constants/jemaos_constants.h"
+#include "wings8os/constants/wings8os_constants.h"
 #include "ui/base/l10n/l10n_util.h"
 #include "ui/base/webui/web_ui_util.h"
 #include "ui/chromeos/devicetype_utils.h"
-#include "jemaos/switches/urls/urls_constants.h"
-#include "jemaos/switches/license/license_switches.h"
+#include "wings8os/switches/urls/urls_constants.h"
+#include "wings8os/switches/license/license_switches.h"
 #include "chromeos/version/version_loader.h"
-#include "jemaos/prefs/jemaos_pref_names.h"
+#include "wings8os/prefs/wings8os_pref_names.h"
 
-#if BUILDFLAG(JEMAOS_DEVICE)
+#if BUILDFLAG(WINGS8OS_DEVICE)
 #include "chromeos/ash/components/system/statistics_provider.h"
-#include "jemaos/switches/services/services_switches.h"
+#include "wings8os/switches/services/services_switches.h"
 #endif
 
 namespace ash::settings {
@@ -400,10 +400,10 @@ void AboutSection::AddLoadTimeData(content::WebUIDataSource* html_source) {
       {"aboutUpdateToRollbackVersionDisallowed",
        IDS_SETTINGS_UPDATE_TO_ROLLBACK_VERSION_DISALLOWED},
 
-      {"aboutJemaOSOtaDisallowedRequiresOneTimePayment",
-       IDS_OS_SETTINGS_JEMAOS_OTA_DISALLOWED_REQUIRES_ONE_TIME_PAYMENT},
-      {"aboutJemaOSOtaDisallowedByLicenseValidation",
-       IDS_OS_SETTINGS_JEMAOS_OTA_DISALLOWED_BY_LICENSE_VALIDATION},
+      {"aboutWings8OSOtaDisallowedRequiresOneTimePayment",
+       IDS_OS_SETTINGS_WINGS8OS_OTA_DISALLOWED_REQUIRES_ONE_TIME_PAYMENT},
+      {"aboutWings8OSOtaDisallowedByLicenseValidation",
+       IDS_OS_SETTINGS_WINGS8OS_OTA_DISALLOWED_BY_LICENSE_VALIDATION},
 
       // About page auto update toggle.
       {"aboutConsumerAutoUpdateToggleTitle",
@@ -418,45 +418,45 @@ void AboutSection::AddLoadTimeData(content::WebUIDataSource* html_source) {
        IDS_SETTINGS_ABOUT_PAGE_CONSUMER_AUTO_UPDATE_TOGGLE_TURN_OFF_BUTTON},
       {"aboutConsumerAutoUpdateToggleKeepUpdatesButton",
        IDS_SETTINGS_ABOUT_PAGE_CONSUMER_AUTO_UPDATE_TOGGLE_KEEP_UPDATES_BUTTON},
-      {"aboutJemaOSVersionWithoutLicenseState",
-       IDS_SETTINGS_ABOUT_PAGE_NEW_JEMAOS_VERSION_WITHOUT_LICENSE_STATE},
-#if BUILDFLAG(USE_JEMAOS_LICENSE)
-      {"aboutJemaOSVersion",
-       IDS_SETTINGS_ABOUT_PAGE_NEW_JEMAOS_VERSION},
-      {"aboutJemaOSLicenseStateUnlicensed",
-       IDS_SETTINGS_ABOUT_PAGE_JEMAOS_LICENSE_STATE_UNLICENSED},
-      {"aboutJemaOSLicenseStateForYouTrial",
-       IDS_SETTINGS_ABOUT_PAGE_JEMAOS_LICENSE_STATE_FOR_YOU_TRIAL},
-      {"aboutJemaOSLicenseStateForYouValid",
-       IDS_SETTINGS_ABOUT_PAGE_JEMAOS_LICENSE_STATE_FOR_YOU_VALID},
-      {"aboutJemaOSLicenseStateForYouExpired",
-       IDS_SETTINGS_ABOUT_PAGE_JEMAOS_LICENSE_STATE_FOR_YOU_EXPIRED},
-      {"aboutJemaOSLicenseStateEnterpriseTrial",
-       IDS_SETTINGS_ABOUT_PAGE_JEMAOS_LICENSE_STATE_ENTERPRISE_TRIAL},
-      {"aboutJemaOSLicenseStateEnterpriseValid",
-       IDS_SETTINGS_ABOUT_PAGE_JEMAOS_LICENSE_STATE_ENTERPRISE_VALID},
-      {"aboutJemaOSLicenseStateEnterpriseExpired",
-       IDS_SETTINGS_ABOUT_PAGE_JEMAOS_LICENSE_STATE_ENTERPRISE_EXPIRED},
+      {"aboutWings8OSVersionWithoutLicenseState",
+       IDS_SETTINGS_ABOUT_PAGE_NEW_WINGS8OS_VERSION_WITHOUT_LICENSE_STATE},
+#if BUILDFLAG(USE_WINGS8OS_LICENSE)
+      {"aboutWings8OSVersion",
+       IDS_SETTINGS_ABOUT_PAGE_NEW_WINGS8OS_VERSION},
+      {"aboutWings8OSLicenseStateUnlicensed",
+       IDS_SETTINGS_ABOUT_PAGE_WINGS8OS_LICENSE_STATE_UNLICENSED},
+      {"aboutWings8OSLicenseStateForYouTrial",
+       IDS_SETTINGS_ABOUT_PAGE_WINGS8OS_LICENSE_STATE_FOR_YOU_TRIAL},
+      {"aboutWings8OSLicenseStateForYouValid",
+       IDS_SETTINGS_ABOUT_PAGE_WINGS8OS_LICENSE_STATE_FOR_YOU_VALID},
+      {"aboutWings8OSLicenseStateForYouExpired",
+       IDS_SETTINGS_ABOUT_PAGE_WINGS8OS_LICENSE_STATE_FOR_YOU_EXPIRED},
+      {"aboutWings8OSLicenseStateEnterpriseTrial",
+       IDS_SETTINGS_ABOUT_PAGE_WINGS8OS_LICENSE_STATE_ENTERPRISE_TRIAL},
+      {"aboutWings8OSLicenseStateEnterpriseValid",
+       IDS_SETTINGS_ABOUT_PAGE_WINGS8OS_LICENSE_STATE_ENTERPRISE_VALID},
+      {"aboutWings8OSLicenseStateEnterpriseExpired",
+       IDS_SETTINGS_ABOUT_PAGE_WINGS8OS_LICENSE_STATE_ENTERPRISE_EXPIRED},
 #endif
-      {"aboutJemaOSDeviceTitleLegacyIntel",
-       IDS_SETTINGS_ABOUT_PAGE_JEMAOS_DEVICE_TITLE_LEGACY_INTEL},
-      {"aboutJemaOSDeviceTitleModernIntel",
-       IDS_SETTINGS_ABOUT_PAGE_JEMAOS_DEVICE_TITLE_MODERN_INTEL},
-      {"aboutJemaOSDeviceTitleAMDGraphics",
-       IDS_SETTINGS_ABOUT_PAGE_JEMAOS_DEVICE_TITLE_AMD_GRAPHICS},
-      {"aboutJemaOSDeviceTitleIntelSlim",
-       IDS_SETTINGS_ABOUT_PAGE_JEMAOS_DEVICE_TITLE_INTEL_SLIM},
+      {"aboutWings8OSDeviceTitleLegacyIntel",
+       IDS_SETTINGS_ABOUT_PAGE_WINGS8OS_DEVICE_TITLE_LEGACY_INTEL},
+      {"aboutWings8OSDeviceTitleModernIntel",
+       IDS_SETTINGS_ABOUT_PAGE_WINGS8OS_DEVICE_TITLE_MODERN_INTEL},
+      {"aboutWings8OSDeviceTitleAMDGraphics",
+       IDS_SETTINGS_ABOUT_PAGE_WINGS8OS_DEVICE_TITLE_AMD_GRAPHICS},
+      {"aboutWings8OSDeviceTitleIntelSlim",
+       IDS_SETTINGS_ABOUT_PAGE_WINGS8OS_DEVICE_TITLE_INTEL_SLIM},
   };
   html_source->AddLocalizedStrings(kLocalizedStrings);
 
-  html_source->AddString("aboutKeepJemaOsUpdateToDate",
-      l10n_util::GetStringFUTF16(IDS_SETTINGS_ABOUT_KEEP_JEMAOS_UPDATE_TO_DATE,
+  html_source->AddString("aboutKeepWings8OsUpdateToDate",
+      l10n_util::GetStringFUTF16(IDS_SETTINGS_ABOUT_KEEP_WINGS8OS_UPDATE_TO_DATE,
         l10n_util::GetStringUTF16(IDS_PRODUCT_OS_NAME)));
-  html_source->AddString("aboutJemaOsUpdateEnabled",
-      l10n_util::GetStringFUTF16(IDS_SETTINGS_ABOUT_JEMAOS_UPDATE_ENABLED,
+  html_source->AddString("aboutWings8OsUpdateEnabled",
+      l10n_util::GetStringFUTF16(IDS_SETTINGS_ABOUT_WINGS8OS_UPDATE_ENABLED,
         l10n_util::GetStringUTF16(IDS_PRODUCT_OS_NAME)));
-  html_source->AddString("aboutJemaOsUpdateDisabled",
-      l10n_util::GetStringFUTF16(IDS_SETTINGS_ABOUT_JEMAOS_UPDATE_DISABLED,
+  html_source->AddString("aboutWings8OsUpdateDisabled",
+      l10n_util::GetStringFUTF16(IDS_SETTINGS_ABOUT_WINGS8OS_UPDATE_DISABLED,
         l10n_util::GetStringUTF16(IDS_PRODUCT_OS_NAME)));
 
   html_source->AddString("aboutTPMFirmwareUpdateLearnMoreURL",
@@ -488,20 +488,20 @@ void AboutSection::AddLoadTimeData(content::WebUIDataSource* html_source) {
 
   html_source->AddString("aboutBrowserVersion",
                          VersionUI::GetAnnotatedVersionStringForUi());
-  std::string jemaosMajorVersion = base::SysInfo::GetLsbJemaReleaseVersion();
-  if (jemaosMajorVersion == "" || jemaosMajorVersion == "unknown") {
-    jemaosMajorVersion = "";
+  std::string wings8osMajorVersion = base::SysInfo::GetLsbWings8ReleaseVersion();
+  if (wings8osMajorVersion == "" || wings8osMajorVersion == "unknown") {
+    wings8osMajorVersion = "";
   } else {
-    jemaosMajorVersion = "v" + jemaosMajorVersion;
+    wings8osMajorVersion = "v" + wings8osMajorVersion;
   }
   auto version = chromeos::version_loader::GetVersion(chromeos::version_loader::VERSION_SHORT);
-  html_source->AddString("aboutJemaOSPlatformVersion", version.value_or(""));
-  html_source->AddString("aboutJemaOSChromiumVersion", std::string(version_info::GetVersionNumber()));
-  html_source->AddString("aboutJemaOSVersionNumber", jemaosMajorVersion);
-  html_source->AddString("aboutJemaOSBoardName", base::SysInfo::GetLsbReleaseBoard());
-#if BUILDFLAG(USE_JEMAOS_LICENSE)
-  html_source->AddInteger("aboutJemaOSLicenseState",
-                          g_browser_process->local_state()->GetInteger(jemaos::prefs::kJemaLicenseStateType));
+  html_source->AddString("aboutWings8OSPlatformVersion", version.value_or(""));
+  html_source->AddString("aboutWings8OSChromiumVersion", std::string(version_info::GetVersionNumber()));
+  html_source->AddString("aboutWings8OSVersionNumber", wings8osMajorVersion);
+  html_source->AddString("aboutWings8OSBoardName", base::SysInfo::GetLsbReleaseBoard());
+#if BUILDFLAG(USE_WINGS8OS_LICENSE)
+  html_source->AddInteger("aboutWings8OSLicenseState",
+                          g_browser_process->local_state()->GetInteger(wings8os::prefs::kWings8LicenseStateType));
 #endif
   html_source->AddString(
       "aboutProductCopyright",
@@ -540,9 +540,9 @@ void AboutSection::AddLoadTimeData(content::WebUIDataSource* html_source) {
       "endOfLifeMessage",
       l10n_util::GetStringFUTF16(IDS_SETTINGS_ABOUT_PAGE_LAST_UPDATE_MESSAGE,
                                  ui::GetChromeOSDeviceName(),
-                                 base::ASCIIToUTF16(jemaos::constants::kEolNotificationURL)));
+                                 base::ASCIIToUTF16(wings8os::constants::kEolNotificationURL)));
 
-  html_source->AddString("jemaosLicenseWebUrl", jemaos::switches::GetJemaOSLicenseWebUrl());
+  html_source->AddString("wings8osLicenseWebUrl", wings8os::switches::GetWings8OSLicenseWebUrl());
 
   html_source->AddString("eolIncentiveOfferTitle",
                          l10n_util::GetStringUTF16(
@@ -587,73 +587,73 @@ void AboutSection::AddLoadTimeData(content::WebUIDataSource* html_source) {
 #endif
 
   html_source->AddString(
-      "aboutJemaOsProductTitleWithLink",
-      l10n_util::GetStringFUTF16(IDS_VERSION_UI_JEMAOS_PRODUCT_TITLE_WITH_LINK,
-#if BUILDFLAG(IS_OPENJEMA)
-                                base::UTF8ToUTF16(jemaos::constants::kOpenJemaHomePageUrl)));
+      "aboutWings8OsProductTitleWithLink",
+      l10n_util::GetStringFUTF16(IDS_VERSION_UI_WINGS8OS_PRODUCT_TITLE_WITH_LINK,
+#if BUILDFLAG(IS_OPENWINGS8)
+                                base::UTF8ToUTF16(wings8os::constants::kOpenWings8HomePageUrl)));
 #else
-                                base::UTF8ToUTF16(jemaos::constants::kJemaOSHomePageUrl)));
+                                base::UTF8ToUTF16(wings8os::constants::kWings8OSHomePageUrl)));
 #endif
-  html_source->AddString("aboutJemaOsProductCopyright",
+  html_source->AddString("aboutWings8OsProductCopyright",
                          base::i18n::MessageFormatter::FormatWithNumberedArgs(
-                            l10n_util::GetStringUTF16(IDS_SETTINGS_JEMAOS_PRODUCT_COPYRIGHT),
+                            l10n_util::GetStringUTF16(IDS_SETTINGS_WINGS8OS_PRODUCT_COPYRIGHT),
                             base::Time::Now()));
-#if !BUILDFLAG(IS_OPENJEMA)
+#if !BUILDFLAG(IS_OPENWINGS8)
   html_source->AddString(
-      "aboutJemaOsProductTos",
-      l10n_util::GetStringFUTF16(IDS_VERSION_UI_JEMAOS_PRODUCT_TOS,
-                                 base::UTF8ToUTF16(jemaos::constants::kPrivacyURLPath),
-                                 base::UTF8ToUTF16(jemaos::constants::kEulaURLPath))),
+      "aboutWings8OsProductTos",
+      l10n_util::GetStringFUTF16(IDS_VERSION_UI_WINGS8OS_PRODUCT_TOS,
+                                 base::UTF8ToUTF16(wings8os::constants::kPrivacyURLPath),
+                                 base::UTF8ToUTF16(wings8os::constants::kEulaURLPath))),
 #endif
 
-#if BUILDFLAG(IS_OPENJEMA)
+#if BUILDFLAG(IS_OPENWINGS8)
   html_source->AddString(
-      "aboutJemaOsOpenJemaLicenseDesc",
-      l10n_util::GetStringUTF16(IDS_VERSION_UI_JEMAOS_OPENJEMA_LICENSE_DESC));
+      "aboutWings8OsOpenWings8LicenseDesc",
+      l10n_util::GetStringUTF16(IDS_VERSION_UI_WINGS8OS_OPENWINGS8_LICENSE_DESC));
 #else
   html_source->AddString(
-      "aboutJemaOsOpenJemaLicenseDesc",
-      l10n_util::GetStringFUTF16(IDS_VERSION_UI_JEMAOS_OPENJEMA_LICENSE_DESC,
-                                base::UTF8ToUTF16(jemaos::constants::kOpenJemaHomePageUrl)));
+      "aboutWings8OsOpenWings8LicenseDesc",
+      l10n_util::GetStringFUTF16(IDS_VERSION_UI_WINGS8OS_OPENWINGS8_LICENSE_DESC,
+                                base::UTF8ToUTF16(wings8os::constants::kOpenWings8HomePageUrl)));
 #endif
   html_source->AddString(
-      "aboutJemaOsOpenJemaProductLicense",
-      l10n_util::GetStringFUTF16(IDS_VERSION_UI_JEMAOS_OPENJEMA_PRODUCT_LICENSE,
+      "aboutWings8OsOpenWings8ProductLicense",
+      l10n_util::GetStringFUTF16(IDS_VERSION_UI_WINGS8OS_OPENWINGS8_PRODUCT_LICENSE,
                                  chrome::kChromiumProjectURL));
   html_source->AddString(
-      "aboutJemaOsProductAndChromiumLicense",
-      l10n_util::GetStringFUTF16(IDS_VERSION_UI_JEMAOS_PRODUCT_CHROMIUM_LICENSE,
+      "aboutWings8OsProductAndChromiumLicense",
+      l10n_util::GetStringFUTF16(IDS_VERSION_UI_WINGS8OS_PRODUCT_CHROMIUM_LICENSE,
                                 chrome::kChromeUICreditsURL16,
                                 chrome::kChromeUIOSCreditsURL16));
 
-#if BUILDFLAG(JEMAOS_DEVICE)
+#if BUILDFLAG(WINGS8OS_DEVICE)
   html_source->AddString(
-      "aboutJemaOsDeviceProductCopyrightInfo",
+      "aboutWings8OsDeviceProductCopyrightInfo",
                          base::i18n::MessageFormatter::FormatWithNumberedArgs(
-                         l10n_util::GetStringUTF16(IDS_VERSION_UI_JEMAOS_DEVICE_PRODUCT_COPYRIGHT_INFO),
+                         l10n_util::GetStringUTF16(IDS_VERSION_UI_WINGS8OS_DEVICE_PRODUCT_COPYRIGHT_INFO),
                             base::Time::Now()));
   html_source->AddString(
-      "aboutJemaOsDeviceProductRegulatoryInfo",
-      l10n_util::GetStringUTF16(IDS_VERSION_UI_JEMAOS_DEVICE_PRODUCT_REGULATORY_INFO));
-#if !BUILDFLAG(USE_JEMAOS_COM)
+      "aboutWings8OsDeviceProductRegulatoryInfo",
+      l10n_util::GetStringUTF16(IDS_VERSION_UI_WINGS8OS_DEVICE_PRODUCT_REGULATORY_INFO));
+#if !BUILDFLAG(USE_WINGS8OS_COM)
   html_source->AddString(
-      "aboutJemaOsDeviceProductCopyrightInfoExtra",
-      l10n_util::GetStringUTF16(IDS_VERSION_UI_JEMAOS_DEVICE_PRODUCT_COPYRIGHT_INFO_EXTRA));
+      "aboutWings8OsDeviceProductCopyrightInfoExtra",
+      l10n_util::GetStringUTF16(IDS_VERSION_UI_WINGS8OS_DEVICE_PRODUCT_COPYRIGHT_INFO_EXTRA));
 #endif
   html_source->AddString(
-      "aboutJemaOsDeviceProductSerialNumberLabel",
-      l10n_util::GetStringUTF16(IDS_VERSION_UI_JEMAOS_DEVICE_PRODUCT_SERIAL_NUMBER_LABEL));
+      "aboutWings8OsDeviceProductSerialNumberLabel",
+      l10n_util::GetStringUTF16(IDS_VERSION_UI_WINGS8OS_DEVICE_PRODUCT_SERIAL_NUMBER_LABEL));
   html_source->AddString(
-      "aboutJemaOsDeviceProductWarrantyUrlTitle",
-      l10n_util::GetStringUTF16(IDS_VERSION_UI_JEMAOS_DEVICE_PRODUCT_WARRANTY_URL_TITLE));
+      "aboutWings8OsDeviceProductWarrantyUrlTitle",
+      l10n_util::GetStringUTF16(IDS_VERSION_UI_WINGS8OS_DEVICE_PRODUCT_WARRANTY_URL_TITLE));
 
 
   auto provider = ::ash::system::StatisticsProvider::GetInstance();
   if (provider) {
     auto machine_id = provider->GetMachineID();
-    html_source->AddString("jemaosDeviceSerialNumber", base::UTF8ToUTF16(machine_id.value_or("")));
+    html_source->AddString("wings8osDeviceSerialNumber", base::UTF8ToUTF16(machine_id.value_or("")));
   }
-  html_source->AddString("jemaosProductWarrentyUrl", jemaos::switches::GetJemaOSProductWarrantyUrl());
+  html_source->AddString("wings8osProductWarrentyUrl", wings8os::switches::GetWings8OSProductWarrantyUrl());
 #endif
 
   // Crostini subsection exists only when OsSettingsRevampWayfinding is enabled.

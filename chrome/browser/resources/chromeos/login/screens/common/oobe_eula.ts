@@ -120,7 +120,7 @@ class EulaScreen extends EulaScreenBase {
 
   onEulaLoad_() {
     const eulaLoader = WebViewLoader.instances['crosEulaFrame'];
-    const privacyLoader = WebViewLoader.instances['jemaosPrivacyFrame'];
+    const privacyLoader = WebViewLoader.instances['wings8osPrivacyFrame'];
 
     // if (eulaLoader.isPerformingRequests) {
     //   return;
@@ -174,7 +174,7 @@ class EulaScreen extends EulaScreenBase {
 
     // Load same local bundled terms HTML into the privacy webview.
     const onlinePrivacyUrl = loadTimeData.getString('privacyOnlineUrl');
-    const privacyFrame = this.shadowRoot?.querySelector<chrome.webviewTag.WebView>('#jemaosPrivacyFrame');
+    const privacyFrame = this.shadowRoot?.querySelector<chrome.webviewTag.WebView>('#wings8osPrivacyFrame');
     assert(privacyFrame);
     this.loadEulaToWebview_(privacyFrame, onlinePrivacyUrl, true, true);
   }

@@ -171,14 +171,14 @@
         <include name="IDR_PLUGIN_VM_INSTALLER" file="plugin_vm/plugin_vm_installer.png" type="BINDATA" />
         <include name="IDR_PLUGIN_VM_INSTALLER_ERROR" file="plugin_vm/plugin_vm_installer_error.png" type="BINDATA" />
       </if>
-      <!--JEMAOS BEGIN-->
-      <if expr="openjema">
-        <part file="../../../openjema/resources/theme/app/jemaos_unscaled_resources.grdp" />
+      <!--WINGS8OS BEGIN-->
+      <if expr="openwings8">
+        <part file="../../../openwings8/resources/theme/app/wings8os_unscaled_resources.grdp" />
       </if>
-      <if expr="not openjema">
-        <part file="../../../jemaos/resources/theme/app/jemaos_unscaled_resources.grdp" />
+      <if expr="not openwings8">
+        <part file="../../../wings8os/resources/theme/app/wings8os_unscaled_resources.grdp" />
       </if>
-      <!--JEMAOS END-->
+      <!--WINGS8OS END-->
     </includes>
   </release>
 </grit>

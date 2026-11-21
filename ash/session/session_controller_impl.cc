@@ -228,7 +228,7 @@ bool SessionControllerImpl::IsUserChild() const {
 
   user_manager::UserType active_user_type = GetUserSession(0)->user_info.type;
   return active_user_type == user_manager::UserType::kChild ||
-         active_user_type == user_manager::UserType::kJemaChild;
+         active_user_type == user_manager::UserType::kWings8Child;
 }
 
 bool SessionControllerImpl::IsUserGuest() const {
@@ -679,7 +679,7 @@ LoginStatus SessionControllerImpl::CalculateLoginStatusForActiveSession()
   switch (user_sessions_[0]->user_info.type) {
     case user_manager::UserType::kRegular:
       return LoginStatus::USER;
-    case user_manager::UserType::kJemaAccount:
+    case user_manager::UserType::kWings8Account:
     case user_manager::UserType::kFlintAccount:
       return LoginStatus::USER;
     case user_manager::UserType::kGuest:
@@ -687,7 +687,7 @@ LoginStatus SessionControllerImpl::CalculateLoginStatusForActiveSession()
     case user_manager::UserType::kPublicAccount:
       return LoginStatus::PUBLIC;
     case user_manager::UserType::kChild:
-    case user_manager::UserType::kJemaChild:
+    case user_manager::UserType::kWings8Child:
       return LoginStatus::CHILD;
     case user_manager::UserType::kKioskApp:
     case user_manager::UserType::kWebKioskApp:

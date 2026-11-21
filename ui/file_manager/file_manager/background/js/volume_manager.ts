@@ -592,7 +592,7 @@ export class VolumeManager extends FilesEventTarget<VolumeManagerEventMap> {
       const rootType = getRootType(entry);
       assert(rootType);
 
-      if (rootType === RootType.JEMADROP) {
+      if (rootType === RootType.WINGS8DROP) {
         return new EntryLocation(volumeInfo, rootType, true, false);
       }
 

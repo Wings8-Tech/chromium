@@ -44,8 +44,8 @@
 #include "ui/base/l10n/l10n_util.h"
 #include "ui/base/webui/web_ui_util.h"
 #include "ui/chromeos/strings/grit/ui_chromeos_strings.h"
-#include "jemaos/switches/account/account_switches.h"
-#include "jemaos/switches/urls/urls_constants.h"
+#include "wings8os/switches/account/account_switches.h"
+#include "wings8os/switches/urls/urls_constants.h"
 
 namespace {
 
@@ -373,7 +373,7 @@ void AddStringsForPhotos(base::Value::Dict* dict) {
   SET_STRING("PHOTOS_WELCOME_TITLE", IDS_FILE_BROWSER_PHOTOS_WELCOME_TITLE);
 }
 
-void AddStringsForJema(base::Value::Dict* dict) {
+void AddStringsForWings8(base::Value::Dict* dict) {
   SET_STRING("NUTSTORE_HINT_BANNER_TITLE",
              IDS_FILE_BROWSER_NUTSTORE_HINT_BANNER_TITLE);
   SET_STRING("NUTSTORE_HINT_BANNER_DESCRIPTION",
@@ -390,14 +390,14 @@ void AddStringsForJema(base::Value::Dict* dict) {
              IDS_FILE_BROWSER_NUTSTORE_HINT_STEPS_OPEN_NUTSTORE);
   SET_STRING("NUTSTORE_HINT_STEPS_CONNECT_ACCOUNT",
              IDS_FILE_BROWSER_NUTSTORE_HINT_STEPS_CONNECT_ACCOUNT);
-  SET_STRING("JEMADROP_ROOT_LABEL",
-             IDS_FILE_BROWSER_JEMADROP_ROOT_LABEL);
+  SET_STRING("WINGS8DROP_ROOT_LABEL",
+             IDS_FILE_BROWSER_WINGS8DROP_ROOT_LABEL);
 
-  SET_STRING("JEMADROP_COMING_SOON", IDS_FILE_BROWSER_JEMADROP_COMING_SOON);
+  SET_STRING("WINGS8DROP_COMING_SOON", IDS_FILE_BROWSER_WINGS8DROP_COMING_SOON);
 
   // Toggle between showing the "Coming soon" placeholder or the real webview.
-  // When this is set to false, Files will load the URL from JEMA_DROP_URL.
-  dict->Set("JEMADROP_COMING_SOON_ENABLED", false);
+  // When this is set to false, Files will load the URL from WINGS8_DROP_URL.
+  dict->Set("WINGS8DROP_COMING_SOON_ENABLED", false);
 }
 
 void AddStringsGeneric(base::Value::Dict* dict) {
@@ -1080,8 +1080,8 @@ void AddStringsGeneric(base::Value::Dict* dict) {
              IDS_FILE_BROWSER_UNSUPPORTED_FILESYSTEM_WARNING);
   SET_STRING("UPLOAD_LABEL", IDS_FILE_BROWSER_UPLOAD_LABEL);
   SET_STRING("WAITING_FOR_SPACE_INFO", IDS_FILE_BROWSER_WAITING_FOR_SPACE_INFO);
-  SET_STRING("OPEN_WITH_JEMAOS_AI_BUTTON_LABEL",
-             IDS_FILE_BROWSER_OPEN_WITH_JEMAOS_AI_BUTTON_LABEL);
+  SET_STRING("OPEN_WITH_WINGS8OS_AI_BUTTON_LABEL",
+             IDS_FILE_BROWSER_OPEN_WITH_WINGS8OS_AI_BUTTON_LABEL);
   SET_STRING("ZIP_FILESYSTEM_ERROR", IDS_FILE_BROWSER_ZIP_FILESYSTEM_ERROR);
   SET_STRING("ZIP_FILE_NAME", IDS_FILE_BROWSER_ZIP_FILE_NAME);
   SET_STRING("ZIP_ITEMS_REMAINING", IDS_FILE_BROWSER_ZIP_ITEMS_REMAINING);
@@ -1330,7 +1330,7 @@ base::Value::Dict GetFileManagerStrings() {
   AddStringsForSharesheet(&dict);
   AddStringsForHoldingSpace(&dict);
   AddStringsForPhotos(&dict);
-  AddStringsForJema(&dict);
+  AddStringsForWings8(&dict);
   AddStringsGeneric(&dict);
   AddStringsForVms(&dict);
   AddStringsForSkyVault(&dict);
@@ -1339,12 +1339,12 @@ base::Value::Dict GetFileManagerStrings() {
            l10n_util::GetStringFUTF16(
                IDS_FILE_BROWSER_NO_TASK_FOR_APK,
                base::ASCIIToUTF16(
-                   jemaos::constants::kJemaOSDevModeTransitionLearnMoreURL)));
+                   wings8os::constants::kWings8OSDevModeTransitionLearnMoreURL)));
 
   dict.Set(
       "DOWNLOADS_LOW_SPACE_WARNING_HELP_URL",
       base::StringPrintf(kHelpURLFormat, kDownloadsLowSpaceWarningHelpNumber));
-  dict.Set("FILES_APP_HELP_URL", jemaos::constants::kFileManagerHelpURL);
+  dict.Set("FILES_APP_HELP_URL", wings8os::constants::kFileManagerHelpURL);
 
   dict.Set("GOOGLE_DRIVE_BUY_STORAGE_URL", kGoogleDriveBuyStorageUrl);
   dict.Set("GOOGLE_DRIVE_MANAGE_STORAGE_URL", kGoogleDriveManageStorageUrl);
@@ -1356,10 +1356,10 @@ base::Value::Dict GetFileManagerStrings() {
   dict.Set("GOOGLE_DRIVE_OFFLINE_HELP_URL", kGoogleDriveOfflineHelpUrl);
   dict.Set("GOOGLE_DRIVE_OVERVIEW_URL", kGoogleDriveOverviewUrl);
   dict.Set("GOOGLE_DRIVE_ROOT_URL", kGoogleDriveRootUrl);
-  dict.Set("NO_TASK_FOR_FILE_URL", jemaos::constants::kFileManagerHelpURL);
+  dict.Set("NO_TASK_FOR_FILE_URL", wings8os::constants::kFileManagerHelpURL);
   dict.Set("DLP_HELP_URL", policy::dlp::kDlpLearnMoreUrl);
 
-  dict.Set("JEMA_DROP_URL", jemaos::constants::kJemaDropUrl);
+  dict.Set("WINGS8_DROP_URL", wings8os::constants::kWings8DropUrl);
 
   webui::SetLoadTimeDataDefaults(g_browser_process->GetApplicationLocale(),
                                  &dict);
@@ -1462,7 +1462,7 @@ void AddFileManagerFeatureStrings(const std::string& locale,
   dict->Set("UI_LOCALE", locale);
   dict->Set("WEEK_START_FROM", GetLocaleBasedWeekStart());
 
-  // dict->Set("JEMA_ACCOUNT_ENABLED", profile && profile->IsJemaProfile());
+  // dict->Set("WINGS8_ACCOUNT_ENABLED", profile && profile->IsWings8Profile());
 
   // ELIGIBLE_AND_ENABLED_GOOGLE_ONE_OFFER_FILES_BANNER does additional checks
   // in addition to a feature flag check.

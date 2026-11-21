@@ -1,10 +1,10 @@
-# JemaOS Preinstalled Web Apps (PWAs)
+# Wings8OS Preinstalled Web Apps (PWAs)
 
-This directory contains the C++ configuration files for preinstalled PWAs in JemaOS.
+This directory contains the C++ configuration files for preinstalled PWAs in Wings8OS.
 
 ## Overview
 
-JemaOS uses the hardcoded C++ approach to preinstall PWAs. This is the most robust method, as it compiles the PWA configurations directly into Chrome, ensuring they are always installed on first boot regardless of network conditions or policy settings.
+Wings8OS uses the hardcoded C++ approach to preinstall PWAs. This is the most robust method, as it compiles the PWA configurations directly into Chrome, ensuring they are always installed on first boot regardless of network conditions or policy settings.
 
 ## How It Works
 
@@ -17,31 +17,31 @@ JemaOS uses the hardcoded C++ approach to preinstall PWAs. This is the most robu
 
 | App | URL | Function | Folder |
 |-----|-----|----------|--------|
-| JemaOS Community | https://community.jemaos.io/ | `GetConfigForJemaCommunity()` | Root |
-| JemaOS Remote Desktop | https://remotedesktop.jemaos.com/ | `GetConfigForJemaRemoteDesktop()` | Root |
-| JemaOS Notes | https://jemanote.jemaos.com/ | `GetConfigForJemaNotes()` | **OEM/JEMA** |
+| Wings8OS Community | https://community.wings8os.io/ | `GetConfigForWings8Community()` | Root |
+| Wings8OS Remote Desktop | https://remotedesktop.wings8.org/ | `GetConfigForWings8RemoteDesktop()` | Root |
+| Wings8OS Notes | https://wings8note.wings8.org/ | `GetConfigForWings8Notes()` | **OEM/WINGS8** |
 | Mistral AI | https://chat.mistral.ai/chat | `GetConfigForMistral()` | Root |
 | Qwant | https://www.qwant.com/?l=fr | `GetConfigForQwant()` | Root |
-| Calculator | https://calculator.apps.chrome/ | `GetConfigForJemaCalculator()` | Root |
+| Calculator | https://calculator.apps.chrome/ | `GetConfigForWings8Calculator()` | Root |
 | Galerie | https://galerie-eta.vercel.app/ | `GetConfigForGalerie()` | Root |
-| Osivibe | https://osivibe.jemaos.com/ | `GetConfigForOsivibe()` | **OEM/JEMA** |
-| Nephtys | https://nephtys.jemaos.com/auth | `GetConfigForNephtys()` | **OEM/JEMA** |
-| JemaChess | https://jemachess.jemaos.com/ | `GetConfigForJemaChess()` | **OEM/JEMA** |
-| SetSound | https://setsound.jemaos.com/ | `GetConfigForSetSound()` | **OEM/JEMA** |
-| Anima | https://anima.jemaos.com/ | `GetConfigForAnima()` | **OEM/JEMA** |
-| JemaPDF | https://jemapdf.jemaos.com/ | `GetConfigForJemaPDF()` | **OEM/JEMA** |
-| QuickText | https://textapp.jemaos.com/ | `GetConfigForQuickText()` | **OEM/JEMA** |
-| Gmail | https://mail.google.com/ | `GetConfigForJemaGmail()` | Root |
-| Text Editor | https://text.app/ | `GetConfigForJemaText()` | Root |
+| Osivibe | https://osivibe.wings8.org/ | `GetConfigForOsivibe()` | **OEM/WINGS8** |
+| Nephtys | https://nephtys.wings8.org/auth | `GetConfigForNephtys()` | **OEM/WINGS8** |
+| Wings8Chess | https://wings8chess.wings8.org/ | `GetConfigForWings8Chess()` | **OEM/WINGS8** |
+| SetSound | https://setsound.wings8.org/ | `GetConfigForSetSound()` | **OEM/WINGS8** |
+| Anima | https://anima.wings8.org/ | `GetConfigForAnima()` | **OEM/WINGS8** |
+| Wings8PDF | https://wings8pdf.wings8.org/ | `GetConfigForWings8PDF()` | **OEM/WINGS8** |
+| QuickText | https://textapp.wings8.org/ | `GetConfigForQuickText()` | **OEM/WINGS8** |
+| Gmail | https://mail.google.com/ | `GetConfigForWings8Gmail()` | Root |
+| Text Editor | https://text.app/ | `GetConfigForWings8Text()` | Root |
 | Office 365 | https://www.office.com/?auth=1 | `GetConfigForOffice365()` | Root |
 | ToffeeShare | https://toffeeshare.com/ | `GetConfigForToffeeShare()` | Root |
 | Excalidraw | https://excalidraw.com/ | `GetConfigForExcalidraw()` | Root |
 | VS Code | https://vscode.dev/ | `GetConfigForVSCode()` | Root |
 | WhatsApp | https://web.whatsapp.com/ | `GetConfigForWhatsApp()` | Root |
 | Teams | https://teams.microsoft.com/ | `GetConfigForTeams()` | Root |
-| Google Docs | https://docs.google.com/ | `GetConfigForJemaDocs()` | Root |
-| Google Sheets | https://docs.google.com/spreadsheets | `GetConfigForJemaSheets()` | Root |
-| Google Meet | https://meet.google.com/ | `GetConfigForJemaMeet()` | Root |
+| Google Docs | https://docs.google.com/ | `GetConfigForWings8Docs()` | Root |
+| Google Sheets | https://docs.google.com/spreadsheets | `GetConfigForWings8Sheets()` | Root |
+| Google Meet | https://meet.google.com/ | `GetConfigForWings8Meet()` | Root |
 
 ## Adding a New PWA
 
@@ -50,7 +50,7 @@ JemaOS uses the hardcoded C++ approach to preinstall PWAs. This is the most robu
 Create `newapp.h` in `chrome/browser/web_applications/preinstalled_web_apps/`:
 
 ```cpp
-// Copyright 2025 Jema Technology. All rights reserved.
+// Copyright 2025 Wings8 Technology. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
@@ -73,7 +73,7 @@ ExternalInstallOptions GetConfigForNewApp();
 Create `newapp.cc` in `chrome/browser/web_applications/preinstalled_web_apps/`:
 
 ```cpp
-// Copyright 2025 Jema Technology. All rights reserved.
+// Copyright 2025 Wings8 Technology. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
@@ -129,7 +129,7 @@ In `chrome/browser/web_applications/BUILD.gn`, add the source files:
 
 ```gn
 sources += [
-  // ... other JemaOS files ...
+  // ... other Wings8OS files ...
   "preinstalled_web_apps/newapp.cc",
   "preinstalled_web_apps/newapp.h",
 ]
@@ -139,5 +139,5 @@ sources += [
 
 ```bash
 cros_sdk
-emerge-amd64-jemaos chromeos-chrome
+emerge-amd64-wings8os chromeos-chrome
 ```

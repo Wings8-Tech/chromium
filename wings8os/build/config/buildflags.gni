@@ -1,0 +1,26 @@
+# Copyright 2023 Wings8 Technology
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+declare_args() {
+  use_wings8os_com = false
+  is_openwings8 = false
+  wings8os_device = false
+}
+
+declare_args() {
+  use_wings8os_license = !is_openwings8 && !wings8os_device
+}
+
+if (is_openwings8) {
+  assert(!use_wings8os_license)
+}
+
+if (wings8os_device) {
+  assert(!use_wings8os_license)
+}
+
+if (use_wings8os_license) {
+  assert(!is_openwings8)
+  assert(!wings8os_device)
+}

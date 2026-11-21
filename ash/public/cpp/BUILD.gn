@@ -489,7 +489,7 @@ component("cpp") {
     "//ui/views",
     "//ui/wm",
     "//ui/wm/public",
-    "//jemaos/prefs",
+    "//wings8os/prefs",
   ]
 
   public_deps = [

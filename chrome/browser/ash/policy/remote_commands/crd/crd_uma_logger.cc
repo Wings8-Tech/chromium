@@ -64,8 +64,8 @@ const char* CrdUmaLogger::FormatUserSessionType() const {
       return "AffiliatedUserSession";
     case UserSessionType::UNAFFILIATED_USER_SESSION:
       return "UnaffiliatedUserSession";
-    case UserSessionType::JEMAOS_USER_SESSION:
-      return "JemaOsUserSession";
+    case UserSessionType::WINGS8OS_USER_SESSION:
+      return "Wings8OsUserSession";
     case UserSessionType::MANAGED_GUEST_SESSION:
       return "ManagedGuestSession";
     case UserSessionType::GUEST_SESSION:

@@ -25,9 +25,9 @@
 #include "chromeos/ash/components/network/network_state.h"
 #include "chromeos/ash/components/network/network_type_pattern.h"
 #include "chromeos/ash/components/network/shill_property_handler.h"
-#include "jemaos/chromeos/ash/components/dbus/jemaos_shell_client/shell_state.h"
+#include "wings8os/chromeos/ash/components/dbus/wings8os_shell_client/shell_state.h"
 
-using jemaos::ash::ShellState;
+using wings8os::ash::ShellState;
 
 namespace base {
 class Location;
@@ -829,9 +829,9 @@ class COMPONENT_EXPORT(CHROMEOS_NETWORK) NetworkStateHandler
   bool allow_only_policy_wifi_networks_to_connect_if_available_ = false;
   bool allow_only_policy_cellular_networks_to_connect_ = false;
   std::vector<std::string> blocked_hex_ssids_;
-  //---***JEMAOS BEGIN***---
+  //---***WINGS8OS BEGIN***---
   bool need_reload_wifidrv = false;
-  //---***JEMAOS END***---
+  //---***WINGS8OS END***---
 
   // After login the user's saved networks get updated asynchronously from
   // shill. These variables indicate whether a user is logged in, and if the

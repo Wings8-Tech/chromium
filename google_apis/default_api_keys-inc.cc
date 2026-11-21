@@ -4,7 +4,7 @@
 
 #include "build/branding_buildflags.h"
 #include "build/chromeos_buildflags.h"
-#include "jemaos/build/config/buildflags.h"
+#include "wings8os/build/config/buildflags.h"
 #include "google_apis/default_api_keys.h"
 
 // This file contains a definition of `GetDefaultApiKeysFromDefinedValues()`
@@ -20,21 +20,21 @@
 #define GOOGLE_API_KEY google_apis::DefaultApiKeys::kUnsetApiToken
 #endif
 
-#if !defined(JEMAOS_API_KEY)
-#define JEMAOS_API_KEY google_apis::DefaultApiKeys::kUnsetApiToken
+#if !defined(WINGS8OS_API_KEY)
+#define WINGS8OS_API_KEY google_apis::DefaultApiKeys::kUnsetApiToken
 #endif
 
 #if !defined(GOOGLE_METRICS_SIGNING_KEY)
 #define GOOGLE_METRICS_SIGNING_KEY google_apis::DefaultApiKeys::kUnsetApiToken
 #endif
 
-#if BUILDFLAG(IS_OPENJEMA)
-#if !defined(JEMAOS_CLIENT_ID_MAIN)
-#define JEMAOS_CLIENT_ID_MAIN google_apis::DefaultApiKeys::kUnsetApiToken
+#if BUILDFLAG(IS_OPENWINGS8)
+#if !defined(WINGS8OS_CLIENT_ID_MAIN)
+#define WINGS8OS_CLIENT_ID_MAIN google_apis::DefaultApiKeys::kUnsetApiToken
 #endif
 
-#if !defined(JEMAOS_CLIENT_SECRET_MAIN)
-#define JEMAOS_CLIENT_SECRET_MAIN google_apis::DefaultApiKeys::kUnsetApiToken
+#if !defined(WINGS8OS_CLIENT_SECRET_MAIN)
+#define WINGS8OS_CLIENT_SECRET_MAIN google_apis::DefaultApiKeys::kUnsetApiToken
 #endif
 #endif
 
@@ -109,13 +109,13 @@
 #endif
 #endif  // BUILDFLAG(IS_CHROMEOS_ASH)
 
-#if BUILDFLAG(IS_OPENJEMA)
-#if !defined(JEMAOS_DEFAULT_CLIENT_ID)
-#define JEMAOS_DEFAULT_CLIENT_ID ""
+#if BUILDFLAG(IS_OPENWINGS8)
+#if !defined(WINGS8OS_DEFAULT_CLIENT_ID)
+#define WINGS8OS_DEFAULT_CLIENT_ID ""
 #endif
 
-#if !defined(JEMAOS_DEFAULT_CLIENT_SECRET)
-#define JEMAOS_DEFAULT_CLIENT_SECRET ""
+#if !defined(WINGS8OS_DEFAULT_CLIENT_SECRET)
+#define WINGS8OS_DEFAULT_CLIENT_SECRET ""
 #endif
 #endif
 
@@ -153,10 +153,10 @@ constexpr ::google_apis::DefaultApiKeys GetDefaultApiKeysFromDefinedValues() {
       .google_api_key_fresnel = GOOGLE_API_KEY_FRESNEL,
       .google_api_key_boca = GOOGLE_API_KEY_BOCA,
 #endif
-      .jemaos_api_key = JEMAOS_API_KEY,
-#if BUILDFLAG(IS_OPENJEMA)
-      .jemaos_client_id_main = JEMAOS_CLIENT_ID_MAIN,
-      .jemaos_client_secret_main = JEMAOS_CLIENT_SECRET_MAIN,
+      .wings8os_api_key = WINGS8OS_API_KEY,
+#if BUILDFLAG(IS_OPENWINGS8)
+      .wings8os_client_id_main = WINGS8OS_CLIENT_ID_MAIN,
+      .wings8os_client_secret_main = WINGS8OS_CLIENT_SECRET_MAIN,
 #endif
       .google_client_id_main = GOOGLE_CLIENT_ID_MAIN,
       .google_client_secret_main = GOOGLE_CLIENT_SECRET_MAIN,
@@ -164,9 +164,9 @@ constexpr ::google_apis::DefaultApiKeys GetDefaultApiKeysFromDefinedValues() {
       .google_client_secret_remoting = GOOGLE_CLIENT_SECRET_REMOTING,
       .google_client_id_remoting_host = GOOGLE_CLIENT_ID_REMOTING_HOST,
       .google_client_secret_remoting_host = GOOGLE_CLIENT_SECRET_REMOTING_HOST,
-#if BUILDFLAG(IS_OPENJEMA)
-      .jemaos_default_client_id = JEMAOS_DEFAULT_CLIENT_ID,
-      .jemaos_default_client_secret = JEMAOS_DEFAULT_CLIENT_SECRET,
+#if BUILDFLAG(IS_OPENWINGS8)
+      .wings8os_default_client_id = WINGS8OS_DEFAULT_CLIENT_ID,
+      .wings8os_default_client_secret = WINGS8OS_DEFAULT_CLIENT_SECRET,
 #endif
       .google_default_client_id = GOOGLE_DEFAULT_CLIENT_ID,
       .google_default_client_secret = GOOGLE_DEFAULT_CLIENT_SECRET};

@@ -13,7 +13,7 @@
 #include "chromeos/ash/components/install_attributes/install_attributes.h"
 #include "chromeos/ash/components/network/network_state.h"
 #include "chromeos/ash/components/network/network_state_handler.h"
-#include "jemaos/switches/account/account_switches.h"
+#include "wings8os/switches/account/account_switches.h"
 
 namespace ash {
 
@@ -104,10 +104,10 @@ void UserCreationScreen::ShowImpl() {
   // Back button is only available in login screen (add user flow) which is
   // indicated by if the device has users. Back button is hidden in the oobe
   // flow.
-  // ---***JEMAOS BEGIN***---
+  // ---***WINGS8OS BEGIN***---
   view_->SetIsBackButtonVisible(
-      LoginDisplayHost::default_host()->HasUserPods() || !jemaos::switches::IsJemaAccountEnabled());
-  // ---***JEMAOS END***---
+      LoginDisplayHost::default_host()->HasUserPods() || !wings8os::switches::IsWings8AccountEnabled());
+  // ---***WINGS8OS END***---
 
   UpdateState(NetworkError::ERROR_REASON_UPDATE);
 

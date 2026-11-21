@@ -71,8 +71,8 @@
 #include "services/device/public/mojom/wake_lock_provider.mojom.h"
 #include "services/network/public/cpp/shared_url_loader_factory.h"
 #include "ui/base/l10n/l10n_util.h"
-#include "jemaos/switches/account/toggle/account_type_toggle.h"
-#include "jemaos/switches/misc/misc_switches.h"
+#include "wings8os/switches/account/toggle/account_type_toggle.h"
+#include "wings8os/switches/misc/misc_switches.h"
 
 // Enable VLOG level 1.
 #undef ENABLED_VLOG_LEVEL
@@ -225,27 +225,27 @@ proximity_auth::mojom::AuthType GetInitialUserAuthType(
     return proximity_auth::mojom::AuthType::OFFLINE_PASSWORD;
   }
 
-  // Check if this is a Jema/Flint account (by gaia_id prefix)
+  // Check if this is a Wings8/Flint account (by gaia_id prefix)
   const std::string& gaia_id = user->GetAccountId().GetGaiaId();
-  const bool is_jema_or_flint_account = 
-      gaia_id.find("jema_id_") == 0 || gaia_id.find("ft_id_") == 0;
+  const bool is_wings8_or_flint_account = 
+      gaia_id.find("wings8_id_") == 0 || gaia_id.find("ft_id_") == 0;
   
-  if (is_jema_or_flint_account) {
-    //---***JEMAOS BEGIN***---
+  if (is_wings8_or_flint_account) {
+    //---***WINGS8OS BEGIN***---
     // Honour an explicit online-sign-in request ONLY. It is set when the device
     // detects (via the SaaS password_version) that the account password changed,
-    // so the pod routes to the online Jema auth and the login stack re-seals the
-    // local cryptohome key. Otherwise Jema accounts keep the ORIGINAL local
+    // so the pod routes to the online Wings8 auth and the login stack re-seals the
+    // local cryptohome key. Otherwise Wings8 accounts keep the ORIGINAL local
     // password flow (normal password field on the pod).
     if (user->force_online_signin()) {
-      LOG(WARNING) << "[JEMAOS] Online sign-in forced for Jema/Flint account: "
+      LOG(WARNING) << "[WINGS8OS] Online sign-in forced for Wings8/Flint account: "
                    << user->GetAccountId().GetUserEmail();
       return proximity_auth::mojom::AuthType::ONLINE_SIGN_IN;
     }
-    //---***JEMAOS END***---
+    //---***WINGS8OS END***---
     // Local (Flint) accounts don't have Google OAuth tokens, so skip all
     // OAuth-related checks and use the local password auth factor.
-    LOG(WARNING) << "[JEMAOS] Jema/Flint account detected in GetInitialUserAuthType: "
+    LOG(WARNING) << "[WINGS8OS] Wings8/Flint account detected in GetInitialUserAuthType: "
                  << user->GetAccountId().GetUserEmail() << ", forcing OFFLINE_PASSWORD";
     return proximity_auth::mojom::AuthType::OFFLINE_PASSWORD;
   }
@@ -562,7 +562,7 @@ void UserSelectionScreen::Init(const user_manager::UserList& users) {
     sync_token_checkers_.reset();
   }
 
-  if (jemaos::switches::IsTpmDictionaryAttackLockoutIgnored()) {
+  if (wings8os::switches::IsTpmDictionaryAttackLockoutIgnored()) {
     return;
   }
 
@@ -646,9 +646,9 @@ void UserSelectionScreen::HandleFocusPod(const AccountId& account_id) {
     pending_focused_account_id_ = account_id;
     return;
   }
-  // ---***JEMAOS BEGIN***---
-  jemaos::switches::ToggleJemaAccountFlagByAccountId(account_id);
-  // ---***JEMAOS END***---
+  // ---***WINGS8OS BEGIN***---
+  wings8os::switches::ToggleWings8AccountFlagByAccountId(account_id);
+  // ---***WINGS8OS END***---
   proximity_auth::ScreenlockBridge::Get()->SetFocusedUser(account_id);
   if (focused_pod_account_id_ == account_id) {
     return;
@@ -706,17 +706,17 @@ void UserSelectionScreen::OnBeforeShow() {
 void UserSelectionScreen::OnUserStatusChecked(const AccountId& account_id,
                                               const std::string& token,
                                               bool reauth_required) {
-  // Check if this is a Jema/Flint account (by gaia_id prefix)
+  // Check if this is a Wings8/Flint account (by gaia_id prefix)
   const std::string& gaia_id = account_id.GetGaiaId();
-  const bool is_jema_or_flint_account = 
-      gaia_id.find("jema_id_") == 0 || gaia_id.find("ft_id_") == 0;
+  const bool is_wings8_or_flint_account = 
+      gaia_id.find("wings8_id_") == 0 || gaia_id.find("ft_id_") == 0;
   
-  if (reauth_required && !is_jema_or_flint_account) {
+  if (reauth_required && !is_wings8_or_flint_account) {
     RecordReauthReason(account_id, ReauthReason::kInvalidTokenHandle);
     SetAuthType(account_id, proximity_auth::mojom::AuthType::ONLINE_SIGN_IN,
                 std::u16string());
-  } else if (reauth_required && is_jema_or_flint_account) {
-    LOG(WARNING) << "[JEMAOS] Skipping token handle reauth for Jema/Flint account: "
+  } else if (reauth_required && is_wings8_or_flint_account) {
+    LOG(WARNING) << "[WINGS8OS] Skipping token handle reauth for Wings8/Flint account: "
                  << account_id.GetUserEmail();
   }
 }

@@ -97,8 +97,8 @@ std::string OsSettingsSection::GetDefaultModifiedUrl(
   return ss.str();
 }
 
-bool OsSettingsSection::IsJemaProfile() const {
-  return ProfileHelper::Get()->IsJemaProfile(profile());
+bool OsSettingsSection::IsWings8Profile() const {
+  return ProfileHelper::Get()->IsWings8Profile(profile());
 }
 
 }  // namespace ash::settings

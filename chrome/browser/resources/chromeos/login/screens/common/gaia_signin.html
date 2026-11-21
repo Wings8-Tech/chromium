@@ -64,7 +64,7 @@ found in the LICENSE file.
 </security-token-pin>
 <oobe-loading-dialog title-key="gaiaLoading"
     id="step-loading" for-step="loading">
-   <iron-icon slot="icon" src="images/jema_logo_new.png" style="width: 132px;height: 20px;"></iron-icon>
+   <iron-icon slot="icon" src="images/wings8_logo_new.png" style="width: 132px;height: 20px;"></iron-icon>
 </oobe-loading-dialog>
 <notification-card id="gaia-dup-email-error" type="fail" class="fit"
     for-step="dup-email-error"
@@ -74,20 +74,20 @@ found in the LICENSE file.
 </notification-card>
 <cr-dialog id="confirmGotoLocalAccountDlg" on-close="onConfirmGotoLocalAccountClosed_">
   <div slot="title">
-    [[i18nDynamic(locale, 'jemaosConfirmGotoLocalAccountTitle')]]
+    [[i18nDynamic(locale, 'wings8osConfirmGotoLocalAccountTitle')]]
   </div>
   <div slot="body">
     <p>
-      [[i18nDynamic(locale, 'jemaosConfirmGotoLocalAccountHintMessage1')]]
+      [[i18nDynamic(locale, 'wings8osConfirmGotoLocalAccountHintMessage1')]]
     </p>
     <p>
-      [[i18nDynamic(locale, 'jemaosConfirmGotoLocalAccountHintMessage2')]]
+      [[i18nDynamic(locale, 'wings8osConfirmGotoLocalAccountHintMessage2')]]
     </p>
   </div>
   <div slot="button-container">
-    <oobe-text-button text-key="jemaosUseLocalAccount"
+    <oobe-text-button text-key="wings8osUseLocalAccount"
         on-click="onUseLocalAccountTap_" autofocus></oobe-text-button>
-    <oobe-text-button text-key="jemaosUseOnlineAccount"
+    <oobe-text-button text-key="wings8osUseOnlineAccount"
         on-click="onUseOnlineAccountTap_" inverse></oobe-text-button>
   </div>
 </cr-dialog>

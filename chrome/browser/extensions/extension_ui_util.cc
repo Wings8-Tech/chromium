@@ -16,8 +16,8 @@
 #include "extensions/common/extension.h"
 #include "extensions/common/image_util.h"
 #include "extensions/common/manifest_handlers/app_display_info.h"
-#include "jemaos/switches/services/services_constants.h"
-#include "jemaos/prefs/jemaos_pref_names.h"
+#include "wings8os/switches/services/services_constants.h"
+#include "wings8os/prefs/wings8os_pref_names.h"
 
 namespace extensions {
 
@@ -26,13 +26,13 @@ namespace {
 bool IsBlockedByPolicy(const Extension* app, content::BrowserContext* context) {
   Profile* profile = Profile::FromBrowserContext(context);
   DCHECK(profile);
-  // ---***JEMAOS BEGIN***---
-  if (app->id() == jemaos::constants::kJemaOSStoreAppId &&
+  // ---***WINGS8OS BEGIN***---
+  if (app->id() == wings8os::constants::kWings8OSStoreAppId &&
       profile->GetPrefs()->GetBoolean(
-        jemaos::prefs::kPrefHideJemaOSStoreIcon)) {
+        wings8os::prefs::kPrefHideWings8OSStoreIcon)) {
     return true;
   }
-  // ---***JEMAOS END***---
+  // ---***WINGS8OS END***---
 
   return app->id() == extensions::kWebStoreAppId &&
          profile->GetPrefs()->GetBoolean(

@@ -23,7 +23,7 @@ class KioskHeartbeatTelemetrySampler : public Sampler {
   // Sends KioskHeartbeats whenever called and passes it to the callback.
   void MaybeCollect(OptionalMetricCallback callback) override;
 
-  void MaybeSendHeartBeatToJema() override;
+  void MaybeSendHeartBeatToWings8() override;
 
  private:
   void OnURLFetchComplete(std::unique_ptr<std::string> response_body);

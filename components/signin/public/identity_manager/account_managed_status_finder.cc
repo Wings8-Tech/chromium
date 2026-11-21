@@ -12,7 +12,7 @@
 #include "base/containers/fixed_flat_set.h"
 #include "base/logging.h"
 #include "google_apis/gaia/gaia_auth_util.h"
-#include "jemaos/switches/account/account_switches.h"
+#include "wings8os/switches/account/account_switches.h"
 
 namespace signin {
 
@@ -477,7 +477,7 @@ bool AccountManagedStatusFinder::MayBeEnterpriseDomain(
     return false;
   }
 
-  if (jemaos::switches::IsPolicyManagedByJema()) {
+  if (wings8os::switches::IsPolicyManagedByWings8()) {
     return true;
   }
   return !kKnownConsumerDomains.contains(email_domain);

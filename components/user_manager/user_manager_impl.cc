@@ -53,7 +53,7 @@
 #include "ui/base/resource/resource_bundle.h"
 #include "ui/chromeos/resources/grit/ui_chromeos_resources.h"
 #include "ui/gfx/image/image_skia.h"
-#include "jemaos/prefs/jemaos_pref_names.h"
+#include "wings8os/prefs/wings8os_pref_names.h"
 
 namespace user_manager {
 namespace {
@@ -87,17 +87,17 @@ UserType GetStoredUserType(const base::Value::Dict& prefs_user_types,
   return static_cast<UserType>(int_user_type);
 }
 
-UserType FixUserTypeForJema(const UserType user_type, const AccountId& account_id) {
+UserType FixUserTypeForWings8(const UserType user_type, const AccountId& account_id) {
   switch (account_id.GetAccountType()) {
     case AccountType::FLINT_ACCOUNT:
       return UserType::kFlintAccount;
-    case AccountType::JEMA_ACCOUNT:
-      return UserType::kJemaAccount;
+    case AccountType::WINGS8_ACCOUNT:
+      return UserType::kWings8Account;
     case AccountType::GOOGLE:
-      // Local Flint/Jema accounts are stored as GOOGLE accounts with
-      // "ft_id_"/"jema_id_" gaia id prefixes (for cryptohome compatibility).
+      // Local Flint/Wings8 accounts are stored as GOOGLE accounts with
+      // "ft_id_"/"wings8_id_" gaia id prefixes (for cryptohome compatibility).
       // Accounts registered as kRegular by older builds must be re-resolved
-      // to their Jema type so they are not subject to gaia-only logic
+      // to their Wings8 type so they are not subject to gaia-only logic
       // (ephemeral users cleanup, login-screen allowlist filtering, forced
       // online sign-in).
       if (user_type == UserType::kRegular) {
@@ -105,8 +105,8 @@ UserType FixUserTypeForJema(const UserType user_type, const AccountId& account_i
         if (gaia_id.starts_with("ft_id_")) {
           return UserType::kFlintAccount;
         }
-        if (gaia_id.starts_with("jema_id_")) {
-          return UserType::kJemaAccount;
+        if (gaia_id.starts_with("wings8_id_")) {
+          return UserType::kWings8Account;
         }
       }
       return user_type;
@@ -229,7 +229,7 @@ const UserList& UserManagerImpl::GetUsers() const {
 UserList UserManagerImpl::GetUsersAllowedForMultiUserSignIn() const {
   // Supervised users are not allowed to use multi-user sign-in.
   if (logged_in_users_.size() == 1 &&
-      primary_user_->GetType() != UserType::kJemaAccount && // JEMAOS_NOTE, might want to remove this line, jema account do not allow multi-profile
+      primary_user_->GetType() != UserType::kWings8Account && // WINGS8OS_NOTE, might want to remove this line, wings8 account do not allow multi-profile
       primary_user_->GetType() != UserType::kRegular) {
     return {};
   }
@@ -384,11 +384,11 @@ void UserManagerImpl::UserLoggedIn(const AccountId& account_id,
   switch (user_type) {
     case UserType::kRegular:
       [[fallthrough]];
-    case UserType::kJemaAccount:
+    case UserType::kWings8Account:
       [[fallthrough]];
     case UserType::kFlintAccount:
       [[fallthrough]];
-    case UserType::kJemaChild:
+    case UserType::kWings8Child:
       [[fallthrough]];
     case UserType::kChild:
       if (account_id != GetOwnerAccountId() && !user &&
@@ -863,7 +863,7 @@ void UserManagerImpl::SaveUserDisplayEmail(const AccountId& account_id,
 UserType UserManagerImpl::GetUserType(const AccountId& account_id) {
   const base::Value::Dict& prefs_user_types =
       local_state_->GetDict(prefs::kUserType);
-  return FixUserTypeForJema(GetStoredUserType(prefs_user_types, account_id), account_id);
+  return FixUserTypeForWings8(GetStoredUserType(prefs_user_types, account_id), account_id);
 }
 
 void UserManagerImpl::SaveUserType(const User* user) {
@@ -1031,15 +1031,15 @@ bool UserManagerImpl::IsLoggedInAsUserWithGaiaAccount() const {
   return IsUserLoggedIn() && active_user_->HasGaiaAccount();
 }
 
-bool UserManagerImpl::IsLoggedInAsUserWithJemaExtendedAccount() const {
+bool UserManagerImpl::IsLoggedInAsUserWithWings8ExtendedAccount() const {
   DCHECK_CALLED_ON_VALID_SEQUENCE(sequence_checker_);
-  return IsUserLoggedIn() && active_user_->IsJemaExtendAccountUser();
+  return IsUserLoggedIn() && active_user_->IsWings8ExtendAccountUser();
 }
 
 bool UserManagerImpl::IsLoggedInAsChildUser() const {
   DCHECK_CALLED_ON_VALID_SEQUENCE(sequence_checker_);
   return IsUserLoggedIn() && (active_user_->GetType() == UserType::kChild ||
-                              active_user_->GetType() == UserType::kJemaChild);
+                              active_user_->GetType() == UserType::kWings8Child);
 }
 
 bool UserManagerImpl::IsLoggedInAsManagedGuestSession() const {
@@ -1106,7 +1106,7 @@ bool UserManagerImpl::IsUserNonCryptohomeDataEphemeral(
   // b) The user logged into any other account type.
   if (IsUserLoggedIn() && (account_id == GetActiveUser()->GetAccountId()) &&
       (is_current_user_ephemeral_regular_user_ ||
-       (!IsLoggedInAsUserWithGaiaAccount() && !IsLoggedInAsUserWithJemaExtendedAccount()))) {
+       (!IsLoggedInAsUserWithGaiaAccount() && !IsLoggedInAsUserWithWings8ExtendedAccount()))) {
     return true;
   }
 
@@ -1124,27 +1124,27 @@ bool UserManagerImpl::IsUserCryptohomeDataEphemeral(
 }
 
 bool UserManagerImpl::IsEphemeralAccountId(const AccountId& account_id) const {
-  // ---***JEMAOS BEGIN***---
-  // Jema/Flint accounts are persistent local accounts: their cryptohome and
+  // ---***WINGS8OS BEGIN***---
+  // Wings8/Flint accounts are persistent local accounts: their cryptohome and
   // their entry in the user list must survive sign-out, otherwise re-login
   // with the local password becomes impossible and the device falls back to
   // OOBE (no known users). Never treat them as ephemeral, regardless of the
   // ephemeral-users device policy. They are identified by account type or,
   // for accounts stored as GOOGLE (cryptohome compatibility), by the
-  // "ft_id_"/"jema_id_" gaia id prefix.
+  // "ft_id_"/"wings8_id_" gaia id prefix.
   if (account_id.GetAccountType() == AccountType::FLINT_ACCOUNT ||
-      account_id.GetAccountType() == AccountType::JEMA_ACCOUNT) {
+      account_id.GetAccountType() == AccountType::WINGS8_ACCOUNT) {
     return false;
   }
   if (account_id.GetAccountType() == AccountType::GOOGLE) {
     const std::string& gaia_id = account_id.GetGaiaId();
     if (gaia_id.starts_with("ft_id_") ||
         gaia_id.starts_with("flint_id_") ||
-        gaia_id.starts_with("jema_id_")) {
+        gaia_id.starts_with("wings8_id_")) {
       return false;
     }
   }
-  // ---***JEMAOS END***---
+  // ---***WINGS8OS END***---
 
   // Data belonging to the device owner is never ephemeral.
   if (account_id == GetOwnerAccountId()) {
@@ -1294,18 +1294,18 @@ bool UserManagerImpl::IsUserAllowed(const User& user) const {
   DCHECK(user.GetType() == UserType::kRegular ||
          user.GetType() == UserType::kGuest ||
          user.GetType() == UserType::kFlintAccount ||
-         user.GetType() == UserType::kJemaAccount ||
-         user.GetType() == UserType::kJemaChild ||
+         user.GetType() == UserType::kWings8Account ||
+         user.GetType() == UserType::kWings8Child ||
          user.GetType() == UserType::kChild);
 
-  // JEMAOS: Jema/Flint online accounts authenticate against the Jema API,
+  // WINGS8OS: Wings8/Flint online accounts authenticate against the Wings8 API,
   // not Google. The device user-allowlist (meant for GAIA accounts) must
   // never terminate their session: with no allowlist policy loaded yet (or
   // AllowNewUser=false) the GAIA check returned false and
   // ChromeSessionManager killed the session a few seconds after every
   // online login -> the black-screen crash-loop. Local accounts were
   // unaffected (HasGaiaAccount() is false for them).
-  if (user.IsJemaAccountUser() || user.IsFlintAccountUser()) {
+  if (user.IsWings8AccountUser() || user.IsFlintAccountUser()) {
     return true;
   }
 
@@ -1328,7 +1328,7 @@ bool UserManagerImpl::IsDeviceLocalAccountMarkedForRemoval(
 
 bool UserManagerImpl::CanUserBeRemoved(const User* user) const {
   // Only regular users are allowed to be manually removed.
-  if (!user || !(user->HasGaiaAccount() || user->IsJemaExtendAccountUser())) {
+  if (!user || !(user->HasGaiaAccount() || user->IsWings8ExtendAccountUser())) {
     return false;
   }
 
@@ -1431,7 +1431,7 @@ void UserManagerImpl::EnsureUsersLoaded() {
         kLegacySupervisedUsersHistogramName,
         LegacySupervisedUserStatus::kGaiaUserDisplayed);
     User* user =
-        User::CreateRegularUser(*it, FixUserTypeForJema(GetStoredUserType(prefs_user_types, *it), *it));
+        User::CreateRegularUser(*it, FixUserTypeForWings8(GetStoredUserType(prefs_user_types, *it), *it));
     user->set_oauth_token_status(LoadUserOAuthStatus(*it));
     user->set_force_online_signin(LoadForceOnlineSignin(*it));
     KnownUser known_user(local_state_.get());
@@ -1771,7 +1771,7 @@ User* UserManagerImpl::RemoveRegularOrSupervisedUserFromList(
       user = *it;
       it = users_.erase(it);
     } else {
-      if ((*it)->HasGaiaAccount() || (*it)->IsJemaExtendAccountUser()) {
+      if ((*it)->HasGaiaAccount() || (*it)->IsWings8ExtendAccountUser()) {
         const std::string user_email = (*it)->GetAccountId().GetUserEmail();
         prefs_users_update->Append(user_email);
       }
@@ -1988,16 +1988,16 @@ void UserManagerImpl::RemoveLocalAutoSigninCredential(const AccountId& account_i
   if (account_id.GetAccountType() != AccountType::FLINT_ACCOUNT) {
     return;
   }
-  // See JemaOsHandler::HandleSaveOfflineLoginPassword
+  // See Wings8OsHandler::HandleSaveOfflineLoginPassword
   PrefService* prefs = GetLocalState();
-  const std::string& account_id_key = prefs->GetString(jemaos::prefs::kOfflineAutoSigninAccountIdKey);
+  const std::string& account_id_key = prefs->GetString(wings8os::prefs::kOfflineAutoSigninAccountIdKey);
   if (account_id_key != account_id.GetAccountIdKey()) {
     return;
   }
 
-  prefs->ClearPref(jemaos::prefs::kOfflineAutoSigninPassword);
-  prefs->ClearPref(jemaos::prefs::kOfflineAutoSigninPasswordFormat);
-  prefs->ClearPref(jemaos::prefs::kOfflineAutoSigninAccountIdKey);
+  prefs->ClearPref(wings8os::prefs::kOfflineAutoSigninPassword);
+  prefs->ClearPref(wings8os::prefs::kOfflineAutoSigninPasswordFormat);
+  prefs->ClearPref(wings8os::prefs::kOfflineAutoSigninAccountIdKey);
 }
 
 }  // namespace user_manager

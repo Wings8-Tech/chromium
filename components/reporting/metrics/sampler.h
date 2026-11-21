@@ -30,7 +30,7 @@ class Sampler {
  public:
   virtual ~Sampler() = default;
   virtual void MaybeCollect(OptionalMetricCallback callback) = 0;
-  virtual void MaybeSendHeartBeatToJema() {}
+  virtual void MaybeSendHeartBeatToWings8() {}
 };
 
 }  // namespace reporting

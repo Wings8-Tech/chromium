@@ -1,4 +1,4 @@
-// Copyright 2025 jema technology. All rights reserved
+// Copyright 2025 wings8 technology. All rights reserved
 #include "chrome/browser/ui/webui/ash/login/data_restore_screen_handler.h"
 #include "components/login/localized_values_builder.h"
 #include "chrome/grit/branded_strings.h"

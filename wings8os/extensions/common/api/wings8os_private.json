@@ -1,0 +1,45 @@
+[
+  {
+    "namespace": "wings8osPrivate",
+    "description": "get or set some wings8os specified prefs throught this api",
+    "compiler_options": {
+      "implemented_in": "wings8os/extensions/browser/api/wings8os_private/wings8os_private_api.h"
+    },
+    "properties": {
+      "services": {
+        "type": "object",
+        "value": {},
+        "description": "Prefs that enable or disable functions.",
+        "properties": {
+          "wings8osImprovementPlanEnabled": {
+            "$ref": "types.ChromeSetting",
+            "value": ["wings8osImprovementPlanEnabled", {"type":"boolean"}],
+            "description": "If enabled, Non-PII system info will be collected by wings8os server."
+          }
+        }
+      }
+    },
+    "types": [{
+      "id": "OsInfo",
+      "type": "object",
+      "properties": {
+        "host_suffix": { "type": "string" },
+        "wings8os": { "type": "boolean" }
+      }
+    }],
+    "functions": [{
+      "name": "getWings8OSInfo",
+      "type": "function",
+      "description": "host info",
+      "parameters": [],
+      "returns_async": {
+        "type": "function",
+        "name": "callback",
+        "parameters": [{
+          "name": "info",
+          "$ref": "OsInfo"
+        }]
+      }
+    }]
+  }
+]

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- extend chrome/app/settings_strings.grdp, included from generated_resources.grd -->
+
+<grit-part>
+
+  <message name="IDS_SETTINGS_PEOPLE_WINGS8OS" desc="Name of the settings page which manages the user's relationship to Wings8OS.">
+    You and Wings8OS
+  </message>
+  <message name="IDS_SETTINGS_SEARCH_NO_RESULTS_WINGS8OS_HELP" desc="Help text for a search that has no results.">
+    Go to <ph name="BEGIN_LINK_CHROMIUM">&lt;a target="_blank" href="$1"&gt;</ph>Wings8OS help<ph name="END_LINK_CHROMIUM">&lt;/a&gt;</ph> if you can't find what you're looking for
+  </message>
+  <message name="IDS_SETTINGS_SAFEBROWSING_ENHANCED_WINGS8_DESC" desc="Description of safe browsing enhanced protection mode, for wings8 profile, remove text Google">
+    Faster, proactive protection against dangerous websites, downloads, and extensions. Warns you about password breaches.
+  </message>
+  <message name="IDS_SETTINGS_SAFEBROWSING_NONE_WINGS8_DESC" desc="Description for safe browsing no protection mode">
+    Does not protect you against dangerous websites, downloads, and extensions.
+   </message>
+  <message name="IDS_SETTINGS_SAFEBROWSING_NONE_WINGS8_DESC_UPDATED" desc="Updated description for safe browsing no protection mode">
+    Does not protect you against dangerous websites, downloads, and extensions.
+  </message>
+
+</grit-part>

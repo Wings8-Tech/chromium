@@ -89,9 +89,9 @@ class USER_MANAGER_EXPORT User {
   // UserType::kRegular and UserType::kChild.
   bool HasGaiaAccount() const;
 
-  bool IsJemaAccountUser() const;
+  bool IsWings8AccountUser() const;
   bool IsFlintAccountUser() const;
-  bool IsJemaExtendAccountUser() const;
+  bool IsWings8ExtendAccountUser() const;
 
   // Returns true if user is child.
   bool IsChild() const;

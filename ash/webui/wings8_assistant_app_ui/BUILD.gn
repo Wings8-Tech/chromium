@@ -1,0 +1,21 @@
+import("//build/config/chromeos/ui_mode.gni")
+
+assert(is_chromeos_ash, "Wings8 Assistant is ash-chrome only")
+
+static_library("wings8_assistant_app_ui") {
+  sources = [
+    "wings8_assistant_app_ui.cc",
+    "wings8_assistant_app_ui.h",
+    "wings8_assistant_app_ui_delegate.h",
+    "wings8_assistant_app_webui_handler.cc",
+    "wings8_assistant_app_webui_handler.h",
+    "url_constants.cc",
+    "url_constants.h",
+  ]
+
+  deps = [
+    "//ash/webui/wings8_assistant_app_ui/resources:resources",
+    "//content/public/browser",
+    "//ui/webui",
+  ]
+}

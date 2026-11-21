@@ -33,8 +33,8 @@ bool ProfileCanUseNonComponentExtensions(const Profile* profile) {
   switch (user->GetType()) {
     case user_manager::UserType::kRegular:
     case user_manager::UserType::kFlintAccount:
-    case user_manager::UserType::kJemaAccount:
-    case user_manager::UserType::kJemaChild:
+    case user_manager::UserType::kWings8Account:
+    case user_manager::UserType::kWings8Child:
     case user_manager::UserType::kChild:
       return true;
 

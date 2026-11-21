@@ -27,7 +27,7 @@ import {getEntry, getFileData, getStore, getVolume} from '../store.js';
 
 import {changeDirectory, hasDlpDisabledFiles} from './current_directory.js';
 import {driveRootEntryListKey, myFilesEntryListKey, recentRootKey} from './volumes.js';
-import {jemaDropRootKey} from './volumes.js';
+import {wings8DropRootKey} from './volumes.js';
 
 /**
  * @fileoverview Entries slice of the store.
@@ -166,7 +166,7 @@ function getEntryIcon(
 
   // Pre-defined icons based on the URL.
   const urlToIconPath: Record<FileKey, string> = {
-    [jemaDropRootKey]: ICON_TYPES.JEMADROP,
+    [wings8DropRootKey]: ICON_TYPES.WINGS8DROP,
     [recentRootKey]: ICON_TYPES.RECENT,
     [myFilesEntryListKey]: ICON_TYPES.MY_FILES,
     [driveRootEntryListKey]: ICON_TYPES.SERVICE_DRIVE,
@@ -492,8 +492,8 @@ function getEntryType(entry: Entry|FilesAppEntry): EntryType {
           return EntryType.RECENT;
         case RootType.PROVIDED:
           return EntryType.PLACEHOLDER;
-        case RootType.JEMADROP:
-          return EntryType.JEMADROP;
+        case RootType.WINGS8DROP:
+          return EntryType.WINGS8DROP;
       }
       console.warn(`Invalid fakeEntry.rootType='${entry.rootType} rootType`);
       return EntryType.PLACEHOLDER;

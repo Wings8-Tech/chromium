@@ -78,9 +78,9 @@ class POLICY_EXPORT BrowserPolicyConnector : public BrowserPolicyConnectorBase {
   virtual bool IsCommandLineSwitchSupported() const = 0;
 
  protected:
-  // ---***JEMAOS BEGIN***---
+  // ---***WINGS8OS BEGIN***---
   void ResetDeviceManagementServiceConfiguration(std::unique_ptr<DeviceManagementService::Configuration> configuration);
-  // ---***JEMAOS END***---
+  // ---***WINGS8OS END***---
   // Builds an uninitialized BrowserPolicyConnector.
   // Init() should be called to create and start the policy components.
   explicit BrowserPolicyConnector(

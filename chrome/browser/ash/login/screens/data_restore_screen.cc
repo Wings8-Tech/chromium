@@ -1,4 +1,4 @@
-// Copyright 2025 jema technology. All rights reserved
+// Copyright 2025 wings8 technology. All rights reserved
 #include "chrome/browser/ash/login/screens/data_restore_screen.h"
 #include "chrome/browser/ui/webui/ash/login/data_restore_screen_handler.h"
 #include "base/logging.h"

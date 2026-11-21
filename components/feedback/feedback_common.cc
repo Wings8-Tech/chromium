@@ -57,7 +57,7 @@ constexpr char kInitiatingDeviceNameValue[] = "Chromebook";
 
 constexpr char kIsOffensiveOrUnsafeKey[] = "is_offensive_or_unsafe";
 
-constexpr char kJemaOSLogName[] = "jemaos.log";
+constexpr char kWings8OSLogName[] = "wings8os.log";
 
 // Determine if the given feedback value is small enough to not need to
 // be compressed.
@@ -72,7 +72,7 @@ bool BelowCompressionThreshold(const std::string& content) {
 }
 */
 bool IncludedInFeedbackData(const std::string& key) {
-  return key == kJemaOSLogName || key == feedback::FeedbackReport::kFeedbackUserCtlConsentKey;
+  return key == kWings8OSLogName || key == feedback::FeedbackReport::kFeedbackUserCtlConsentKey;
 }
 
 void AddFeedbackData(userfeedback::ExtensionSubmit* feedback_data,

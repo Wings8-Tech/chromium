@@ -18,7 +18,7 @@ namespace user_manager {
 const char kCanonicalEmail[] = "email";
 const char kGAIAIdKey[] = "gaia_id";
 const char kFlintIdKey[] = "flint_id";
-const char kJemaIdKey[] = "jema_id";
+const char kWings8IdKey[] = "wings8_id";
 const char kObjGuidKey[] = "obj_guid";
 const char kAccountTypeKey[] = "account_type";
 
@@ -27,7 +27,7 @@ std::optional<AccountId> LoadAccountId(const base::Value::Dict& dict) {
   const std::string* gaia_id = dict.FindString(kGAIAIdKey);
   const std::string* obj_guid = dict.FindString(kObjGuidKey);
   const std::string* flint_id = dict.FindString(kFlintIdKey);
-  const std::string* jema_id = dict.FindString(kJemaIdKey);
+  const std::string* wings8_id = dict.FindString(kWings8IdKey);
   AccountType account_type = AccountType::GOOGLE;
   if (const std::string* account_type_string =
           dict.FindString(kAccountTypeKey)) {
@@ -40,9 +40,9 @@ std::optional<AccountId> LoadAccountId(const base::Value::Dict& dict) {
             email ? *email : std::string(), gaia_id ? *gaia_id : std::string());
       }
       break;
-    case AccountType::JEMA_ACCOUNT:
-      if (email && jema_id) {
-        return AccountId::FyFromUserEmailJemaId(*email, *jema_id);
+    case AccountType::WINGS8_ACCOUNT:
+      if (email && wings8_id) {
+        return AccountId::FyFromUserEmailWings8Id(*email, *wings8_id);
       }
       break;
      case AccountType::FLINT_ACCOUNT:
@@ -80,9 +80,9 @@ bool AccountIdMatches(const AccountId& account_id,
       }
       break;
     }
-    case AccountType::JEMA_ACCOUNT: {
-      const std::string* jema_id = dict.FindString(kJemaIdKey);
-      if (jema_id && account_id.GetJemaId() == *jema_id) {
+    case AccountType::WINGS8_ACCOUNT: {
+      const std::string* wings8_id = dict.FindString(kWings8IdKey);
+      if (wings8_id && account_id.GetWings8Id() == *wings8_id) {
         return true;
       }
       break;
@@ -124,9 +124,9 @@ void StoreAccountId(const AccountId& account_id, base::Value::Dict& dict) {
         dict.Set(kGAIAIdKey, account_id.GetGaiaId());
       }
       break;
-    case AccountType::JEMA_ACCOUNT:
-      if (!account_id.GetJemaId().empty()) {
-        dict.Set(kJemaIdKey, account_id.GetJemaId());
+    case AccountType::WINGS8_ACCOUNT:
+      if (!account_id.GetWings8Id().empty()) {
+        dict.Set(kWings8IdKey, account_id.GetWings8Id());
       }
       break;
     case AccountType::FLINT_ACCOUNT:

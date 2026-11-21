@@ -72,7 +72,7 @@ in_app_images = [
 ]
 
 icon_images = [
-  "jemaos/camera_app_icons_128.png",
-  "jemaos/camera_app_icons_192.png",
-  "jemaos/camera_app_icons_48.png",
+  "wings8os/camera_app_icons_128.png",
+  "wings8os/camera_app_icons_192.png",
+  "wings8os/camera_app_icons_48.png",
 ]

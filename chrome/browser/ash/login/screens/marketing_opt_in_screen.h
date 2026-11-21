@@ -65,7 +65,7 @@ class MarketingOptInScreen : public BaseScreen {
   // On "Get Started" button pressed.
   void OnGetStarted(bool chromebook_email_opt_in);
 
-  void OnJemaGetStarted(bool email_opt_in, bool improvement_plan_opt_in);
+  void OnWings8GetStarted(bool email_opt_in, bool improvement_plan_opt_in);
 
   void SetA11yButtonVisibilityForTest(bool shown);
 
@@ -117,7 +117,7 @@ class MarketingOptInScreen : public BaseScreen {
   // Whether the email opt-in toggle is visible.
   bool email_opt_in_visible_ = false;
 
-  bool jema_email_opt_in_visible_ = false;
+  bool wings8_email_opt_in_visible_ = false;
 
   // Country code. Unknown IFF empty.
   std::string country_;

@@ -19,8 +19,8 @@ namespace {
 
 constexpr char kOptInVisibility[] = "optInVisibility";
 constexpr char kOptInDefaultState[] = "optInDefaultState";
-constexpr char kJemaOptInVisibility[] = "jemaOptInVisibility";
-constexpr char kJemaOptInDefaultState[] = "jemaOptInDefaultState";
+constexpr char kWings8OptInVisibility[] = "wings8OptInVisibility";
+constexpr char kWings8OptInDefaultState[] = "wings8OptInDefaultState";
 constexpr char kLegalFooterVisibility[] = "legalFooterVisibility";
 constexpr char kCloudGamingDevice[] = "cloudGamingDevice";
 
@@ -70,23 +70,23 @@ void MarketingOptInScreenHandler::DeclareLocalizedValues(
   builder->Add("finalA11yPageDoneButtonTitle",
                IDS_MARKETING_OPT_IN_ACCESSIBILITY_DONE_BUTTON);
   builder->Add(
-      "marketingOptInGetJemaUpdates",
-      IDS_LOGIN_MARKETING_OPT_IN_SCREEN_GET_JEMA_UPDATES_SIGN_ME_UP);
-  builder->Add("jemaOSImprovementPlanOptionLabel",
-               IDS_MARKETING_OPT_IN_JEMAOS_IMPROVEMENT_PLAN);
+      "marketingOptInGetWings8Updates",
+      IDS_LOGIN_MARKETING_OPT_IN_SCREEN_GET_WINGS8_UPDATES_SIGN_ME_UP);
+  builder->Add("wings8OSImprovementPlanOptionLabel",
+               IDS_MARKETING_OPT_IN_WINGS8OS_IMPROVEMENT_PLAN);
 }
 
 void MarketingOptInScreenHandler::Show(bool opt_in_visible,
                                        bool opt_in_default_state,
-                                       bool jema_opt_in_visible,
-                                       bool jema_opt_in_default_state,
+                                       bool wings8_opt_in_visible,
+                                       bool wings8_opt_in_default_state,
                                        bool legal_footer_visible,
                                        bool cloud_gaming_enabled) {
   base::Value::Dict data;
   data.Set(kOptInVisibility, opt_in_visible);
   data.Set(kOptInDefaultState, opt_in_default_state);
-  data.Set(kJemaOptInVisibility, jema_opt_in_visible);
-  data.Set(kJemaOptInDefaultState, jema_opt_in_default_state);
+  data.Set(kWings8OptInVisibility, wings8_opt_in_visible);
+  data.Set(kWings8OptInDefaultState, wings8_opt_in_default_state);
   data.Set(kLegalFooterVisibility, legal_footer_visible);
   data.Set(kCloudGamingDevice, cloud_gaming_enabled);
 

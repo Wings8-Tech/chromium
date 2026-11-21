@@ -46,7 +46,7 @@
 #include "ui/base/l10n/l10n_util.h"
 #include "ui/display/display.h"
 #include "ui/display/screen.h"
-#include "jemaos/switches/account/account_switches.h"
+#include "wings8os/switches/account/account_switches.h"
 
 namespace ash {
 namespace {
@@ -167,8 +167,8 @@ void LockScreenReauthHandler::LoadAuthenticatorParam(
                         ->GetAccountId()
                         .GetGaiaId();
 
-  if (user_manager::UserManager::Get()->GetPrimaryUser()->GetAccountId().GetAccountType() == AccountType::JEMA_ACCOUNT) {
-    context.gaia_id = user_manager::UserManager::Get()->GetPrimaryUser()->GetAccountId().GetJemaId();
+  if (user_manager::UserManager::Get()->GetPrimaryUser()->GetAccountId().GetAccountType() == AccountType::WINGS8_ACCOUNT) {
+    context.gaia_id = user_manager::UserManager::Get()->GetPrimaryUser()->GetAccountId().GetWings8Id();
   }
 
   user_manager::KnownUser known_user(g_browser_process->local_state());

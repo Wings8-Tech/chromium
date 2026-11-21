@@ -344,11 +344,11 @@ export class SearchPageElement extends SearchPageElementBase {
 
   protected feedbackWritingGuidanceUrl(): string {
     // TODO(xiangdongkong): append ?hl={the application locale} to the url.
-    // <if expr="not use_jemaos_com">
-    const url = 'https://jematechnology.fr/docs/knowledge-base/recipes/feedback-howto';
+    // <if expr="not use_wings8os_com">
+    const url = 'https://wings8.org/docs/knowledge-base/recipes/feedback-howto';
     // </if>
-    // <if expr="use_jemaos_com">
-    const url = 'https://jemaos.com/docs/knowledge-base/recipes/feedback-howto';
+    // <if expr="use_wings8os_com">
+    const url = 'https://wings8.org/docs/knowledge-base/recipes/feedback-howto';
     // </if>
     return url;
   }
@@ -456,9 +456,9 @@ export class SearchPageElement extends SearchPageElementBase {
     showScrollingEffects(event, this as HTMLElement);
   }
 
-  private jemaosFeedbackFeatureHelpMessage() {
+  private wings8osFeedbackFeatureHelpMessage() {
     return this.i18nAdvanced(
-        'jemaosFeedbackFeatureHelpMessage', {tags: ['ul', 'li']});
+        'wings8osFeedbackFeatureHelpMessage', {tags: ['ul', 'li']});
   }
 
   getSearchResultCountForTesting(): number {

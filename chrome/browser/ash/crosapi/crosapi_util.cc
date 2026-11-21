@@ -623,10 +623,10 @@ mojom::SessionType GetSessionType() {
   switch (user->GetType()) {
     case user_manager::UserType::kRegular:
     case user_manager::UserType::kFlintAccount:
-    case user_manager::UserType::kJemaAccount:
+    case user_manager::UserType::kWings8Account:
       return mojom::SessionType::kRegularSession;
     case user_manager::UserType::kChild:
-    case user_manager::UserType::kJemaChild:
+    case user_manager::UserType::kWings8Child:
       return mojom::SessionType::kChildSession;
     case user_manager::UserType::kGuest:
       return mojom::SessionType::kGuestSession;
@@ -688,10 +688,10 @@ std::optional<account_manager::Account> GetDeviceAccount() {
           account_manager::AccountKey{account_id.GetGaiaId(),
                                       account_manager::AccountType::kGaia},
           user->GetDisplayEmail()});
-    case AccountType::JEMA_ACCOUNT:
+    case AccountType::WINGS8_ACCOUNT:
       return std::make_optional(account_manager::Account{
-          account_manager::AccountKey{account_id.GetJemaId(),
-                                      account_manager::AccountType::kJema},
+          account_manager::AccountKey{account_id.GetWings8Id(),
+                                      account_manager::AccountType::kWings8},
               user->GetDisplayEmail()});
     case AccountType::FLINT_ACCOUNT:
       return std::make_optional(account_manager::Account{
@@ -1139,8 +1139,8 @@ policy::CloudPolicyCore* GetCloudPolicyCoreForUser(
     const user_manager::User& user) {
   switch (user.GetType()) {
     case user_manager::UserType::kRegular:
-    case user_manager::UserType::kJemaAccount:
-    case user_manager::UserType::kJemaChild:
+    case user_manager::UserType::kWings8Account:
+    case user_manager::UserType::kWings8Child:
     case user_manager::UserType::kChild: {
       policy::UserCloudPolicyManagerAsh* manager =
           GetUserCloudPolicyManager(user);
@@ -1164,8 +1164,8 @@ policy::ComponentCloudPolicyService* GetComponentCloudPolicyServiceForUser(
     const user_manager::User& user) {
   switch (user.GetType()) {
     case user_manager::UserType::kRegular:
-    case user_manager::UserType::kJemaAccount:
-    case user_manager::UserType::kJemaChild:
+    case user_manager::UserType::kWings8Account:
+    case user_manager::UserType::kWings8Child:
     case user_manager::UserType::kChild: {
       policy::UserCloudPolicyManagerAsh* manager =
           GetUserCloudPolicyManager(user);

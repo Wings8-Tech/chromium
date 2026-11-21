@@ -330,7 +330,7 @@ export class OobeWelcomeScreen extends OobeWelcomeScreenBase {
   }
 
    /**
-   * JemaOS.
+   * Wings8OS.
    * move fr (French) and en-US to the top of languageList
    */
   rearrangeLanguages() {

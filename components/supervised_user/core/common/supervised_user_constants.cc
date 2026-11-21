@@ -6,7 +6,7 @@
 
 #include "base/notreached.h"
 #include "components/supervised_user/core/common/pref_names.h"
-#include "jemaos/switches/account/account_switches.h"
+#include "wings8os/switches/account/account_switches.h"
 
 namespace supervised_user {
 

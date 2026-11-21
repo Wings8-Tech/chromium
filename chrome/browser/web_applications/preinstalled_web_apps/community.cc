@@ -1,4 +1,4 @@
-// Copyright 2022 Jema Technology. All rights reserved.
+// Copyright 2022 Wings8 Technology. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
@@ -6,9 +6,9 @@
 
 namespace web_app {
 
-ExternalInstallOptions GetConfigForJemaCommunity() {
+ExternalInstallOptions GetConfigForWings8Community() {
   ExternalInstallOptions options(
-      /*install_url=*/GURL("https://community.jemaos.io/"),
+      /*install_url=*/GURL("https://community.wings8os.io/"),
       /*user_display_mode=*/mojom::UserDisplayMode::kStandalone,
       /*install_source=*/ExternalInstallSource::kExternalDefault);
 

@@ -200,7 +200,7 @@
         https://myactivity.google.com/myactivity/?utm_source=chrome_h
       </message>
 
-      <part file="../../../jemaos/i18n/chrome/app/resources/locale_settings.override.grdp" />
+      <part file="../../../wings8os/i18n/chrome/app/resources/locale_settings.override.grdp" />
 
     </messages>
   </release>

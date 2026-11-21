@@ -421,11 +421,11 @@ JobConfigurationBase::GetResourceRequest(bool bypass_proxy, int last_error) {
           std::string(dm_protocol::kEnrollmentTokenAuthHeaderPrefix) +
               auth_data_.enrollment_token());
       break;
-    case DMAuthTokenType::kJema:
+    case DMAuthTokenType::kWings8:
       rr->headers.SetHeader(
           dm_protocol::kAuthHeader,
-          std::string(dm_protocol::kJemaEnrollmentTokenAuthHeaderPrefix) +
-              auth_data_.jema_token());
+          std::string(dm_protocol::kWings8EnrollmentTokenAuthHeaderPrefix) +
+              auth_data_.wings8_token());
       break;
     case DMAuthTokenType::kOauth:
       // OAuth token is transferred as a HTTP query parameter.

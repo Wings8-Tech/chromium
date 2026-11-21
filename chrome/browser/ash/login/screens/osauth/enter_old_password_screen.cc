@@ -29,7 +29,7 @@
 #include "chromeos/ash/components/osauth/public/auth_session_storage.h"
 #include "chromeos/ash/components/osauth/public/common_types.h"
 #include "components/prefs/pref_service.h"
-#include "jemaos/prefs/jemaos_prefs.h"
+#include "wings8os/prefs/wings8os_prefs.h"
 
 namespace ash {
 namespace {
@@ -66,24 +66,24 @@ EnterOldPasswordScreen::EnterOldPasswordScreen(
 EnterOldPasswordScreen::~EnterOldPasswordScreen() = default;
 
 void EnterOldPasswordScreen::ShowImpl() {
-  //---***JEMAOS BEGIN***---
-  // JemaOS already knows the password that currently unlocks this account's
+  //---***WINGS8OS BEGIN***---
+  // Wings8OS already knows the password that currently unlocks this account's
   // cryptohome (it is saved, OSCrypt-encrypted, at every successful login).
   // Use it to re-seal the key automatically instead of asking the user for
   // their old password: the user only had to type the NEW password once,
   // online.
   PrefService* local_state =
       g_browser_process ? g_browser_process->local_state() : nullptr;
-  const std::string saved = jemaos::prefs::GetJemaAccountPassword(
+  const std::string saved = wings8os::prefs::GetWings8AccountPassword(
       local_state, context()->user_context->GetAccountId().GetUserEmail());
   if (!saved.empty()) {
-    LOG(WARNING) << "[JEMAOS] Auto re-sealing cryptohome with the saved "
+    LOG(WARNING) << "[WINGS8OS] Auto re-sealing cryptohome with the saved "
                     "device password (no old-password prompt)";
     auto_attempt_ = true;
     AttemptAuthentication(saved);
     return;
   }
-  //---***JEMAOS END***---
+  //---***WINGS8OS END***---
   view_->Show();
 }
 
@@ -125,17 +125,17 @@ void EnterOldPasswordScreen::OnPasswordAuthentication(
     if (cryptohome::ErrorMatches(
             error->get_cryptohome_error(),
             user_data_auth::CRYPTOHOME_ERROR_AUTHORIZATION_KEY_FAILED)) {
-      //---***JEMAOS BEGIN***---
+      //---***WINGS8OS BEGIN***---
       // The saved password was rejected (e.g. it is stale). Fall back to
       // asking the user for their old password rather than failing the login.
       if (auto_attempt_) {
         auto_attempt_ = false;
-        LOG(WARNING) << "[JEMAOS] Saved device password rejected, falling back "
+        LOG(WARNING) << "[WINGS8OS] Saved device password rejected, falling back "
                         "to manual old-password entry";
         view_->Show();
         return;
       }
-      //---***JEMAOS END***---
+      //---***WINGS8OS END***---
       view_->ShowWrongPasswordError();
       return;
     }

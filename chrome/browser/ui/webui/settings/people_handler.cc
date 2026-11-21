@@ -78,7 +78,7 @@
 #include "ash/constants/ash_features.h"
 #include "components/prefs/pref_service.h"
 #include "chrome/browser/browser_process.h"
-#include "jemaos/prefs/jemaos_pref_names.h"
+#include "wings8os/prefs/wings8os_pref_names.h"
 #endif
 
 #if !BUILDFLAG(IS_CHROMEOS_ASH)
@@ -730,8 +730,8 @@ void PeopleHandler::HandleCleanLocalAutoSignin(const base::Value::List& args) {
     return;
   }
   PrefService* prefs = g_browser_process->local_state();
-  prefs->SetString(jemaos::prefs::kOfflineAutoSigninPassword, std::string());
-  prefs->SetString(jemaos::prefs::kOfflineAutoSigninAccountIdKey,
+  prefs->SetString(wings8os::prefs::kOfflineAutoSigninPassword, std::string());
+  prefs->SetString(wings8os::prefs::kOfflineAutoSigninAccountIdKey,
       std::string());
 }
 

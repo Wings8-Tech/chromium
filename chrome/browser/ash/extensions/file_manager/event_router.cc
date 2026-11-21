@@ -88,7 +88,7 @@
 #include "storage/browser/file_system/file_system_url.h"
 #include "storage/common/file_system/file_system_util.h"
 #include "ui/display/tablet_state.h"
-#include "jemaos/prefs/jemaos_pref_names.h"
+#include "wings8os/prefs/wings8os_pref_names.h"
 
 using apps::AppServiceProxy;
 using apps::AppServiceProxyFactory;
@@ -740,7 +740,7 @@ void EventRouter::ObserveEvents() {
     pref_change_registrar_->Add(ash::prefs::kFilesAppFolderShortcuts, cb);
     pref_change_registrar_->Add(prefs::kOfficeFileMovedToOneDrive, cb);
     pref_change_registrar_->Add(prefs::kOfficeFileMovedToGoogleDrive, cb);
-    pref_change_registrar_->Add(jemaos::prefs::kJemaAssistantEnabled, cb);
+    pref_change_registrar_->Add(wings8os::prefs::kWings8AssistantEnabled, cb);
   }
 
   {

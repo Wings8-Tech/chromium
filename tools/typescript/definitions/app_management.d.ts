@@ -1,4 +1,4 @@
-// Copyright 2025 jema technology. All rights reserved.
+// Copyright 2025 wings8 technology. All rights reserved.
 
 /** @fileoverview Definitions for chrome.appManagement API */
 

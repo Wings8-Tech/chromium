@@ -235,9 +235,9 @@ class BASE_EXPORT SysInfo {
   // whether a USE flag is set or not). See https://goo.gl/BbBkzg for more
   // details.
   static std::string GetLsbReleaseBoard();
-  // ---***JEMAOS BEGIN***---
-  static std::string GetLsbJemaReleaseVersion();
-  // ---***JEMAOS END***---
+  // ---***WINGS8OS BEGIN***---
+  static std::string GetLsbWings8ReleaseVersion();
+  // ---***WINGS8OS END***---
 
   static std::string GetLsbReleaseBoardWithoutSuffix();
 

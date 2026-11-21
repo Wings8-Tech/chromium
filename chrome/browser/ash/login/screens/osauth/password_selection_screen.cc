@@ -84,26 +84,26 @@ PasswordSelectionScreen::~PasswordSelectionScreen() = default;
 
 void PasswordSelectionScreen::ShowImpl() {
   is_shown_ = true;
-  //---***JEMAOS BEGIN***---
-  // JemaOS never wants the device "local password" selection screen: the account
+  //---***WINGS8OS BEGIN***---
+  // Wings8OS never wants the device "local password" selection screen: the account
   // cryptohome is sealed with the password typed at sign-in (added during
   // CompleteLogin in auth_session_authenticator.cc). Skip it entirely.
   if (context()->user_context) {
     const AccountId& id = context()->user_context->GetAccountId();
     const std::string& gaia = id.GetGaiaId();
-    if (gaia.find("jema_id_") == 0 || gaia.find("ft_id_") == 0) {
-      LOG(WARNING) << "[JEMAOS] Skipping password selection screen for "
+    if (gaia.find("wings8_id_") == 0 || gaia.find("ft_id_") == 0) {
+      LOG(WARNING) << "[WINGS8OS] Skipping password selection screen for "
                    << id.GetUserEmail();
       exit_callback_.Run(Result::GAIA_PASSWORD_CHOICE);
       return;
     }
   }
-  //---***JEMAOS END***---
+  //---***WINGS8OS END***---
   if (!view_) {
     return;
   }
   Profile* profile = ProfileManager::GetPrimaryUserProfile();
-  view_->Show(profile && profile->IsJemaProfile());
+  view_->Show(profile && profile->IsWings8Profile());
   InspectContextAndContinue(
       base::BindOnce(&PasswordSelectionScreen::InspectContext,
                      weak_ptr_factory_.GetWeakPtr()),
@@ -137,20 +137,20 @@ void PasswordSelectionScreen::OnUserAction(const base::Value::List& args) {
 }
 
 bool PasswordSelectionScreen::MaybeSkip(WizardContext& wizard_context) {
-  //---***JEMAOS BEGIN***---
-  // Same as ShowImpl: never offer the local-password selection for JemaOS
-  // accounts (Jema online / Flint local).
+  //---***WINGS8OS BEGIN***---
+  // Same as ShowImpl: never offer the local-password selection for Wings8OS
+  // accounts (Wings8 online / Flint local).
   if (wizard_context.user_context) {
     const AccountId& id = wizard_context.user_context->GetAccountId();
     const std::string& gaia = id.GetGaiaId();
-    if (gaia.find("jema_id_") == 0 || gaia.find("ft_id_") == 0) {
-      LOG(WARNING) << "[JEMAOS] Skipping password selection screen (MaybeSkip) for "
+    if (gaia.find("wings8_id_") == 0 || gaia.find("ft_id_") == 0) {
+      LOG(WARNING) << "[WINGS8OS] Skipping password selection screen (MaybeSkip) for "
                    << id.GetUserEmail();
       exit_callback_.Run(Result::GAIA_PASSWORD_CHOICE);
       return true;
     }
   }
-  //---***JEMAOS END***---
+  //---***WINGS8OS END***---
   if (wizard_context.skip_post_login_screens_for_tests && is_shown_) {
     CHECK_IS_TEST();
     // WizardController::SkipPostLoginScreensForTesting() can be triggered

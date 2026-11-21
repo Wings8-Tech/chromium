@@ -16,42 +16,42 @@
 #include "net/http/http_status_code.h"
 #include "services/network/public/mojom/url_response_head.mojom.h"
 #include "base/json/json_writer.h"
-#include "jemaos/build/config/buildflags.h"
-#include "jemaos/switches/account/account_switches.h"
-#include "jemaos/switches/account/account_constants.h"
+#include "wings8os/build/config/buildflags.h"
+#include "wings8os/switches/account/account_switches.h"
+#include "wings8os/switches/account/account_constants.h"
 #include "base/command_line.h"
 
 namespace reporting {
 
 namespace {
 
-constexpr char kJemaosKioskHeartbeatServerPath[] =
+constexpr char kWings8osKioskHeartbeatServerPath[] =
   "/report/kioskHeartbeat";
 
 std::string heartbeat_server_url() {
   std::string base_url;
   base::CommandLine* command_line = base::CommandLine::ForCurrentProcess();
-  if (command_line->HasSwitch(jemaos::switches::kJemaOSDeviceManagementUrl)) {
-    base_url = command_line->GetSwitchValueASCII(jemaos::switches::kJemaOSDeviceManagementUrl);
+  if (command_line->HasSwitch(wings8os::switches::kWings8OSDeviceManagementUrl)) {
+    base_url = command_line->GetSwitchValueASCII(wings8os::switches::kWings8OSDeviceManagementUrl);
   } else {
-    base_url = jemaos::constants::kDefaultJemaOSDeviceManagementServerUrl;
+    base_url = wings8os::constants::kDefaultWings8OSDeviceManagementServerUrl;
   }
-  return base::StrCat({base_url, kJemaosKioskHeartbeatServerPath});
+  return base::StrCat({base_url, kWings8osKioskHeartbeatServerPath});
 }
 
 constexpr char kJsonContentType[] = "application/json";
 constexpr int kHeartBeatRequestTimeoutInSeconds = 30;
 constexpr size_t kMaxMessageSize = 1024;
 constexpr net::NetworkTrafficAnnotationTag kTrafficAnnotation =
-  net::DefineNetworkTrafficAnnotation("kiosk_jemaos_heartbeat", R"(
+  net::DefineNetworkTrafficAnnotation("kiosk_wings8os_heartbeat", R"(
       semantics {
-        sender: "JemaOS"
+        sender: "Wings8OS"
         description:
-          "This request is used to send heartbeat request to jemaos server"
+          "This request is used to send heartbeat request to wings8os server"
         trigger:
           "kiosk_heartbeat_telemetry_sampler"
         data: "None."
-        destination: KIOSK_JEMAOS_HEARTBEAT_SERVER
+        destination: KIOSK_WINGS8OS_HEARTBEAT_SERVER
       }
       policy {
         cookies_allowed: NO
@@ -68,7 +68,7 @@ void KioskHeartbeatTelemetrySampler::MaybeCollect(
   std::move(callback).Run(std::move(metric_data));
 }
 
-void KioskHeartbeatTelemetrySampler::MaybeSendHeartBeatToJema() {
+void KioskHeartbeatTelemetrySampler::MaybeSendHeartBeatToWings8() {
   if (requesting_) {
     return;
   }

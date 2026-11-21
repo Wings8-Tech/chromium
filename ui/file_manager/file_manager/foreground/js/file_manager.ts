@@ -71,7 +71,7 @@ import {FolderShortcutsDataModel} from './folder_shortcuts_data_model.js';
 import {GearMenuController} from './gear_menu_controller.js';
 import {GuestOsController} from './guest_os_controller.js';
 import {LastModifiedController} from './last_modified_controller.js';
-import {JemaDropViewController} from './jemadrop_view_controller.js';
+import {Wings8DropViewController} from './wings8drop_view_controller.js';
 import {LaunchParam} from './launch_param.js';
 import {ListThumbnailLoader} from './list_thumbnail_loader.js';
 import {MainWindowComponent} from './main_window_component.js';
@@ -255,7 +255,7 @@ export class FileManager {
    */
   protected lastModifiedController_: LastModifiedController|null = null;
 
-  protected jemaDropViewController_: JemaDropViewController|null = null;
+  protected wings8DropViewController_: Wings8DropViewController|null = null;
 
   /**
    * OneDrive controller.
@@ -339,14 +339,14 @@ export class FileManager {
    */
   private recentEntry_: null|FakeEntry = null;
 
-  private jemaDropEntry_: null|FakeEntry = null;
+  private wings8DropEntry_: null|FakeEntry = null;
 
   /**
    * Whether or not we are running in guest mode.
    */
   private guestMode_: boolean = false;
 
-  private jemaAssistantEnabled_: boolean = false;
+  private wings8AssistantEnabled_: boolean = false;
 
   private store_ = getStore();
 
@@ -458,8 +458,8 @@ export class FileManager {
     return this.guestMode_;
   }
 
-  get jemaAssistantEnabled(): boolean {
-    return this.jemaAssistantEnabled_;
+  get wings8AssistantEnabled(): boolean {
+    return this.wings8AssistantEnabled_;
   }
 
   /**
@@ -588,9 +588,9 @@ export class FileManager {
 
      // @ts-ignore: error TS2531: Object is possibly 'null'.
     if (!isModal(this.launchParams_.type)) {
-      this.jemaDropViewController_ = new JemaDropViewController(
+      this.wings8DropViewController_ = new Wings8DropViewController(
         // @ts-ignore: error TS2531: Object is possibly 'null'.
-        this.ui_, this.ui_.jemaDropView, this.directoryModel_);
+        this.ui_, this.ui_.wings8DropView, this.directoryModel_);
     }
 
     this.quickViewModel_ = new QuickViewModel();
@@ -1022,9 +1022,9 @@ export class FileManager {
         chrome.fileManagerPrivate.FileCategory.ALL);
     this.store_.dispatch(addUiEntry(this.recentEntry_));
 
-    this.jemaDropEntry_ = new FakeEntryImpl(
-        str('JEMADROP_ROOT_LABEL'), RootType.JEMADROP, this.getSourceRestriction_());
-    this.store_.dispatch(addUiEntry(this.jemaDropEntry_));
+    this.wings8DropEntry_ = new FakeEntryImpl(
+        str('WINGS8DROP_ROOT_LABEL'), RootType.WINGS8DROP, this.getSourceRestriction_());
+    this.store_.dispatch(addUiEntry(this.wings8DropEntry_));
 
     assert(this.launchParams_);
     this.selectionHandler_ = new FileSelectionHandler(
@@ -1120,7 +1120,7 @@ export class FileManager {
     assert(this.metadataModel_);
     assert(this.folderShortcutsModel_);
     assert(this.launchParams_);
-    assert(this.jemaDropEntry_);
+    assert(this.wings8DropEntry_);
     assert(this.recentEntry_);
     assert(this.androidAppListModel_);
     assert(this.crostini_);
@@ -1604,7 +1604,7 @@ export class FileManager {
       return;
     }
 
-    this.jemaAssistantEnabled_ = prefs.jemaAssistantEnabled;
+    this.wings8AssistantEnabled_ = prefs.wings8AssistantEnabled;
 
     if (this.driveEnabled_ !== prefs.driveEnabled) {
       this.driveEnabled_ = prefs.driveEnabled;

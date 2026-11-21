@@ -34,18 +34,18 @@ std::optional<std::string> GetEnrollmentToken(
   return std::nullopt;
 }
 
-std::optional<std::string> GetJemaEnrollmentToken(
+std::optional<std::string> GetWings8EnrollmentToken(
     const ash::OobeConfiguration* oobe_config) {
   if (!oobe_config) {
     LOG(ERROR) << "OobeConfiguration is not initialized";
     return std::nullopt;
   }
 
-  const std::string* jema_enrollment_token =
+  const std::string* wings8_enrollment_token =
       oobe_config->configuration().FindString(
-          ash::configuration::kJemaEnrollmentToken);
-  if (jema_enrollment_token && !jema_enrollment_token->empty()) {
-    return *jema_enrollment_token;
+          ash::configuration::kWings8EnrollmentToken);
+  if (wings8_enrollment_token && !wings8_enrollment_token->empty()) {
+    return *wings8_enrollment_token;
   }
   return std::nullopt;
 }

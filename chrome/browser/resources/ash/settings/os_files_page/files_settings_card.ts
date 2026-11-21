@@ -60,7 +60,7 @@ export class FilesSettingsCardElement extends FilesSettingsCardElementBase {
       hideGoogleDrive_: {
         type: Boolean,
         value: () => {
-          return loadTimeData.getBoolean('isJemaProfile');
+          return loadTimeData.getBoolean('isWings8Profile');
         },
       },
 

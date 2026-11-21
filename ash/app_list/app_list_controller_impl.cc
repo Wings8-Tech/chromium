@@ -964,7 +964,7 @@ void AppListControllerImpl::OnAssistantStatusChanged(
   UpdateSearchBoxUiVisibilities();
 }
 
-void AppListControllerImpl::OnJemaAssistantEnabled(bool enabled) {
+void AppListControllerImpl::OnWings8AssistantEnabled(bool enabled) {
   UpdateSearchBoxUiVisibilities();
 }
 
@@ -1210,8 +1210,8 @@ void AppListControllerImpl::RecordShelfAppLaunched() {
 
 void AppListControllerImpl::StartAssistant(
     assistant::AssistantEntryPoint entry_point) {
-  if (ash::features::IsJemaAssistantEnabled()) {
-    NewWindowDelegate::GetInstance()->OpenUrl(GURL("chrome://jemaos-ai"),
+  if (ash::features::IsWings8AssistantEnabled()) {
+    NewWindowDelegate::GetInstance()->OpenUrl(GURL("chrome://wings8os-ai"),
       NewWindowDelegate::OpenUrlFrom::kUserInteraction,
       NewWindowDelegate::Disposition::kNewWindow);
     UpdateSearchBoxUiVisibilities();
@@ -1223,7 +1223,7 @@ void AppListControllerImpl::StartAssistant(
 
 void AppListControllerImpl::EndAssistant(
     assistant::AssistantExitPoint exit_point) {
-  if (ash::features::IsJemaAssistantEnabled()) {
+  if (ash::features::IsWings8AssistantEnabled()) {
     return;
   }
   AssistantUiController::Get()->CloseUi(exit_point);
@@ -1237,7 +1237,7 @@ AppListControllerImpl::GetToggleableCategories() const {
   return std::vector<AppListSearchControlCategory>();
 }
 
-void AppListControllerImpl::CloseJemaAssistant() {
+void AppListControllerImpl::CloseWings8Assistant() {
   if (!IsInTabletMode()) {
     if (bubble_presenter_) {
       bubble_presenter_->BackOrExit();
@@ -1802,7 +1802,7 @@ SearchModel* AppListControllerImpl::GetSearchModel() {
 
 void AppListControllerImpl::UpdateSearchBoxUiVisibilities() {
   SearchBoxModel* search_box_model = GetSearchModel()->search_box();
-  search_box_model->SetShowAssistantButton(IsAssistantAllowedAndEnabled() || IsJemaAssistantEnabled());
+  search_box_model->SetShowAssistantButton(IsAssistantAllowedAndEnabled() || IsWings8AssistantEnabled());
   search_box_model->SetShowSunfishButton(
       CaptureModeController::IsSunfishAllowedAndEnabled());
 
@@ -1895,13 +1895,13 @@ bool AppListControllerImpl::ShouldShowHomeScreen() const {
   return !SplitViewController::Get(window)->InSplitViewMode();
 }
 
-bool AppListControllerImpl::IsJemaAssistantEnabled() const {
-  auto featureEnabled = ash::features::IsJemaAssistantEnabled();
+bool AppListControllerImpl::IsWings8AssistantEnabled() const {
+  auto featureEnabled = ash::features::IsWings8AssistantEnabled();
   if (!featureEnabled) {
     return false;
   }
   auto* state = AssistantState::Get();
-  return state->jema_assistant_enabled().value_or(false);
+  return state->wings8_assistant_enabled().value_or(false);
 }
 
 void AppListControllerImpl::UpdateForOverviewModeChange(bool show_home_launcher,

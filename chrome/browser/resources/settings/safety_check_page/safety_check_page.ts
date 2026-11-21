@@ -178,7 +178,7 @@ export class SettingsSafetyCheckPageElement extends
   }
 
   private shouldShowCheckPasswordsChild_(): boolean {
-    return !loadTimeData.getBoolean('isJemaProfile');
+    return !loadTimeData.getBoolean('isWings8Profile');
   }
 
   /** Triggers the safety check. */

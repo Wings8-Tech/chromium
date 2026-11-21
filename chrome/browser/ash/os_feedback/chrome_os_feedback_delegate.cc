@@ -288,9 +288,9 @@ void ChromeOsFeedbackDelegate::SendReport(
           feedback_data->set_gaia_id(account_id.GetGaiaId());
           feedback_data->set_account_type("google");
           break;
-        case AccountType::JEMA_ACCOUNT:
-          feedback_data->set_gaia_id(account_id.GetJemaId());
-          feedback_data->set_account_type("jemaos");
+        case AccountType::WINGS8_ACCOUNT:
+          feedback_data->set_gaia_id(account_id.GetWings8Id());
+          feedback_data->set_account_type("wings8os");
           break;
         case AccountType::FLINT_ACCOUNT:
           feedback_data->set_account_type("flint");

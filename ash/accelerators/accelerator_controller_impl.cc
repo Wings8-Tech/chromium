@@ -26,7 +26,7 @@
 #include "ash/constants/ash_features.h"
 #include "ash/constants/devicetype.h"
 #include "ash/debug.h"
-#include "ash/jemaos_ai/jemaos_ai_view.h"
+#include "ash/wings8os_ai/wings8os_ai_view.h"
 #include "ash/ime/ime_controller_impl.h"
 #include "ash/ime/ime_switch_type.h"
 #include "ash/public/cpp/accelerator_actions.h"
@@ -415,18 +415,18 @@ bool IsShortcutBlockedByPolicy(ui::Accelerator accelerator) {
 }
 
 bool CanToggleAssistant() {
-  if (!ash::features::IsJemaAssistantEnabled()) {
+  if (!ash::features::IsWings8AssistantEnabled()) {
     return false;
   }
-  return AssistantState::Get()->jema_assistant_enabled().value_or(false);
+  return AssistantState::Get()->wings8_assistant_enabled().value_or(false);
 }
 
-bool CanHandleToggleJemaOSAssistantBubble() {
+bool CanHandleToggleWings8OSAssistantBubble() {
   if (!CanToggleAssistant()) {
     return false;
   }
   Shelf* shelf = Shelf::ForWindow(Shell::GetPrimaryRootWindow());
-  return shelf->jema_assistant_view() && shelf->jema_assistant_view()->CanHandleToggleJemaOSAssistant();
+  return shelf->wings8_assistant_view() && shelf->wings8_assistant_view()->CanHandleToggleWings8OSAssistant();
 }
 
 }  // namespace
@@ -993,8 +993,8 @@ bool AcceleratorControllerImpl::CanPerformAction(
       return true;
     case AcceleratorAction::kEnableSelectToSpeak:
       return true;
-    case AcceleratorAction::kToggleJemaosAssistant:
-      return CanHandleToggleJemaOSAssistantBubble();
+    case AcceleratorAction::kToggleWings8osAssistant:
+      return CanHandleToggleWings8OSAssistantBubble();
     case AcceleratorAction::kEnableOrToggleDictation:
       return accelerators::CanEnableOrToggleDictation();
     case AcceleratorAction::kToggleDockedMagnifier:
@@ -1567,8 +1567,8 @@ void AcceleratorControllerImpl::PerformAction(
     case AcceleratorAction::kEnableSelectToSpeak:
       accelerators::EnableSelectToSpeak();
       break;
-    case AcceleratorAction::kToggleJemaosAssistant:
-      accelerators::ToggleJemaOSAssistant();
+    case AcceleratorAction::kToggleWings8osAssistant:
+      accelerators::ToggleWings8OSAssistant();
       break;
     case AcceleratorAction::kEnableOrToggleDictation:
       // UMA metrics are recorded later in the call stack.
@@ -1840,7 +1840,7 @@ void AcceleratorControllerImpl::PerformDebugActionOnDelegateIfEnabled(
   }
 }
 
-void RotateScreenJemaOS() {
+void RotateScreenWings8OS() {
   accelerators::RotateScreenWithoutConfirmation();
 }
 

@@ -48,7 +48,7 @@
 #include "ui/events/ash/keyboard_capability.h"
 #include "ui/events/ash/keyboard_layout_util.h"
 #include "ui/events/devices/device_data_manager.h"
-#include "jemaos/switches/urls/urls_constants.h"
+#include "wings8os/switches/urls/urls_constants.h"
 
 namespace ash::settings {
 
@@ -1766,10 +1766,10 @@ void DeviceSection::AddDevicePointersStrings(
   html_source->AddLocalizedStrings(kPointersStrings);
 
   html_source->AddString("naturalScrollLearnMoreLink",
-                         base::ASCIIToUTF16(jemaos::constants::kNaturalScrollHelpURL));
+                         base::ASCIIToUTF16(wings8os::constants::kNaturalScrollHelpURL));
   html_source->AddString(
       "controlledScrollingLearnMoreLink",
-      base::ASCIIToUTF16(jemaos::constants::kNaturalScrollHelpURL));
+      base::ASCIIToUTF16(wings8os::constants::kNaturalScrollHelpURL));
   html_source->AddString("hapticFeedbackLearnMoreLink",
                          GetHelpUrlWithBoard(chrome::kHapticFeedbackHelpURL));
 

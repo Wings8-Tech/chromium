@@ -54,10 +54,10 @@ const char kBrailleImeExtensionPath[] = "chromeos/accessibility/braille_ime";
 const char kBrailleImeEngineId[] =
     "_comp_ime_jddehjeebkoimngcbdkaahpobgicbffpbraille";
 
-const char kJemaOSRimeExtensionId[] = "nfglebjgiflmmcdddkbcbgmdkomlfcpa";
+const char kWings8OSRimeExtensionId[] = "nfglebjgiflmmcdddkbcbgmdkomlfcpa";
 
-const char* const kJemaOSImeExtensionIds[] = {
-  kJemaOSRimeExtensionId,
+const char* const kWings8OSImeExtensionIds[] = {
+  kWings8OSRimeExtensionId,
 };
 
 const char kArcImeLanguage[] = "_arc_ime_language_";
@@ -152,8 +152,8 @@ std::string GetInputMethodIDByEngineID(const std::string& engine_id) {
   return engine_id;
 }
 
-bool IsJemaOSProvidedIMEByExtensionId(const std::string& extension_id) {
-  for (const auto& id : kJemaOSImeExtensionIds) {
+bool IsWings8OSProvidedIMEByExtensionId(const std::string& extension_id) {
+  for (const auto& id : kWings8OSImeExtensionIds) {
     if (extension_id == id) {
       return true;
     }
@@ -161,9 +161,9 @@ bool IsJemaOSProvidedIMEByExtensionId(const std::string& extension_id) {
   return false;
 }
 
-bool IsJemaOSProvidedIME(const std::string& input_method_id) {
+bool IsWings8OSProvidedIME(const std::string& input_method_id) {
   const std::string extension_id = GetExtensionIDFromInputMethodID(input_method_id);
-  return IsJemaOSProvidedIMEByExtensionId(extension_id);
+  return IsWings8OSProvidedIMEByExtensionId(extension_id);
 }
 
 bool IsExtensionIME(const std::string& input_method_id) {

@@ -32,7 +32,7 @@
 #include "ui/strings/grit/ui_strings.h"
 #include "ui/web_dialogs/web_dialog_ui.h"
 #include "ui/webui/mojo_web_ui_controller.h"
-#include "jemaos/switches/urls/urls_constants.h"
+#include "wings8os/switches/urls/urls_constants.h"
 
 namespace ash {
 
@@ -76,10 +76,10 @@ void AddStringResources(content::WebUIDataSource* source) {
   source->AddLocalizedStrings(kStrings);
 
   std::u16string learn_more_url =
-  //---***JEMAOS BEGIN***---
-      base::ASCIIToUTF16(std::string{jemaos::constants::kLinuxAppsLearnMoreURL} +
+  //---***WINGS8OS BEGIN***---
+      base::ASCIIToUTF16(std::string{wings8os::constants::kLinuxAppsLearnMoreURL} +
                          "&b=" + base::SysInfo::GetLsbReleaseBoard());
-  //---***JEMAOS END***---
+  //---***WINGS8OS END***---
   source->AddString(
       "promptMessage",
       l10n_util::GetStringFUTF8(IDS_CROSTINI_UPGRADER_BODY, learn_more_url));

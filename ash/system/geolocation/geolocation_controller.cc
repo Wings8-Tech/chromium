@@ -24,7 +24,7 @@
 #include "components/prefs/pref_change_registrar.h"
 #include "components/prefs/pref_registry_simple.h"
 #include "components/prefs/pref_service.h"
-#include "jemaos/switches/services/services_switches.h"
+#include "wings8os/switches/services/services_switches.h"
 #include "net/traffic_annotation/network_traffic_annotation.h"
 #include "services/network/public/cpp/resource_request.h"
 #include "services/network/public/cpp/shared_url_loader_factory.h"
@@ -230,8 +230,8 @@ void GeolocationController::OnGeoposition(const Geoposition& position,
   is_current_geoposition_from_cache_ = false;
   StoreCachedGeoposition();
 
-  // Request timezone from JemaOS API based on the new coordinates
-  RequestTimezoneFromJemaOS(position.latitude, position.longitude);
+  // Request timezone from Wings8OS API based on the new coordinates
+  RequestTimezoneFromWings8OS(position.latitude, position.longitude);
 
   const base::expected<base::Time, SunRiseSetError> new_sunset =
       GetSunsetTime();
@@ -380,34 +380,34 @@ void GeolocationController::StoreCachedGeoposition() const {
   }
 }
 
-void GeolocationController::RequestTimezoneFromJemaOS(double latitude,
+void GeolocationController::RequestTimezoneFromWings8OS(double latitude,
                                                        double longitude) {
-  if (jemaos::switches::DisableJemaOSTimezoneAPI()) {
-    VLOG(1) << "[JEMA GEOLOCATION] JemaOS Timezone API is disabled.";
+  if (wings8os::switches::DisableWings8OSTimezoneAPI()) {
+    VLOG(1) << "[WINGS8 GEOLOCATION] Wings8OS Timezone API is disabled.";
     return;
   }
 
-  std::string timezone_url = jemaos::switches::GetJemaOSTimezoneAPIUrl();
+  std::string timezone_url = wings8os::switches::GetWings8OSTimezoneAPIUrl();
   timezone_url += "lat=" + base::NumberToString(latitude);
   timezone_url += "&lng=" + base::NumberToString(longitude);
 
-  VLOG(1) << "[JEMA GEOLOCATION] Requesting timezone from: " << timezone_url;
+  VLOG(1) << "[WINGS8 GEOLOCATION] Requesting timezone from: " << timezone_url;
 
   net::NetworkTrafficAnnotationTag traffic_annotation =
-      net::DefineNetworkTrafficAnnotation("jemaos_timezone_request", R"(
+      net::DefineNetworkTrafficAnnotation("wings8os_timezone_request", R"(
         semantics {
-          sender: "JemaOS Timezone Service"
+          sender: "Wings8OS Timezone Service"
           description:
             "Requests timezone information based on geographic coordinates "
             "to automatically set the system timezone."
           trigger:
-            "When a new geolocation is obtained and JemaOS timezone API is enabled."
+            "When a new geolocation is obtained and Wings8OS timezone API is enabled."
           data:
             "Latitude and longitude coordinates."
           destination: OTHER
           internal {
             contacts {
-              email: "support@jemaos.com"
+              email: "support@wings8.org"
             }
           }
           user_data {
@@ -419,9 +419,9 @@ void GeolocationController::RequestTimezoneFromJemaOS(double latitude,
           cookies_allowed: NO
           setting:
             "This feature can be disabled by command line switch "
-            "--disable-jemaos-timezone-api."
+            "--disable-wings8os-timezone-api."
           policy_exception_justification:
-            "Not implemented. This feature is essential for JemaOS functionality."
+            "Not implemented. This feature is essential for Wings8OS functionality."
         })");
 
   auto resource_request = std::make_unique<network::ResourceRequest>();
@@ -436,7 +436,7 @@ void GeolocationController::RequestTimezoneFromJemaOS(double latitude,
   auto* url_loader_factory =
       geolocation_provider_->GetSharedURLLoaderFactoryForTesting();
   if (!url_loader_factory) {
-    VLOG(1) << "[JEMA GEOLOCATION] URL loader factory not available.";
+    VLOG(1) << "[WINGS8 GEOLOCATION] URL loader factory not available.";
     return;
   }
 
@@ -450,27 +450,27 @@ void GeolocationController::RequestTimezoneFromJemaOS(double latitude,
 void GeolocationController::OnTimezoneResponse(
     std::unique_ptr<std::string> response_body) {
   if (!response_body) {
-    VLOG(1) << "[JEMA GEOLOCATION] Failed to get timezone response.";
+    VLOG(1) << "[WINGS8 GEOLOCATION] Failed to get timezone response.";
     return;
   }
 
-  VLOG(1) << "[JEMA GEOLOCATION] Timezone response: " << *response_body;
+  VLOG(1) << "[WINGS8 GEOLOCATION] Timezone response: " << *response_body;
 
   std::optional<base::Value> json_value =
       base::JSONReader::Read(*response_body);
   if (!json_value || !json_value->is_dict()) {
-    VLOG(1) << "[JEMA GEOLOCATION] Failed to parse timezone JSON response.";
+    VLOG(1) << "[WINGS8 GEOLOCATION] Failed to parse timezone JSON response.";
     return;
   }
 
   const base::Value::Dict& dict = json_value->GetDict();
   const std::string* timezone_id = dict.FindString("timeZoneId");
   if (!timezone_id || timezone_id->empty()) {
-    VLOG(1) << "[JEMA GEOLOCATION] No timezone ID in response.";
+    VLOG(1) << "[WINGS8 GEOLOCATION] No timezone ID in response.";
     return;
   }
 
-  VLOG(1) << "[JEMA GEOLOCATION] Setting timezone to: " << *timezone_id;
+  VLOG(1) << "[WINGS8 GEOLOCATION] Setting timezone to: " << *timezone_id;
 
   // Set the system timezone
   system::TimezoneSettings::GetInstance()->SetTimezoneFromID(

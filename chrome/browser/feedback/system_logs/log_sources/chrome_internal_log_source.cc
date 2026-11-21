@@ -145,10 +145,10 @@ std::string GetPrimaryAccountTypeString() {
       return "regular";
     case user_manager::UserType::kFlintAccount:
       return "flint_account";
-    case user_manager::UserType::kJemaAccount:
-      return "jema_account";
-    case user_manager::UserType::kJemaChild:
-      return "jema_child";
+    case user_manager::UserType::kWings8Account:
+      return "wings8_account";
+    case user_manager::UserType::kWings8Child:
+      return "wings8_child";
     case user_manager::UserType::kGuest:
       return "guest";
     case user_manager::UserType::kPublicAccount:

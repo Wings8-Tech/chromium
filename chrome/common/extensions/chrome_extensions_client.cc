@@ -38,9 +38,9 @@
 #include "services/network/public/mojom/cors_origin_pattern.mojom.h"
 #include "ui/base/l10n/l10n_util.h"
 #include "url/gurl.h"
-//---***JEMAOS BEGIN***---
-#include "jemaos/extensions/common/jemaos_extensions_api_provider.h"
-//---***JEMAOS END***---
+//---***WINGS8OS BEGIN***---
+#include "wings8os/extensions/common/wings8os_extensions_api_provider.h"
+//---***WINGS8OS END***---
 
 namespace extensions {
 
@@ -57,9 +57,9 @@ const char kExtensionBlocklistHttpsUrlPrefix[] =
 ChromeExtensionsClient::ChromeExtensionsClient() {
   AddAPIProvider(std::make_unique<ChromeExtensionsAPIProvider>());
   AddAPIProvider(std::make_unique<CoreExtensionsAPIProvider>());
-  //---***JEMAOS BEGIN***---
-  AddAPIProvider(std::make_unique<JemaOSExtensionsAPIProvider>());
-  //---***JEMAOS END***---
+  //---***WINGS8OS BEGIN***---
+  AddAPIProvider(std::make_unique<Wings8OSExtensionsAPIProvider>());
+  //---***WINGS8OS END***---
 }
 
 ChromeExtensionsClient::~ChromeExtensionsClient() {

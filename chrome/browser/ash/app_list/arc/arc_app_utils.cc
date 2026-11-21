@@ -94,15 +94,15 @@ constexpr char kSetInTouchModeIntent[] =
 constexpr char kAndroidClockAppId[] = "ddmmnabaeomoacfpfjgghfpocfolhjlg";
 constexpr char kAndroidFilesAppId[] = "gmiohhmfhgfclpeacmdfancbipocempm";
 
-// ---***JEMAOS BEGIN***---
-const char kJemaOSWMPFAppId[] = "nglolffhmcmoldfapiinhaiagibhpkoe";
-const char kJemaOSWMPFHelperAppId[] = "nnchigminpdegkbaepjbncddkacfhlpm";
-// ---***JEMAOS END***---
+// ---***WINGS8OS BEGIN***---
+const char kWings8OSWMPFAppId[] = "nglolffhmcmoldfapiinhaiagibhpkoe";
+const char kWings8OSWMPFHelperAppId[] = "nnchigminpdegkbaepjbncddkacfhlpm";
+// ---***WINGS8OS END***---
 
 constexpr char const* kAppIdsHiddenInLauncher[] = {
-    // ---***JEMAOS BEGIN***---
-    kJemaOSWMPFAppId, kJemaOSWMPFHelperAppId,
-    // ---***JEMAOS END***---
+    // ---***WINGS8OS BEGIN***---
+    kWings8OSWMPFAppId, kWings8OSWMPFHelperAppId,
+    // ---***WINGS8OS END***---
     kAndroidClockAppId,    kSettingsAppId,  kAndroidFilesAppId,
     kAndroidContactsAppId, kPlayGamesAppId, kPackageInstallerAppId};
 

@@ -48,7 +48,7 @@
 #include "third_party/re2/src/re2/re2.h"
 
 #include "ui/display/display.h"
-#include "jemaos/switches/accelerometer/accelerometer_switches.h"
+#include "wings8os/switches/accelerometer/accelerometer_switches.h"
 
 using google::protobuf::RepeatedField;
 using google::protobuf::RepeatedPtrField;
@@ -992,11 +992,11 @@ void DecodeGenericPolicies(const em::ChromeDeviceSettingsProto& policy,
   }else{
     display::Display::Rotation default_rotate = display::Display::ROTATE_0;
 
-    if (jemaos::switches::IsRotate_90()){
+    if (wings8os::switches::IsRotate_90()){
       default_rotate = display::Display::ROTATE_90;
-    }else if (jemaos::switches::IsRotate_180()){
+    }else if (wings8os::switches::IsRotate_180()){
       default_rotate = display::Display::ROTATE_180;
-    }else if (jemaos::switches::IsRotate_270()){
+    }else if (wings8os::switches::IsRotate_270()){
       default_rotate = display::Display::ROTATE_270;
     }
 

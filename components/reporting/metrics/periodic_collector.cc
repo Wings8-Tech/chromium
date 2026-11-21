@@ -35,9 +35,9 @@ PeriodicCollector::PeriodicCollector(Sampler* sampler,
                                      base::TimeDelta default_rate,
                                      int rate_unit_to_ms,
                                      base::TimeDelta init_delay,
-                                     bool should_send_to_jema)
+                                     bool should_send_to_wings8)
     : CollectorBase(sampler),
-      should_send_to_jema_(should_send_to_jema),
+      should_send_to_wings8_(should_send_to_wings8),
       metric_report_queue_(metric_report_queue),
       rate_controller_(std::make_unique<MetricRateController>(
           base::BindRepeating(&PeriodicCollector::Collect,
@@ -104,8 +104,8 @@ void PeriodicCollector::OnMetricDataCollected(
       base::Time::Now().InMillisecondsSinceUnixEpoch());
   metric_report_queue_->Enqueue(std::move(metric_data.value()));
 
-  if (should_send_to_jema_) {
-    JemaHeartBeat();
+  if (should_send_to_wings8_) {
+    Wings8HeartBeat();
   }
 }
 

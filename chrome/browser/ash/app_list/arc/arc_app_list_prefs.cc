@@ -1302,7 +1302,7 @@ void ArcAppListPrefs::SetDefaultAppsFilterLevel() {
   // one, we have no option but to ban all pre-installed apps on Android side.
   // Match this requirement and don't show pre-installed apps for managed users
   // in app list.
-  //---***JEMAOS BEGIN***---
+  //---***WINGS8OS BEGIN***---
   /*
   if (arc::policy_util::IsAccountManaged(profile_)) {
     if (profile_->IsChild() || ash::switches::IsTabletFormFactor()) {
@@ -1319,7 +1319,7 @@ void ArcAppListPrefs::SetDefaultAppsFilterLevel() {
   } else {*/
     default_apps_->set_filter_level(ArcDefaultAppList::FilterLevel::ALL);
   /*}*/
-  //---***JEMAOS END***---
+  //---***WINGS8OS END***---
   // Register default apps if it was not registered before.
   RegisterDefaultApps();
 }

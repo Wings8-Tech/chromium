@@ -616,10 +616,10 @@ std::string ProfilePolicyConnector::GetTimeToFirstPolicyLoadMetricSuffix()
         return "Managed.Ephemeral";
       }
       return is_user_new_ ? "Managed.NewPersistent" : "Managed.Existing";
-    case user_manager::UserType::kJemaAccount:
-      return "Jema";
-    case user_manager::UserType::kJemaChild:
-      return "JemaChild";
+    case user_manager::UserType::kWings8Account:
+      return "Wings8";
+    case user_manager::UserType::kWings8Child:
+      return "Wings8Child";
     case user_manager::UserType::kFlintAccount:
       return "Flint";
     case user_manager::UserType::kChild:

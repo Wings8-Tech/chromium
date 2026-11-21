@@ -52,17 +52,17 @@
 #include "third_party/zlib/google/compression_utils.h"
 #include "url/gurl.h"
 #include "base/json/json_reader.h"
-#include "jemaos/chromeos/ash/components/dbus/jemaos_shell_client/jemaos_shell_client.h"
+#include "wings8os/chromeos/ash/components/dbus/wings8os_shell_client/wings8os_shell_client.h"
 
 namespace ash {
 
 namespace {
 
-jemaos::ash::JemaOSShellClient* GetShellClient() {
-  return jemaos::ash::JemaOSShellClient::Get();
+wings8os::ash::Wings8OSShellClient* GetShellClient() {
+  return wings8os::ash::Wings8OSShellClient::Get();
 }
-const char kShellCmdGetDevices[] = "/usr/bin/jemaos-update-firmware -l";
-const char kShellCmdUpdateFirmware[] = "/usr/bin/jemaos-update-firmware";
+const char kShellCmdGetDevices[] = "/usr/bin/wings8os-update-firmware -l";
+const char kShellCmdUpdateFirmware[] = "/usr/bin/wings8os-update-firmware";
 const char kShellUpdateFirmwareProgressIntervalInSeconds = 1;
 
 static constexpr auto FwupdStatusStringMap =
@@ -663,7 +663,7 @@ void FirmwareUpdateManager::ShellClientRequestUpdates() {
                      weak_ptr_factory_.GetWeakPtr()));
 }
 
-void FirmwareUpdateManager::OnShellClientGetUpdates(std::optional<jemaos::ash::ShellState> state) {
+void FirmwareUpdateManager::OnShellClientGetUpdates(std::optional<wings8os::ash::ShellState> state) {
   if (!state || state->code != 0) {
     LOG(ERROR) << "get upgradable devices task error, "
                << (state ? state->result : "state is null");
@@ -702,7 +702,7 @@ void FirmwareUpdateManager::OnShellClientGetUpdates(std::optional<jemaos::ash::S
   NotifyUpdateListObservers();
  }
 
-void FirmwareUpdateManager::OnShellClientUpdateFirmwareStarted(std::optional<jemaos::ash::ShellState> state) {
+void FirmwareUpdateManager::OnShellClientUpdateFirmwareStarted(std::optional<wings8os::ash::ShellState> state) {
   if (!state || state->code == -1) {
     LOG(ERROR) << "update firmware task error, "
                << (state ? state->result : "state is null");
@@ -723,7 +723,7 @@ void FirmwareUpdateManager::OnShellClientUpdateFirmwareStarted(std::optional<jem
 
 void FirmwareUpdateManager::QueryShellTaskState(int32_t task_id) {
   auto callback = base::BindOnce(
-    [](base::WeakPtr<FirmwareUpdateManager> self, int32_t task_id, std::optional<jemaos::ash::ShellState> state) {
+    [](base::WeakPtr<FirmwareUpdateManager> self, int32_t task_id, std::optional<wings8os::ash::ShellState> state) {
       if (self) {
         self->OnGetShellClientTaskState(task_id, state);
       }
@@ -741,7 +741,7 @@ void FirmwareUpdateManager::ScheduleGetTaskOutputAndState(int32_t task_id) {
              base::Seconds(kShellUpdateFirmwareProgressIntervalInSeconds));
 }
 
-void FirmwareUpdateManager::OnGetShellClientTaskState(int32_t task_id, std::optional<jemaos::ash::ShellState> state) {
+void FirmwareUpdateManager::OnGetShellClientTaskState(int32_t task_id, std::optional<wings8os::ash::ShellState> state) {
   auto updateState = firmware_update::mojom::UpdateState::kUnknown;
   bool finished = false;
 

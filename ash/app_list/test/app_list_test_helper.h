@@ -31,7 +31,7 @@ namespace ash {
 class AppListBubbleAppsPage;
 class AppListBubbleAppsCollectionsPage;
 class AppListBubbleAssistantPage;
-class JemaAssistantPage;
+class Wings8AssistantPage;
 class AppListBubbleSearchPage;
 class AppListBubbleView;
 class AppListControllerImpl;
@@ -179,7 +179,7 @@ class AppListTestHelper {
   views::View* GetAppCollectionsSectionsContainer();
   AppListBubbleSearchPage* GetBubbleSearchPage();
   SearchResultPageAnchoredDialog* GetBubbleSearchPageDialog();
-  JemaAssistantPage* GetBubbleAssistantPage();
+  Wings8AssistantPage* GetBubbleAssistantPage();
   SearchModel::SearchResults* GetSearchResults();
   views::View* GetBubbleLauncherAppsSeparatorView();
   std::vector<ash::AppListSearchResultCategory>* GetOrderedResultCategories();

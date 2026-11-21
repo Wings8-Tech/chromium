@@ -616,7 +616,7 @@ void CloudPolicyClient::RegisterWithOidcResponse(
   unique_request_job_ = service_->CreateJob(std::move(config));
 }
 
-void CloudPolicyClient::RegisterWithJemaToken(
+void CloudPolicyClient::RegisterWithWings8Token(
     const RegistrationParameters& parameters,
     const std::string& client_id,
     const std::string& token) {
@@ -630,7 +630,7 @@ void CloudPolicyClient::RegisterWithJemaToken(
   auto params = DMServerJobConfiguration::CreateParams::WithClient(
       DeviceManagementService::JobConfiguration::TYPE_REGISTRATION,
       this);
-  params.auth_data = DMAuth::FromJemaToken(token);
+  params.auth_data = DMAuth::FromWings8Token(token);
   params.callback = base::BindOnce(&CloudPolicyClient::OnRegisterCompleted,
                                    weak_ptr_factory_.GetWeakPtr());
   std::unique_ptr<RegistrationJobConfiguration> config =

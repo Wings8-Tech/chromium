@@ -1069,8 +1069,8 @@ inline constexpr char kLastChildScreenTimeReset[] =
 inline constexpr char kHelpAppNotificationLastShownMilestone[] =
     "help_app_notification_last_shown_milestone";
 
-inline constexpr char kJemaOSReleaseNotesLastShownVersion[] =
-    "jemaos_last_release_notes_shown_version";
+inline constexpr char kWings8OSReleaseNotesLastShownVersion[] =
+    "wings8os_last_release_notes_shown_version";
 
 // Amount of times the release notes suggestion chip should be
 // shown before it disappears.

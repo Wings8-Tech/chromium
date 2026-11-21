@@ -1,0 +1,114 @@
+// Copyright (c) 2023 Wings8 Technology. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+#ifndef _WINGS8OS_UI_WEBUI_SETTINGS_ASH_WINGS8OS_HANDLER_BACKUP_TASK_MANAGER_H_
+#define _WINGS8OS_UI_WEBUI_SETTINGS_ASH_WINGS8OS_HANDLER_BACKUP_TASK_MANAGER_H_
+
+#include <string>
+#include <utility>
+#include <memory>
+#include "base/memory/weak_ptr.h"
+#include "third_party/abseil-cpp/absl/types/optional.h"
+#include "base/functional/callback.h"
+#include "wings8os/chromeos/ash/components/dbus/wings8os_shell_client/shell_state.h"
+#include "base/files/file_path.h"
+
+namespace base {
+class OneShotTimer;
+class FilePath;
+}
+namespace message_center {
+class Notification;
+}
+
+class Profile;
+
+namespace wings8os::ash {
+class Wings8OSShellClient;
+}
+
+namespace ash::settings {
+
+using wings8os::ash::Wings8OSShellClient;
+using wings8os::ash::ShellState;
+
+class BackupTaskManager {
+ public:
+    enum class TaskState {
+      kIdle,
+      kRunning,
+      kFinished,
+      kFailed,
+    };
+    using BackupTaskCallback = base::OnceCallback<void(TaskState)>;
+    BackupTaskManager();
+    ~BackupTaskManager();
+
+    static BackupTaskManager* GetInstance();
+    static void DestroyInstance();
+
+    void StartTask(Profile* profile,
+                   const std::string& email,
+                   const std::string& password);
+    void OnTaskStarted(std::optional<ShellState> state);
+    void GetTaskOutputAndState();
+    void OnGetTaskOutputAndState(std::optional<ShellState> state);
+
+    void ScheduleGetTaskOutputAndState();
+
+    void SetBackupFile(const base::FilePath& path) { backup_path_ = path; }
+    TaskState GetTaskState() const { return task_state_; }
+    void SetCallback(BackupTaskCallback callback) {
+      callback_ = std::move(callback);
+    }
+
+    // Shows (or updates) the shared backup/restore notification for flows
+    // that don't go through StartTask() (cloud backup, local/cloud restore).
+    // kRunning shows an indeterminate pinned progress notification;
+    // kFinished/kFailed show a dismissible result notification.
+    void ShowSimpleNotification(TaskState state,
+                                const std::u16string& title,
+                                const std::u16string& message);
+
+ private:
+    void DisplayNotification(
+        std::unique_ptr<message_center::Notification> notification);
+
+    // Handle backup finished
+    void OnBackupFinished();
+    void OnCheckBackupFile(const bool);
+    void ShowBackupFinishedNotification(
+        const base::FilePath& file_path, const bool exists);
+
+    void GetShellClientTaskState();
+    void OnGetShellClientTaskState(std::optional<ShellState> state);
+
+    // Handle backup error
+    using ReadTmpLogCallback = base::OnceCallback<
+      void(const base::FilePath& file_path, const bool exists)>;
+    void OnBackupError();
+    void OnCheckTmpLogFile(const bool);
+    void ProcessTmpLogFileByShellClient(
+        const base::FilePath& tmp, ReadTmpLogCallback callback);
+    void OnTmpLogFileRead(
+        ReadTmpLogCallback callback, std::optional<ShellState> state);
+    void OnLogFileCopied(ReadTmpLogCallback callback,
+                         const base::FilePath& log, const bool exists);
+    void ShowBackupErrorNotification(
+        const base::FilePath& log, const bool exists);
+
+    Wings8OSShellClient* shell_client_ = nullptr;
+    int32_t task_id_ = 0;
+    TaskState task_state_ = TaskState::kIdle;
+    Profile* profile_ = nullptr;
+    base::FilePath backup_path_;
+    base::FilePath tmp_log_path_;
+    BackupTaskCallback callback_;
+
+    scoped_refptr<base::SequencedTaskRunner> task_runner_;
+    base::WeakPtrFactory<BackupTaskManager> weak_ptr_factory_{this};
+};
+
+}  // namespace ash::settings
+
+#endif  // _WINGS8OS_UI_WEBUI_SETTINGS_ASH_WINGS8OS_HANDLER_BACKUP_TASK_MANAGER_H_

@@ -41,7 +41,7 @@ const PasswordSelectionBase = OobeDialogHostMixin(
     LoginScreenMixin(MultiStepMixin(OobeI18nMixin(PolymerElement))));
 
 interface PasswordSelectionScreenData {
-  isJemaProfile: boolean;
+  isWings8Profile: boolean;
 }
 
 export class PasswordSelection extends PasswordSelectionBase {
@@ -62,7 +62,7 @@ export class PasswordSelection extends PasswordSelectionBase {
         type: String,
       },
 
-      isJemaProfile: {
+      isWings8Profile: {
         type: Boolean,
       },
 
@@ -85,7 +85,7 @@ export class PasswordSelection extends PasswordSelectionBase {
   }
 
   private selectedPasswordType: string;
-  private isJemaProfile: boolean;
+  private isWings8Profile: boolean;
   private passwordTypeEnum: PasswordType;
   private backButtonVisible: boolean;
 
@@ -115,7 +115,7 @@ export class PasswordSelection extends PasswordSelectionBase {
   override onBeforeShow(data: PasswordSelectionScreenData): void {
     super.onBeforeShow();
     this.selectedPasswordType = PasswordType.LOCAL_PASSWORD;
-    this.isJemaProfile = data["isJemaProfile"];
+    this.isWings8Profile = data["isWings8Profile"];
   }
 
   override onBeforeHide(): void {
@@ -145,28 +145,28 @@ export class PasswordSelection extends PasswordSelectionBase {
 
   private getPasswordSelectionSubtitile(
     locale: string,
-    isJemaProfile: boolean,
+    isWings8Profile: boolean,
   ): string {
     return this.i18nDynamic(
       locale,
-      isJemaProfile
-        ? "passwordSelectionJemaSubtitle"
+      isWings8Profile
+        ? "passwordSelectionWings8Subtitle"
         : "passwordSelectionSubtitile",
     );
   }
 
-  private getGaiaPasswordSelectionIcon(isJemaProfile: boolean): string {
-    return isJemaProfile ? 'oobe-32:jemaos-f': 'oobe-32:google-g';
+  private getGaiaPasswordSelectionIcon(isWings8Profile: boolean): string {
+    return isWings8Profile ? 'oobe-32:wings8os-f': 'oobe-32:google-g';
   }
 
   private getGaiaPasswordSelectionLabel(
     locale: string,
-    isJemaProfile: boolean,
+    isWings8Profile: boolean,
   ): string {
     return this.i18nDynamic(
       locale,
-      isJemaProfile
-        ? "gaiaPasswordSelectionJemaLabel"
+      isWings8Profile
+        ? "gaiaPasswordSelectionWings8Label"
         : "gaiaPasswordSelectionLabel",
     );
   }

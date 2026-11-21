@@ -24,20 +24,20 @@ void PasswordSelectionScreenHandler::DeclareLocalizedValues(
                 ui::GetChromeOSDeviceName());
   builder->AddF("passwordSelectionSubtitile", IDS_PASSWORD_SELECTION_SUBTITLE,
                 ui::GetChromeOSDeviceName());
-  builder->AddF("passwordSelectionJemaSubtitle", IDS_PASSWORD_SELECTION_JEMA_SUBTITLE,
+  builder->AddF("passwordSelectionWings8Subtitle", IDS_PASSWORD_SELECTION_WINGS8_SUBTITLE,
                 ui::GetChromeOSDeviceName());
   builder->AddF("localPasswordSelectionLabel",
                 IDS_PASSWORD_SELECTION_LOCAL_PASSWORD_LABEL,
                 ui::GetChromeOSDeviceName());
   builder->Add("gaiaPasswordSelectionLabel",
                IDS_PASSWORD_SELECTION_GAIA_PASSWORD_LABEL);
-  builder->Add("gaiaPasswordSelectionJemaLabel",
-               IDS_PASSWORD_SELECTION_JEMA_PASSWORD_LABEL);
+  builder->Add("gaiaPasswordSelectionWings8Label",
+               IDS_PASSWORD_SELECTION_WINGS8_PASSWORD_LABEL);
 }
 
-void PasswordSelectionScreenHandler::Show(bool is_jema_profile) {
+void PasswordSelectionScreenHandler::Show(bool is_wings8_profile) {
   base::Value::Dict dict;
-  dict.Set("isJemaProfile", is_jema_profile);
+  dict.Set("isWings8Profile", is_wings8_profile);
   ShowInWebUI(std::move(dict));
 }
 

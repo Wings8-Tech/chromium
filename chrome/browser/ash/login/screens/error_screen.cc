@@ -111,9 +111,9 @@ void ErrorScreen::DisallowOfflineLogin() {
   ShowOfflineLoginOption(false);
 }
 
-void ErrorScreen::AllowJemaLocalSignin(bool allowed) {
+void ErrorScreen::AllowWings8LocalSignin(bool allowed) {
   if (view_)
-    view_->SetJemaLocalSigninAllowed(allowed);
+    view_->SetWings8LocalSigninAllowed(allowed);
 }
 
 void ErrorScreen::ShowOfflineLoginOption(bool show) {

@@ -22,7 +22,7 @@
 #include "extensions/browser/guest_view/web_view/web_view_permission_types.h"
 #include "extensions/common/extension_features.h"
 #include "ppapi/buildflags/buildflags.h"
-#include "jemaos/switches/services/services_switches.h"
+#include "wings8os/switches/services/services_switches.h"
 #include "third_party/blink/public/mojom/mediastream/media_stream.mojom-shared.h"
 #include "third_party/blink/public/mojom/mediastream/media_stream.mojom.h"
 
@@ -192,8 +192,8 @@ void WebViewPermissionHelper::RequestMediaAccessPermission(
     const content::MediaStreamRequest& request,
     content::MediaResponseCallback callback) {
   bool default_media_access_permission = false;
-  GURL jemaAIURL(jemaos::switches::GetJemaOSAssistantWebUrl());
-  if ((url::Origin::Create(request.security_origin) == url::Origin::Create(jemaAIURL))) {
+  GURL wings8AIURL(wings8os::switches::GetWings8OSAssistantWebUrl());
+  if ((url::Origin::Create(request.security_origin) == url::Origin::Create(wings8AIURL))) {
     default_media_access_permission = true;
   }
   base::Value::Dict request_info;

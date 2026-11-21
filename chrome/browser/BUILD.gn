@@ -2493,14 +2493,14 @@ static_library("browser") {
     "//ui/strings",
     "//ui/surface",
     "//ui/webui",
-    "//jemaos/prefs",
-    "//jemaos/switches",
+    "//wings8os/prefs",
+    "//wings8os/switches",
   ]
 
   if (is_chromeos) {
-    if (use_jemaos_license) {
+    if (use_wings8os_license) {
       deps += [
-        "//jemaos/license",
+        "//wings8os/license",
       ]
     }
   }

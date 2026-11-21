@@ -1,4 +1,4 @@
-// Copyright 2025 Jema Technology. All rights reserved.
+// Copyright 2025 Wings8 Technology. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
@@ -8,7 +8,7 @@ namespace web_app {
 
 ExternalInstallOptions GetConfigForNephtys() {
   ExternalInstallOptions options(
-      /*install_url=*/GURL("https://nephtys.jemaos.com/auth"),
+      /*install_url=*/GURL("https://nephtys.wings8.org/auth"),
       /*user_display_mode=*/mojom::UserDisplayMode::kStandalone,
       /*install_source=*/ExternalInstallSource::kExternalDefault);
 

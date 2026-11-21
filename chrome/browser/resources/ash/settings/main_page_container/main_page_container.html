@@ -256,11 +256,11 @@
     </template>
 
     <template is="dom-if"
-        if="[[shouldStampPage_(pageAvailability, Section.kJemaAssistant)]]"
+        if="[[shouldStampPage_(pageAvailability, Section.kWings8Assistant)]]"
         restamp>
-      <page-displayer section="[[Section.kJemaAssistant]]">
-        <os-settings-jema-assistant-page prefs="{{prefs}}">
-        </os-settings-jema-assistant-page>
+      <page-displayer section="[[Section.kWings8Assistant]]">
+        <os-settings-wings8-assistant-page prefs="{{prefs}}">
+        </os-settings-wings8-assistant-page>
       </page-displayer>
     </template>
 
@@ -348,13 +348,13 @@
       </template>
     </div>
 
-    <div id="jemaosPageContainer"
-      hidden$="[[!shouldShowJemaOsSettingsPageContainer_]]">
+    <div id="wings8osPageContainer"
+      hidden$="[[!shouldShowWings8OsSettingsPageContainer_]]">
       <template is="dom-if"
-          if="[[shouldStampPage_(pageAvailability, Section.kJemaOs)]]"
+          if="[[shouldStampPage_(pageAvailability, Section.kWings8Os)]]"
           restamp>
-        <page-displayer section="[[Section.kJemaOs]]">
-          <os-jema-page></os-jema-page>
+        <page-displayer section="[[Section.kWings8Os]]">
+          <os-wings8-page></os-wings8-page>
         </page-displayer>
       </template>
     </div>

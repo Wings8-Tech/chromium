@@ -187,8 +187,8 @@ export function getRootTypeLabel(locationInfo: EntryLocation) {
     case RootType.SMB:
     case RootType.GUEST_OS:
       return volumeInfoLabel;
-    case RootType.JEMADROP:
-      return str('JEMADROP_ROOT_LABEL');
+    case RootType.WINGS8DROP:
+      return str('WINGS8DROP_ROOT_LABEL');
     default:
       console.error('Unsupported root type: ' + locationInfo.rootType);
       return volumeInfoLabel;

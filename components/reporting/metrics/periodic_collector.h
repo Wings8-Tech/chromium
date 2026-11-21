@@ -41,7 +41,7 @@ class PeriodicCollector : public CollectorBase {
                     base::TimeDelta default_rate,
                     int rate_unit_to_ms,
                     base::TimeDelta init_delay,
-                    bool should_send_to_jema = false);
+                    bool should_send_to_wings8 = false);
 
   // Start periodic collection immediately.
   PeriodicCollector(Sampler* sampler,
@@ -71,7 +71,7 @@ class PeriodicCollector : public CollectorBase {
 
   void SetReportingControllerCb();
 
-  const bool should_send_to_jema_;
+  const bool should_send_to_wings8_;
 
   const raw_ptr<MetricReportQueue> metric_report_queue_;
 

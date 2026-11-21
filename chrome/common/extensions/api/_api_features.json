@@ -217,7 +217,7 @@
     "contexts": ["webui"],
     "matches": [
       "chrome://assistant-optin/*",
-      "chrome://jemaos-ai/*",
+      "chrome://wings8os-ai/*",
       "chrome://add-supervision/*",
       "chrome://chrome-signin/*",
       "chrome://graduation/*",
@@ -1005,7 +1005,7 @@
     "contexts": ["privileged_extension"],
     "platforms": ["chromeos"],
     "allowlist": [
-      "F3C1CDC64C6AAB9E1DF4219AC2242C0505A14A9E"  //JemaOS System Control Extension
+      "F3C1CDC64C6AAB9E1DF4219AC2242C0505A14A9E"  //Wings8OS System Control Extension
     ]
   }],
   "virtualKeyboardPrivate": {

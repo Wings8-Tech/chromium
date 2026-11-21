@@ -424,12 +424,12 @@ class GritNode(base.Node):
           continue  # predefined IDs are sometimes used more than once
 
         if node_id in unique_names and node_id not in duplicate_names:
-          #//---***JEMAOS BEGIN***---
+          #//---***WINGS8OS BEGIN***---
           #duplicate_names.append(node_id)
           unique_names[node_id].SetAllowlistMarkedAsSkip(True)
         #unique_names[node_id] = 1
         unique_names[node_id] = node
-          #//---***JEMAOS END***---
+          #//---***WINGS8OS END***---
 
     if len(duplicate_names):
       raise exception.DuplicateKey(', '.join(duplicate_names))

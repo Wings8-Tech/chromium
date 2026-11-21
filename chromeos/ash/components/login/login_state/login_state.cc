@@ -32,13 +32,13 @@ LoginState::LoggedInUserType GetLoggedInUserTypeFromUser(
   switch (active_user.GetType()) {
     case user_manager::UserType::kRegular:
     case user_manager::UserType::kFlintAccount:
-    case user_manager::UserType::kJemaAccount:
+    case user_manager::UserType::kWings8Account:
       return LoginState::LOGGED_IN_USER_REGULAR;
     case user_manager::UserType::kGuest:
       return LoginState::LOGGED_IN_USER_GUEST;
     case user_manager::UserType::kPublicAccount:
       return LoginState::LOGGED_IN_USER_PUBLIC_ACCOUNT;
-    case user_manager::UserType::kJemaChild:
+    case user_manager::UserType::kWings8Child:
     case user_manager::UserType::kChild:
       return LoginState::LOGGED_IN_USER_CHILD;
     case user_manager::UserType::kKioskApp:

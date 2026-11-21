@@ -22,7 +22,7 @@
 #include "extensions/buildflags/buildflags.h"
 #include "extensions/common/extension_set.h"
 #include "extensions/common/manifest_constants.h"
-#include "jemaos/switches/services/services_switches.h"
+#include "wings8os/switches/services/services_switches.h"
 
 namespace safe_browsing {
 
@@ -57,7 +57,7 @@ void PopulateExtensionInfo(
   if (const std::string* update_url = extension.manifest()->FindStringPath(
           extensions::manifest_keys::kUpdateURL)) {
     extension_info->set_update_url(
-        jemaos::switches::MayConvertWebStoreUpdateUrl(*update_url));
+        wings8os::switches::MayConvertWebStoreUpdateUrl(*update_url));
   }
 
   extension_info->set_installed_by_default(

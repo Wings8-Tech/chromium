@@ -77,7 +77,7 @@
 #include "content/public/browser/browser_thread.h"
 #include "content/public/common/content_features.h"
 #include "ui/display/types/display_constants.h"
-#include "jemaos/switches/arc/arc_switches.h"
+#include "wings8os/switches/arc/arc_switches.h"
 
 // Enable VLOG level 1.
 #undef ENABLED_VLOG_LEVEL
@@ -132,7 +132,7 @@ void MaybeUpdateOptInCancelUMA(const ArcSupportHost* support_host) {
 // switch kArcForceShowPlayStoreApp.
 bool ShouldLaunchPlayStoreApp(Profile* profile,
                               bool oobe_or_assistant_wizard_start) {
-  if (profile->IsJemaProfile()) {
+  if (profile->IsWings8Profile()) {
     return false;
   }
 
@@ -627,13 +627,13 @@ void ArcSessionManager::OnProvisioningFinished(
   // and |State::Active| is not guaranteed to be set here.
   // prefs::kArcDataRemoveRequested also can be active for now.
 
-  // ---***JEMAOS BEGIN***---
-  const bool is_jema_profile = profile_ && profile_->IsJemaProfile();
-  const bool provisioning_successful = result.is_success() || is_jema_profile;
-  if (is_jema_profile) {
+  // ---***WINGS8OS BEGIN***---
+  const bool is_wings8_profile = profile_ && profile_->IsWings8Profile();
+  const bool provisioning_successful = result.is_success() || is_wings8_profile;
+  if (is_wings8_profile) {
     provisioning_reported_ = false;
   }
-  // ---***JEMAOS END***---
+  // ---***WINGS8OS END***---
   if (provisioning_reported_) {
     // We don't expect success ArcProvisioningResult to be reported twice
     // or reported after an error.
@@ -649,10 +649,10 @@ void ArcSessionManager::OnProvisioningFinished(
     scoped_opt_in_tracker_->TrackError();
   }
 
-  // ---***JEMAOS BEGIN***---
+  // ---***WINGS8OS BEGIN***---
   if (result.general_error() ==
-      mojom::GeneralSignInError::CHROME_SERVER_COMMUNICATION_ERROR && !is_jema_profile) {
-  // ---***JEMAOS END***---
+      mojom::GeneralSignInError::CHROME_SERVER_COMMUNICATION_ERROR && !is_wings8_profile) {
+  // ---***WINGS8OS END***---
     // TODO(poromov): Consider ARC PublicSession offline mode.
     // Currently ARC session will be exited below, while the main user session
     // will be kept alive without Android apps.
@@ -671,8 +671,8 @@ void ArcSessionManager::OnProvisioningFinished(
                              provisioning_successful, profile_);
     UpdateProvisioningStatusUMA(GetProvisioningStatus(result), profile_);
 
-    // ---***JEMAOS BEGIN***---
-  if (!is_jema_profile) {
+    // ---***WINGS8OS BEGIN***---
+  if (!is_wings8_profile) {
     if (result.gms_sign_in_error()) {
       UpdateProvisioningSigninResultUMA(
           GetSigninErrorResult(result.gms_sign_in_error().value()), profile_);
@@ -685,7 +685,7 @@ void ArcSessionManager::OnProvisioningFinished(
           profile_);
     }
   }
-    // ---***JEMAOS END***---
+    // ---***WINGS8OS END***---
 
     if (!provisioning_successful) {
       UpdateOptInCancelUMA(OptInCancelReason::PROVISIONING_FAILED);
@@ -1112,7 +1112,7 @@ void ArcSessionManager::AllowActivation(AllowActivationReason reason) {
 
   activation_is_allowed_ = true;
   if (state_ == State::READY) {
-    StartArcForRegularBootAfterSeconds(jemaos::switches::GetJemaOSArcDelay());
+    StartArcForRegularBootAfterSeconds(wings8os::switches::GetWings8OSArcDelay());
   }
 }
 
@@ -1257,7 +1257,7 @@ void ArcSessionManager::RequestEnableImpl() {
   if (skip_terms_of_service_negotiation) {
     state_ = State::READY;
     if (activation_is_allowed_) {
-      StartArcForRegularBootAfterSeconds(jemaos::switches::GetJemaOSArcDelay());
+      StartArcForRegularBootAfterSeconds(wings8os::switches::GetWings8OSArcDelay());
     } else {
       DCHECK(!activation_necessity_checker_);
       activation_necessity_checker_ =

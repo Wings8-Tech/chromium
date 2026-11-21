@@ -34,7 +34,7 @@ inline constexpr char kRlzEmbargoEndDateKey[] = "rlz_embargo_end_date";
 // Customization ID key.
 inline constexpr char kCustomizationIdKey[] = "customization_id";
 
-inline constexpr char kJemaOsLicenseIdKey[] = "jemaos_license_id";
+inline constexpr char kWings8OsLicenseIdKey[] = "wings8os_license_id";
 
 // Developer switch value.
 inline constexpr char kDevSwitchBootKey[] = "devsw_boot";

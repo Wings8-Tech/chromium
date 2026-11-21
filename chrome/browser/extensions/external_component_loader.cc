@@ -26,25 +26,25 @@
 #endif
 
 #include "base/strings/stringprintf.h"
-#include "jemaos/switches/services/services_switches.h"
-#include "jemaos/build/config/buildflags.h"
+#include "wings8os/switches/services/services_switches.h"
+#include "wings8os/build/config/buildflags.h"
 
 namespace {
 
-void AddJemaOSExtensions(base::Value::Dict& prefs) {
+void AddWings8OSExtensions(base::Value::Dict& prefs) {
   const char update_url_template[] =
     "%s/update/%s/updates.xml";
   std::vector<std::string> preinstalled_apps = {
     "hidnajblbifdkmheebalalchohohmaef",  // system controller
-#if !BUILDFLAG(IS_OPENJEMA)
-    "iakadpgajjigiaojnbdmodlngmbkfhag",  // start arc settings, not force installed by default on openjema
+#if !BUILDFLAG(IS_OPENWINGS8)
+    "iakadpgajjigiaojnbdmodlngmbkfhag",  // start arc settings, not force installed by default on openwings8
 #endif
     "mofiofjpikncjaigmdlblhojbnkabako",  // store
     // "fogdcaodknbhigpklbhepedofamkfbln", // rdp
     "nfglebjgiflmmcdddkbcbgmdkomlfcpa",  // rime
   };
   const std::string base_update_url =
-    jemaos::switches::GetJemaOSWebStoreUpdateUrl();
+    wings8os::switches::GetWings8OSWebStoreUpdateUrl();
   std::string update_url;
   for (const auto& app_id : preinstalled_apps) {
     update_url = base::StringPrintf(update_url_template,
@@ -83,7 +83,7 @@ void ExternalComponentLoader::StartLoading() {
   }
 #endif
 
-  AddJemaOSExtensions(prefs);
+  AddWings8OSExtensions(prefs);
 
   LoadFinished(std::move(prefs));
 }

@@ -34,17 +34,17 @@ bool IsSyncable(const Extension* extension, Profile* profile) {
   //
   // TODO(akalin): Relax this restriction once we've put in UI to
   // approve synced extensions.
-  // ---***JEMAOS BEGIN***---
+  // ---***WINGS8OS BEGIN***---
   if (profile == nullptr && g_browser_process) {
     ProfileManager* profile_manager = g_browser_process->profile_manager();
     if (profile_manager) {
       profile = profile_manager->GetActiveUserProfile();
     }
   }
-  if (profile && profile->IsJemaProfile()) {
+  if (profile && profile->IsWings8Profile()) {
     if (!ManifestURL::GetUpdateURL(extension).is_empty() &&
         (!ManifestURL::UpdatesFromGallery(extension)
-         && !ManifestURL::UpdatesFromJemaOSGallery(extension))) {
+         && !ManifestURL::UpdatesFromWings8OSGallery(extension))) {
       return false;
     }
   } else {
@@ -53,7 +53,7 @@ bool IsSyncable(const Extension* extension, Profile* profile) {
       return false;
     }
   }
-  // ---***JEMAOS END***---
+  // ---***WINGS8OS END***---
 
   switch (extension->GetType()) {
     case Manifest::TYPE_EXTENSION:

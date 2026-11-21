@@ -915,10 +915,10 @@ export class DirectoryTreeContainer {
 
     const fileKey = fileData.key;
 
-    if (fileData.rootType === RootType.JEMADROP) {
-      this.directoryModel_.dispatchEvent(new CustomEvent('jemadrop-started'));
+    if (fileData.rootType === RootType.WINGS8DROP) {
+      this.directoryModel_.dispatchEvent(new CustomEvent('wings8drop-started'));
     } else {
-      this.directoryModel_.dispatchEvent(new CustomEvent('jemadrop-stopped'));
+      this.directoryModel_.dispatchEvent(new CustomEvent('wings8drop-stopped'));
     }
 
     const navigationRootData = isRoot ?

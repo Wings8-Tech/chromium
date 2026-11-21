@@ -40,13 +40,13 @@ class InputImeSetCandidateWindowPropertiesFunction : public ExtensionFunction {
   ResponseAction Run() override;
 };
 
-class InputImeShowJemaLanguageStateFunction : public ExtensionFunction {
+class InputImeShowWings8LanguageStateFunction : public ExtensionFunction {
  public:
-  DECLARE_EXTENSION_FUNCTION("input.ime.showJemaLanguageState",
-                             INPUT_IME_SHOW_JEMA_LANGUAGE_STATE)
+  DECLARE_EXTENSION_FUNCTION("input.ime.showWings8LanguageState",
+                             INPUT_IME_SHOW_WINGS8_LANGUAGE_STATE)
 
  protected:
-  ~InputImeShowJemaLanguageStateFunction() override = default;
+  ~InputImeShowWings8LanguageStateFunction() override = default;
 
   // ExtensionFunction:
   ResponseAction Run() override;

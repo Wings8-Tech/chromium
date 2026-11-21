@@ -16,7 +16,7 @@
 #include "components/prefs/pref_change_registrar.h"
 #include "components/prefs/pref_service.h"
 #include "device_management_backend.pb.h"
-#include "jemaos/prefs/jemaos_pref_names.h"
+#include "wings8os/prefs/wings8os_pref_names.h"
 
 namespace ash {
 
@@ -92,12 +92,12 @@ void AssistantStateBase::RegisterPrefChanges(PrefService* pref_service) {
       base::BindRepeating(&AssistantStateBase::UpdateOnboardingMode,
                           base::Unretained(this)));
   pref_change_registrar_->Add(
-      jemaos::prefs::kJemaAssistantEnabled,
-      base::BindRepeating(&AssistantStateBase::UpdateJemaAssistantEnabled,
+      wings8os::prefs::kWings8AssistantEnabled,
+      base::BindRepeating(&AssistantStateBase::UpdateWings8AssistantEnabled,
                           base::Unretained(this)));
   pref_change_registrar_->Add(
-      jemaos::prefs::kJemaAssistantExtraAcceleratorEnabled,
-      base::BindRepeating(&AssistantStateBase::UpdateJemaAssistantEnabled,
+      wings8os::prefs::kWings8AssistantExtraAcceleratorEnabled,
+      base::BindRepeating(&AssistantStateBase::UpdateWings8AssistantEnabled,
                           base::Unretained(this)));
 
   UpdateConsentStatus();
@@ -108,7 +108,7 @@ void AssistantStateBase::RegisterPrefChanges(PrefService* pref_service) {
   UpdateLaunchWithMicOpen();
   UpdateNotificationEnabled();
   UpdateOnboardingMode();
-  UpdateJemaAssistantEnabled();
+  UpdateWings8AssistantEnabled();
 }
 
 bool AssistantStateBase::IsScreenContextAllowed() const {
@@ -144,10 +144,10 @@ void AssistantStateBase::InitializeObserver(AssistantStateObserver* observer) {
     observer->OnAssistantNotificationEnabled(notification_enabled_.value());
   if (onboarding_mode_.has_value())
     observer->OnAssistantOnboardingModeChanged(onboarding_mode_.value());
-  if (jema_assistant_enabled_.has_value())
-    observer->OnJemaAssistantEnabled(jema_assistant_enabled_.value());
-  if (jema_assistant_extra_accelerator_enabled_.has_value())
-    observer->OnJemaAssistantExtraAcceleratorEnabled(jema_assistant_extra_accelerator_enabled_.value());
+  if (wings8_assistant_enabled_.has_value())
+    observer->OnWings8AssistantEnabled(wings8_assistant_enabled_.value());
+  if (wings8_assistant_extra_accelerator_enabled_.has_value())
+    observer->OnWings8AssistantExtraAcceleratorEnabled(wings8_assistant_extra_accelerator_enabled_.value());
 
   observer->OnAssistantStatusChanged(assistant_status_);
   if (allowed_state_.has_value())
@@ -255,27 +255,27 @@ void AssistantStateBase::UpdateOnboardingMode() {
     observer.OnAssistantOnboardingModeChanged(onboarding_mode_.value());
 }
 
-void AssistantStateBase::UpdateJemaAssistantEnabled() {
-  auto jema_assistant_enabled = pref_change_registrar_->prefs()->GetBoolean(
-      jemaos::prefs::kJemaAssistantEnabled);
-  if (!jema_assistant_enabled_.has_value() ||
-      jema_assistant_enabled_.value() != jema_assistant_enabled) {
-    jema_assistant_enabled_ = jema_assistant_enabled;
+void AssistantStateBase::UpdateWings8AssistantEnabled() {
+  auto wings8_assistant_enabled = pref_change_registrar_->prefs()->GetBoolean(
+      wings8os::prefs::kWings8AssistantEnabled);
+  if (!wings8_assistant_enabled_.has_value() ||
+      wings8_assistant_enabled_.value() != wings8_assistant_enabled) {
+    wings8_assistant_enabled_ = wings8_assistant_enabled;
     for (auto& observer : observers_) {
-      observer.OnJemaAssistantEnabled(jema_assistant_enabled_.value());
+      observer.OnWings8AssistantEnabled(wings8_assistant_enabled_.value());
     }
   }
 
-  auto jema_assistant_extra_accelerator_enabled = pref_change_registrar_->prefs()->GetBoolean(
-      jemaos::prefs::kJemaAssistantExtraAcceleratorEnabled);
-  jema_assistant_extra_accelerator_enabled = jema_assistant_enabled && jema_assistant_extra_accelerator_enabled;
-  if (jema_assistant_extra_accelerator_enabled_.has_value() &&
-      jema_assistant_extra_accelerator_enabled_.value() == jema_assistant_extra_accelerator_enabled) {
+  auto wings8_assistant_extra_accelerator_enabled = pref_change_registrar_->prefs()->GetBoolean(
+      wings8os::prefs::kWings8AssistantExtraAcceleratorEnabled);
+  wings8_assistant_extra_accelerator_enabled = wings8_assistant_enabled && wings8_assistant_extra_accelerator_enabled;
+  if (wings8_assistant_extra_accelerator_enabled_.has_value() &&
+      wings8_assistant_extra_accelerator_enabled_.value() == wings8_assistant_extra_accelerator_enabled) {
     return;
   }
-  jema_assistant_extra_accelerator_enabled_ = jema_assistant_extra_accelerator_enabled;
+  wings8_assistant_extra_accelerator_enabled_ = wings8_assistant_extra_accelerator_enabled;
   for (auto& observer : observers_) {
-    observer.OnJemaAssistantExtraAcceleratorEnabled(jema_assistant_extra_accelerator_enabled_.value());
+    observer.OnWings8AssistantExtraAcceleratorEnabled(wings8_assistant_extra_accelerator_enabled_.value());
   }
 }
 

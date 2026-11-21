@@ -100,7 +100,7 @@ export class ErrorMessageScreen extends ErrorMessageScreenBase {
   override get EXTERNAL_API(): string[] {
     return [
       'allowGuestSignin',
-      'allowJemaLocalSignin',
+      'allowWings8LocalSignin',
       'allowOfflineLogin',
       'setUiState',
       'setErrorState',
@@ -161,9 +161,9 @@ export class ErrorMessageScreen extends ErrorMessageScreenBase {
         observer: 'updateLocalizedContent',
       },
 
-      jemaLocalSigninAllowed: {
+      wings8LocalSigninAllowed: {
         type: Boolean,
-        // JEMAOS: default hidden — the "sign in with a local account" link is
+        // WINGS8OS: default hidden — the "sign in with a local account" link is
         // not shown on the OOBE/first-boot screen.
         value: false,
         observer: 'updateLocalizedContent',
@@ -194,7 +194,7 @@ export class ErrorMessageScreen extends ErrorMessageScreenBase {
   private enableWifiScans: boolean;
   private currentNetworkName: string;
   private guestSessionAllowed: boolean;
-  private jemaLocalSigninAllowed: boolean;
+  private wings8LocalSigninAllowed: boolean;
   private offlineLoginAllowed: boolean;
   private connectingIndicatorShown: boolean;
 
@@ -366,12 +366,12 @@ export class ErrorMessageScreen extends ErrorMessageScreenBase {
         'click', this.launchGuestSession.bind(this));
 
     this.updateElementWithStringAndAnchorTag(
-        'jema-local-signin', 'jemaLocalSignin', {}, ['jema-local-signin-link']);
-    const jemaLocalSigninLink =
-        this.shadowRoot?.querySelector('#jema-local-signin-link');
-    assert(jemaLocalSigninLink instanceof HTMLAnchorElement);
-    jemaLocalSigninLink.addEventListener(
-        'click', this.advanceToJemaLocalSignin_.bind(this));
+        'wings8-local-signin', 'wings8LocalSignin', {}, ['wings8-local-signin-link']);
+    const wings8LocalSigninLink =
+        this.shadowRoot?.querySelector('#wings8-local-signin-link');
+    assert(wings8LocalSigninLink instanceof HTMLAnchorElement);
+    wings8LocalSigninLink.addEventListener(
+        'click', this.advanceToWings8LocalSignin_.bind(this));
 
     this.updateElementWithStringAndAnchorTag(
         'error-guest-signin-fix-network', 'guestSigninFixNetwork', {},
@@ -437,12 +437,12 @@ export class ErrorMessageScreen extends ErrorMessageScreenBase {
     this.guestSessionAllowed = allowed;
   }
 
-  allowJemaLocalSignin(allowed: boolean) {
-    this.jemaLocalSigninAllowed = allowed;
+  allowWings8LocalSignin(allowed: boolean) {
+    this.wings8LocalSigninAllowed = allowed;
   }
 
-  advanceToJemaLocalSignin_() {
-    chrome.send('jemaLocalSignin');
+  advanceToWings8LocalSignin_() {
+    chrome.send('wings8LocalSignin');
   }
 
   /**

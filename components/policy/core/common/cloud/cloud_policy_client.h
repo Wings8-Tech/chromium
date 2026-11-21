@@ -311,7 +311,7 @@ class POLICY_EXPORT CloudPolicyClient {
       const base::TimeDelta& timeout_duration,
       ResultCallback callback);
 
-  virtual void RegisterWithJemaToken(
+  virtual void RegisterWithWings8Token(
       const RegistrationParameters& parameters,
       const std::string& client_id,
       const std::string& token);

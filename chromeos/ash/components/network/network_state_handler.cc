@@ -31,15 +31,15 @@
 #include "chromeos/ash/components/network/network_state_handler_observer.h"
 #include "chromeos/ash/components/network/tether_constants.h"
 #include "third_party/cros_system_api/dbus/service_constants.h"
-//---***JEMAOS BEGIN***---
-#include "jemaos/chromeos/ash/components/dbus/jemaos_shell_client/jemaos_shell_client.h"
-#include "jemaos/chromeos/ash/components/dbus/jemaos_shell_client/shell_state.h"
-#include "jemaos/switches/features/network_switches.h"
-#include "jemaos/switches/features/network_constants.h"
+//---***WINGS8OS BEGIN***---
+#include "wings8os/chromeos/ash/components/dbus/wings8os_shell_client/wings8os_shell_client.h"
+#include "wings8os/chromeos/ash/components/dbus/wings8os_shell_client/shell_state.h"
+#include "wings8os/switches/features/network_switches.h"
+#include "wings8os/switches/features/network_constants.h"
 
-using jemaos::ash::JemaOSShellClient;
-using jemaos::ash::ShellState;
-//---***JEMAOS END***---
+using wings8os::ash::Wings8OSShellClient;
+using wings8os::ash::ShellState;
+//---***WINGS8OS END***---
 
 namespace ash {
 
@@ -164,7 +164,7 @@ class NetworkStateHandler::ActiveNetworkState {
 const char NetworkStateHandler::kDefaultCheckPortalList[] =
     "ethernet,wifi,cellular";
 
-//---***JEMAOS BEGIN***---
+//---***WINGS8OS BEGIN***---
 void NetworkStateHandler::ShellStateCallback(base::OnceClosure callback, std::optional<ShellState> state) {
     VLOG(1) << "Shell State Callback from network state: state code:" << state->code;
     if (callback.is_null())
@@ -174,11 +174,11 @@ void NetworkStateHandler::ShellStateCallback(base::OnceClosure callback, std::op
 
 void NetworkStateHandler::InvokeExecuteReloadWifiDrv(base::OnceClosure callback) {
     VLOG(1) << "Invoke ExecuteReloadWifiDrv from network state";
-    JemaOSShellClient::Get()
-      ->SyncExec(jemaos::constants::kJemaOSReloadWifiCmd,
+    Wings8OSShellClient::Get()
+      ->SyncExec(wings8os::constants::kWings8OSReloadWifiCmd,
         base::BindOnce(&NetworkStateHandler::ShellStateCallback, weak_ptr_factory_.GetWeakPtr(), std::move(callback)));
 }
-//---***JEMAOS END***---
+//---***WINGS8OS END***---
 
 NetworkStateHandler::NetworkStateHandler() {
   DCHECK_CALLED_ON_VALID_SEQUENCE(sequence_checker_);
@@ -207,9 +207,9 @@ void NetworkStateHandler::InitShillPropertyHandler() {
   shill_property_handler_ =
       std::make_unique<internal::ShillPropertyHandler>(this);
   shill_property_handler_->Init();
-//---***JEMAOS BEGIN***---
-  need_reload_wifidrv = jemaos::switches::NeedResetWifiDriver();
-//---***JEMAOS END***---
+//---***WINGS8OS BEGIN***---
+  need_reload_wifidrv = wings8os::switches::NeedResetWifiDriver();
+//---***WINGS8OS END***---
 }
 
 void NetworkStateHandler::UpdateBlockedCellularNetworks(bool only_managed) {

@@ -30,7 +30,7 @@
 namespace crostini {
 
 namespace {
-  const base::FilePath::CharType kJemaminaImageDirName[] =
+  const base::FilePath::CharType kWings8minaImageDirName[] =
     FILE_PATH_LITERAL("/run/imageloader/cros-termina/99999.0.0");
 }  // namespace
 
@@ -59,8 +59,8 @@ void TerminaInstaller::Install(
       [](std::unique_ptr<UninstallResult> ptr) {}, std::move(ptr));
   RemoveComponentIfPresent(std::move(remove_callback), uninstall_result_ptr);
 
-  if (!base::IsDirectoryEmpty(base::FilePath(kJemaminaImageDirName))) {
-    InstallJemamina(std::move(callback));
+  if (!base::IsDirectoryEmpty(base::FilePath(kWings8minaImageDirName))) {
+    InstallWings8mina(std::move(callback));
     return;
   }
 
@@ -71,9 +71,9 @@ void TerminaInstaller::Install(
       base::DoNothing()));
 }
 
-void TerminaInstaller::InstallJemamina(
+void TerminaInstaller::InstallWings8mina(
     base::OnceCallback<void(InstallResult)> callback) {
-  termina_location_ = base::FilePath(kJemaminaImageDirName);
+  termina_location_ = base::FilePath(kWings8minaImageDirName);
   std::move(callback).Run(InstallResult::Success);
 }
 

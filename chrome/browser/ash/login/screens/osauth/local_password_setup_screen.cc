@@ -32,7 +32,7 @@
 
 namespace ash {
 
-// Forward declaration - defined in jema_local_signin_screen_handler.cc
+// Forward declaration - defined in wings8_local_signin_screen_handler.cc
 std::string GetAndClearWebLoginPasswordForOOBE();
 
 namespace {
@@ -89,7 +89,7 @@ void LocalPasswordSetupScreen::PreDoShow() {
 }
 
 void LocalPasswordSetupScreen::InspectContext(UserContext* user_context) {
-  jema_local_password_ = std::nullopt;
+  wings8_local_password_ = std::nullopt;
   if (!user_context) {
     LOG(ERROR) << "Session expired while waiting for user's decision";
     context()->osauth_error = WizardContext::OSAuthErrorKind::kFatal;
@@ -97,12 +97,12 @@ void LocalPasswordSetupScreen::InspectContext(UserContext* user_context) {
     return;
   }
   
-  // Check if we have a web login password stored (from JEMA/Flint web authentication)
+  // Check if we have a web login password stored (from WINGS8/Flint web authentication)
   std::string web_password = GetAndClearWebLoginPasswordForOOBE();
   if (!web_password.empty()) {
-    LOG(WARNING) << "[JEMAOS] Auto-filling password from web login for user: "
+    LOG(WARNING) << "[WINGS8OS] Auto-filling password from web login for user: "
                  << user_context->GetAccountId().GetUserEmail();
-    jema_local_password_ = web_password;
+    wings8_local_password_ = web_password;
     return;
   }
   
@@ -111,21 +111,21 @@ void LocalPasswordSetupScreen::InspectContext(UserContext* user_context) {
     // only flint account will have local password, and skip DoShow
     return;
   }
-  std::optional<LocalPasswordInput> password = user_context->GetJemaLocalPassword();
+  std::optional<LocalPasswordInput> password = user_context->GetWings8LocalPassword();
   if (password) {
-    jema_local_password_ = password->value();
+    wings8_local_password_ = password->value();
   }
 }
 
 void LocalPasswordSetupScreen::AfterContextInspected() {
-  if (!jema_local_password_) {
+  if (!wings8_local_password_) {
     DoShow();
     return;
   }
-  SetJemaLocalPassword();
+  SetWings8LocalPassword();
 }
 
-void LocalPasswordSetupScreen::SetJemaLocalPassword() {
+void LocalPasswordSetupScreen::SetWings8LocalPassword() {
   auth::mojom::PasswordFactorEditor& password_factor_editor =
     auth::GetPasswordFactorEditor(
       quick_unlock::QuickUnlockFactory::GetDelegate(),
@@ -134,7 +134,7 @@ void LocalPasswordSetupScreen::SetJemaLocalPassword() {
   // skip update mocified_factors, to skip factor_setup_success_screen automatically
   update_modified_factors_ = false;
   password_factor_editor.SetLocalPassword(
-    GetToken(), jema_local_password_.value(),
+    GetToken(), wings8_local_password_.value(),
     base::BindOnce(&LocalPasswordSetupScreen::OnSetLocalPassword,
                    weak_factory_.GetWeakPtr()));
 }
@@ -150,10 +150,10 @@ void LocalPasswordSetupScreen::DoShow() {
   bool is_recovery_flow = context()->knowledge_factor_setup.auth_setup_flow ==
                           WizardContext::AuthChangeFlow::kRecovery;
   Profile* profile = ProfileManager::GetPrimaryUserProfile();
-  bool is_jema_profile = profile && profile->IsJemaProfile();
+  bool is_wings8_profile = profile && profile->IsWings8Profile();
   view_->Show(/*can_go_back=*/can_go_back,
               /*is_recovery_flow=*/is_recovery_flow,
-              /*is_jema_profile*/is_jema_profile);
+              /*is_wings8_profile*/is_wings8_profile);
 }
 
 void LocalPasswordSetupScreen::OnUserAction(const base::Value::List& args) {

@@ -15,13 +15,13 @@
 #include "services/network/public/cpp/resource_request.h"
 #include "services/network/public/mojom/url_response_head.mojom.h"
 #include "url/gurl.h"
-#include "jemaos/build/config/buildflags.h"
+#include "wings8os/build/config/buildflags.h"
 
 namespace captive_portal {
 
-#if BUILDFLAG(USE_JEMAOS_COM)
+#if BUILDFLAG(USE_WINGS8OS_COM)
 const char CaptivePortalDetector::kDefaultURL[] =
-    "http://store.jemaos.com/204";
+    "http://store.wings8.org/204";
 #else
 const char CaptivePortalDetector::kDefaultURL[] =
     "http://www.gstatic.com/generate_204";

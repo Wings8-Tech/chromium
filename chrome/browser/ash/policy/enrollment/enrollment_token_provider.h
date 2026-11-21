@@ -21,7 +21,7 @@ namespace policy {
 std::optional<std::string> GetEnrollmentToken(
     const ash::OobeConfiguration* oobe_config);
 
-std::optional<std::string> GetJemaEnrollmentToken(
+std::optional<std::string> GetWings8EnrollmentToken(
     const ash::OobeConfiguration* oobe_config);
 
 }  // namespace policy

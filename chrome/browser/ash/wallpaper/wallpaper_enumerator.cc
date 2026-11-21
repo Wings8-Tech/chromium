@@ -15,7 +15,7 @@
 #include "base/task/thread_pool.h"
 #include "chrome/browser/ash/file_manager/path_util.h"
 #include "chrome/browser/ash/file_manager/trash_common_util.h"
-#include "jemaos/switches/misc/misc_constants.h"
+#include "wings8os/switches/misc/misc_constants.h"
 
 namespace {
 
@@ -61,11 +61,11 @@ std::vector<base::FilePath> EnumerateAllImages(
     EnumerateFiles(search_path, trash_paths, pattern, &image_paths);
   }
 
-  const base::FilePath jema_search_path =
-    base::FilePath(jemaos::constants::kJemaOSWallpapersBasePath);
-  EnumerateFiles(jema_search_path, trash_paths, kPngFilePattern, &image_paths);
-  EnumerateFiles(jema_search_path, trash_paths, kJpgFilePattern, &image_paths);
-  EnumerateFiles(jema_search_path, trash_paths, kJpegFilePattern, &image_paths);
+  const base::FilePath wings8_search_path =
+    base::FilePath(wings8os::constants::kWings8OSWallpapersBasePath);
+  EnumerateFiles(wings8_search_path, trash_paths, kPngFilePattern, &image_paths);
+  EnumerateFiles(wings8_search_path, trash_paths, kJpgFilePattern, &image_paths);
+  EnumerateFiles(wings8_search_path, trash_paths, kJpegFilePattern, &image_paths);
 
   return image_paths;
 }

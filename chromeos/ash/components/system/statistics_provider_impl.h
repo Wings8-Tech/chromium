@@ -45,7 +45,7 @@ class COMPONENT_EXPORT(CHROMEOS_ASH_COMPONENTS_SYSTEM) StatisticsProviderImpl
     // Binary to fake crossystem tool with arguments. E.g. echo.
     base::CommandLine crossystem_tool{base::CommandLine::NO_PROGRAM};
 
-    base::CommandLine jemaos_hardward_id_tool{base::CommandLine::NO_PROGRAM};
+    base::CommandLine wings8os_hardward_id_tool{base::CommandLine::NO_PROGRAM};
 
     base::FilePath machine_info_filepath;
     base::FilePath oem_manifest_filepath;

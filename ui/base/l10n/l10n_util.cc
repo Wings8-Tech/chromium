@@ -61,7 +61,7 @@
 #include "ui/base/l10n/l10n_util_win.h"
 #endif  // BUILDFLAG(IS_WIN)
 
-#include "jemaos/build/config/buildflags.h"
+#include "wings8os/build/config/buildflags.h"
 
 namespace {
 
@@ -584,7 +584,7 @@ std::string GetApplicationLocaleInternalNonMac(const std::string& pref_locale) {
     }
   }
 
-#if !BUILDFLAG(USE_JEMAOS_COM)
+#if !BUILDFLAG(USE_WINGS8OS_COM)
   // Fallback on en-US.
   const std::string fallback_locale("en-US");
 #else

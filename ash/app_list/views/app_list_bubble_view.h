@@ -10,7 +10,7 @@
 
 #include "ash/app_list/app_list_view_provider.h"
 #include "ash/app_list/views/app_list_folder_controller.h"
-#include "ash/app_list/views/assistant/jema_assistant_page.h"
+#include "ash/app_list/views/assistant/wings8_assistant_page.h"
 #include "ash/app_list/views/search_box_view_delegate.h"
 #include "ash/ash_export.h"
 #include "ash/public/cpp/app_list/app_list_types.h"
@@ -31,7 +31,7 @@ class AppListBubbleAppsPage;
 class AppListBubbleAppsCollectionsPage;
 class AppListBubbleAssistantPage;
 class AppListBubbleSearchPage;
-class JemaAssistantPage;
+class Wings8AssistantPage;
 class AppListFolderItem;
 class AppListFolderView;
 class AppListViewDelegate;
@@ -211,7 +211,7 @@ class ASH_EXPORT AppListBubbleView : public views::View,
   raw_ptr<AppListBubbleAppsPage> apps_page_ = nullptr;
   raw_ptr<AppListBubbleSearchPage> search_page_ = nullptr;
   raw_ptr<AppListBubbleAppsCollectionsPage> apps_collections_page_ = nullptr;
-  raw_ptr<JemaAssistantPage> assistant_page_ = nullptr;
+  raw_ptr<Wings8AssistantPage> assistant_page_ = nullptr;
 
   // Lives in this class because it can overlap the search box.
   raw_ptr<AppListFolderView, DanglingUntriaged> folder_view_ = nullptr;

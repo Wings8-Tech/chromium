@@ -29,7 +29,7 @@
 #include "components/user_manager/user_manager.h"
 #include "content/public/browser/browser_thread.h"
 
-#include "jemaos/prefs/jemaos_pref_names.h"
+#include "wings8os/prefs/wings8os_pref_names.h"
 
 namespace chrome {
 namespace {
@@ -114,7 +114,7 @@ void AttemptUserExit() {
       TRACE_EVENT0("shutdown", "CommitPendingWrite");
       state->CommitPendingWrite();
     }
-    state->SetBoolean(jemaos::prefs::kOfflineAutoSigninIsChromeLastSignout, true);
+    state->SetBoolean(wings8os::prefs::kOfflineAutoSigninIsChromeLastSignout, true);
     state->CommitPendingWrite();
   }
   SetSendStopRequestToSessionManager();

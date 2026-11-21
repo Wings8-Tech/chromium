@@ -41,8 +41,8 @@
 #include "ui/gfx/image/image.h"
 #include "ui/gfx/image/image_skia_operations.h"
 #include "ui/gfx/paint_vector_icon.h"
-#include "jemaos/switches/urls/urls_constants.h"
-#include "jemaos/misc/jemaos_release_note_url.h"
+#include "wings8os/switches/urls/urls_constants.h"
+#include "wings8os/misc/wings8os_release_note_url.h"
 
 namespace ash {
 namespace {
@@ -252,7 +252,7 @@ void EolNotification::Click(const std::optional<int>& button_index,
       case kButtonAboutUpdates:
         // Open link to learn more about updates.
         NewWindowDelegate::GetPrimary()->OpenUrl(
-            GURL(jemaos::constants::kEolNotificationURL),
+            GURL(wings8os::constants::kEolNotificationURL),
             NewWindowDelegate::OpenUrlFrom::kUserInteraction,
             NewWindowDelegate::Disposition::kNewForegroundTab);
 
@@ -270,8 +270,8 @@ void EolNotification::Click(const std::optional<int>& button_index,
     switch (*button_index) {
       case BUTTON_MORE_INFO: {
         const GURL url(dismiss_pref_ == prefs::kEolNotificationDismissed
-                           ? (jemaos::constants::kEolNotificationURL)
-                           : jemaos::misc::BuildJemaReleaseNoteUrlWithPath());
+                           ? (wings8os::constants::kEolNotificationURL)
+                           : wings8os::misc::BuildWings8ReleaseNoteUrlWithPath());
         // Show eol link.
         NewWindowDelegate::GetPrimary()->OpenUrl(
             url, NewWindowDelegate::OpenUrlFrom::kUserInteraction,

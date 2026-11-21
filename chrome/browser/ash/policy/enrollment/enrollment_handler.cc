@@ -81,7 +81,7 @@ em::DeviceRegisterRequest::Flavor EnrollmentModeToRegistrationFlavor(
     case EnrollmentConfig::MODE_MANUAL_REENROLLMENT:
       return em::DeviceRegisterRequest::FLAVOR_ENROLLMENT_MANUAL_RENEW;
     case EnrollmentConfig::MODE_LOCAL_FORCED:
-    case EnrollmentConfig::MODE_JEMA_LOCAL_FORCED:
+    case EnrollmentConfig::MODE_WINGS8_LOCAL_FORCED:
       return em::DeviceRegisterRequest::FLAVOR_ENROLLMENT_LOCAL_FORCED;
     case EnrollmentConfig::MODE_LOCAL_ADVERTISED:
       return em::DeviceRegisterRequest::FLAVOR_ENROLLMENT_LOCAL_ADVERTISED;
@@ -453,9 +453,9 @@ void EnrollmentHandler::StartRegistration() {
   SetStep(STEP_REGISTRATION);
   if (enrollment_config_.is_mode_attestation()) {
     StartAttestationBasedEnrollmentFlow();
-  } else if (enrollment_config_.is_mode_jema()) {
-   client_->RegisterWithJemaToken(*register_params_, client_id_,
-                                  dm_auth_.jema_token());
+  } else if (enrollment_config_.is_mode_wings8()) {
+   client_->RegisterWithWings8Token(*register_params_, client_id_,
+                                  dm_auth_.wings8_token());
   } else if (enrollment_config_.is_mode_token()) {
     client_->RegisterDeviceWithEnrollmentToken(*register_params_, client_id_,
                                                dm_auth_.Clone());

@@ -46,10 +46,10 @@ HostAuthenticationConfig::GetSupportedMethods() {
       methods.push_back(AuthenticationMethod::PAIRED_SPAKE2_CURVE25519);
     }
     methods.push_back(AuthenticationMethod::SHARED_SECRET_SPAKE2_CURVE25519);
-    // JEMAOS: SPAKE2 over Curve25519 is the only JemaOS method. The legacy
-    // jemaos_hmac_sha256 method (no SPAKE2, offline-guessable) is no longer
+    // WINGS8OS: SPAKE2 over Curve25519 is the only Wings8OS method. The legacy
+    // wings8os_hmac_sha256 method (no SPAKE2, offline-guessable) is no longer
     // advertised or accepted.
-    methods.push_back(AuthenticationMethod::JEMAOS_SPAKE2_CURVE25519);
+    methods.push_back(AuthenticationMethod::WINGS8OS_SPAKE2_CURVE25519);
   }
   return methods;
 }

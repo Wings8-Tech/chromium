@@ -218,47 +218,47 @@ class UserSessionManager
   // can be created first.
   void OnUserProfileLoaded(Profile* profile, const user_manager::User* user);
 
-  // JEMAOS: Inject the SAML access token as a cookie on .jemaos.com so PWA
-  // apps can verify subscriptions. Reads token from GetJemaOSAccessToken().
-  void InjectJemaOSTokenCookie(Profile* profile);
+  // WINGS8OS: Inject the SAML access token as a cookie on .wings8.org so PWA
+  // apps can verify subscriptions. Reads token from GetWings8OSAccessToken().
+  void InjectWings8OSTokenCookie(Profile* profile);
 
-  // JEMAOS: Periodically re-injects the subscription cookie and renews the
+  // WINGS8OS: Periodically re-injects the subscription cookie and renews the
   // access token through the refresh endpoint before it expires server-side.
-  void MaybeRefreshAndInjectJemaOSToken();
-  void RefreshJemaOSToken();
-  // JEMAOS: Same refresh, with a completion callback so callers (e.g. the
+  void MaybeRefreshAndInjectWings8OSToken();
+  void RefreshWings8OSToken();
+  // WINGS8OS: Same refresh, with a completion callback so callers (e.g. the
   // settings backup-analysis handler) can retry an API call with the renewed
   // token. When a refresh is already in flight the callback is queued and
   // runs when it completes; it also runs when there is nothing to refresh.
-  void RefreshJemaOSToken(base::OnceClosure on_done);
-  void OnJemaOSTokenRefreshed(std::unique_ptr<network::SimpleURLLoader> loader,
+  void RefreshWings8OSToken(base::OnceClosure on_done);
+  void OnWings8OSTokenRefreshed(std::unique_ptr<network::SimpleURLLoader> loader,
                               std::unique_ptr<std::string> response_body);
-  // JEMAOS: Runs (and clears) the callbacks queued for the current/last
+  // WINGS8OS: Runs (and clears) the callbacks queued for the current/last
   // token refresh.
-  void RunJemaOSTokenRefreshCallbacks();
-  // JEMAOS: Deletes the cookies previously injected by
-  // InjectJemaOSTokenCookie (access token + managed marker), so PWAs stop
+  void RunWings8OSTokenRefreshCallbacks();
+  // WINGS8OS: Deletes the cookies previously injected by
+  // InjectWings8OSTokenCookie (access token + managed marker), so PWAs stop
   // considering the session OS-managed once it is dead.
-  void ClearJemaOSInjectedCookies(Profile* profile);
-  void StartJemaOSTokenLifecycleTimer();
+  void ClearWings8OSInjectedCookies(Profile* profile);
+  void StartWings8OSTokenLifecycleTimer();
 
-  // JEMAOS: Queries /v1/connect/os/subscription with the stored access token
+  // WINGS8OS: Queries /v1/connect/os/subscription with the stored access token
   // and caches the result in the profile pref
-  // jemaos::prefs::kJemaSubscriptionActive. Only runs when the stored token
-  // belongs to the account of |profile| (Jema online accounts); the result
+  // wings8os::prefs::kWings8SubscriptionActive. Only runs when the stored token
+  // belongs to the account of |profile| (Wings8 online accounts); the result
   // gates premium PWA preinstallation and cloud backup/restore.
-  void FetchJemaOSSubscriptionState(Profile* profile);
-  void OnJemaOSSubscriptionFetched(
+  void FetchWings8OSSubscriptionState(Profile* profile);
+  void OnWings8OSSubscriptionFetched(
       std::unique_ptr<network::SimpleURLLoader> loader,
       std::unique_ptr<std::string> response_body);
 
-  // JEMAOS: Notifies the Connect API (POST /v1/connect/user/by-email with
+  // WINGS8OS: Notifies the Connect API (POST /v1/connect/user/by-email with
   // {email, device_uid}) that this physical PC signed in as this account, so
   // the backend can bind/refresh last_seen on the enrolled hardware
-  // (jema.hardware.os_device_id). Fire-and-forget: runs only for Jema online
+  // (wings8.hardware.os_device_id). Fire-and-forget: runs only for Wings8 online
   // accounts, never blocks the session.
-  void NotifyJemaOSDeviceUid(Profile* profile);
-  void OnJemaOSDeviceUidNotified(
+  void NotifyWings8OSDeviceUid(Profile* profile);
+  void OnWings8OSDeviceUidNotified(
       std::unique_ptr<network::SimpleURLLoader> loader,
       std::unique_ptr<std::string> response_body);
 
@@ -680,12 +680,12 @@ class UserSessionManager
   // only be called once per program lifetime.
   bool has_recorded_first_web_contents_metrics_ = false;
 
-  // JEMAOS: Keeps the subscription cookie fresh and renews the access token.
-  base::RepeatingTimer jemaos_token_timer_;
-  bool jemaos_token_refresh_in_flight_ = false;
-  // JEMAOS: Completion callbacks queued for the in-flight token refresh (see
-  // RefreshJemaOSToken(base::OnceClosure)).
-  std::vector<base::OnceClosure> jemaos_token_refresh_done_callbacks_;
+  // WINGS8OS: Keeps the subscription cookie fresh and renews the access token.
+  base::RepeatingTimer wings8os_token_timer_;
+  bool wings8os_token_refresh_in_flight_ = false;
+  // WINGS8OS: Completion callbacks queued for the in-flight token refresh (see
+  // RefreshWings8OSToken(base::OnceClosure)).
+  std::vector<base::OnceClosure> wings8os_token_refresh_done_callbacks_;
 
   base::WeakPtrFactory<UserSessionManager> weak_factory_{this};
 };

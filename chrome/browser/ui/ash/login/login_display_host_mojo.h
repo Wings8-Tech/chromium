@@ -219,23 +219,23 @@ class LoginDisplayHostMojo : public LoginDisplayHostCommon,
   };
   std::unique_ptr<AuthState> pending_auth_state_;
 
-  // JEMAOS: set when a Jema account's typed password differs from the last one
+  // WINGS8OS: set when a Wings8 account's typed password differs from the last one
   // that unlocked its vault. The password is verified online and, on success,
   // the vault is re-sealed with the standard PasswordUpdateFlow before login.
-  std::string pending_jema_new_password_;
-  std::string pending_jema_old_password_;
-  bool pending_jema_authenticated_by_pin_ = false;
-  bool pending_jema_seat_gate_ = false;
+  std::string pending_wings8_new_password_;
+  std::string pending_wings8_old_password_;
+  bool pending_wings8_authenticated_by_pin_ = false;
+  bool pending_wings8_seat_gate_ = false;
   std::unique_ptr<PasswordUpdateFlow> pending_password_update_flow_;
 
-  // JEMAOS: shared login continuation (builds the UserContext and calls Login).
+  // WINGS8OS: shared login continuation (builds the UserContext and calls Login).
   void ContinueLoginWithPassword(const AccountId& account_id,
                                  const std::string& password,
                                  bool authenticated_by_pin,
                                  bool save_password);
-  // JEMAOS: continues after the online verification of a Jema password.
-  void OnJemaPasswordValidated(const AccountId& account_id, bool ok);
-  void OnJemaSeatGateChecked(const AccountId& account_id,
+  // WINGS8OS: continues after the online verification of a Wings8 password.
+  void OnWings8PasswordValidated(const AccountId& account_id, bool ok);
+  void OnWings8SeatGateChecked(const AccountId& account_id,
                              const std::string& password,
                              bool authenticated_by_pin,
                              bool blocked);

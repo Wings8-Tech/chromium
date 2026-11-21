@@ -190,7 +190,7 @@ Style notes:
     <file path="strings/ash_strings_zh-HK.xtb" lang="zh-HK" />
     <file path="strings/ash_strings_zh-TW.xtb" lang="zh-TW" />
     <file path="strings/ash_strings_zu.xtb" lang="zu" />
-    <file path="../jemaos/i18n/ash/strings/ash_strings_zh-CN.xtb" lang="zh-CN" />
+    <file path="../wings8os/i18n/ash/strings/ash_strings_zh-CN.xtb" lang="zh-CN" />
   </translations>
   <release seq="1">
     <messages fallback_to_english="true">
@@ -8850,8 +8850,8 @@ To shut down the device, press and hold the power button on the device again.
         Settings
       </message>
 
-      <part file="../jemaos/i18n/ash/ash_strings.override.grdp" />
-      <part file="../jemaos/i18n/ash/ash_strings.grdp" />
+      <part file="../wings8os/i18n/ash/ash_strings.override.grdp" />
+      <part file="../wings8os/i18n/ash/ash_strings.grdp" />
 
      </messages>
     </release>

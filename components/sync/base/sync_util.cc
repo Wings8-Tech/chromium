@@ -17,10 +17,10 @@
 #include "google_apis/gaia/gaia_config.h"
 #include "ui/base/device_form_factor.h"
 #include "url/gurl.h"
-// ---***JEMAOS BEGIN***---
-#include "jemaos/switches/account/account_switches.h"
-#include "jemaos/switches/account/account_constants.h"
-// ---***JEMAOS END***---
+// ---***WINGS8OS BEGIN***---
+#include "wings8os/switches/account/account_switches.h"
+#include "wings8os/switches/account/account_constants.h"
+// ---***WINGS8OS END***---
 
 namespace {
 
@@ -83,29 +83,29 @@ GURL GetSyncServiceURL(const base::CommandLine& command_line,
   // 1. Explicitly specified --sync-url
   // 2. Specified as part of the --gaia-config
   // 3. Default URL (different for Stable/Beta vs. Dev/Canary/unbranded)
-  // ---***JEMAOS BEGIN***---
-  if (jemaos::switches::IsJemaAccountEnabled()) {
-    GURL result(jemaos::constants::kJemaOSSyncDevServerUrl);
+  // ---***WINGS8OS BEGIN***---
+  if (wings8os::switches::IsWings8AccountEnabled()) {
+    GURL result(wings8os::constants::kWings8OSSyncDevServerUrl);
     if (channel == version_info::Channel::STABLE ||
         channel == version_info::Channel::BETA) {
-      result = GURL(jemaos::constants::kJemaOSSyncServerUrl);
+      result = GURL(wings8os::constants::kWings8OSSyncServerUrl);
     }
-    if (command_line.HasSwitch(jemaos::switches::kJemaOSSyncServiceURL)) {
+    if (command_line.HasSwitch(wings8os::switches::kWings8OSSyncServiceURL)) {
       std::string value(
-          command_line.GetSwitchValueASCII(jemaos::switches::kJemaOSSyncServiceURL));
+          command_line.GetSwitchValueASCII(wings8os::switches::kWings8OSSyncServiceURL));
       if (!value.empty()) {
         GURL custom_sync_url(value);
         if (custom_sync_url.is_valid()) {
           result = custom_sync_url;
         } else {
-          LOG(WARNING) << "The following JemaOS sync URL specified at the command-line "
+          LOG(WARNING) << "The following Wings8OS sync URL specified at the command-line "
             << "is invalid: " << value;
         }
       }
     }
     return result;
   }
-  // ---***JEMAOS END***---
+  // ---***WINGS8OS END***---
   GURL result(internal::kSyncDevServerUrl);
 
   // 1. Get the sync server URL from the --sync-url command-line param, if

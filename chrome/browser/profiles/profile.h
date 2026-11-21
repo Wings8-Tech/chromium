@@ -430,7 +430,7 @@ class Profile : public content::BrowserContext {
   // Returns whether it is a system profile.
   bool IsSystemProfile() const;
 
-  virtual bool IsJemaProfile() const;
+  virtual bool IsWings8Profile() const;
 
   bool CanUseDiskWhenOffTheRecord() override;
 
@@ -509,11 +509,11 @@ class Profile : public content::BrowserContext {
   jni_zero::ScopedJavaLocalRef<jobject> GetJavaObject() const;
 #endif  // BUILDFLAG(IS_ANDROID)
  protected:
-  //---***JEMAOS BEGIN***---
-  void set_is_jema_profile(bool is_jema_profile) {
-    is_jema_profile_ = is_jema_profile;
+  //---***WINGS8OS BEGIN***---
+  void set_is_wings8_profile(bool is_wings8_profile) {
+    is_wings8_profile_ = is_wings8_profile;
   }
-  //---***JEMAOS END***---
+  //---***WINGS8OS END***---
 
   // Creates an OffTheRecordProfile which points to this Profile.
   static std::unique_ptr<Profile> CreateOffTheRecordProfile(
@@ -557,9 +557,9 @@ class Profile : public content::BrowserContext {
   std::optional<raw_ptr<ThemeService>> theme_service_;
   std::optional<raw_ptr<InstantService>> instant_service_;
 
-  //---***JEMAOS BEGIN***---
-  bool is_jema_profile_;
-  //---***JEMAOS END***---
+  //---***WINGS8OS BEGIN***---
+  bool is_wings8_profile_;
+  //---***WINGS8OS END***---
 
   base::ObserverList<ProfileObserver,
                      /*check_empty=*/true,

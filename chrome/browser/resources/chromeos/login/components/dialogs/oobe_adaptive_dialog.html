@@ -253,35 +253,35 @@ found in the LICENSE file.
     --iron-icon-fill-color: var(--oobe-adaptive-dialog-icon-fill-color);
   }
 
-  :host([jemaos-layout]) #oobe-subtitle ::slotted(*) {
+  :host([wings8os-layout]) #oobe-subtitle ::slotted(*) {
     padding-top: 16px;
   }
 
-  :host([jemaos-layout]) #oobe-jemaos-illustration {
+  :host([wings8os-layout]) #oobe-wings8os-illustration {
     overflow: hidden;
     height: 72%;
   }
 
-  :host([jemaos-layout]) #oobe-jemaos-illustration.oobe-jemaos-non-animation-container {
+  :host([wings8os-layout]) #oobe-wings8os-illustration.oobe-wings8os-non-animation-container {
     width: fit-content;
     margin: 0 auto;
   }
 
-  :host([jemaos-layout]) #oobe-jemaos-illustration ::slotted(img) {
+  :host([wings8os-layout]) #oobe-wings8os-illustration ::slotted(img) {
     width: 100%;
     height: 100%;
   }
 
-  :host([jemaos-layout]) #contentContainer {
+  :host([wings8os-layout]) #contentContainer {
     width: 100%;
     padding-top: var(--oobe-adaptive-dialog-item-vertical-padding);
   }
 
-  :host([jemaos-layout]) #contentContainer ::slotted(*) {
+  :host([wings8os-layout]) #contentContainer ::slotted(*) {
     max-width: 100%;
   }
 
-  #jemaos-local-connect-container {
+  #wings8os-local-connect-container {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -291,14 +291,14 @@ found in the LICENSE file.
     padding: 24px;
   }
 
-  #jemaos-local-connect-container iron-icon {
+  #wings8os-local-connect-container iron-icon {
     --iron-icon-height: 64px;
     --iron-icon-width: 64px;
     --iron-icon-fill-color: var(--cros-sys-primary);
     margin-bottom: 16px;
   }
 
-  #jemaos-local-connect-link {
+  #wings8os-local-connect-link {
     color: var(--cros-sys-primary);
     cursor: pointer;
     font-size: var(--oobe-subheader-font-size);
@@ -306,7 +306,7 @@ found in the LICENSE file.
     text-decoration: none;
   }
 
-  #jemaos-local-connect-link:hover {
+  #wings8os-local-connect-link:hover {
     text-decoration: underline;
   }
 </style>
@@ -316,7 +316,7 @@ found in the LICENSE file.
       <slot name="back-navigation"></slot>
     </div>
     <div id="main-container" class="layout vertical flex">
-      <template is="dom-if" if="[[!jemaosLayout]]">
+      <template is="dom-if" if="[[!wings8osLayout]]">
         <div id="header-container">
           <div id="oobe-icon-div" class="vertical-mode-centering">
             <slot name="icon"></slot>
@@ -347,29 +347,29 @@ found in the LICENSE file.
           </div>
         </div>
       </template>
-      <template is="dom-if" if="[[jemaosLayout]]">
+      <template is="dom-if" if="[[wings8osLayout]]">
         <div id="header-container" class="layout vertical flex center-justified">
           <template is="dom-if" if="[[showNoNetworkLink_]]">
-            <div id="jemaos-local-connect-container">
+            <div id="wings8os-local-connect-container">
               <iron-icon icon="oobe-32:avatar"></iron-icon>
-              <a id="jemaos-local-connect-link" href="#" on-click="onLocalConnectClicked_">
+              <a id="wings8os-local-connect-link" href="#" on-click="onLocalConnectClicked_">
                 [[localConnectText_]]
               </a>
             </div>
           </template>
           <template is="dom-if" if="[[!showNoNetworkLink_]]">
             <template is="dom-if" if="[[animationUrl]]">
-              <div id="oobe-jemaos-illustration" class="vertical-mode-centering">
-                <slot name="jemaos-illustration">
+              <div id="oobe-wings8os-illustration" class="vertical-mode-centering">
+                <slot name="wings8os-illustration">
                   <template is="dom-if" if="[[animationUrl]]">
-                    <oobe-cr-lottie id="jemaos-illustration-animation" hide-play-pause-icon loop="[[animationLoop]]"
+                    <oobe-cr-lottie id="wings8os-illustration-animation" hide-play-pause-icon loop="[[animationLoop]]"
                       animation-url="[[animationUrl]]">
                 </slot>
               </div>
             </template>
             <template is="dom-if" if="[[!animationUrl]]">
-              <div id="oobe-jemaos-illustration" class="vertical-mode-centering oobe-jemaos-non-animation-container">
-                <slot name="jemaos-illustration"></slot>
+              <div id="oobe-wings8os-illustration" class="vertical-mode-centering oobe-wings8os-non-animation-container">
+                <slot name="wings8os-illustration"></slot>
               </div>
             </template>
           </template>

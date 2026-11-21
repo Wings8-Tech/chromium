@@ -8,7 +8,7 @@
 
 #include "ash/components/arc/session/arc_bridge_service.h"
 #include "ash/components/arc/session/arc_service_manager.h"
-#include "ash/jemaos_ai/jemaos_ai_view.h"
+#include "ash/wings8os_ai/wings8os_ai_view.h"
 #include "ash/session/session_controller_impl.h"
 #include "ash/shell.h"
 #include "ash/shelf/shelf.h"
@@ -133,10 +133,10 @@ void TouchSelectionMenuRunnerChromeOS::OpenMenu(
 
 bool TouchSelectionMenuRunnerChromeOS::CanHandleSendTextToAI() {
   ash::Shelf* shelf = ash::Shelf::ForWindow(ash::Shell::GetPrimaryRootWindow());
-  if (!shelf || !shelf->jema_assistant_view()) {
+  if (!shelf || !shelf->wings8_assistant_view()) {
     return false;
   }
-  return shelf->jema_assistant_view()->CanHandleTouchSelectionMenuAction();
+  return shelf->wings8_assistant_view()->CanHandleTouchSelectionMenuAction();
 }
 
 void TouchSelectionMenuRunnerChromeOS::HandleSendTextToAI(const std::u16string& text) {
@@ -144,5 +144,5 @@ void TouchSelectionMenuRunnerChromeOS::HandleSendTextToAI(const std::u16string& 
     return;
   }
   ash::Shelf* shelf = ash::Shelf::ForWindow(ash::Shell::GetPrimaryRootWindow());
-  shelf->jema_assistant_view()->HandleSendTextToAI(anchor_rect_, text);
+  shelf->wings8_assistant_view()->HandleSendTextToAI(anchor_rect_, text);
 }

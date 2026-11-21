@@ -118,7 +118,7 @@
 #include "ui/views/widget/widget.h"
 #include "ui/views/widget/widget_observer.h"
 #include "url/gurl.h"
-#include "jemaos/switches/urls/urls_constants.h"
+#include "wings8os/switches/urls/urls_constants.h"
 
 namespace ash {
 
@@ -443,7 +443,7 @@ AccessibilityManager* AccessibilityManager::Get() {
 // static
 void AccessibilityManager::ShowAccessibilityHelp() {
   ShowSingletonTab(ProfileManager::GetActiveUserProfile(),
-                   GURL(jemaos::constants::kJemaAccessibilityHelpURL));
+                   GURL(wings8os::constants::kWings8AccessibilityHelpURL));
 }
 
 AccessibilityManager::AccessibilityManager() {

@@ -174,7 +174,7 @@ export const ICON_TYPES = {
   PLUGIN_VM: 'plugin_vm',
   POWERPOINT: 'ppt',
   RAW: 'raw',
-  JEMADROP: 'jemadrop',
+  WINGS8DROP: 'wings8drop',
   RECENT: 'recent',
   REMOVABLE: 'removable',
   SCRIPT: 'script',

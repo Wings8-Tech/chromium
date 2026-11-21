@@ -39,8 +39,8 @@ class ASH_PUBLIC_EXPORT AssistantStateObserver : public base::CheckedObserver {
   virtual void OnAssistantNotificationEnabled(bool notification_enabled) {}
   virtual void OnAssistantOnboardingModeChanged(
       assistant::prefs::AssistantOnboardingMode onboarding_mode) {}
-  virtual void OnJemaAssistantEnabled(bool enabled) {}
-  virtual void OnJemaAssistantExtraAcceleratorEnabled(bool enabled) {}
+  virtual void OnWings8AssistantEnabled(bool enabled) {}
+  virtual void OnWings8AssistantExtraAcceleratorEnabled(bool enabled) {}
   virtual void OnAssistantStateDestroyed() {}
   virtual void OnAssistantStatusChanged(assistant::AssistantStatus status) {}
   virtual void OnAssistantFeatureAllowedChanged(
@@ -113,12 +113,12 @@ class ASH_PUBLIC_EXPORT AssistantStateBase {
     return locked_full_screen_enabled_;
   }
 
-  const std::optional<bool>& jema_assistant_enabled() const {
-    return jema_assistant_enabled_;
+  const std::optional<bool>& wings8_assistant_enabled() const {
+    return wings8_assistant_enabled_;
   }
 
-  const std::optional<bool>& jema_assistant_extra_accelerator_enabled() const {
-    return jema_assistant_extra_accelerator_enabled_;
+  const std::optional<bool>& wings8_assistant_extra_accelerator_enabled() const {
+    return wings8_assistant_extra_accelerator_enabled_;
   }
 
   std::string ToString() const;
@@ -144,7 +144,7 @@ class ASH_PUBLIC_EXPORT AssistantStateBase {
   void UpdateLaunchWithMicOpen();
   void UpdateNotificationEnabled();
   void UpdateOnboardingMode();
-  void UpdateJemaAssistantEnabled();
+  void UpdateWings8AssistantEnabled();
 
   // Called when new values of the listened states are received.
   void UpdateAssistantStatus(assistant::AssistantStatus status);
@@ -197,8 +197,8 @@ class ASH_PUBLIC_EXPORT AssistantStateBase {
   // available yet.
   std::optional<bool> locked_full_screen_enabled_;
 
-  std::optional<bool> jema_assistant_enabled_;
-  std::optional<bool> jema_assistant_extra_accelerator_enabled_;
+  std::optional<bool> wings8_assistant_enabled_;
+  std::optional<bool> wings8_assistant_extra_accelerator_enabled_;
 
   // Observes user profile prefs for the Assistant.
   std::unique_ptr<PrefChangeRegistrar> pref_change_registrar_;

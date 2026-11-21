@@ -274,11 +274,11 @@ void ProfileHelperImpl::SetUserToProfileMappingForTesting(
   DCHECK(user);
   user_to_profile_for_testing_[user] = profile;
 }
-// ---***JEMAOS BEGIN***---
+// ---***WINGS8OS BEGIN***---
 // static
-bool ProfileHelper::IsJemaProfile(const Profile* profile) {
-  return profile && profile->IsJemaProfile();
+bool ProfileHelper::IsWings8Profile(const Profile* profile) {
+  return profile && profile->IsWings8Profile();
 }
-// ---***JEMAOS END***---
+// ---***WINGS8OS END***---
 
 }  // namespace ash

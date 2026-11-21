@@ -209,13 +209,13 @@ void CandidateView::SetHighlighted(bool highlighted) {
   if (highlighted) {
     if (index_in_page_ == 0) {
       SetBackground(views::CreateThemedRoundedRectBackground(
-            kJemaColorTextfieldSelectionBackground, background_radius_, 0, 0));
+            kWings8ColorTextfieldSelectionBackground, background_radius_, 0, 0));
     } else if (index_in_page_ == page_size_ - 1) {
       SetBackground(views::CreateThemedRoundedRectBackground(
-            kJemaColorTextfieldSelectionBackground, 0, background_radius_, 0));
+            kWings8ColorTextfieldSelectionBackground, 0, background_radius_, 0));
     } else {
       SetBackground(views::CreateThemedSolidBackground(
-          ui::kJemaColorTextfieldSelectionBackground));
+          ui::kWings8ColorTextfieldSelectionBackground));
     }
 
     if (!kUseModernSkin) {

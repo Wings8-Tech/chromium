@@ -63,9 +63,9 @@ export class PrivacyGuideSafeBrowsingFragmentElement extends
         },
       },
 
-      isJemaProfile_: {
+      isWings8Profile_: {
         type: Boolean,
-        value: () => loadTimeData.getBoolean('isJemaProfile'),
+        value: () => loadTimeData.getBoolean('isWings8Profile'),
       },
     };
   }
@@ -147,8 +147,8 @@ export class PrivacyGuideSafeBrowsingFragmentElement extends
   }
 
   private safeBrowsingEnhancedDesc_(): string {
-    if (loadTimeData.getBoolean('isJemaProfile')) {
-      return this.i18n('safeBrowsingEnhancedJemaDesc');
+    if (loadTimeData.getBoolean('isWings8Profile')) {
+      return this.i18n('safeBrowsingEnhancedWings8Desc');
     } else {
       return this.i18n('safeBrowsingEnhancedDesc');
     }

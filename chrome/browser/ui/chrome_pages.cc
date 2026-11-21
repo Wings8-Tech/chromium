@@ -79,11 +79,11 @@
 #else
 #include "chrome/browser/ui/signin/signin_view_controller.h"
 #endif
-//---***JEMAOS BEGIN***---
-#include "jemaos/switches/urls/urls_constants.h"
-#include "jemaos/misc/jemaos_release_note_url.h"
-#include "jemaos/switches/services/services_switches.h"
-//---***JEMAOS END***---
+//---***WINGS8OS BEGIN***---
+#include "wings8os/switches/urls/urls_constants.h"
+#include "wings8os/misc/wings8os_release_note_url.h"
+#include "wings8os/switches/services/services_switches.h"
+//---***WINGS8OS END***---
 
 #if !BUILDFLAG(IS_ANDROID)
 #include "base/metrics/histogram_functions.h"
@@ -139,13 +139,13 @@ void LaunchReleaseNotesImpl(Profile* profile, apps::LaunchSource source) {
 }
 #endif
 
-//---***JEMAOS BEGIN***---
+//---***WINGS8OS BEGIN***---
 void LaunchReleaseNotesInTab(Profile* profile) {
-  GURL url(jemaos::misc::BuildJemaReleaseNoteUrlWithPath());
+  GURL url(wings8os::misc::BuildWings8ReleaseNoteUrlWithPath());
   auto displayer = std::make_unique<ScopedTabbedBrowserDisplayer>(profile);
   ShowSingletonTab(displayer->browser(), url);
 }
-//---***JEMAOS END***---
+//---***WINGS8OS END***---
 
 // Shows either the help app or the appropriate help page for |source|. If
 // |browser| is NULL and the help page is used (vs the app), the help page is
@@ -208,7 +208,7 @@ void ShowHelpImpl(Browser* browser, Profile* profile, HelpSource source) {
       NOTREACHED() << "Unhandled help source " << source;
   }
 #endif  // BUILDFLAG_IS_CHROMEOS_LACROS)
-  url = GURL(jemaos::constants::kJemaOSHelpURL);
+  url = GURL(wings8os::constants::kWings8OSHelpURL);
   if (browser) {
     ShowSingletonTab(browser, url);
   } else {
@@ -405,15 +405,15 @@ void LaunchReleaseNotes(Profile* profile, apps::LaunchSource source) {
 #if BUILDFLAG(IS_CHROMEOS_ASH) && BUILDFLAG(GOOGLE_CHROME_BRANDING)
   LaunchReleaseNotesImpl(profile, source);
 #endif
-  // ---***JEMAOS BEGIN***---
+  // ---***WINGS8OS BEGIN***---
   LaunchReleaseNotesInTab(profile);
-  // ---***JEMAOS END***---
+  // ---***WINGS8OS END***---
 }
 
 void ShowBetaForum(Browser* browser) {
-  //---***JEMAOS BEGIN***---
-  ShowSingletonTab(browser, GURL(jemaos::constants::kJemaOSForumURL));
-  //---***JEMAOS END***---
+  //---***WINGS8OS BEGIN***---
+  ShowSingletonTab(browser, GURL(wings8os::constants::kWings8OSForumURL));
+  //---***WINGS8OS END***---
 }
 
 void ShowSlow(Browser* browser) {
@@ -594,7 +594,7 @@ void ShowSearchEngineSettings(Browser* browser) {
 }
 
 void ShowWebStore(Browser* browser, std::string_view utm_source_value) {
-  GURL webstore_url = GURL(jemaos::switches::GetJemaOSAppStoreURL() + "/?init=");
+  GURL webstore_url = GURL(wings8os::switches::GetWings8OSAppStoreURL() + "/?init=");
   NavigateParams params(browser, webstore_url, ui::PAGE_TRANSITION_AUTO_BOOKMARK);
   params.disposition = WindowOpenDisposition::CURRENT_TAB;
   params.window_action = NavigateParams::NO_ACTION;

@@ -3,13 +3,13 @@
 // found in the LICENSE file.
 
 #include "components/safety_check/url_constants.h"
-#include "jemaos/build/config/buildflags.h"
+#include "wings8os/build/config/buildflags.h"
 
 namespace safety_check {
 
-#if BUILDFLAG(USE_JEMAOS_COM)
+#if BUILDFLAG(USE_WINGS8OS_COM)
 const char kConnectivityCheckUrl[] =
-    "https://store.jemaos.com/204";
+    "https://store.wings8.org/204";
 #else
 const char kConnectivityCheckUrl[] =
     "https://connectivitycheck.gstatic.com/generate_204";

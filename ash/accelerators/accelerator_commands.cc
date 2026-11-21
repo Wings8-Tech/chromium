@@ -24,7 +24,7 @@
 #include "ash/display/screen_orientation_controller.h"
 #include "ash/focus_cycler.h"
 #include "ash/frame/non_client_frame_view_ash.h"
-#include "ash/jemaos_ai/jemaos_ai_view.h"
+#include "ash/wings8os_ai/wings8os_ai_view.h"
 #include "ash/game_dashboard/game_dashboard_controller.h"
 #include "ash/glanceables/glanceables_controller.h"
 #include "ash/ime/ime_controller_impl.h"
@@ -1323,9 +1323,9 @@ void ToggleAssignToAllDesk() {
 }
 
 void ToggleAssistant() {
-  if (ash::features::IsJemaAssistantEnabled()) {
-    if (AssistantState::Get()->jema_assistant_enabled().value_or(false)) {
-      NewWindowDelegate::GetInstance()->OpenUrl(GURL("chrome://jemaos-ai"),
+  if (ash::features::IsWings8AssistantEnabled()) {
+    if (AssistantState::Get()->wings8_assistant_enabled().value_or(false)) {
+      NewWindowDelegate::GetInstance()->OpenUrl(GURL("chrome://wings8os-ai"),
                                                 NewWindowDelegate::OpenUrlFrom::kUserInteraction,
                                                 NewWindowDelegate::Disposition::kNewWindow);
     }
@@ -1466,12 +1466,12 @@ void EnableSelectToSpeak() {
   Shell::Get()->accessibility_controller()->EnableSelectToSpeakWithDialog();
 }
 
-void ToggleJemaOSAssistant() {
-  if (!ash::features::IsJemaAssistantEnabled()) {
+void ToggleWings8OSAssistant() {
+  if (!ash::features::IsWings8AssistantEnabled()) {
     return;
   }
   Shelf* shelf = Shelf::ForWindow(Shell::GetPrimaryRootWindow());
-  shelf->jema_assistant_view()->ShowBubble();
+  shelf->wings8_assistant_view()->ShowBubble();
 }
 
 void EnableOrToggleDictation() {

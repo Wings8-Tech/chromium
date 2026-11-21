@@ -1,9 +1,9 @@
-// Copyright 2025 Jema Technology. All rights reserved.
+// Copyright 2025 Wings8 Technology. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-#ifndef JEMAOS_CHROME_BROWSER_WEB_APPLICATIONS_PREINSTALLED_WEB_APPS_MISTRAL_H_
-#define JEMAOS_CHROME_BROWSER_WEB_APPLICATIONS_PREINSTALLED_WEB_APPS_MISTRAL_H_
+#ifndef WINGS8OS_CHROME_BROWSER_WEB_APPLICATIONS_PREINSTALLED_WEB_APPS_MISTRAL_H_
+#define WINGS8OS_CHROME_BROWSER_WEB_APPLICATIONS_PREINSTALLED_WEB_APPS_MISTRAL_H_
 
 #include "chrome/browser/web_applications/external_install_options.h"
 
@@ -13,4 +13,4 @@ ExternalInstallOptions GetConfigForMistral();
 
 }  // namespace web_app
 
-#endif  // JEMAOS_CHROME_BROWSER_WEB_APPLICATIONS_PREINSTALLED_WEB_APPS_MISTRAL_H_
+#endif  // WINGS8OS_CHROME_BROWSER_WEB_APPLICATIONS_PREINSTALLED_WEB_APPS_MISTRAL_H_

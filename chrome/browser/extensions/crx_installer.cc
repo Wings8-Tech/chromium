@@ -181,12 +181,12 @@ void CrxInstaller::InstallCrx(const base::FilePath& source_file) {
                 base::CommandLine::ForCurrentProcess()->HasSwitch(
                     ::switches::kAppsGalleryURL))
           : GetExternalVerifierFormat();
-  // ---***JEMAOS BEGIN***---
-  // if (profile_->IsJemaProfile()) {
-  // allow google account install from jemaos store
+  // ---***WINGS8OS BEGIN***---
+  // if (profile_->IsWings8Profile()) {
+  // allow google account install from wings8os store
   format = GetExternalVerifierFormat();
   // }
-  // ---***JEMAOS END***---
+  // ---***WINGS8OS END***---
   InstallCrxFile(CRXFileInfo(source_file, format));
 }
 

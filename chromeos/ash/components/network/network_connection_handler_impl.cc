@@ -43,15 +43,15 @@
 #include "dbus/object_path.h"
 #include "net/cert/x509_certificate.h"
 #include "third_party/cros_system_api/dbus/service_constants.h"
-//---***JEMAOS BEGIN***---
-#include "jemaos/switches/features/network_switches.h"
-#include "jemaos/switches/features/network_constants.h"
-#include "jemaos/chromeos/ash/components/dbus/jemaos_shell_client/jemaos_shell_client.h"
-#include "jemaos/chromeos/ash/components/dbus/jemaos_shell_client/shell_state.h"
+//---***WINGS8OS BEGIN***---
+#include "wings8os/switches/features/network_switches.h"
+#include "wings8os/switches/features/network_constants.h"
+#include "wings8os/chromeos/ash/components/dbus/wings8os_shell_client/wings8os_shell_client.h"
+#include "wings8os/chromeos/ash/components/dbus/wings8os_shell_client/shell_state.h"
 
-using jemaos::ash::JemaOSShellClient;
-using jemaos::ash::ShellState;
-//---***JEMAOS END***---
+using wings8os::ash::Wings8OSShellClient;
+using wings8os::ash::ShellState;
+//---***WINGS8OS END***---
 
 namespace ash {
 
@@ -238,7 +238,7 @@ std::ostream& operator<<(std::ostream& stream, client_cert::ConfigType type) {
 
 }  // namespace
 
-//---***JEMAOS BEGIN***---
+//---***WINGS8OS BEGIN***---
 void NetworkConnectionHandlerImpl::ShellStateCallback(base::OnceClosure callback,
                                                       std::optional<ShellState> state) {
     VLOG(1) << "Shell State Callback: state code:" << state->code;
@@ -251,12 +251,12 @@ void NetworkConnectionHandlerImpl::ShellStateCallback(base::OnceClosure callback
 void NetworkConnectionHandlerImpl::InvokeExecuteReloadWifiDrv(base::OnceClosure callback) {
     on_reload_wifidrv_ = true;
     VLOG(1) << "Invoke ExecuteReloadWifiDrv:" << on_reload_wifidrv_;
-    JemaOSShellClient::Get()
-      ->SyncExec(jemaos::constants::kJemaOSReloadWifiCmd,
+    Wings8OSShellClient::Get()
+      ->SyncExec(wings8os::constants::kWings8OSReloadWifiCmd,
         base::BindOnce(&NetworkConnectionHandlerImpl::ShellStateCallback, weak_ptr_factory_.GetWeakPtr(), std::move(callback)));
 }
 
-//---***JEMAOS END***---
+//---***WINGS8OS END***---
 
 NetworkConnectionHandlerImpl::ConnectRequest::ConnectRequest(
     ConnectCallbackMode mode,
@@ -312,9 +312,9 @@ void NetworkConnectionHandlerImpl::Init(
   // After this point, the NetworkConnectionHandlerImpl is fully initialized
   // (all handler references set, observers registered, ...).
 
-  //---***JEMAOS BEGIN***---
-  need_reload_wifidrv_ = jemaos::switches::NeedResetWifiDriver();
-  //---***JEMAOS END***---
+  //---***WINGS8OS BEGIN***---
+  need_reload_wifidrv_ = wings8os::switches::NeedResetWifiDriver();
+  //---***WINGS8OS END***---
 }
 
 void NetworkConnectionHandlerImpl::OnCertificatesLoaded() {
@@ -985,7 +985,7 @@ void NetworkConnectionHandlerImpl::CallShillConnect(
     const std::string& service_path) {
   NET_LOG(EVENT) << "Sending Connect Request to Shill: "
                  << NetworkPathId(service_path);
-  //---***JEMAOS BEGIN***---
+  //---***WINGS8OS BEGIN***---
   VLOG(1) << "check if need reload " << need_reload_wifidrv_;
   if (need_reload_wifidrv_) {
     VLOG(1) << "check if on reload " << on_reload_wifidrv_;
@@ -995,7 +995,7 @@ void NetworkConnectionHandlerImpl::CallShillConnect(
                      weak_ptr_factory_.GetWeakPtr(), service_path));
     return;
   }
-  //---***JEMAOS END***---
+  //---***WINGS8OS END***---
   network_state_handler_->ClearLastErrorForNetwork(service_path);
   ShillServiceClient::Get()->Connect(
       dbus::ObjectPath(service_path),

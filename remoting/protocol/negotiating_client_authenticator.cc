@@ -148,9 +148,9 @@ void NegotiatingClientAuthenticator::CreateAuthenticatorForCurrentMethod(
     case AuthenticationMethod::CORP_SESSION_AUTHZ_SPAKE2_CURVE25519:
       NOTREACHED();
 
-    case AuthenticationMethod::JEMAOS_HMAC_SHA256:
-    case AuthenticationMethod::JEMAOS_SPAKE2_CURVE25519:
-      // JEMAOS: only implemented by the JemaOS web client (not by this native
+    case AuthenticationMethod::WINGS8OS_HMAC_SHA256:
+    case AuthenticationMethod::WINGS8OS_SPAKE2_CURVE25519:
+      // WINGS8OS: only implemented by the Wings8OS web client (not by this native
       // client), which speaks the protocol directly.
       NOTREACHED();
   }

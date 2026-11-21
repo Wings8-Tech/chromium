@@ -389,7 +389,7 @@ std::optional<bool> IsUserChild(Profile* profile) {
   return user ? std::make_optional(user->GetType() ==
                                    user_manager::UserType::kChild
                                 || user->GetType() ==
-                                   user_manager::UserType::kJemaChild)
+                                   user_manager::UserType::kWings8Child)
               : std::nullopt;
 }
 #endif  // BUILDFLAG(IS_CHROMEOS)

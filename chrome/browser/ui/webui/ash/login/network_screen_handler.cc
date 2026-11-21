@@ -45,16 +45,16 @@ void NetworkScreenHandler::DeclareLocalizedValues(
                IDS_NETWORK_PROXY_SETTINGS_LIST_ITEM_NAME);
   builder->Add("addWiFiListItemName", IDS_NETWORK_ADD_WI_FI_LIST_ITEM_NAME);
 
-  // JemaOS online account network requirement strings
-  builder->Add("jemaosOnlineAccountNetworkRequiredError",
-               IDS_JEMAOS_ONLINE_ACCOUNT_NETWORK_REQUIRED_ERROR);
-  builder->Add("jemaosOnlineAccountNetworkRequiredMessage",
-               IDS_JEMAOS_ONLINE_ACCOUNT_NETWORK_REQUIRED_MESSAGE);
-  builder->Add("jemaosOnlineAccountWifiPreferredMessage",
-               IDS_JEMAOS_ONLINE_ACCOUNT_WIFI_PREFERRED_MESSAGE);
+  // Wings8OS online account network requirement strings
+  builder->Add("wings8osOnlineAccountNetworkRequiredError",
+               IDS_WINGS8OS_ONLINE_ACCOUNT_NETWORK_REQUIRED_ERROR);
+  builder->Add("wings8osOnlineAccountNetworkRequiredMessage",
+               IDS_WINGS8OS_ONLINE_ACCOUNT_NETWORK_REQUIRED_MESSAGE);
+  builder->Add("wings8osOnlineAccountWifiPreferredMessage",
+               IDS_WINGS8OS_ONLINE_ACCOUNT_WIFI_PREFERRED_MESSAGE);
 
-  // JemaOS local account sign-in link shown on the WiFi page when offline.
-  builder->Add("jemaosLocalConnectLink", IDS_JEMAOS_LOCAL_CONNECT_LINK);
+  // Wings8OS local account sign-in link shown on the WiFi page when offline.
+  builder->Add("wings8osLocalConnectLink", IDS_WINGS8OS_LOCAL_CONNECT_LINK);
 
   builder->Add("networkScreenQuickStart",
                IDS_LOGIN_QUICK_START_SETUP_NETWORK_SCREEN_ENTRY_POINT);
@@ -79,10 +79,10 @@ void NetworkScreenHandler::GetAdditionalParameters(base::Value::Dict* dict) {
   cellular_setup::AddNonStringLoadTimeDataToDict(dict);
 }
 
-void NetworkScreenHandler::OnJemaosOnlineAccountSelected() {
-  // Notify WebUI that JemaOS online account was selected on the network screen.
+void NetworkScreenHandler::OnWings8osOnlineAccountSelected() {
+  // Notify WebUI that Wings8OS online account was selected on the network screen.
   // UI handlers may choose to react (e.g. advance flow, record metrics).
-  CallExternalAPI("onJemaosOnlineAccountSelected");
+  CallExternalAPI("onWings8osOnlineAccountSelected");
 }
 void NetworkScreenHandler::SetQuickStartEntryPointVisibility(bool visible) {
   CallExternalAPI("setQuickStartEntryPointVisibility", visible);

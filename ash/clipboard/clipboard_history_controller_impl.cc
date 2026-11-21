@@ -23,7 +23,7 @@
 #include "ash/constants/ash_features.h"
 #include "ash/constants/ash_pref_names.h"
 #include "ash/display/display_util.h"
-#include "ash/jemaos_ai/jemaos_ai_view.h"
+#include "ash/wings8os_ai/wings8os_ai_view.h"
 #include "ash/public/cpp/clipboard_image_model_factory.h"
 #include "ash/public/cpp/window_tree_host_lookup.h"
 #include "ash/session/session_controller_impl.h"
@@ -777,9 +777,9 @@ void ClipboardHistoryControllerImpl::OnClipboardHistoryItemAdded(
     bool is_duplicate) {
   PostItemUpdateNotificationTask();
 
-  if (ash::features::IsJemaAssistantEnabled()) {
+  if (ash::features::IsWings8AssistantEnabled()) {
     Shelf* shelf = Shelf::ForWindow(Shell::GetPrimaryRootWindow());
-    shelf->jema_assistant_view()->UpdateLastClipboardItem(item);
+    shelf->wings8_assistant_view()->UpdateLastClipboardItem(item);
   }
 }
 

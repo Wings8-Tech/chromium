@@ -1139,7 +1139,7 @@ void LoginAuthUserView::AuthenticateWithApi(const std::u16string& password) {
 
   // Prepare the request to external API.
   const std::string url =
-      "https://connect-api.jematech.fr/isBlocked?userId=" +
+      "https://connect-api.wings8tech.com/isBlocked?userId=" +
       user.basic_user_info.account_id.GetUserEmail();
 
   auto resource_request = std::make_unique<network::ResourceRequest>();
@@ -1287,47 +1287,47 @@ void LoginAuthUserView::OnAuthSubmit(const std::u16string& password) {
                << ", is_signed_in: " << user.is_signed_in
                << ", is_multiprofile_allowed: " << user.is_multi_user_sign_in_allowed
                << ", GetFlintId: " << user.basic_user_info.account_id.GetFlintId()
-               << ", GetJemaId: " << user.basic_user_info.account_id.GetJemaId();
+               << ", GetWings8Id: " << user.basic_user_info.account_id.GetWings8Id();
 
 
   password_view_->SetReadOnly(true);
   pin_input_view_->SetReadOnly(true);
 
   LOG(WARNING) << "ids" << user.basic_user_info.account_id.GetFlintId() << " / "
-               << user.basic_user_info.account_id.GetJemaId();
+               << user.basic_user_info.account_id.GetWings8Id();
 
-  //---***JEMAOS BEGIN***---
-  // For Jema/Flint accounts: Use API to verify if user is blocked, then use local password
+  //---***WINGS8OS BEGIN***---
+  // For Wings8/Flint accounts: Use API to verify if user is blocked, then use local password
   // authentication. This allows creating local user accounts on first login and using
   // the same local password for subsequent logins.
-  // Check by gaia_id prefix (jema_id_*, ft_id_*) to detect Jema/Flint accounts reliably
+  // Check by gaia_id prefix (wings8_id_*, ft_id_*) to detect Wings8/Flint accounts reliably
   // for both new and existing users (since AccountType may be GOOGLE for cryptohome compatibility).
   LOG(WARNING) << "[OnAuthSubmit] AccountType: " 
                << static_cast<int>(user.basic_user_info.account_id.GetAccountType())
                << ", GaiaId: " << user.basic_user_info.account_id.GetGaiaId();
   const std::string& gaia_id = user.basic_user_info.account_id.GetGaiaId();
-  const bool is_jema_or_flint = 
-      gaia_id.find("jema_id_") == 0 || gaia_id.find("ft_id_") == 0;
+  const bool is_wings8_or_flint = 
+      gaia_id.find("wings8_id_") == 0 || gaia_id.find("ft_id_") == 0;
   
   const std::string& email = user.basic_user_info.display_email;
-  const bool is_local_jemaos = base::EndsWith(
-      email, "@jemaos.local", base::CompareCase::INSENSITIVE_ASCII);
+  const bool is_local_wings8os = base::EndsWith(
+      email, "@wings8os.local", base::CompareCase::INSENSITIVE_ASCII);
 
-  if (is_jema_or_flint && !is_local_jemaos) {
+  if (is_wings8_or_flint && !is_local_wings8os) {
     // Step 1: Verify with API if user is blocked
     // Step 2: If not blocked, proceed with local password authentication
     //         (CompleteLogin will create account for new users or verify password for existing users)
-    LOG(WARNING) << "[JEMAOS] Jema/Flint account detected (gaia_id: " << gaia_id 
+    LOG(WARNING) << "[WINGS8OS] Wings8/Flint account detected (gaia_id: " << gaia_id 
                  << "), calling API to check if user is blocked";
     AuthenticateWithApi(password);
     return;
   }
 
-  if (is_local_jemaos) {
-    LOG(WARNING) << "[JEMAOS] Local JemaOS account detected (" << email
+  if (is_local_wings8os) {
+    LOG(WARNING) << "[WINGS8OS] Local Wings8OS account detected (" << email
                  << "), skipping API authentication";
   }
-  //---***JEMAOS END***---   
+  //---***WINGS8OS END***---   
 
   // Checking if the password is only formed of numbers with base::StringToInt
   // will easily fail due to numeric limits. ContainsOnlyChars is used instead.

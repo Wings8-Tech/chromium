@@ -8731,10 +8731,10 @@ const FeatureEntry kFeatureEntries[] = {
      flag_descriptions::kTetheringExperimentalFunctionalityDescription, kOsCrOS,
      FEATURE_VALUE_TYPE(ash::features::kTetheringExperimentalFunctionality)},
 
-    {"enable-jemaos-ai",
-     flag_descriptions::kJemaOsAIName,
-     flag_descriptions::kJemaOsAIDescription, kOsCrOS,
-     FEATURE_VALUE_TYPE(ash::features::kJemaAssistant)},
+    {"enable-wings8os-ai",
+     flag_descriptions::kWings8OsAIName,
+     flag_descriptions::kWings8OsAIDescription, kOsCrOS,
+     FEATURE_VALUE_TYPE(ash::features::kWings8Assistant)},
 
     {"dynamic-search-update-animation",
      flag_descriptions::kDynamicSearchUpdateAnimationName,

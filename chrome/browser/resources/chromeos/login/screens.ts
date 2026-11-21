@@ -31,13 +31,13 @@ import './screens/common/local_state_error.js';
 import './screens/common/managed_terms_of_service.js';
 import './screens/common/marketing_opt_in.js';
 import './screens/common/multidevice_setup.js';
-import './screens/common/jema_local_signin.js';
+import './screens/common/wings8_local_signin.js';
 import './screens/common/data_restore.js';
 import './screens/common/online_authentication_screen.js';
 import './screens/common/oobe_reset.js';
 import './screens/common/oobe_eula.js';
 import './screens/common/os_install.js';
-import './screens/common/jemaos_installer.js';
+import './screens/common/wings8os_installer.js';
 import './screens/common/os_trial.js';
 import './screens/common/perks_discovery.js';
 import './screens/common/personalized_recommend_apps.js';
@@ -165,7 +165,7 @@ export const commonScreensList: OobeTypes.ScreensList = [
   {tag: 'managed-terms-of-service-element', id: 'terms-of-service'},
   {tag: 'marketing-opt-in-element', id: 'marketing-opt-in'},
   {tag: 'multidevice-setup-element', id: 'multidevice-setup-screen'},
-  {tag: 'jema-local-signin-element', id: 'jema-local-signin'},
+  {tag: 'wings8-local-signin-element', id: 'wings8-local-signin'},
   {tag: 'oobe-eula-element', id: 'oobe-eula-md'},
   {
     tag: 'online-authentication-screen-element',
@@ -185,7 +185,7 @@ export const commonScreensList: OobeTypes.ScreensList = [
   },
   {tag: 'factor-setup-success-element', id: 'factor-setup-success'},
   {
-    tag: 'oobe-jemaos-installer',
+    tag: 'oobe-wings8os-installer',
     id: 'os-install',
     condition: 'isOsInstallAllowed',
   },

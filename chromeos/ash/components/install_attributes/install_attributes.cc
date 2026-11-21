@@ -34,8 +34,8 @@
 #include "components/policy/proto/install_attributes.pb.h"
 #include "google_apis/gaia/gaia_auth_util.h"
 #include "third_party/cros_system_api/dbus/service_constants.h"
-#include "jemaos/switches/account/account_switches.h"
-#include "jemaos/switches/account/base/account_base.h"
+#include "wings8os/switches/account/account_switches.h"
+#include "wings8os/switches/account/base/account_base.h"
 
 namespace ash {
 
@@ -344,8 +344,8 @@ void InstallAttributes::LockDeviceIfAttributesIsReady(
   std::string service;
   if (device_mode == policy::DEVICE_MODE_ENTERPRISE ||
       device_mode == policy::DEVICE_MODE_DEMO) {
-    if (jemaos::switches::IsJemaAccountEnabled()) {
-      service = "jemaos";
+    if (wings8os::switches::IsWings8AccountEnabled()) {
+      service = "wings8os";
     } else {
       service = "default";
     }
@@ -376,7 +376,7 @@ void InstallAttributes::LockDeviceIfAttributesIsReady(
     return;
   }
 
-  jemaos::switches::JemaSetDeviceManagedFlag(true);
+  wings8os::switches::Wings8SetDeviceManagedFlag(true);
 
   ReadImmutableAttributes(
       base::BindOnce(&InstallAttributes::OnReadImmutableAttributes,
@@ -498,9 +498,9 @@ const char InstallAttributes::kDemoDeviceMode[] = "demo_mode";
 const char InstallAttributes::kAttrEnterpriseDeviceId[] =
     "enterprise.device_id";
 const char InstallAttributes::kAttrEnterpriseDomain[] = "enterprise.domain";
-// ---***JEMAOS BEGIN***---
+// ---***WINGS8OS BEGIN***---
 const char InstallAttributes::kAttrEnterpriseService[] = "enterprise.service";
-// ---***JEMAOS END***---
+// ---***WINGS8OS END***---
 const char InstallAttributes::kAttrEnterpriseRealm[] = "enterprise.realm";
 const char InstallAttributes::kAttrEnterpriseMode[] = "enterprise.mode";
 const char InstallAttributes::kAttrEnterpriseOwned[] = "enterprise.owned";
@@ -557,17 +557,17 @@ void InstallAttributes::DecodeInstallAttributes(
   registration_domain_.clear();
   registration_realm_.clear();
   registration_device_id_.clear();
-  // ---***JEMAOS BEGIN***---
+  // ---***WINGS8OS BEGIN***---
   registration_service_.clear();
-  // ---***JEMAOS END***---
+  // ---***WINGS8OS END***---
 
   const std::string enterprise_owned =
       ReadMapKey(attr_map, kAttrEnterpriseOwned);
   const std::string mode = ReadMapKey(attr_map, kAttrEnterpriseMode);
   const std::string domain = ReadMapKey(attr_map, kAttrEnterpriseDomain);
-  // ---***JEMAOS BEGIN***---
+  // ---***WINGS8OS BEGIN***---
   const std::string service = ReadMapKey(attr_map, kAttrEnterpriseService);
-  // ---***JEMAOS END***---
+  // ---***WINGS8OS END***---
   const std::string realm = ReadMapKey(attr_map, kAttrEnterpriseRealm);
   const std::string device_id = ReadMapKey(attr_map, kAttrEnterpriseDeviceId);
 
@@ -583,12 +583,12 @@ void InstallAttributes::DecodeInstallAttributes(
       }
       registration_mode_ = policy::DEVICE_MODE_ENTERPRISE;
     }
-    // ---***JEMAOS BEGIN***---
+    // ---***WINGS8OS BEGIN***---
     if (registration_mode_ == policy::DEVICE_MODE_ENTERPRISE ||
         registration_mode_ == policy::DEVICE_MODE_DEMO) {
       registration_service_ = service;
     }
-    // ---***JEMAOS END***---
+    // ---***WINGS8OS END***---
 
     if (registration_mode_ == policy::DEVICE_MODE_ENTERPRISE ||
         registration_mode_ == policy::DEVICE_MODE_DEMO) {

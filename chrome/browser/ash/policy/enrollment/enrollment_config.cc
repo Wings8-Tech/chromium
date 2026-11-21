@@ -34,7 +34,7 @@ namespace {
 
 const char kRecoveryHistogram[] = "EnterpriseCheck.EnrollementRecoveryOnBoot";
 
-const char kZeroTouchEnrollmentJemaForced[] = "enterprise-enable-zero-touch-enrollment-jema-forced";
+const char kZeroTouchEnrollmentWings8Forced[] = "enterprise-enable-zero-touch-enrollment-wings8-forced";
 
 // Do not reorder or delete entries because it is used in UMA.
 enum class EnrollmentRecoveryOnBootUma {
@@ -97,7 +97,7 @@ std::string_view ToStringView(EnrollmentConfig::Mode mode) {
     CASE(MODE_ATTESTATION_LOCAL_FORCED);
     CASE(MODE_ATTESTATION_SERVER_FORCED);
     CASE(MODE_ATTESTATION_MANUAL_FALLBACK);
-    CASE(MODE_JEMA_LOCAL_FORCED);
+    CASE(MODE_WINGS8_LOCAL_FORCED);
     CASE(MODE_INITIAL_SERVER_FORCED);
     CASE(MODE_ATTESTATION_INITIAL_SERVER_FORCED);
     CASE(MODE_ATTESTATION_INITIAL_MANUAL_FALLBACK);
@@ -186,7 +186,7 @@ EnrollmentConfig::Mode GetManualFallbackMode(
     case EnrollmentConfig::MODE_LOCAL_ADVERTISED:
     case EnrollmentConfig::MODE_SERVER_FORCED:
     case EnrollmentConfig::MODE_SERVER_ADVERTISED:
-    case EnrollmentConfig::MODE_JEMA_LOCAL_FORCED:
+    case EnrollmentConfig::MODE_WINGS8_LOCAL_FORCED:
     case EnrollmentConfig::MODE_RECOVERY:
     case EnrollmentConfig::MODE_ATTESTATION:
     case EnrollmentConfig::MODE_ATTESTATION_LOCAL_FORCED:
@@ -207,7 +207,7 @@ struct EnrollmentConfig::PrescribedConfig {
   EnrollmentConfig::Mode mode = MODE_NONE;
   std::string management_domain;
   std::string enrollment_token;
-  std::string jema_enrollment_token;
+  std::string wings8_enrollment_token;
   OOBEConfigSource oobe_config_source = OOBEConfigSource::kNone;
 
   static PrescribedConfig GetPrescribedConfig(
@@ -224,11 +224,11 @@ EnrollmentConfig::PrescribedConfig::GetPrescribedConfig(
     ash::system::StatisticsProvider* statistics_provider,
     const base::Value::Dict& device_state,
     const ash::OobeConfiguration* oobe_configuration) {
-  std::optional<std::string> jema_enrollment_token =
-    GetJemaEnrollmentToken(oobe_configuration);
-  if (jema_enrollment_token.has_value()) {
-    return {.mode = EnrollmentConfig::MODE_JEMA_LOCAL_FORCED,
-            .jema_enrollment_token = std::move(jema_enrollment_token.value()),
+  std::optional<std::string> wings8_enrollment_token =
+    GetWings8EnrollmentToken(oobe_configuration);
+  if (wings8_enrollment_token.has_value()) {
+    return {.mode = EnrollmentConfig::MODE_WINGS8_LOCAL_FORCED,
+            .wings8_enrollment_token = std::move(wings8_enrollment_token.value()),
             .oobe_config_source = policy::OOBEConfigSource::kPackagingTool};
   }
   // Decide enrollment mode. Give precedence to forced variants.
@@ -354,7 +354,7 @@ struct EnrollmentConfig::PrescribedLicense {
 EnrollmentConfig::PrescribedLicense
 EnrollmentConfig::PrescribedLicense::GetPrescribedLicense(
     const base::Value::Dict& device_state) {
-  if (EnrollmentConfig::IsZeroTouchEnrollmentJemaForced()) {
+  if (EnrollmentConfig::IsZeroTouchEnrollmentWings8Forced()) {
     return {.is_license_packaged_with_device = false,
             .assigned_upgrade_type = EnrollmentConfig::AssignedUpgradeType::
                 kAssignedUpgradeTypeChromeEnterprise,
@@ -404,13 +404,13 @@ EnrollmentConfig::EnrollmentConfig(PrescribedConfig prescribed_config,
       license_type(prescribed_license.license_type),
       assigned_upgrade_type(prescribed_license.assigned_upgrade_type),
       enrollment_token(std::move(prescribed_config.enrollment_token)),
-      jema_enrollment_token(std::move(prescribed_config.jema_enrollment_token)),
+      wings8_enrollment_token(std::move(prescribed_config.wings8_enrollment_token)),
       oobe_config_source(prescribed_config.oobe_config_source) {}
 
 // static
-bool EnrollmentConfig::IsZeroTouchEnrollmentJemaForced() {
+bool EnrollmentConfig::IsZeroTouchEnrollmentWings8Forced() {
   base::CommandLine* command_line = base::CommandLine::ForCurrentProcess();
-  return command_line->HasSwitch(kZeroTouchEnrollmentJemaForced);
+  return command_line->HasSwitch(kZeroTouchEnrollmentWings8Forced);
 }
 
 // static
@@ -441,10 +441,10 @@ EnrollmentConfig EnrollmentConfig::GetPrescribedEnrollmentConfig(
   const base::Value::Dict& device_state =
       local_state->GetDict(prefs::kServerBackedDeviceState);
 
-  std::optional<std::string> jema_enrollment_token =
-    GetJemaEnrollmentToken(oobe_configuration);
-  if (jema_enrollment_token.has_value()) {
-    base::CommandLine::ForCurrentProcess()->AppendSwitch(kZeroTouchEnrollmentJemaForced);
+  std::optional<std::string> wings8_enrollment_token =
+    GetWings8EnrollmentToken(oobe_configuration);
+  if (wings8_enrollment_token.has_value()) {
+    base::CommandLine::ForCurrentProcess()->AppendSwitch(kZeroTouchEnrollmentWings8Forced);
   }
 
   return EnrollmentConfig(

@@ -16,7 +16,7 @@
 #include "chromecast/net/time_sync_tracker.h"
 #include "net/http/http_status_code.h"
 #include "services/network/public/cpp/network_connection_tracker.h"
-#include "jemaos/build/config/buildflags.h"
+#include "wings8os/build/config/buildflags.h"
 
 class GURL;
 
@@ -35,14 +35,14 @@ class SimpleURLLoader;
 
 namespace chromecast {
 
-#if BUILDFLAG(USE_JEMAOS_COM)
+#if BUILDFLAG(USE_WINGS8OS_COM)
 // Default (HTTPS) url for connectivity checking.
 constexpr char kDefaultConnectivityCheckUrl[] =
-    "https://store.jemaos.com/204";
+    "https://store.wings8.org/204";
 
 // HTTP url for connectivity checking.
 constexpr char kHttpConnectivityCheckUrl[] =
-    "http://store.jemaos.com/204";
+    "http://store.wings8.org/204";
 #else
 // Default (HTTPS) url for connectivity checking.
 constexpr char kDefaultConnectivityCheckUrl[] =

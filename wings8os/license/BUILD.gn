@@ -1,0 +1,43 @@
+# Copyright 2020 The Wings8OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+import("//build/config/chromeos/rules.gni")
+import("//wings8os/build/config/buildflags.gni")
+
+assert(is_chromeos, "Non-Chrome-OS builds must not depend on //chromeos")
+assert(use_wings8os_license)
+
+source_set("license") {
+  deps = [
+    "//base",
+    "//crypto",
+    "//net",
+    "//content/public/browser",
+    "//dbus",
+    "//chromeos/ash/components/dbus/update_engine",
+    "//chrome/browser/ash/policy/enrollment",
+    "//chrome/browser/ash/login",
+    "//chrome/browser/ash/profiles",
+    "//components/user_manager",
+    "//wings8os/chromeos/ash/components/dbus/wings8os_shell_client",
+    "//wings8os/constants",
+    "//wings8os/prefs",
+  ]
+
+  sources = [
+    "wings8os_callback_status.h",
+    "wings8os_license_validator.cc",
+    "wings8os_license_validator.h",
+    "wings8os_license_fetcher.cc",
+    "wings8os_license_fetcher.h",
+    "wings8os_license_manager.cc",
+    "wings8os_license_manager.h",
+    "wings8os_license_enforcement.cc",
+    "wings8os_license_enforcement.h",
+    "wings8os_license_user_util.cc",
+    "wings8os_license_user_util.h",
+  ]
+
+  defines = [ "CHROMEOS_IMPLEMENTATION" ]
+}

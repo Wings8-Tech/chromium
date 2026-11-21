@@ -199,8 +199,8 @@ export interface AboutPageBrowserProxy {
    */
   getChannelInfo(): Promise<ChannelInfo>;
 
-  getEnabledJemaOTA(): Promise<boolean>;
-  enableJemaOTA(enabled: boolean): void;
+  getEnabledWings8OTA(): Promise<boolean>;
+  enableWings8OTA(enabled: boolean): void;
 
   canChangeChannel(): Promise<boolean>;
 
@@ -328,12 +328,12 @@ export class AboutPageBrowserProxyImpl implements AboutPageBrowserProxy {
     return sendWithPromise('getChannelInfo');
   }
 
-  enableJemaOTA(enabled: boolean) {
-    chrome.send('enableJemaOTA', [enabled]);
+  enableWings8OTA(enabled: boolean) {
+    chrome.send('enableWings8OTA', [enabled]);
   }
 
-  getEnabledJemaOTA() {
-    return sendWithPromise('getEnabledJemaOTA');
+  getEnabledWings8OTA() {
+    return sendWithPromise('getEnabledWings8OTA');
   }
 
   canChangeChannel(): Promise<boolean> {

@@ -128,7 +128,7 @@ std::unique_ptr<UserCloudPolicyManagerAsh> CreateUserCloudPolicyManagerAsh(
         return nullptr;
       }
       break;
-    case AccountType::JEMA_ACCOUNT:
+    case AccountType::WINGS8_ACCOUNT:
       break;
     case AccountType::FLINT_ACCOUNT:
       // Flint accounts are not supported.

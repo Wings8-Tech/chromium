@@ -87,7 +87,7 @@ void OsInstallScreenHandler::DeclareLocalizedValues(
   builder->Add("osInstallDialogShutdownButton",
                IDS_OS_INSTALL_SCREEN_SHUTDOWN_BUTTON);
 
-  DeclareJemaInstallerLocalizedValues(builder);
+  DeclareWings8InstallerLocalizedValues(builder);
 }
 
 void OsInstallScreenHandler::GetAdditionalParameters(base::Value::Dict* parameters) {
@@ -96,125 +96,125 @@ void OsInstallScreenHandler::GetAdditionalParameters(base::Value::Dict* paramete
   parameters->Set("lsbReleaseBoard", base::SysInfo::GetLsbReleaseBoardWithoutSuffix());
 }
 
-void OsInstallScreenHandler::DeclareJemaInstallerLocalizedValues(
+void OsInstallScreenHandler::DeclareWings8InstallerLocalizedValues(
     ::login::LocalizedValuesBuilder* builder) {
-  builder->Add("jemaosInstallerAppName", IDS_JEMAOS_INSTALLER_APP_NAME);
-  builder->AddF("jemaosInstallerAppDesc", IDS_JEMAOS_INSTALLER_APP_DESC,
+  builder->Add("wings8osInstallerAppName", IDS_WINGS8OS_INSTALLER_APP_NAME);
+  builder->AddF("wings8osInstallerAppDesc", IDS_WINGS8OS_INSTALLER_APP_DESC,
                 IDS_INSTALLED_PRODUCT_OS_NAME);
-  builder->Add("jemaosInstallerAppDisclaimer",
-               IDS_JEMAOS_INSTALLER_APP_DISCLAIMER);
-  builder->Add("jemaosInstallerFullDiskInstallationTitle",
-               IDS_JEMAOS_INSTALLER_FULL_DISK_INSTALLATION_TITLE);
-  builder->AddF("jemaosInstallerFullDiskInstallationHelperText",
-               IDS_JEMAOS_INSTALLER_FULL_DISK_INSTALLATION_HELPER_TEXT,
+  builder->Add("wings8osInstallerAppDisclaimer",
+               IDS_WINGS8OS_INSTALLER_APP_DISCLAIMER);
+  builder->Add("wings8osInstallerFullDiskInstallationTitle",
+               IDS_WINGS8OS_INSTALLER_FULL_DISK_INSTALLATION_TITLE);
+  builder->AddF("wings8osInstallerFullDiskInstallationHelperText",
+               IDS_WINGS8OS_INSTALLER_FULL_DISK_INSTALLATION_HELPER_TEXT,
                IDS_INSTALLED_PRODUCT_OS_NAME);
-  builder->Add("jemaosInstallerDualbootInstallationTitle",
-               IDS_JEMAOS_INSTALLER_DUALBOOT_INSTALLATION_TITLE);
-  builder->AddF("jemaosInstallerDualbootInstallationHelperText",
-               IDS_JEMAOS_INSTALLER_DUALBOOT_INSTALLATION_HELPER_TEXT,
+  builder->Add("wings8osInstallerDualbootInstallationTitle",
+               IDS_WINGS8OS_INSTALLER_DUALBOOT_INSTALLATION_TITLE);
+  builder->AddF("wings8osInstallerDualbootInstallationHelperText",
+               IDS_WINGS8OS_INSTALLER_DUALBOOT_INSTALLATION_HELPER_TEXT,
                IDS_INSTALLED_PRODUCT_OS_NAME);
-  builder->AddF("jemaosInstallerFullDiskInstallationDisclaimer",
-               IDS_JEMAOS_INSTALLER_FULL_DISK_INSTALLATION_DISCLAIMER,
+  builder->AddF("wings8osInstallerFullDiskInstallationDisclaimer",
+               IDS_WINGS8OS_INSTALLER_FULL_DISK_INSTALLATION_DISCLAIMER,
                IDS_INSTALLED_PRODUCT_OS_NAME);
-  builder->AddF("jemaosInstallerDualbootInstallationDesc",
-               IDS_JEMAOS_INSTALLER_DUALBOOT_INSTALLATION_DESC,
+  builder->AddF("wings8osInstallerDualbootInstallationDesc",
+               IDS_WINGS8OS_INSTALLER_DUALBOOT_INSTALLATION_DESC,
                IDS_INSTALLED_PRODUCT_OS_NAME);
-  builder->Add("jemaosInstallerDualbootInstallationDisclaimer",
-               IDS_JEMAOS_INSTALLER_DUALBOOT_INSTALLATION_DISCLAIMER);
-  builder->Add("jemaosInstallerInstallButton",
-               IDS_JEMAOS_INSTALLER_TEXT_ON_INSTALL_BUTTON);
-  builder->Add("jemaosInstallerConfigDiskSelectLabel",
-               IDS_JEMAOS_INSTALLER_CONFIG_DISK_SELECT_LABEL);
-  builder->Add("jemaosInstallerNormalConfigNoAvailableDisk",
-               IDS_JEMAOS_INSTALLER_NORMAL_CONFIG_NO_AVAILABLE_DISK);
-  builder->Add("jemaosInstallerInstalling",
-               IDS_JEMAOS_INSTALLER_INSTALLING_TITLE);
-  builder->Add("jemaosInstallerShutdownButton",
-               IDS_JEMAOS_INSTALLER_TEXT_ON_SHUTDOWN_BUTTON);
-  builder->Add("jemaosInstallerInstallSuccessTitle",
-               IDS_JEMAOS_INSTALLER_INSTALL_SUCCESS_TITLE);
-  builder->Add("jemaosInstallerInstallFailedTitle",
-               IDS_JEMAOS_INSTALLER_INSTALL_FAILED_TITLE);
-  builder->AddF("jemaosInstallerInstallSuccessMessage",
-               IDS_JEMAOS_INSTALLER_INSTALL_SUCCESS_MESSAGE,
+  builder->Add("wings8osInstallerDualbootInstallationDisclaimer",
+               IDS_WINGS8OS_INSTALLER_DUALBOOT_INSTALLATION_DISCLAIMER);
+  builder->Add("wings8osInstallerInstallButton",
+               IDS_WINGS8OS_INSTALLER_TEXT_ON_INSTALL_BUTTON);
+  builder->Add("wings8osInstallerConfigDiskSelectLabel",
+               IDS_WINGS8OS_INSTALLER_CONFIG_DISK_SELECT_LABEL);
+  builder->Add("wings8osInstallerNormalConfigNoAvailableDisk",
+               IDS_WINGS8OS_INSTALLER_NORMAL_CONFIG_NO_AVAILABLE_DISK);
+  builder->Add("wings8osInstallerInstalling",
+               IDS_WINGS8OS_INSTALLER_INSTALLING_TITLE);
+  builder->Add("wings8osInstallerShutdownButton",
+               IDS_WINGS8OS_INSTALLER_TEXT_ON_SHUTDOWN_BUTTON);
+  builder->Add("wings8osInstallerInstallSuccessTitle",
+               IDS_WINGS8OS_INSTALLER_INSTALL_SUCCESS_TITLE);
+  builder->Add("wings8osInstallerInstallFailedTitle",
+               IDS_WINGS8OS_INSTALLER_INSTALL_FAILED_TITLE);
+  builder->AddF("wings8osInstallerInstallSuccessMessage",
+               IDS_WINGS8OS_INSTALLER_INSTALL_SUCCESS_MESSAGE,
                IDS_INSTALLED_PRODUCT_OS_NAME);
-  builder->Add("jemaosInstallerInstallFailedMessage",
-               IDS_JEMAOS_INSTALLER_INSTALL_FAILED_MESSAGE);
-  builder->AddF("jemaosInstallDualbootConfigSelectOSPart",
-               IDS_JEMAOS_INSTALLER_DUALBOOT_CONFIG_SELECT_OS_PARTITION,
+  builder->Add("wings8osInstallerInstallFailedMessage",
+               IDS_WINGS8OS_INSTALLER_INSTALL_FAILED_MESSAGE);
+  builder->AddF("wings8osInstallDualbootConfigSelectOSPart",
+               IDS_WINGS8OS_INSTALLER_DUALBOOT_CONFIG_SELECT_OS_PARTITION,
                IDS_INSTALLED_PRODUCT_OS_NAME);
-  builder->Add("jemaosInstallerDualbootConfigPartSelectLabel",
-               IDS_JEMAOS_INSTALLER_DUALBOOT_CONFIG_PARTITION_SELECT_LABEL);
-  builder->Add("jemaosInstallDualbootConfigSelectEFIPart",
-               IDS_JEMAOS_INSTALLER_DUALBOOT_CONFIG_SELECT_EFI_PARTITION);
-  builder->Add("jemaosInstallerDualbootSelectedDiskHasNoAvailOSPart",
-               IDS_JEMAOS_INSTALLER_DUALBOOT_SELECTED_DISK_HAS_NO_AVAIL_OS_PARTITION);
-  builder->Add("jemaosInstallerDualbootSelectedDiskHasNoAvailEFIPart",
-               IDS_JEMAOS_INSTALLER_DUALBOOT_SELECTED_DISK_HAS_NO_AVAIL_EFI_PARTITION);
-  builder->Add("jemaosInstallerDualbootSelectedOSPartSizeSmaller",
-               IDS_JEMAOS_INSTALLER_DUALBOOT_SELECTED_PARTITION_SIZE_SMALLER);
-  builder->AddF("jemaosInstallerDualbootSelectedOSPartAlreadyInstalled",
-               IDS_JEMAOS_INSTALLER_DUALBOOT_SELECTED_PARTITION_ALREADY_INSTALLED,
+  builder->Add("wings8osInstallerDualbootConfigPartSelectLabel",
+               IDS_WINGS8OS_INSTALLER_DUALBOOT_CONFIG_PARTITION_SELECT_LABEL);
+  builder->Add("wings8osInstallDualbootConfigSelectEFIPart",
+               IDS_WINGS8OS_INSTALLER_DUALBOOT_CONFIG_SELECT_EFI_PARTITION);
+  builder->Add("wings8osInstallerDualbootSelectedDiskHasNoAvailOSPart",
+               IDS_WINGS8OS_INSTALLER_DUALBOOT_SELECTED_DISK_HAS_NO_AVAIL_OS_PARTITION);
+  builder->Add("wings8osInstallerDualbootSelectedDiskHasNoAvailEFIPart",
+               IDS_WINGS8OS_INSTALLER_DUALBOOT_SELECTED_DISK_HAS_NO_AVAIL_EFI_PARTITION);
+  builder->Add("wings8osInstallerDualbootSelectedOSPartSizeSmaller",
+               IDS_WINGS8OS_INSTALLER_DUALBOOT_SELECTED_PARTITION_SIZE_SMALLER);
+  builder->AddF("wings8osInstallerDualbootSelectedOSPartAlreadyInstalled",
+               IDS_WINGS8OS_INSTALLER_DUALBOOT_SELECTED_PARTITION_ALREADY_INSTALLED,
                IDS_INSTALLED_PRODUCT_OS_NAME);
-  builder->AddF("jemaosInstallerMultiBootOptionTitle",
-               IDS_JEMAOS_INSTALLER_MULTI_BOOT_OPTION_TITLE,
+  builder->AddF("wings8osInstallerMultiBootOptionTitle",
+               IDS_WINGS8OS_INSTALLER_MULTI_BOOT_OPTION_TITLE,
                IDS_INSTALLED_PRODUCT_OS_NAME);
-  builder->Add("jemaosInstallerInstallREFIndTitle",
-               IDS_JEMAOS_INSTALLER_INSTALL_REFIND_TITLE);
-  builder->Add("jemaosInstallerInstallREFIndHelperText",
-               IDS_JEMAOS_INSTALLER_INSTALL_REFIND_HELPER_TEXT);
-  builder->Add("jemaosInstallerInstallUefiBootTitle",
-               IDS_JEMAOS_INSTALLER_INSTALL_UEFI_BOOT_TITLE);
-  builder->AddF("jemaosInstallerInstallUefiBootHelperText",
-               IDS_JEMAOS_INSTALLER_INSTALL_UEFI_BOOT_HELPER_TEXT,
+  builder->Add("wings8osInstallerInstallREFIndTitle",
+               IDS_WINGS8OS_INSTALLER_INSTALL_REFIND_TITLE);
+  builder->Add("wings8osInstallerInstallREFIndHelperText",
+               IDS_WINGS8OS_INSTALLER_INSTALL_REFIND_HELPER_TEXT);
+  builder->Add("wings8osInstallerInstallUefiBootTitle",
+               IDS_WINGS8OS_INSTALLER_INSTALL_UEFI_BOOT_TITLE);
+  builder->AddF("wings8osInstallerInstallUefiBootHelperText",
+               IDS_WINGS8OS_INSTALLER_INSTALL_UEFI_BOOT_HELPER_TEXT,
                IDS_INSTALLED_PRODUCT_OS_NAME);
-  builder->Add("jemaosInstallerMultiBootConfigureByYourselfTitle",
-               IDS_JEMAOS_INSTALLER_MULTI_BOOT_CONFIGURE_BY_YOURSELF_TITLE);
-  builder->AddF("jemaosInstallerMultiBootConfigureByYourselfHelperText",
-               IDS_JEMAOS_INSTALLER_MULTI_BOOT_CONFIGURE_BY_YOURSELF_HELPER_TEXT,
+  builder->Add("wings8osInstallerMultiBootConfigureByYourselfTitle",
+               IDS_WINGS8OS_INSTALLER_MULTI_BOOT_CONFIGURE_BY_YOURSELF_TITLE);
+  builder->AddF("wings8osInstallerMultiBootConfigureByYourselfHelperText",
+               IDS_WINGS8OS_INSTALLER_MULTI_BOOT_CONFIGURE_BY_YOURSELF_HELPER_TEXT,
                IDS_INSTALLED_PRODUCT_OS_NAME);
-  builder->Add("jemaosInstallerAbortButton",
-               IDS_JEMAOS_INSTALLER_TEXT_ON_ABORT_BUTTON);
-  builder->Add("jemaosInstallerAbortTitle",
-               IDS_JEMAOS_INSTALLER_ABORT_TITLE);
-  builder->Add("jemaosInstallerAbortMessage",
-               IDS_JEMAOS_INSTALLER_ABORT_MESSAGE);
-  builder->Add("jemaosInstallerGetDiskInfoFailed",
-               IDS_JEMAOS_INSTALLER_GET_DISK_INFO_FAILED);
-  builder->Add("jemaosInstallerAbortingMessage",
-               IDS_JEMAOS_INSTALLER_ABORTING_MESAGE);
-  builder->Add("jemaosInstallerUsbInstallationTitle",
-               IDS_JEMAOS_INSTALLER_USB_INSTALLATION_TITLE);
-  builder->AddF("jemaosInstallerUsbInstallationHelperText",
-               IDS_JEMAOS_INSTALLER_USB_INSTALLATION_HELPER_TEXT,
+  builder->Add("wings8osInstallerAbortButton",
+               IDS_WINGS8OS_INSTALLER_TEXT_ON_ABORT_BUTTON);
+  builder->Add("wings8osInstallerAbortTitle",
+               IDS_WINGS8OS_INSTALLER_ABORT_TITLE);
+  builder->Add("wings8osInstallerAbortMessage",
+               IDS_WINGS8OS_INSTALLER_ABORT_MESSAGE);
+  builder->Add("wings8osInstallerGetDiskInfoFailed",
+               IDS_WINGS8OS_INSTALLER_GET_DISK_INFO_FAILED);
+  builder->Add("wings8osInstallerAbortingMessage",
+               IDS_WINGS8OS_INSTALLER_ABORTING_MESAGE);
+  builder->Add("wings8osInstallerUsbInstallationTitle",
+               IDS_WINGS8OS_INSTALLER_USB_INSTALLATION_TITLE);
+  builder->AddF("wings8osInstallerUsbInstallationHelperText",
+               IDS_WINGS8OS_INSTALLER_USB_INSTALLATION_HELPER_TEXT,
                IDS_INSTALLED_PRODUCT_OS_NAME);
-  builder->AddF("jemaosInstallerUsbInstallationDisclaimer",
-               IDS_JEMAOS_INSTALLER_USB_INSTALLATION_DISCLAIMER,
+  builder->AddF("wings8osInstallerUsbInstallationDisclaimer",
+               IDS_WINGS8OS_INSTALLER_USB_INSTALLATION_DISCLAIMER,
                IDS_INSTALLED_PRODUCT_OS_NAME);
-  builder->Add("jemaosInstallerUsbConfigNoAvailableDisk",
-               IDS_JEMAOS_INSTALLER_USB_CONFIG_NO_AVAILABLE_DISK);
-  builder->AddF("jemaosInstallerCreateOSPartOption",
-               IDS_JEMAOS_INSTALLER_CREATE_OS_PART_OPTION,
+  builder->Add("wings8osInstallerUsbConfigNoAvailableDisk",
+               IDS_WINGS8OS_INSTALLER_USB_CONFIG_NO_AVAILABLE_DISK);
+  builder->AddF("wings8osInstallerCreateOSPartOption",
+               IDS_WINGS8OS_INSTALLER_CREATE_OS_PART_OPTION,
                IDS_INSTALLED_PRODUCT_OS_NAME);
-  builder->AddF("jemaosInstallerCreateOSPartSizeLabel",
-               IDS_JEMAOS_INSTALLER_CREATE_OS_PART_SIZE_LABEL,
+  builder->AddF("wings8osInstallerCreateOSPartSizeLabel",
+               IDS_WINGS8OS_INSTALLER_CREATE_OS_PART_SIZE_LABEL,
                IDS_INSTALLED_PRODUCT_OS_NAME);
-  builder->AddF("jemaosInstallerCreateOSPartSizeHelperText",
-               IDS_JEMAOS_INSTALLER_CREATE_OS_PART_SIZE_HELPER_TEXT,
+  builder->AddF("wings8osInstallerCreateOSPartSizeHelperText",
+               IDS_WINGS8OS_INSTALLER_CREATE_OS_PART_SIZE_HELPER_TEXT,
                IDS_INSTALLED_PRODUCT_OS_NAME);
-  builder->AddF("jemaosInstallerShrinkOSPartOption",
-               IDS_JEMAOS_INSTALLER_SHRINK_OS_PART_OPTION,
+  builder->AddF("wings8osInstallerShrinkOSPartOption",
+               IDS_WINGS8OS_INSTALLER_SHRINK_OS_PART_OPTION,
                IDS_INSTALLED_PRODUCT_OS_NAME);
-  builder->AddF("jemaosInstallerShrinkOSPartHelperText",
-               IDS_JEMAOS_INSTALLER_SHRINK_OS_PART_HELPER_TEXT,
+  builder->AddF("wings8osInstallerShrinkOSPartHelperText",
+               IDS_WINGS8OS_INSTALLER_SHRINK_OS_PART_HELPER_TEXT,
                IDS_INSTALLED_PRODUCT_OS_NAME);
-  builder->Add("jemaosInstallerCreateOSPartFailed",
-               IDS_JEMAOS_INSTALLER_CREATE_OS_PART_FAILED);
+  builder->Add("wings8osInstallerCreateOSPartFailed",
+               IDS_WINGS8OS_INSTALLER_CREATE_OS_PART_FAILED);
 
-  builder->Add("jemaosOobeWelcomeDisableNextDesc",
-               IDS_JEMAOS_OOBE_WELCOME_DISABLE_NEXT_DESC);
-  builder->Add("jemaosOobeWelcomeDisableNextContinueAnyway",
-               IDS_JEMAOS_OOBE_WELCOME_DISABLE_NEXT_CONTINUE_ANYWAY);
+  builder->Add("wings8osOobeWelcomeDisableNextDesc",
+               IDS_WINGS8OS_OOBE_WELCOME_DISABLE_NEXT_DESC);
+  builder->Add("wings8osOobeWelcomeDisableNextContinueAnyway",
+               IDS_WINGS8OS_OOBE_WELCOME_DISABLE_NEXT_CONTINUE_ANYWAY);
 }
 
 void OsInstallScreenHandler::Show() {

@@ -43,7 +43,7 @@
 #include "ui/events/devices/device_data_manager.h"
 #include "ui/events/devices/touchscreen_device.h"
 #include "ui/strings/grit/ui_strings.h"
-#include "jemaos/switches/display/display_switches.h"
+#include "wings8os/switches/display/display_switches.h"
 
 namespace display {
 
@@ -335,7 +335,7 @@ ManagedDisplayInfo DisplayChangeObserver::CreateManagedDisplayInfo(
   new_info.set_from_native_platform(true);
 
   new_info.set_native(native);
-  device_scale_factor = jemaos::switches::GetDefaultDSF(device_scale_factor);
+  device_scale_factor = wings8os::switches::GetDefaultDSF(device_scale_factor);
   VLOG(1) << "device_scale_factor:" << device_scale_factor << " dpi:" << dpi;
   new_info.set_device_scale_factor(device_scale_factor);
 
@@ -418,13 +418,13 @@ ManagedDisplayInfo DisplayChangeObserver::CreateManagedDisplayInfoInternal(
   bool native = false;
   float device_scale_factor = 1.0f;
   // Sets dpi only if the screen size is valid.
-  // ---***JEMAOS BEGIN***---
-  const float dpi = jemaos::switches::GetDefaultScreenDpi(
+  // ---***WINGS8OS BEGIN***---
+  const float dpi = wings8os::switches::GetDefaultScreenDpi(
       IsDisplaySizeValid(snapshot->physical_size())
                         ? kInchInMm * mode_info->size().width() /
                               snapshot->physical_size().width()
                         : 0);
-  // ---***JEMAOS END***---
+  // ---***WINGS8OS END***---
   if (snapshot->type() == DISPLAY_CONNECTION_TYPE_INTERNAL) {
     native = true;
     device_scale_factor = FindDeviceScaleFactor(dpi, mode_info->size());

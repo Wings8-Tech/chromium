@@ -419,7 +419,7 @@ export class DirectoryModel extends FilesEventTarget<DirectoryModelEventMap> {
   private isCurrentRootVolumeType_(volumeType: VolumeType): boolean {
     const rootType = this.getCurrentRootType();
     return rootType !== null && !isRecentRootType(rootType) &&
-        rootType != RootType.JEMADROP &&
+        rootType != RootType.WINGS8DROP &&
         getVolumeTypeFromRootType(rootType) === volumeType;
   }
 
@@ -1384,17 +1384,17 @@ export class DirectoryModel extends FilesEventTarget<DirectoryModelEventMap> {
    */
   activateDirectoryEntry(
       dirEntry: DirectoryEntry|FilesAppDirEntry, callback?: VoidCallback) {
-    let isJemaDrop = false;
+    let isWings8Drop = false;
     if (isFakeEntry(dirEntry)) {
       const fakeEntry = (dirEntry);
-      if (fakeEntry.rootType === RootType.JEMADROP) {
-        isJemaDrop = true;
+      if (fakeEntry.rootType === RootType.WINGS8DROP) {
+        isWings8Drop = true;
       }
     }
-    if (isJemaDrop) {
-      dispatchSimpleEvent(this, 'jemadrop-started');
+    if (isWings8Drop) {
+      dispatchSimpleEvent(this, 'wings8drop-started');
     } else {
-      dispatchSimpleEvent(this, 'jemadrop-stopped');
+      dispatchSimpleEvent(this, 'wings8drop-stopped');
     }
     const currentDirectoryEntry = this.getCurrentDirEntry();
     if (currentDirectoryEntry && isSameEntry(dirEntry, currentDirectoryEntry)) {

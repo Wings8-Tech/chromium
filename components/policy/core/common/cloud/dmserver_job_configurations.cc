@@ -15,7 +15,7 @@
 #include "services/network/public/cpp/shared_url_loader_factory.h"
 #include "url/gurl.h"
 #include "chromeos/ash/components/system/statistics_provider.h"
-#include "jemaos/switches/account/account_switches.h"
+#include "wings8os/switches/account/account_switches.h"
 
 namespace em = enterprise_management;
 
@@ -115,16 +115,16 @@ const char* JobTypeToRequestType(
   NOTREACHED() << "Invalid job type " << type;
 }
 
-std::string GetJemaOsLicenseId() {
+std::string GetWings8OsLicenseId() {
   ash::system::StatisticsProvider* provider =
       ash::system::StatisticsProvider::GetInstance();
-  std::string jemaos_license_id = "";
+  std::string wings8os_license_id = "";
   const std::optional<std::string_view> str =
-    provider->GetMachineStatistic(ash::system::kJemaOsLicenseIdKey);
+    provider->GetMachineStatistic(ash::system::kWings8OsLicenseIdKey);
   if (str) {
-    jemaos_license_id = std::string(str.value());
+    wings8os_license_id = std::string(str.value());
   }
-  return jemaos_license_id;
+  return wings8os_license_id;
 }
 
 }  // namespace
@@ -204,8 +204,8 @@ DMServerJobConfiguration::DMServerJobConfiguration(CreateParams params)
                params.service->configuration()->GetPlatformParameter());
   AddParameter(dm_protocol::kParamDeviceID, params.client_id);
 
-  if (jemaos::switches::IsJemaDMServerUrl(server_url_)) {
-    AddParameter(dm_protocol::kParamJemaOsLicenseId, GetJemaOsLicenseId());
+  if (wings8os::switches::IsWings8DMServerUrl(server_url_)) {
+    AddParameter(dm_protocol::kParamWings8OsLicenseId, GetWings8OsLicenseId());
   }
 
   if (params.profile_id) {

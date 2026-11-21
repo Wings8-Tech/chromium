@@ -44,7 +44,7 @@ import {FilesAlertDialog} from './files_alert_dialog.js';
 import {FilesConfirmDialog} from './files_confirm_dialog.js';
 import {FilesMenuItem} from './files_menu.js';
 import {GearMenu} from './gear_menu.js';
-import {JemaDropView} from './jemadrop_view.js';
+import {Wings8DropView} from './wings8drop_view.js';
 import {ImportCrostiniImageDialog} from './import_crostini_image_dialog.js';
 import {InstallLinuxPackageDialog} from './install_linux_package_dialog.js';
 import {ListContainer, ListType} from './list_container.js';
@@ -271,7 +271,7 @@ export class FileManagerUI {
    */
   private a11yMessage_: HTMLElement;
 
-  jemaDropView: JemaDropView|null = null;
+  wings8DropView: Wings8DropView|null = null;
 
   searchContainer: SearchContainer|null = null;
 
@@ -489,8 +489,8 @@ export class FileManagerUI {
     splitterContainer.addEventListener(
         XfSplitter.events.SPLITTER_DRAGMOVE, this.relayout.bind(this));
 
-    this.jemaDropView =
-        new JemaDropView(queryRequiredElement('#jemadrop-view', this.element));
+    this.wings8DropView =
+        new Wings8DropView(queryRequiredElement('#wings8drop-view', this.element));
 
     /**
      * Search container, which controls search UI elements.

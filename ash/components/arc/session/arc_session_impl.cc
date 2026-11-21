@@ -42,7 +42,7 @@
 #include "mojo/public/cpp/platform/named_platform_channel.h"
 #include "mojo/public/cpp/platform/platform_channel.h"
 #include "mojo/public/cpp/platform/socket_utils_posix.h"
-#include "jemaos/chromeos/ash/components/dbus/jemaos_shell_client/jemaos_shell_client.h"
+#include "wings8os/chromeos/ash/components/dbus/wings8os_shell_client/wings8os_shell_client.h"
 
 namespace arc {
 
@@ -670,7 +670,7 @@ void ArcSessionImpl::MayStartPolicyManager() {
 }
 
 void ArcSessionImpl::StartPolicyManager() {
-  jemaos::ash::JemaOSShellClient* shellClient = jemaos::ash::JemaOSShellClient::Get();
+  wings8os::ash::Wings8OSShellClient* shellClient = wings8os::ash::Wings8OSShellClient::Get();
   if (!shellClient) {
     LOG(ERROR) << "Failed to get shell client, unable to start arc policy manager";
     OnStartPolicyManagerCommandFinished(std::nullopt);
@@ -682,7 +682,7 @@ void ArcSessionImpl::StartPolicyManager() {
                      weak_factory_.GetWeakPtr()));
 }
 
-void ArcSessionImpl::OnStartPolicyManagerCommandFinished(std::optional<jemaos::ash::ShellState> state) {
+void ArcSessionImpl::OnStartPolicyManagerCommandFinished(std::optional<wings8os::ash::ShellState> state) {
   if (state && state->code == 0) {
     VLOG(2) << "Arc policy manager started.";
     start_policy_manager_retry_count_ = 0;

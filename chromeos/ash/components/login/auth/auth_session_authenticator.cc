@@ -91,8 +91,8 @@ void AuthSessionAuthenticator::CompleteLoginImpl(
   DCHECK(context);
   DCHECK(context->GetUserType() == user_manager::UserType::kRegular ||
          context->GetUserType() == user_manager::UserType::kFlintAccount ||
-         context->GetUserType() == user_manager::UserType::kJemaAccount ||
-         context->GetUserType() == user_manager::UserType::kJemaChild ||
+         context->GetUserType() == user_manager::UserType::kWings8Account ||
+         context->GetUserType() == user_manager::UserType::kWings8Child ||
          context->GetUserType() == user_manager::UserType::kChild);
   // For now we don't support empty passwords:
   if (context->GetKey()->GetKeyType() == Key::KEY_TYPE_PASSWORD_PLAIN) {
@@ -349,7 +349,7 @@ void AuthSessionAuthenticator::DoCompleteLogin(
                              auth_factor_editor_->AsWeakPtr()));
         }
       } else {
-        //---***JEMAOS BEGIN***---
+        //---***WINGS8OS BEGIN***---
         // Add the knowledge key (the password typed at sign-in) right away so
         // the account can log in normally, without the OOBE "local password"
         // screen. cryptohome has already been created/mounted by the steps
@@ -360,9 +360,9 @@ void AuthSessionAuthenticator::DoCompleteLogin(
         steps.push_back(base::BindOnce(
             &AuthSessionAuthenticator::RecordFirstAuthFactorAdded,
             weak_factory_.GetWeakPtr()));
-        LOG(WARNING) << "[JEMAOS] Added password key for new persistent user: "
+        LOG(WARNING) << "[WINGS8OS] Added password key for new persistent user: "
                      << context->GetAccountId().GetUserEmail();
-        //---***JEMAOS END***---
+        //---***WINGS8OS END***---
       }
     }  // challenge-response
   } else {  // existing user
@@ -426,9 +426,9 @@ void AuthSessionAuthenticator::AuthenticateToLogin(
   DCHECK(context);
   DCHECK(context->GetUserType() == user_manager::UserType::kRegular ||
          context->GetUserType() == user_manager::UserType::kFlintAccount ||
-         context->GetUserType() == user_manager::UserType::kJemaAccount ||
+         context->GetUserType() == user_manager::UserType::kWings8Account ||
          context->GetUserType() == user_manager::UserType::kChild ||
-         context->GetUserType() == user_manager::UserType::kJemaChild ||
+         context->GetUserType() == user_manager::UserType::kWings8Child ||
          context->GetUserType() == user_manager::UserType::kPublicAccount);
   PrepareForNewAttempt("AuthenticateToLogin", "Returning regular user");
 
@@ -453,9 +453,9 @@ void AuthSessionAuthenticator::AuthenticateToUnlock(
   DCHECK(user_context);
   DCHECK(user_context->GetUserType() == user_manager::UserType::kRegular ||
          user_context->GetUserType() == user_manager::UserType::kFlintAccount ||
-         user_context->GetUserType() == user_manager::UserType::kJemaAccount ||
+         user_context->GetUserType() == user_manager::UserType::kWings8Account ||
          user_context->GetUserType() == user_manager::UserType::kChild ||
-         user_context->GetUserType() == user_manager::UserType::kJemaChild ||
+         user_context->GetUserType() == user_manager::UserType::kWings8Child ||
          user_context->GetUserType() == user_manager::UserType::kPublicAccount);
   PrepareForNewAttempt("AuthenticateToUnlock", "Returning regular user");
 

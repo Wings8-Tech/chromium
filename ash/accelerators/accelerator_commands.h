@@ -333,7 +333,7 @@ ASH_EXPORT void TogglePicker(base::TimeTicks accelerator_timestamp);
 // the feature is currently enabled.
 ASH_EXPORT void EnableSelectToSpeak();
 
-ASH_EXPORT void ToggleJemaOSAssistant();
+ASH_EXPORT void ToggleWings8OSAssistant();
 
 // Enables Dictation if the feature is currently disabled. Toggles (either
 // starts or stops) Dictation if the feature is currently enabled.

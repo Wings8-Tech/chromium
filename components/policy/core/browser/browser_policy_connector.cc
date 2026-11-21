@@ -28,8 +28,8 @@
 #include "components/policy/policy_constants.h"
 #include "components/prefs/pref_registry_simple.h"
 #include "components/signin/public/identity_manager/account_managed_status_finder.h"
-#include "jemaos/switches/account/account_switches.h"
-#include "jemaos/switches/account/account_constants.h"
+#include "wings8os/switches/account/account_switches.h"
+#include "wings8os/switches/account/account_constants.h"
 
 namespace policy {
 
@@ -78,7 +78,7 @@ void BrowserPolicyConnector::Shutdown() {
   policy_statistics_collector_.reset();
 }
 
-// ---***JEMAOS BEGIN***---
+// ---***WINGS8OS BEGIN***---
 void BrowserPolicyConnector::ResetDeviceManagementServiceConfiguration(std::unique_ptr<DeviceManagementService::Configuration> configuration) {
   if (!device_management_service_) return;
 
@@ -90,7 +90,7 @@ void BrowserPolicyConnector::ResetDeviceManagementServiceConfiguration(std::uniq
   VLOG(2) << "replace device management service configuration";
   device_management_service_->ResetConfiguration(std::move(configuration));
 }
-// ---***JEMAOS END***---
+// ---***WINGS8OS END***---
 
 void BrowserPolicyConnector::ScheduleServiceInitialization(
     int64_t delay_milliseconds) {
@@ -115,27 +115,27 @@ bool BrowserPolicyConnector::ProviderHasPolicies(
 }
 
 std::string BrowserPolicyConnector::GetDeviceManagementUrl() const {
-  if (jemaos::switches::IsPolicyManagedByJema()) {
-    return GetUrlOverride(jemaos::switches::kJemaOSDeviceManagementUrl,
-                          jemaos::constants::kDefaultJemaOSDeviceManagementServerUrl);
+  if (wings8os::switches::IsPolicyManagedByWings8()) {
+    return GetUrlOverride(wings8os::switches::kWings8OSDeviceManagementUrl,
+                          wings8os::constants::kDefaultWings8OSDeviceManagementServerUrl);
   }
   return GetUrlOverride(switches::kDeviceManagementUrl,
                         kDefaultDeviceManagementServerUrl);
 }
 
 std::string BrowserPolicyConnector::GetRealtimeReportingUrl() const {
-  if (jemaos::switches::IsPolicyManagedByJema()) {
-    return GetUrlOverride(jemaos::switches::kJemaOSRealtimeReportingUrl,
-                          jemaos::constants::kDefaultJemaOSRealtimeReportingServerUrl);
+  if (wings8os::switches::IsPolicyManagedByWings8()) {
+    return GetUrlOverride(wings8os::switches::kWings8OSRealtimeReportingUrl,
+                          wings8os::constants::kDefaultWings8OSRealtimeReportingServerUrl);
   }
   return GetUrlOverride(switches::kRealtimeReportingUrl,
                         kDefaultRealtimeReportingServerUrl);
 }
 
 std::string BrowserPolicyConnector::GetEncryptedReportingUrl() const {
-  if (jemaos::switches::IsPolicyManagedByJema()) {
-    return GetUrlOverride(jemaos::switches::kJemaOSEncryptedReportingUrl,
-                          jemaos::constants::kDefaultJemaOSEncryptedReportingServerUrl);
+  if (wings8os::switches::IsPolicyManagedByWings8()) {
+    return GetUrlOverride(wings8os::switches::kWings8OSEncryptedReportingUrl,
+                          wings8os::constants::kDefaultWings8OSEncryptedReportingServerUrl);
   }
   return GetUrlOverride(switches::kEncryptedReportingUrl,
                         kDefaultEncryptedReportingServerUrl);

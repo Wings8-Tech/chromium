@@ -27,7 +27,7 @@
 #include "content/public/browser/web_ui.h"
 #include "content/public/browser/web_ui_data_source.h"
 #include "content/public/common/url_constants.h"
-#include "jemaos/switches/urls/urls_constants.h"
+#include "wings8os/switches/urls/urls_constants.h"
 #include "mojo/public/cpp/bindings/pending_receiver.h"
 #include "ui/base/l10n/l10n_util.h"
 #include "ui/resources/grit/webui_resources.h"
@@ -143,18 +143,18 @@ void AddLocalizedStrings(content::WebUIDataSource* source) {
   };
 
   source->AddLocalizedStrings(kLocalizedStrings);
-#if BUILDFLAG(USE_JEMAOS_COM)
-  source->AddString("jemaosFeedbackFeatureHelpMessage",
+#if BUILDFLAG(USE_WINGS8OS_COM)
+  source->AddString("wings8osFeedbackFeatureHelpMessage",
                     l10n_util::GetStringUTF16(
-                      IDS_FEEDBACK_TOOL_JEMAOS_FEEDBACK_FEATURE_HELP_MESSAGE));
+                      IDS_FEEDBACK_TOOL_WINGS8OS_FEEDBACK_FEATURE_HELP_MESSAGE));
 #else
-  source->AddString("jemaosFeedbackFeatureHelpMessage",
+  source->AddString("wings8osFeedbackFeatureHelpMessage",
                     l10n_util::GetStringFUTF16(
-                      IDS_FEEDBACK_TOOL_JEMAOS_FEEDBACK_FEATURE_HELP_MESSAGE,
-                      base::ASCIIToUTF16(jemaos::constants::kJemaOSHelpURL),
-                      base::ASCIIToUTF16(jemaos::constants::kJemaOSForumURL),
-                      base::ASCIIToUTF16(jemaos::constants::kJemaOSDiscordServerURL),
-                      base::ASCIIToUTF16(jemaos::constants::kJemaOSTelegramGroupURL)
+                      IDS_FEEDBACK_TOOL_WINGS8OS_FEEDBACK_FEATURE_HELP_MESSAGE,
+                      base::ASCIIToUTF16(wings8os::constants::kWings8OSHelpURL),
+                      base::ASCIIToUTF16(wings8os::constants::kWings8OSForumURL),
+                      base::ASCIIToUTF16(wings8os::constants::kWings8OSDiscordServerURL),
+                      base::ASCIIToUTF16(wings8os::constants::kWings8OSTelegramGroupURL)
   ));
 #endif
   source->UseStringsJs();

@@ -956,8 +956,8 @@ bool CaptureModeController::CanShowUserNudge() const {
   switch (*user_type) {
     case user_manager::UserType::kRegular:
     case user_manager::UserType::kChild:
-    case user_manager::UserType::kJemaAccount:
-    case user_manager::UserType::kJemaChild:
+    case user_manager::UserType::kWings8Account:
+    case user_manager::UserType::kWings8Child:
     case user_manager::UserType::kFlintAccount:
       // We only allow regular and child accounts to see the nudge.
       break;

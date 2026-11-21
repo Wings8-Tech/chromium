@@ -162,7 +162,7 @@ class EnrollmentScreen
     AUTH_ATTESTATION,
     AUTH_OAUTH,
     AUTH_ENROLLMENT_TOKEN,
-    AUTH_JEMA,
+    AUTH_WINGS8,
   };
 
   // Updates view GAIA flow type which is used to modify visual appearance
@@ -201,7 +201,7 @@ class EnrollmentScreen
 
   void AuthenticateUsingEnrollmentToken();
 
-  void AuthenticateUsingJema();
+  void AuthenticateUsingWings8();
 
   // Shows the interactive screen. Resets auth then shows the signin screen.
   void ShowInteractiveScreen();

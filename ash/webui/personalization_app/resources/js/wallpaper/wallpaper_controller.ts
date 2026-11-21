@@ -15,7 +15,7 @@ import {PersonalizationStore} from '../personalization_store.js';
 
 import {DisplayableImage} from './constants.js';
 import {isDefaultImage, isGooglePhotosPhoto, isImageAMatchForKey, isImageEqualToSelected, isWallpaperImage} from './utils.js';
-import {isJemaImage} from './utils.js';
+import {isWings8Image} from './utils.js';
 import * as action from './wallpaper_actions.js';
 import {DailyRefreshType} from './wallpaper_state.js';
 
@@ -371,7 +371,7 @@ export async function selectWallpaper(
     } else if (isNonEmptyFilePath(image)) {
       return provider.selectLocalImage(
           image, layout, /*preview_mode=*/ shouldPreview);
-    } else if (isJemaImage(image)) {
+    } else if (isWings8Image(image)) {
       return provider.selectLocalImage(
           image.light, layout, /*preview_mode=*/ shouldPreview);
     } else if (isGooglePhotosPhoto(image)) {

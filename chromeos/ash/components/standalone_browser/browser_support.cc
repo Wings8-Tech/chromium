@@ -38,14 +38,14 @@ bool IsUserTypeAllowed(const user_manager::User& user) {
   switch (user.GetType()) {
     case user_manager::UserType::kRegular:
     case user_manager::UserType::kFlintAccount:
-    case user_manager::UserType::kJemaAccount:
+    case user_manager::UserType::kWings8Account:
     case user_manager::UserType::kPublicAccount:
     // Note: Lacros will not be enabled for Guest users unless LacrosOnly
     // flag is passed in --enable-features. See https://crbug.com/1294051#c25.
     case user_manager::UserType::kGuest:
       return true;
     case user_manager::UserType::kChild:
-    case user_manager::UserType::kJemaChild:
+    case user_manager::UserType::kWings8Child:
       return base::FeatureList::IsEnabled(features::kLacrosForSupervisedUsers);
     case user_manager::UserType::kWebKioskApp:
     case user_manager::UserType::kKioskApp:

@@ -22,7 +22,7 @@
 #include "chromeos/dbus/common/dbus_callback.h"
 #include "chromeos/dbus/tpm_manager/tpm_manager.pb.h"
 #include "chromeos/dbus/tpm_manager/tpm_manager_client.h"
-#include "jemaos/switches/misc/misc_switches.h"
+#include "wings8os/switches/misc/misc_switches.h"
 
 namespace ash {
 namespace {
@@ -88,7 +88,7 @@ EulaScreen::EulaScreen(base::WeakPtr<EulaView> view,
 EulaScreen::~EulaScreen() = default;
 
 bool EulaScreen::MaybeSkip(WizardContext& context) {
-  if (policy::EnrollmentConfig::IsZeroTouchEnrollmentJemaForced()) {
+  if (policy::EnrollmentConfig::IsZeroTouchEnrollmentWings8Forced()) {
     exit_callback_.Run(Result::NOT_APPLICABLE);
     return true;
   }
@@ -101,7 +101,7 @@ bool EulaScreen::MaybeSkip(WizardContext& context) {
   // This should be kept in sync with `testapi_shouldSkipEula`. If the logic
   // became too complicated we need to consider extract and reuse parts of it.
 
-  if (!context.is_branded_build && !jemaos::switches::IsJemaCustomEnabled()) {
+  if (!context.is_branded_build && !wings8os::switches::IsWings8CustomEnabled()) {
     exit_callback_.Run(Result::NOT_APPLICABLE);
     return true;
   }

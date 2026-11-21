@@ -700,11 +700,11 @@ class ChromeVoxTutorial extends ChromeVoxTutorialBase {
       },
       {
         msgId: 'chrome_keyboard_shortcuts',
-        link: 'https://jemaos.com/docs/knowledge-base/recipes/keyboard-shortcuts',
+        link: 'https://wings8.org/docs/knowledge-base/recipes/keyboard-shortcuts',
       },
       {
         msgId: 'touchscreen_accessibility',
-        link: 'https://jemaos.com/docs/manual/explore-accessibility/use-the-built-in-screen-reader',
+        link: 'https://wings8.org/docs/manual/explore-accessibility/use-the-built-in-screen-reader',
       },
     ];
     for (const resource of resources) {

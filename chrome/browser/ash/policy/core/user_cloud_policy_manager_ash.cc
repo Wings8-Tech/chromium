@@ -66,7 +66,7 @@
 #include "content/public/browser/network_service_instance.h"
 #include "services/network/public/cpp/shared_url_loader_factory.h"
 #include "url/gurl.h"
-#include "jemaos/switches/account/toggle/account_type_toggle.h"
+#include "wings8os/switches/account/toggle/account_type_toggle.h"
 
 namespace em = enterprise_management;
 
@@ -101,22 +101,22 @@ void RegistrationResultUMA(RegistrationResult registration_result) {
 bool IsChildUser(const AccountId& account_id) {
   const user_manager::User* const user =
       user_manager::UserManager::Get()->FindUser(account_id);
-  return user && (user->GetType() == user_manager::UserType::kChild || user->GetType() == user_manager::UserType::kJemaChild);
+  return user && (user->GetType() == user_manager::UserType::kChild || user->GetType() == user_manager::UserType::kWings8Child);
 }
 
-// Returns whether the user with |account_id| is a Jema account (regular, child, or Flint).
-bool IsJemaUser(const AccountId& account_id) {
+// Returns whether the user with |account_id| is a Wings8 account (regular, child, or Flint).
+bool IsWings8User(const AccountId& account_id) {
   // First check gaia_id prefix for new users (before User object is created)
   const std::string& gaia_id = account_id.GetGaiaId();
-  if (gaia_id.find("jema_id_") == 0 || gaia_id.find("ft_id_") == 0) {
+  if (gaia_id.find("wings8_id_") == 0 || gaia_id.find("ft_id_") == 0) {
     return true;
   }
   
   // Fallback to User type check for existing users
   const user_manager::User* const user =
       user_manager::UserManager::Get()->FindUser(account_id);
-  return user && (user->GetType() == user_manager::UserType::kJemaAccount ||
-                  user->GetType() == user_manager::UserType::kJemaChild ||
+  return user && (user->GetType() == user_manager::UserType::kWings8Account ||
+                  user->GetType() == user_manager::UserType::kWings8Child ||
                   user->GetType() == user_manager::UserType::kFlintAccount);
 }
 
@@ -568,9 +568,9 @@ void UserCloudPolicyManagerAsh::SetPolicyRequired(bool policy_required) {
         base::CommandLine(base::CommandLine::NO_PROGRAM);
     command_line.AppendSwitchASCII(ash::switches::kProfileRequiresPolicy,
                                    policy_required ? "true" : "false");
-    // ---***JEMAOS BEGIN***---
-    jemaos::switches::ToggleJemaAccountFlagForCommandLineByAccountId(&command_line, account_id_);
-    // ---***JEMAOS END***---
+    // ---***WINGS8OS BEGIN***---
+    wings8os::switches::ToggleWings8AccountFlagForCommandLineByAccountId(&command_line, account_id_);
+    // ---***WINGS8OS END***---
     base::CommandLine::StringVector flags;
     flags.assign(command_line.argv().begin() + 1, command_line.argv().end());
     DCHECK_EQ(1u, flags.size());
@@ -634,15 +634,15 @@ void UserCloudPolicyManagerAsh::FetchPolicyOAuthToken() {
     return;
   }
 
-  // JEMAOS: Allow Jema accounts to proceed without GAIA policy token.
-  // Policy for Jema accounts is optional and should not block session start.
-  if (IsJemaUser(account_id_)) {
-    LOG(WARNING) << "[JEMAOS] Skipping policy fetch for Jema/Flint account: " 
+  // WINGS8OS: Allow Wings8 accounts to proceed without GAIA policy token.
+  // Policy for Wings8 accounts is optional and should not block session start.
+  if (IsWings8User(account_id_)) {
+    LOG(WARNING) << "[WINGS8OS] Skipping policy fetch for Wings8/Flint account: " 
                  << account_id_.GetUserEmail() 
                  << ", gaia_id: " << account_id_.GetGaiaId();
     SetPolicyRequired(false);
     CancelWaitForPolicyFetch(true,
-                             "Jema account: skipping policy oauth token fetch");
+                             "Wings8 account: skipping policy oauth token fetch");
     return;
   }
 

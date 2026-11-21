@@ -4,7 +4,7 @@
 
 import("//chrome/common/features.gni")
 
-import("//jemaos/build/config/buildflags.gni")
+import("//wings8os/build/config/buildflags.gni")
 
 ts_definition_files = [
   "//tools/typescript/definitions/bluetooth.d.ts",

@@ -24,7 +24,7 @@
 #include "rlz/buildflags/buildflags.h"
 #include "ui/base/l10n/l10n_util.h"
 #include "url/gurl.h"
-#include "jemaos/switches/urls/urls_constants.h"
+#include "wings8os/switches/urls/urls_constants.h"
 
 namespace ash {
 
@@ -52,11 +52,11 @@ std::string EulaScreenHandler::GetEulaOnlineUrl() {
         switches::kOobeEulaUrlForTests);
   }
 
-  return jemaos::constants::kOnlineEulaURLPath;
+  return wings8os::constants::kOnlineEulaURLPath;
 }
 
 std::string EulaScreenHandler::GetPrivacyOnlineUrl() {
-  return jemaos::constants::kOnlinePrivacyURLPath;
+  return wings8os::constants::kOnlinePrivacyURLPath;
 }
 
 void EulaScreenHandler::DeclareLocalizedValues(

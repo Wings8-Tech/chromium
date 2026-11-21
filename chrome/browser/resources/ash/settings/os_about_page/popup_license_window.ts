@@ -1,4 +1,4 @@
-// Copyright 2025 jema technology. All rights reserved.
+// Copyright 2025 wings8 technology. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
@@ -23,7 +23,7 @@ export class PopupLicenseWindowProxy {
   popupUpgrade() {}
 }
 
-const CASHIER_SERVER_URL = loadTimeData.getString('jemaosLicenseWebUrl');
+const CASHIER_SERVER_URL = loadTimeData.getString('wings8osLicenseWebUrl');
 
 let instance: PopupLicenseWindowProxy|null = null;
 
@@ -50,7 +50,7 @@ export class PopupLicenseWindowProxyImpl {
   }
 
   getBoardName_() {
-    return loadTimeData.getString('aboutJemaOSBoardName');
+    return loadTimeData.getString('aboutWings8OSBoardName');
   }
 
   executeCommand_(command: string) {
@@ -68,7 +68,7 @@ export class PopupLicenseWindowProxyImpl {
   }
 
   async getLicenseId_() {
-    const command = '/usr/share/jemaos_shell/license-utils.sh id';
+    const command = '/usr/share/wings8os_shell/license-utils.sh id';
     let licenseId = '';
     try {
       const result = await this.executeCommand_(command);

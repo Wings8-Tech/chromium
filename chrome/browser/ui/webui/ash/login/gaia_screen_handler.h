@@ -244,7 +244,7 @@ class GaiaScreenHandler final
   void DeclareJSCallbacks() override;
   void InitAfterJavascriptAllowed() override;
 
-  void HandleJemaLocalSignin();
+  void HandleWings8LocalSignin();
   // WebUI message handlers.
   void HandleWebviewLoadAborted(int error_code);
 
@@ -278,11 +278,11 @@ class GaiaScreenHandler final
 
   void HandleLaunchSAMLPublicSession(const std::string& email);
 
-  // ---***JEMAOS BEGIN***---
+  // ---***WINGS8OS BEGIN***---
   void SetupCertificateCacheForOnlineAuth();
   void HandleUserSelectGoogleAccount();
   void HandleResetAccountFlag();
-  // ---***JEMAOS END***---
+  // ---***WINGS8OS END***---
 
   // Handles SAML/GAIA login flow metrics
   // is_third_party_idp == false means GAIA-based authentication

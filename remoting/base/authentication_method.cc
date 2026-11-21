@@ -18,11 +18,11 @@ const NameMapElement<AuthenticationMethod> kAuthenticationMethodStrings[] = {
      "cloud_session_authz_spake2_curve25519"},
     {AuthenticationMethod::CORP_SESSION_AUTHZ_SPAKE2_CURVE25519,
      "corp_session_authz_spake2_curve25519"},
-    // JEMAOS: our simple access-code-hash method (no SPAKE2).
-    {AuthenticationMethod::JEMAOS_HMAC_SHA256, "jemaos_hmac_sha256"},
-    // JEMAOS: SPAKE2 over Curve25519 (web client performs SPAKE2 in JS).
-    {AuthenticationMethod::JEMAOS_SPAKE2_CURVE25519,
-     "jemaos_spake2_curve25519"},
+    // WINGS8OS: our simple access-code-hash method (no SPAKE2).
+    {AuthenticationMethod::WINGS8OS_HMAC_SHA256, "wings8os_hmac_sha256"},
+    // WINGS8OS: SPAKE2 over Curve25519 (web client performs SPAKE2 in JS).
+    {AuthenticationMethod::WINGS8OS_SPAKE2_CURVE25519,
+     "wings8os_spake2_curve25519"},
 };
 
 }  // namespace

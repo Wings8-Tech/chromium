@@ -484,7 +484,7 @@ component("base") {
     "//base:i18n",
     "//build:blink_buildflags",
     "//build:branding_buildflags",
-    "//jemaos/build/config:buildflags",
+    "//wings8os/build/config:buildflags",
     "//net",
     "//third_party/brotli:dec",
     "//third_party/icu",

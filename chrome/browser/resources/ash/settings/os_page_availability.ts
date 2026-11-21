@@ -35,8 +35,8 @@ export type OsPageAvailability = Record<Section, boolean>;
 export function createPageAvailability(): OsPageAvailability {
   return {
     [Section.kAboutChromeOs]: !!routes.ABOUT,
-    [Section.kJemaOs]: !!routes.JEMAOS,
-    [Section.kJemaAssistant]: !!routes.OS_JEMA_ASSISTANT,
+    [Section.kWings8Os]: !!routes.WINGS8OS,
+    [Section.kWings8Assistant]: !!routes.OS_WINGS8_ASSISTANT,
     [Section.kAccessibility]: !!routes.OS_ACCESSIBILITY,
     [Section.kApps]: !!routes.APPS,
     [Section.kBluetooth]: !!routes.BLUETOOTH,

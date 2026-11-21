@@ -128,7 +128,7 @@
 #include "chrome/browser/ui/ash/login/login_display_host.h"
 #include "chrome/browser/ui/ash/system/system_tray_client_impl.h"
 #include "chrome/browser/ui/startup/startup_browser_creator.h"
-#include "chrome/browser/ui/webui/ash/login/jema_local_signin_screen_handler.h"
+#include "chrome/browser/ui/webui/ash/login/wings8_local_signin_screen_handler.h"
 #include "chrome/browser/web_applications/preinstalled_web_app_manager.h"
 #include "chrome/browser/web_applications/web_app_provider.h"
 #include "chrome/common/channel_info.h"
@@ -198,7 +198,7 @@
 #include "content/public/browser/network_service_instance.h"
 #include "content/public/browser/storage_partition.h"
 #include "content/public/common/content_switches.h"
-#include "jemaos/prefs/jemaos_pref_names.h"
+#include "wings8os/prefs/wings8os_pref_names.h"
 #include "net/base/load_flags.h"
 #include "net/cookies/canonical_cookie.h"
 #include "net/cookies/cookie_access_result.h"
@@ -217,13 +217,13 @@
 #include "ui/base/ime/ash/input_method_manager.h"
 #include "ui/base/ime/ash/input_method_util.h"
 #include "url/gurl.h"
-//---***JEMAOS BEGIN***---
+//---***WINGS8OS BEGIN***---
 #include "components/embedder_support/pref_names.h"
 #include "components/omnibox/browser/omnibox_prefs.h"
-#include "jemaos/misc/jemaos_device_uid.h"
-#include "jemaos/prefs/jemaos_prefs.h"
-#include "jemaos/switches/account/toggle/account_type_toggle.h"
-//---***JEMAOS END***---
+#include "wings8os/misc/wings8os_device_uid.h"
+#include "wings8os/prefs/wings8os_prefs.h"
+#include "wings8os/switches/account/toggle/account_type_toggle.h"
+//---***WINGS8OS END***---
 
 #undef ENABLED_VLOG_LEVEL
 #define ENABLED_VLOG_LEVEL 1
@@ -441,30 +441,30 @@ bool IsRunningTest() {
              ::switches::kTestType);
 }
 
-//---***JEMAOS BEGIN***---
-// Jema/Flint accounts authenticate against the Jema API. They are flagged as
+//---***WINGS8OS BEGIN***---
+// Wings8/Flint accounts authenticate against the Wings8 API. They are flagged as
 // "has GAIA account" for the generic ChromeOS plumbing, but they hold NO Google
-// credential: feeding their opaque Jema token into GAIA/OAuth2 machinery
+// credential: feeding their opaque Wings8 token into GAIA/OAuth2 machinery
 // (session restore, token handle fetch) dereferences Google-only state and
 // segfaults the browser a few seconds after the desktop appears (crash loop ->
 // session_manager gives up -> user is thrown back to the login screen).
-bool IsJemaFamilyAccountId(const AccountId& account_id) {
+bool IsWings8FamilyAccountId(const AccountId& account_id) {
   const std::string gaia_id = account_id.GetGaiaId();
-  return gaia_id.find("jema_id_") == 0 || gaia_id.find("ft_id_") == 0 ||
+  return gaia_id.find("wings8_id_") == 0 || gaia_id.find("ft_id_") == 0 ||
          gaia_id.find("flint_id_") == 0;
 }
 
-bool IsJemaFamilyUser(const user_manager::User* user) {
-  return user && (user->IsJemaAccountUser() || user->IsFlintAccountUser() ||
-                  IsJemaFamilyAccountId(user->GetAccountId()));
+bool IsWings8FamilyUser(const user_manager::User* user) {
+  return user && (user->IsWings8AccountUser() || user->IsFlintAccountUser() ||
+                  IsWings8FamilyAccountId(user->GetAccountId()));
 }
-//---***JEMAOS END***---
+//---***WINGS8OS END***---
 
 bool IsOnlineSignin(const UserContext& user_context) {
   return user_context.GetAuthFlow() == UserContext::AUTH_FLOW_GAIA_WITH_SAML ||
-         //---***JEMAOS BEGIN***---
-         user_context.GetAuthFlow() == UserContext::AUTH_FLOW_JEMA_ONLINE ||
-         //---***JEMAOS END***---
+         //---***WINGS8OS BEGIN***---
+         user_context.GetAuthFlow() == UserContext::AUTH_FLOW_WINGS8_ONLINE ||
+         //---***WINGS8OS END***---
          user_context.GetAuthFlow() == UserContext::AUTH_FLOW_GAIA_WITHOUT_SAML;
 }
 
@@ -495,7 +495,7 @@ policy::MinimumVersionPolicyHandler* GetMinimumVersionPolicyHandler() {
 void OnPrepareTpmDeviceFinished(bool tpm_fallback_not_necessary) {
   BootTimesRecorder::Get()->AddLoginTimeMarker("TPMOwn-End", false);
   if (tpm_fallback_not_necessary) {
-    jemaos::prefs::SetNotNecessaryForceTpmFallback(
+    wings8os::prefs::SetNotNecessaryForceTpmFallback(
         g_browser_process->local_state());
   }
 }
@@ -831,7 +831,7 @@ void UserSessionManager::StartSession(
   start_session_type_ = start_session_type;
 
   VLOG(1) << "Starting user session.";
-  jemaos::switches::ToggleJemaAccountFlagByAccountId(
+  wings8os::switches::ToggleWings8AccountFlagByAccountId(
       user_context.GetAccountId());
   PreStartSession(start_session_type);
   CreateUserSession(user_context, has_auth_cookies);
@@ -872,13 +872,13 @@ void UserSessionManager::RestoreAuthenticationSession(Profile* user_profile) {
   const user_manager::User* user =
       ProfileHelper::Get()->GetUserByProfile(user_profile);
 
-  //---***JEMAOS BEGIN***---
-  // No Google session to restore for Jema/Flint accounts.
-  if (IsJemaFamilyUser(user)) {
-    VLOG(1) << "[JEMAOS] Skipping GAIA session restore for a Jema account";
+  //---***WINGS8OS BEGIN***---
+  // No Google session to restore for Wings8/Flint accounts.
+  if (IsWings8FamilyUser(user)) {
+    VLOG(1) << "[WINGS8OS] Skipping GAIA session restore for a Wings8 account";
     return;
   }
-  //---***JEMAOS END***---
+  //---***WINGS8OS END***---
 
   auto* identity_manager = IdentityManagerFactory::GetForProfile(user_profile);
   const bool account_id_valid =
@@ -927,7 +927,7 @@ void UserSessionManager::SetFirstLoginPrefs(
   InitLocaleAndInputMethodsForNewUser(this, profile, public_session_locale,
                                       public_session_input_method);
 
-  if (profile->IsJemaProfile()) {
+  if (profile->IsWings8Profile()) {
     // profile->GetPrefs()->SetBoolean(omnibox::kDocumentSuggestEnabled, false);
     profile->GetPrefs()->SetBoolean(
         embedder_support::kAlternateErrorPagesEnabled, false);
@@ -1197,24 +1197,24 @@ void UserSessionManager::OnSessionRestoreStateChanged(
   // Otherwise, auth token dependent code would be in an invalid state.
   // Important piece such as policy code might be broken because of this and
   // subject to an exploit. See http://crbug.com/677312.
-  const bool jema_online_account =
-      user_context_.GetAuthFlow() == UserContext::AUTH_FLOW_JEMA_ONLINE ||
-      user_context_.GetAccountId().GetGaiaId().find("jema_id_") == 0 ||
+  const bool wings8_online_account =
+      user_context_.GetAuthFlow() == UserContext::AUTH_FLOW_WINGS8_ONLINE ||
+      user_context_.GetAccountId().GetGaiaId().find("wings8_id_") == 0 ||
       user_context_.GetAccountId().GetGaiaId().find("ft_id_") == 0 ||
       user_context_.GetAccountId().GetGaiaId().find("flint_id_") == 0;
   if (IsOnlineSignin(user_context_) &&
       state == OAuth2LoginManager::SESSION_RESTORE_FAILED &&
-      //---***JEMAOS BEGIN***---
-      // Jema online accounts authenticate with a local password and the Jema
+      //---***WINGS8OS BEGIN***---
+      // Wings8 online accounts authenticate with a local password and the Wings8
       // API, not a Google OAuth2 token: the OAuth2 session restore can never
-      // succeed for them (their stored token is a Jema credential, not an
+      // succeed for them (their stored token is a Wings8 credential, not an
       // OAuth2 refresh token), and terminating the session kicked every
       // online login back to the login panel (black screen ~3 s, repeated,
       // then sign-out). Guard by ACCOUNT ID too: depending on the login path
-      // the AUTH_FLOW_JEMA_ONLINE marker can be absent here, and the flow
+      // the AUTH_FLOW_WINGS8_ONLINE marker can be absent here, and the flow
       // check alone let the termination through -> the crash-loop.
-      !jema_online_account
-      //---***JEMAOS END***---
+      !wings8_online_account
+      //---***WINGS8OS END***---
       ) {
     SYSLOG(ERROR)
         << "Session restore failed for online sign-in, terminating session.";
@@ -1244,14 +1244,14 @@ void UserSessionManager::OnConnectionChanged(
     if (!user->is_profile_created()) {
       continue;
     }
-    //---***JEMAOS BEGIN***---
-    // Jema/Flint accounts have no Google OAuth2 session: driving
+    //---***WINGS8OS BEGIN***---
+    // Wings8/Flint accounts have no Google OAuth2 session: driving
     // OAuth2LoginManager for them when the network comes up (a few seconds
     // after login) touches Google-only state and crashes the browser.
-    if (IsJemaFamilyUser(user)) {
+    if (IsWings8FamilyUser(user)) {
       continue;
     }
-    //---***JEMAOS END***---
+    //---***WINGS8OS END***---
 
     Profile* user_profile = ProfileHelper::Get()->GetProfileByUser(user);
     DCHECK(user_profile);
@@ -1309,7 +1309,7 @@ void UserSessionManager::CreateUserSession(const UserContext& user_context,
   session_manager::SessionManager::Get()->CreateSession(
       user_context_.GetAccountId(), user_context_.GetUserIDHash(),
       user_context.GetUserType() == user_manager::UserType::kChild ||
-          user_context.GetUserType() == user_manager::UserType::kJemaChild);
+          user_context.GetUserType() == user_manager::UserType::kWings8Child);
 }
 
 void UserSessionManager::PreStartSession(StartSessionType start_session_type) {
@@ -1653,10 +1653,10 @@ void UserSessionManager::InitProfilePreferences(
 
     user = user_manager->FindUser(user_context.GetAccountId());
     bool is_child = user->GetType() == user_manager::UserType::kChild ||
-                    user->GetType() == user_manager::UserType::kJemaChild;
+                    user->GetType() == user_manager::UserType::kWings8Child;
     DCHECK(is_child ==
            (user_context.GetUserType() == user_manager::UserType::kChild ||
-            user_context.GetUserType() == user_manager::UserType::kJemaChild));
+            user_context.GetUserType() == user_manager::UserType::kWings8Child));
 
     signin::Tribool is_under_advanced_protection = signin::Tribool::kUnknown;
     if (IsOnlineSignin(user_context)) {
@@ -1757,10 +1757,10 @@ void UserSessionManager::UserProfileInitialized(Profile* profile,
 
     } else if (!in_session_password_change_feature_enabled ||
                user_context_.GetAuthFlow() ==
-                   //---***JEMAOS BEGIN***---
-                   UserContext::AUTH_FLOW_JEMA_ONLINE ||
+                   //---***WINGS8OS BEGIN***---
+                   UserContext::AUTH_FLOW_WINGS8_ONLINE ||
                user_context_.GetAuthFlow() ==
-                   //---***JEMAOS END***---
+                   //---***WINGS8OS END***---
                    UserContext::AUTH_FLOW_GAIA_WITHOUT_SAML) {
       // These attributes are no longer relevant and should be deleted if
       // either a) the in-session password change feature is no longer enabled
@@ -1914,7 +1914,7 @@ void UserSessionManager::FinalizePrepareProfile(Profile* profile) {
     VLOG(1) << "Clearing all secrets";
     user_context_.ClearSecrets();
     if (user->GetType() == user_manager::UserType::kChild ||
-        user->GetType() == user_manager::UserType::kJemaChild) {
+        user->GetType() == user_manager::UserType::kWings8Child) {
       VLOG(1) << "Waiting for child policy refresh before showing session UI";
       DCHECK(child_policy_observer_);
       child_policy_observer_->NotifyWhenPolicyReady(
@@ -2198,31 +2198,31 @@ void UserSessionManager::OnUserProfileLoaded(Profile* profile,
   session_manager::SessionManager::Get()->NotifyUserProfileLoaded(
       user->GetAccountId());
 
-  // JEMAOS: Inject the SAML access token as a cookie on .jemaos.com for PWA
+  // WINGS8OS: Inject the SAML access token as a cookie on .wings8.org for PWA
   // apps. Deferred via PostTask to run after profile init is complete.
   base::SingleThreadTaskRunner::GetCurrentDefault()->PostTask(
       FROM_HERE,
-      base::BindOnce(&UserSessionManager::InjectJemaOSTokenCookie,
+      base::BindOnce(&UserSessionManager::InjectWings8OSTokenCookie,
                      weak_factory_.GetWeakPtr(), base::Unretained(profile)));
 
-  // JEMAOS: Start the token lifecycle timer so the cookie stays fresh and the
+  // WINGS8OS: Start the token lifecycle timer so the cookie stays fresh and the
   // access token is renewed before it expires server-side.
-  StartJemaOSTokenLifecycleTimer();
+  StartWings8OSTokenLifecycleTimer();
 
-  // JEMAOS: Cache the subscription state (Pro vs Freemium) for this profile;
+  // WINGS8OS: Cache the subscription state (Pro vs Freemium) for this profile;
   // it gates premium PWA preinstallation and cloud backup/restore.
   base::SingleThreadTaskRunner::GetCurrentDefault()->PostTask(
       FROM_HERE,
-      base::BindOnce(&UserSessionManager::FetchJemaOSSubscriptionState,
+      base::BindOnce(&UserSessionManager::FetchWings8OSSubscriptionState,
                      weak_factory_.GetWeakPtr(), base::Unretained(profile)));
 
-  // JEMAOS: Report this PC's stable hardware UID to the Connect API so the
+  // WINGS8OS: Report this PC's stable hardware UID to the Connect API so the
   // backend binds (first login) or refreshes last_seen (later logins) on the
   // enrolled hardware row. Without this, os_device_id stays NULL and the
   // first-login hardware attach never happens.
   base::SingleThreadTaskRunner::GetCurrentDefault()->PostTask(
       FROM_HERE,
-      base::BindOnce(&UserSessionManager::NotifyJemaOSDeviceUid,
+      base::BindOnce(&UserSessionManager::NotifyWings8OSDeviceUid,
                      weak_factory_.GetWeakPtr(), base::Unretained(profile)));
 
   // TODO(hidehiko): the condition looks redundant. We can merge them into
@@ -2236,11 +2236,11 @@ void UserSessionManager::OnUserProfileLoaded(Profile* profile,
     observer->StartObserving();
   }
 
-  //---***JEMAOS BEGIN***---
-  // Token handles are a Google-only concept; never fetch one with a Jema token.
+  //---***WINGS8OS BEGIN***---
+  // Token handles are a Google-only concept; never fetch one with a Wings8 token.
   if (TokenHandlesEnabled() && user && user->HasGaiaAccount() &&
-      !IsJemaFamilyUser(user)) {
-  //---***JEMAOS END***---
+      !IsWings8FamilyUser(user)) {
+  //---***WINGS8OS END***---
     CreateTokenUtilIfMissing();
     if (IsOnlineSignin(user_context_)) {
       // If the user has gone through an online Gaia flow, then their LST is
@@ -2265,18 +2265,18 @@ void UserSessionManager::OnUserProfileLoaded(Profile* profile,
   }
 }
 
-void UserSessionManager::InjectJemaOSTokenCookie(Profile* profile) {
-  const std::string token = GetJemaOSAccessToken();
+void UserSessionManager::InjectWings8OSTokenCookie(Profile* profile) {
+  const std::string token = GetWings8OSAccessToken();
   if (token.empty()) {
-    LOG(WARNING) << "[JEMAOS] No access token to inject as cookie";
+    LOG(WARNING) << "[WINGS8OS] No access token to inject as cookie";
     return;
   }
   if (!profile) {
-    LOG(ERROR) << "[JEMAOS] InjectJemaOSTokenCookie: profile is null";
+    LOG(ERROR) << "[WINGS8OS] InjectWings8OSTokenCookie: profile is null";
     return;
   }
-  //---***JEMAOS BEGIN***---
-  // The stored token belongs to ONE Jema online account. Never inject it
+  //---***WINGS8OS BEGIN***---
+  // The stored token belongs to ONE Wings8 online account. Never inject it
   // into another profile (e.g. a local account session, or a different
   // online account on multi-account devices): the subscription cookie would
   // then grant that profile access to the Pro PWAs (SubscriptionGuard reads
@@ -2284,86 +2284,86 @@ void UserSessionManager::InjectJemaOSTokenCookie(Profile* profile) {
   std::string token_email;
   if (g_browser_process) {
     token_email = g_browser_process->local_state()->GetString(
-        jemaos::prefs::kJemaOsAuthEmail);
+        wings8os::prefs::kWings8OsAuthEmail);
   }
   if (token_email.empty() ||
       !base::EqualsCaseInsensitiveASCII(profile->GetProfileUserName(),
                                         token_email)) {
-    LOG(WARNING) << "[JEMAOS] Not injecting token cookie into profile "
+    LOG(WARNING) << "[WINGS8OS] Not injecting token cookie into profile "
                  << profile->GetProfileUserName()
                  << " (token belongs to another account)";
     return;
   }
-  //---***JEMAOS END***---
+  //---***WINGS8OS END***---
 
   auto* storage_partition = profile->GetDefaultStoragePartition();
   if (!storage_partition) {
-    LOG(ERROR) << "[JEMAOS] InjectJemaOSTokenCookie: storage partition null";
+    LOG(ERROR) << "[WINGS8OS] InjectWings8OSTokenCookie: storage partition null";
     return;
   }
   auto* cookie_manager = storage_partition->GetCookieManagerForBrowserProcess();
   if (!cookie_manager) {
-    LOG(ERROR) << "[JEMAOS] InjectJemaOSTokenCookie: cookie manager null";
+    LOG(ERROR) << "[WINGS8OS] InjectWings8OSTokenCookie: cookie manager null";
     return;
   }
 
-  LOG(INFO) << "[JEMAOS] Injecting SAML access token cookie for PWA apps";
+  LOG(INFO) << "[WINGS8OS] Injecting SAML access token cookie for PWA apps";
 
-  const GURL kJemaOsUrl("https://jemaos.com");
+  const GURL kWings8OsUrl("https://wings8.org");
   // Long-lived cookie: the lifecycle timer re-injects a fresh value regularly
   // and renews the underlying access token before it expires server-side.
   const std::string cookie_value =
-      "jemaos_access_token=" + token +
-      "; Path=/; Domain=.jemaos.com; Secure; SameSite=Lax; Max-Age=604800";
+      "wings8os_access_token=" + token +
+      "; Path=/; Domain=.wings8.org; Secure; SameSite=Lax; Max-Age=604800";
 
   net::CookieInclusionStatus status;
   auto cookie =
-      net::CanonicalCookie::Create(kJemaOsUrl, cookie_value, base::Time::Now(),
+      net::CanonicalCookie::Create(kWings8OsUrl, cookie_value, base::Time::Now(),
                                    /*server_time=*/base::Time(),
                                    /*cookie_partition_key=*/std::nullopt,
                                    net::CookieSourceType::kOther, &status);
 
   if (!cookie) {
-    LOG(ERROR) << "[JEMAOS] Failed to create cookie: "
+    LOG(ERROR) << "[WINGS8OS] Failed to create cookie: "
                << status.GetDebugString();
     return;
   }
 
   net::CookieOptions options = net::CookieOptions::MakeAllInclusive();
   cookie_manager->SetCanonicalCookie(
-      *cookie, kJemaOsUrl, options,
+      *cookie, kWings8OsUrl, options,
       base::BindOnce([](net::CookieAccessResult result) {
-        LOG(INFO) << "[JEMAOS] Cookie set: " << result.status.IsInclude();
+        LOG(INFO) << "[WINGS8OS] Cookie set: " << result.status.IsInclude();
       }));
 
-  // JEMAOS: Managed-session marker. The OS is the SINGLE owner of the
+  // WINGS8OS: Managed-session marker. The OS is the SINGLE owner of the
   // refresh token and rotates it on its own lifecycle; the server-side
   // rotation invalidates the previous refresh token, so if a PWA rotated
   // the shared session too, the OS session would die (401 on every system
   // call, e.g. the backup-analysis panel). PWAs (SubscriptionGuard) read
   // this marker and, when present, never refresh on their own and never
-  // pull tokens from the jema-auth portal: they wait for this cookie to be
-  // renewed by the OS. Cleared by ClearJemaOSInjectedCookies() when the
+  // pull tokens from the wings8-auth portal: they wait for this cookie to be
+  // renewed by the OS. Cleared by ClearWings8OSInjectedCookies() when the
   // session is rejected, so PWAs can fall back to the web session.
   const std::string managed_cookie_value =
-      "jemaos_managed=1; Path=/; Domain=.jemaos.com; Secure; SameSite=Lax; "
+      "wings8os_managed=1; Path=/; Domain=.wings8.org; Secure; SameSite=Lax; "
       "Max-Age=604800";
   auto managed_cookie = net::CanonicalCookie::Create(
-      kJemaOsUrl, managed_cookie_value, base::Time::Now(),
+      kWings8OsUrl, managed_cookie_value, base::Time::Now(),
       /*server_time=*/base::Time(),
       /*cookie_partition_key=*/std::nullopt, net::CookieSourceType::kOther,
       &status);
   if (managed_cookie) {
     cookie_manager->SetCanonicalCookie(
-        *managed_cookie, kJemaOsUrl, options,
+        *managed_cookie, kWings8OsUrl, options,
         base::BindOnce([](net::CookieAccessResult result) {
-          LOG(INFO) << "[JEMAOS] Managed-session cookie set: "
+          LOG(INFO) << "[WINGS8OS] Managed-session cookie set: "
                     << result.status.IsInclude();
         }));
   }
 }
 
-void UserSessionManager::ClearJemaOSInjectedCookies(Profile* profile) {
+void UserSessionManager::ClearWings8OSInjectedCookies(Profile* profile) {
   if (!profile) {
     return;
   }
@@ -2376,26 +2376,26 @@ void UserSessionManager::ClearJemaOSInjectedCookies(Profile* profile) {
   if (!cookie_manager) {
     return;
   }
-  const GURL kJemaOsUrl("https://jemaos.com");
+  const GURL kWings8OsUrl("https://wings8.org");
   for (const char* cookie_name :
-       {"jemaos_access_token", "jemaos_managed", "jemaos_refresh_token"}) {
+       {"wings8os_access_token", "wings8os_managed", "wings8os_refresh_token"}) {
     network::mojom::CookieDeletionFilterPtr filter(
         network::mojom::CookieDeletionFilter::New());
-    filter->url = kJemaOsUrl;
+    filter->url = kWings8OsUrl;
     filter->cookie_name = cookie_name;
     cookie_manager->DeleteCookies(std::move(filter), base::DoNothing());
   }
-  LOG(INFO) << "[JEMAOS] Cleared injected session cookies";
+  LOG(INFO) << "[WINGS8OS] Cleared injected session cookies";
 }
 
 namespace {
 
-// JemaOS Connect API used to renew subscription access tokens.
-constexpr char kJemaOsConnectApiBase[] = "https://connect-api.jematech.fr";
-constexpr char kJemaOsTokenRefreshPath[] = "/v1/connect/refreshtoken";
+// Wings8OS Connect API used to renew subscription access tokens.
+constexpr char kWings8OsConnectApiBase[] = "https://connect-api.wings8tech.com";
+constexpr char kWings8OsTokenRefreshPath[] = "/v1/connect/refreshtoken";
 // 1 min: this tick also carries the subscription/seat-revocation check, so an
 // admin deactivation closes the session within ~1 minute instead of 15.
-constexpr base::TimeDelta kJemaOsTokenCheckInterval = base::Minutes(1);
+constexpr base::TimeDelta kWings8OsTokenCheckInterval = base::Minutes(1);
 // Proactive renewal window for the opaque access token. The server-side
 // access token lives 24 h; renewing only after 6 h (old behaviour) left a
 // stale token whenever the PC slept through the window, and the premium
@@ -2403,11 +2403,11 @@ constexpr base::TimeDelta kJemaOsTokenCheckInterval = base::Minutes(1);
 // hour while the session is active keeps the shared cookie fresh; the
 // server keeps the access token VALUE stable, so concurrent consumers
 // never see a rotation.
-constexpr base::TimeDelta kJemaOsOpaqueTokenRenewAfter = base::Hours(1);
+constexpr base::TimeDelta kWings8OsOpaqueTokenRenewAfter = base::Hours(1);
 // Refresh proactively when this much lifetime remains (JWT exp).
-constexpr base::TimeDelta kJemaOsRefreshMargin = base::Minutes(30);
+constexpr base::TimeDelta kWings8OsRefreshMargin = base::Minutes(30);
 // Safety net for opaque tokens without an exp claim.
-constexpr base::TimeDelta kJemaOsOpaqueTokenMaxAge = base::Hours(6);
+constexpr base::TimeDelta kWings8OsOpaqueTokenMaxAge = base::Hours(6);
 
 bool Base64UrlDecodeToString(std::string_view input, std::string* out) {
   std::string b64(input);
@@ -2445,20 +2445,20 @@ base::Time ExtractJwtExpiryTime(const std::string& token) {
 
 }  // namespace
 
-void UserSessionManager::StartJemaOSTokenLifecycleTimer() {
-  if (jemaos_token_timer_.IsRunning()) {
+void UserSessionManager::StartWings8OSTokenLifecycleTimer() {
+  if (wings8os_token_timer_.IsRunning()) {
     return;
   }
-  jemaos_token_timer_.Start(
-      FROM_HERE, kJemaOsTokenCheckInterval,
-      base::BindRepeating(&UserSessionManager::MaybeRefreshAndInjectJemaOSToken,
+  wings8os_token_timer_.Start(
+      FROM_HERE, kWings8OsTokenCheckInterval,
+      base::BindRepeating(&UserSessionManager::MaybeRefreshAndInjectWings8OSToken,
                           weak_factory_.GetWeakPtr()));
   // Run one check immediately so a nearly-expired token is renewed now.
-  MaybeRefreshAndInjectJemaOSToken();
+  MaybeRefreshAndInjectWings8OSToken();
 }
 
-void UserSessionManager::MaybeRefreshAndInjectJemaOSToken() {
-  const std::string token = GetJemaOSAccessToken();
+void UserSessionManager::MaybeRefreshAndInjectWings8OSToken() {
+  const std::string token = GetWings8OSAccessToken();
   if (token.empty()) {
     // No stored credentials: nothing to renew (fresh login pending).
     return;
@@ -2468,7 +2468,7 @@ void UserSessionManager::MaybeRefreshAndInjectJemaOSToken() {
     return;
   }
 
-  const std::string refresh_token = GetJemaOSRefreshToken();
+  const std::string refresh_token = GetWings8OSRefreshToken();
   bool should_refresh = false;
   if (!refresh_token.empty()) {
     const base::Time expiry = ExtractJwtExpiryTime(token);
@@ -2476,15 +2476,15 @@ void UserSessionManager::MaybeRefreshAndInjectJemaOSToken() {
       // Opaque token: refresh periodically as a safety net.
       if (g_browser_process) {
         const int64_t issued_at = g_browser_process->local_state()->GetInt64(
-            jemaos::prefs::kJemaOsAuthIssuedAt);
+            wings8os::prefs::kWings8OsAuthIssuedAt);
         if (issued_at == 0 ||
             base::Time::Now() - base::Time::FromDeltaSinceWindowsEpoch(
                                     base::Seconds(issued_at)) >
-                kJemaOsOpaqueTokenRenewAfter) {
+                kWings8OsOpaqueTokenRenewAfter) {
           should_refresh = true;
         }
       }
-    } else if (base::Time::Now() > expiry - kJemaOsRefreshMargin) {
+    } else if (base::Time::Now() > expiry - kWings8OsRefreshMargin) {
       should_refresh = true;
     }
   } else {
@@ -2494,44 +2494,44 @@ void UserSessionManager::MaybeRefreshAndInjectJemaOSToken() {
     // instead of looping on an expired token marked as OS-managed.
     if (g_browser_process) {
       const int64_t issued_at = g_browser_process->local_state()->GetInt64(
-          jemaos::prefs::kJemaOsAuthIssuedAt);
+          wings8os::prefs::kWings8OsAuthIssuedAt);
       const base::TimeDelta token_age =
           issued_at == 0
               ? base::Hours(48)
               : base::Time::Now() -
                     base::Time::FromDeltaSinceWindowsEpoch(
                         base::Seconds(issued_at));
-      if (token_age > kJemaOsOpaqueTokenMaxAge * 4) {
-        LOG(WARNING) << "[JEMAOS] Access token is stale with no refresh "
+      if (token_age > kWings8OsOpaqueTokenMaxAge * 4) {
+        LOG(WARNING) << "[WINGS8OS] Access token is stale with no refresh "
                         "token; clearing stored auth tokens";
-        ClearJemaOSAuthTokens();
-        ClearJemaOSInjectedCookies(profile);
+        ClearWings8OSAuthTokens();
+        ClearWings8OSInjectedCookies(profile);
         return;
       }
     }
   }
 
-  if (should_refresh && !jemaos_token_refresh_in_flight_) {
-    RefreshJemaOSToken();
+  if (should_refresh && !wings8os_token_refresh_in_flight_) {
+    RefreshWings8OSToken();
     return;
   }
-  InjectJemaOSTokenCookie(profile);
+  InjectWings8OSTokenCookie(profile);
   // Keep the cached subscription state fresh on the same cadence; upgrades
   // from Freemium to Pro take effect without waiting for the next login.
-  FetchJemaOSSubscriptionState(profile);
+  FetchWings8OSSubscriptionState(profile);
 }
 
-void UserSessionManager::RefreshJemaOSToken() {
-  RefreshJemaOSToken(base::OnceClosure());
+void UserSessionManager::RefreshWings8OSToken() {
+  RefreshWings8OSToken(base::OnceClosure());
 }
 
-void UserSessionManager::RefreshJemaOSToken(base::OnceClosure on_done) {
-  const std::string refresh_token = GetJemaOSRefreshToken();
+void UserSessionManager::RefreshWings8OSToken(base::OnceClosure on_done) {
+  const std::string refresh_token = GetWings8OSRefreshToken();
   Profile* profile = ProfileManager::GetActiveUserProfile();
   if (refresh_token.empty() || !profile) {
-    jemaos_token_refresh_in_flight_ = false;
+    wings8os_token_refresh_in_flight_ = false;
     if (profile) {
-      InjectJemaOSTokenCookie(profile);
+      InjectWings8OSTokenCookie(profile);
     }
     // Nothing to renew: run the completion callback right away so the
     // caller can retry its API call with the (unchanged) token state.
@@ -2541,28 +2541,28 @@ void UserSessionManager::RefreshJemaOSToken(base::OnceClosure on_done) {
     return;
   }
   if (on_done) {
-    jemaos_token_refresh_done_callbacks_.push_back(std::move(on_done));
+    wings8os_token_refresh_done_callbacks_.push_back(std::move(on_done));
   }
-  if (jemaos_token_refresh_in_flight_) {
+  if (wings8os_token_refresh_in_flight_) {
     // A refresh is already running; queued callbacks run when it completes.
     return;
   }
-  jemaos_token_refresh_in_flight_ = true;
+  wings8os_token_refresh_in_flight_ = true;
 
-  const GURL url(std::string(kJemaOsConnectApiBase) + kJemaOsTokenRefreshPath);
+  const GURL url(std::string(kWings8OsConnectApiBase) + kWings8OsTokenRefreshPath);
   const net::NetworkTrafficAnnotationTag annotation =
-      net::DefineNetworkTrafficAnnotation("jemaos_token_refresh", R"(
+      net::DefineNetworkTrafficAnnotation("wings8os_token_refresh", R"(
         semantics {
-          sender: "JemaOS subscription token manager"
-          description: "Renews the JemaOS subscription access token so PWA apps"
+          sender: "Wings8OS subscription token manager"
+          description: "Renews the Wings8OS subscription access token so PWA apps"
             " keep working without forcing a new login."
           trigger: "Periodic timer or token near expiry."
-          data: "The stored JemaOS refresh token and account email."
+          data: "The stored Wings8OS refresh token and account email."
           destination: OTHER
         }
         policy {
           cookies_allowed: NO
-          setting: "Tied to the user's JemaOS account session."
+          setting: "Tied to the user's Wings8OS account session."
         })");
 
   auto resource_request = std::make_unique<network::ResourceRequest>();
@@ -2571,7 +2571,7 @@ void UserSessionManager::RefreshJemaOSToken(base::OnceClosure on_done) {
   resource_request->credentials_mode = network::mojom::CredentialsMode::kOmit;
   resource_request->headers.SetHeader(net::HttpRequestHeaders::kAccept,
                                       "application/json");
-  // Same API key the PWAs and FetchJemaOSSubscriptionState send; every
+  // Same API key the PWAs and FetchWings8OSSubscriptionState send; every
   // connect route enforces it (401 otherwise, which would wipe the session).
   resource_request->headers.SetHeader(
       "x-api-key", "e58492a3-b452-4197-9f4a-deb7915b9446");
@@ -2590,26 +2590,26 @@ void UserSessionManager::RefreshJemaOSToken(base::OnceClosure on_done) {
       profile->GetDefaultStoragePartition()
           ->GetURLLoaderFactoryForBrowserProcess()
           .get(),
-      base::BindOnce(&UserSessionManager::OnJemaOSTokenRefreshed,
+      base::BindOnce(&UserSessionManager::OnWings8OSTokenRefreshed,
                      weak_factory_.GetWeakPtr(), std::move(loader)),
       256 * 1024);
 }
 
-void UserSessionManager::RunJemaOSTokenRefreshCallbacks() {
-  if (jemaos_token_refresh_done_callbacks_.empty()) {
+void UserSessionManager::RunWings8OSTokenRefreshCallbacks() {
+  if (wings8os_token_refresh_done_callbacks_.empty()) {
     return;
   }
   std::vector<base::OnceClosure> callbacks;
-  callbacks.swap(jemaos_token_refresh_done_callbacks_);
+  callbacks.swap(wings8os_token_refresh_done_callbacks_);
   for (auto& callback : callbacks) {
     std::move(callback).Run();
   }
 }
 
-void UserSessionManager::OnJemaOSTokenRefreshed(
+void UserSessionManager::OnWings8OSTokenRefreshed(
     std::unique_ptr<network::SimpleURLLoader> loader,
     std::unique_ptr<std::string> response_body) {
-  jemaos_token_refresh_in_flight_ = false;
+  wings8os_token_refresh_in_flight_ = false;
   Profile* profile = ProfileManager::GetActiveUserProfile();
 
   int status = 0;
@@ -2621,32 +2621,32 @@ void UserSessionManager::OnJemaOSTokenRefreshed(
     // Refresh token revoked or expired: clear credentials so apps show the
     // upgrade/login screen instead of failing silently. The injected cookies
     // are removed too so PWAs stop treating the session as OS-managed and
-    // fall back to the web (jema-auth portal) session.
-    LOG(WARNING) << "[JEMAOS] Refresh token rejected (" << status
+    // fall back to the web (wings8-auth portal) session.
+    LOG(WARNING) << "[WINGS8OS] Refresh token rejected (" << status
                  << "), clearing stored auth tokens";
-    ClearJemaOSAuthTokens();
-    ClearJemaOSInjectedCookies(profile);
-    RunJemaOSTokenRefreshCallbacks();
+    ClearWings8OSAuthTokens();
+    ClearWings8OSInjectedCookies(profile);
+    RunWings8OSTokenRefreshCallbacks();
     return;
   }
 
   if (status < 200 || status >= 300 || !response_body) {
-    LOG(WARNING) << "[JEMAOS] Token refresh failed (status " << status
+    LOG(WARNING) << "[WINGS8OS] Token refresh failed (status " << status
                  << "), keeping current token";
     if (profile) {
-      InjectJemaOSTokenCookie(profile);
+      InjectWings8OSTokenCookie(profile);
     }
-    RunJemaOSTokenRefreshCallbacks();
+    RunWings8OSTokenRefreshCallbacks();
     return;
   }
 
   std::optional<base::Value> json = base::JSONReader::Read(*response_body);
   if (!json || !json->is_dict()) {
-    LOG(WARNING) << "[JEMAOS] Token refresh returned invalid JSON";
+    LOG(WARNING) << "[WINGS8OS] Token refresh returned invalid JSON";
     if (profile) {
-      InjectJemaOSTokenCookie(profile);
+      InjectWings8OSTokenCookie(profile);
     }
-    RunJemaOSTokenRefreshCallbacks();
+    RunWings8OSTokenRefreshCallbacks();
     return;
   }
 
@@ -2661,24 +2661,24 @@ void UserSessionManager::OnJemaOSTokenRefreshed(
   }
 
   if (!new_access || new_access->empty()) {
-    LOG(WARNING) << "[JEMAOS] Token refresh response had no accessToken";
+    LOG(WARNING) << "[WINGS8OS] Token refresh response had no accessToken";
     if (profile) {
-      InjectJemaOSTokenCookie(profile);
+      InjectWings8OSTokenCookie(profile);
     }
-    RunJemaOSTokenRefreshCallbacks();
+    RunWings8OSTokenRefreshCallbacks();
     return;
   }
 
   std::string email;
   if (g_browser_process) {
     email = g_browser_process->local_state()->GetString(
-        jemaos::prefs::kJemaOsAuthEmail);
+        wings8os::prefs::kWings8OsAuthEmail);
   }
 
-  //---***JEMAOS BEGIN***---
+  //---***WINGS8OS BEGIN***---
   // Track the SaaS password version. osLogin/refreshtoken expose a monotonic
   // password_version; we store the last seen value. We deliberately do NOT force
-  // an online sign-in here: Jema accounts keep the NORMAL local password flow
+  // an online sign-in here: Wings8 accounts keep the NORMAL local password flow
   // (no "Se connecter" button). The password change is applied transparently
   // when the user types their new password at the pod.
   if (g_browser_process) {
@@ -2687,44 +2687,44 @@ void UserSessionManager::OnJemaOSTokenRefreshed(
         dict.FindInt("password_version");
     if (new_password_version.has_value()) {
       const int64_t stored_password_version =
-          local_state->GetInt64(jemaos::prefs::kJemaOsAuthPasswordVersion);
+          local_state->GetInt64(wings8os::prefs::kWings8OsAuthPasswordVersion);
       if (stored_password_version != 0 &&
           stored_password_version != *new_password_version) {
-        LOG(WARNING) << "[JEMAOS] SaaS password change detected (version "
+        LOG(WARNING) << "[WINGS8OS] SaaS password change detected (version "
                      << stored_password_version << " -> "
                      << *new_password_version
                      << "); the new password will be applied on next login.";
       }
-      local_state->SetInt64(jemaos::prefs::kJemaOsAuthPasswordVersion,
+      local_state->SetInt64(wings8os::prefs::kWings8OsAuthPasswordVersion,
                             *new_password_version);
     }
   }
-  //---***JEMAOS END***---
+  //---***WINGS8OS END***---
 
-  StoreJemaOSAuthTokens(*new_access, new_refresh ? *new_refresh : std::string(),
+  StoreWings8OSAuthTokens(*new_access, new_refresh ? *new_refresh : std::string(),
                         email);
-  LOG(INFO) << "[JEMAOS] Access token renewed successfully";
+  LOG(INFO) << "[WINGS8OS] Access token renewed successfully";
   if (profile) {
-    InjectJemaOSTokenCookie(profile);
+    InjectWings8OSTokenCookie(profile);
   }
-  RunJemaOSTokenRefreshCallbacks();
+  RunWings8OSTokenRefreshCallbacks();
 }
 
-void UserSessionManager::FetchJemaOSSubscriptionState(Profile* profile) {
+void UserSessionManager::FetchWings8OSSubscriptionState(Profile* profile) {
   if (!profile) {
     return;
   }
-  const std::string token = GetJemaOSAccessToken();
+  const std::string token = GetWings8OSAccessToken();
   if (token.empty()) {
     return;
   }
   // The stored token is global (local state): only use it when it belongs to
-  // the account of this profile, i.e. a Jema online account. Local accounts
-  // (@jemaos.local) and other accounts keep the default (no subscription).
+  // the account of this profile, i.e. a Wings8 online account. Local accounts
+  // (@wings8os.local) and other accounts keep the default (no subscription).
   std::string token_email;
   if (g_browser_process) {
     token_email = g_browser_process->local_state()->GetString(
-        jemaos::prefs::kJemaOsAuthEmail);
+        wings8os::prefs::kWings8OsAuthEmail);
   }
   if (token_email.empty() ||
       !base::EqualsCaseInsensitiveASCII(profile->GetProfileUserName(),
@@ -2732,21 +2732,21 @@ void UserSessionManager::FetchJemaOSSubscriptionState(Profile* profile) {
     return;
   }
 
-  const GURL url(std::string(kJemaOsConnectApiBase) +
+  const GURL url(std::string(kWings8OsConnectApiBase) +
                  "/v1/connect/os/subscription");
   const net::NetworkTrafficAnnotationTag annotation =
-      net::DefineNetworkTrafficAnnotation("jemaos_subscription_check", R"(
+      net::DefineNetworkTrafficAnnotation("wings8os_subscription_check", R"(
         semantics {
-          sender: "JemaOS subscription state manager"
-          description: "Checks whether the Jema online account has an active"
+          sender: "Wings8OS subscription state manager"
+          description: "Checks whether the Wings8 online account has an active"
             " Pro subscription to gate premium PWAs and cloud backup."
           trigger: "User profile load or periodic token lifecycle timer."
-          data: "The stored JemaOS access token."
+          data: "The stored Wings8OS access token."
           destination: OTHER
         }
         policy {
           cookies_allowed: NO
-          setting: "Tied to the user's JemaOS account session."
+          setting: "Tied to the user's Wings8OS account session."
         })");
 
   auto resource_request = std::make_unique<network::ResourceRequest>();
@@ -2770,7 +2770,7 @@ void UserSessionManager::FetchJemaOSSubscriptionState(Profile* profile) {
   if (!loader_factory) {
     // The factory is not ready this early in the session startup; the
     // lifecycle timer will retry on its next tick.
-    LOG(WARNING) << "[JEMAOS] Subscription check skipped: no URL loader "
+    LOG(WARNING) << "[WINGS8OS] Subscription check skipped: no URL loader "
                     "factory yet";
     return;
   }
@@ -2782,12 +2782,12 @@ void UserSessionManager::FetchJemaOSSubscriptionState(Profile* profile) {
   auto* loader_ptr = loader.get();
   loader_ptr->DownloadToString(
       loader_factory.get(),
-      base::BindOnce(&UserSessionManager::OnJemaOSSubscriptionFetched,
+      base::BindOnce(&UserSessionManager::OnWings8OSSubscriptionFetched,
                      weak_factory_.GetWeakPtr(), std::move(loader)),
       64 * 1024);
 }
 
-void UserSessionManager::OnJemaOSSubscriptionFetched(
+void UserSessionManager::OnWings8OSSubscriptionFetched(
     std::unique_ptr<network::SimpleURLLoader> loader,
     std::unique_ptr<std::string> response_body) {
   // Resolve the profile lazily: the profile the request was started for may
@@ -2801,7 +2801,7 @@ void UserSessionManager::OnJemaOSSubscriptionFetched(
   std::string token_email;
   if (g_browser_process) {
     token_email = g_browser_process->local_state()->GetString(
-        jemaos::prefs::kJemaOsAuthEmail);
+        wings8os::prefs::kWings8OsAuthEmail);
   }
   if (token_email.empty() ||
       !base::EqualsCaseInsensitiveASCII(profile->GetProfileUserName(),
@@ -2815,14 +2815,14 @@ void UserSessionManager::OnJemaOSSubscriptionFetched(
   if (status < 200 || status >= 300) {
     // Keep the last known state on transient errors (fail-closed: the pref
     // defaults to false).
-    LOG(WARNING) << "[JEMAOS] Subscription check failed (status " << status
+    LOG(WARNING) << "[WINGS8OS] Subscription check failed (status " << status
                  << "), keeping previous state";
     return;
   }
 
   std::optional<base::Value> json = base::JSONReader::Read(*response_body);
   if (!json || !json->is_dict()) {
-    LOG(WARNING) << "[JEMAOS] Subscription check returned invalid JSON";
+    LOG(WARNING) << "[WINGS8OS] Subscription check returned invalid JSON";
     return;
   }
   const base::Value::Dict& dict = json->GetDict();
@@ -2830,27 +2830,27 @@ void UserSessionManager::OnJemaOSSubscriptionFetched(
   const bool seat_deactivated =
       dict.FindBool("seat_deactivated").value_or(false);
   const bool previous =
-      profile->GetPrefs()->GetBoolean(jemaos::prefs::kJemaSubscriptionActive);
-  profile->GetPrefs()->SetBoolean(jemaos::prefs::kJemaSubscriptionActive,
+      profile->GetPrefs()->GetBoolean(wings8os::prefs::kWings8SubscriptionActive);
+  profile->GetPrefs()->SetBoolean(wings8os::prefs::kWings8SubscriptionActive,
                                   active);
-  profile->GetPrefs()->SetBoolean(jemaos::prefs::kJemaSeatDeactivated,
+  profile->GetPrefs()->SetBoolean(wings8os::prefs::kWings8SeatDeactivated,
                                   seat_deactivated);
   if (seat_deactivated) {
-    LOG(WARNING) << "[JEMAOS] Fleet admin deactivated all seats of this "
+    LOG(WARNING) << "[WINGS8OS] Fleet admin deactivated all seats of this "
                     "account; the license manager will close the session.";
   }
-  LOG(INFO) << "[JEMAOS] Subscription state for "
+  LOG(INFO) << "[WINGS8OS] Subscription state for "
             << profile->GetProfileUserName() << ": "
             << (active ? "active (Pro)" : "none (Freemium)");
 
-  // JEMAOS: the startup preinstall pass usually runs before this response
+  // WINGS8OS: the startup preinstall pass usually runs before this response
   // arrives, with the fail-closed default (no subscription). If the account
   // turns out to have an active Pro/Pro+ subscription, re-run the preinstall
   // synchronize now so the premium OEM PWAs get installed during this first
   // session instead of only at the next login.
   if (active && !previous) {
     if (auto* provider = web_app::WebAppProvider::GetForWebApps(profile)) {
-      LOG(INFO) << "[JEMAOS] Re-running preinstalled web apps synchronize "
+      LOG(INFO) << "[WINGS8OS] Re-running preinstalled web apps synchronize "
                    "for the premium OEM bundle";
       provider->preinstalled_web_app_manager().SynchronizeNow(
           base::DoNothing());
@@ -2858,31 +2858,31 @@ void UserSessionManager::OnJemaOSSubscriptionFetched(
   }
 }
 
-void UserSessionManager::NotifyJemaOSDeviceUid(Profile* profile) {
+void UserSessionManager::NotifyWings8OSDeviceUid(Profile* profile) {
   if (!profile || !g_browser_process || !g_browser_process->local_state()) {
     return;
   }
-  // Online accounts only: local (@jemaos.local) and other profiles have no
+  // Online accounts only: local (@wings8os.local) and other profiles have no
   // SaaS identity to bind the hardware UID to.
   const std::string email = profile->GetProfileUserName();
   if (email.empty() ||
-      base::EndsWith(email, "@jemaos.local",
+      base::EndsWith(email, "@wings8os.local",
                      base::CompareCase::INSENSITIVE_ASCII)) {
     return;
   }
   const std::string device_uid =
-      jemaos::GetDeviceUid(g_browser_process->local_state());
+      wings8os::GetDeviceUid(g_browser_process->local_state());
   if (device_uid.empty()) {
-    LOG(WARNING) << "[JEMAOS] Device UID unavailable, skipping SaaS notify";
+    LOG(WARNING) << "[WINGS8OS] Device UID unavailable, skipping SaaS notify";
     return;
   }
 
-  const GURL url(std::string(kJemaOsConnectApiBase) +
+  const GURL url(std::string(kWings8OsConnectApiBase) +
                  "/v1/connect/user/by-email");
   const net::NetworkTrafficAnnotationTag annotation =
-      net::DefineNetworkTrafficAnnotation("jemaos_device_uid_notify", R"(
+      net::DefineNetworkTrafficAnnotation("wings8os_device_uid_notify", R"(
         semantics {
-          sender: "JemaOS device identity reporter"
+          sender: "Wings8OS device identity reporter"
           description: "Reports this PC's stable hardware UID to the Connect"
             " API at sign-in so the backend binds (first login) or refreshes"
             " last_seen (later logins) on the enrolled hardware row."
@@ -2892,7 +2892,7 @@ void UserSessionManager::NotifyJemaOSDeviceUid(Profile* profile) {
         }
         policy {
           cookies_allowed: NO
-          setting: "Tied to the user's JemaOS account session."
+          setting: "Tied to the user's Wings8OS account session."
         })");
 
   auto resource_request = std::make_unique<network::ResourceRequest>();
@@ -2919,7 +2919,7 @@ void UserSessionManager::NotifyJemaOSDeviceUid(Profile* profile) {
   scoped_refptr<network::SharedURLLoaderFactory> loader_factory =
       storage_partition->GetURLLoaderFactoryForBrowserProcess();
   if (!loader_factory) {
-    LOG(WARNING) << "[JEMAOS] Device UID notify skipped: no URL loader "
+    LOG(WARNING) << "[WINGS8OS] Device UID notify skipped: no URL loader "
                     "factory yet";
     return;
   }
@@ -2929,15 +2929,15 @@ void UserSessionManager::NotifyJemaOSDeviceUid(Profile* profile) {
   loader->SetAllowHttpErrorResults(true);
   loader->AttachStringForUpload(body, "application/json");
   auto* loader_ptr = loader.get();
-  LOG(INFO) << "[JEMAOS] Reporting device UID for " << email;
+  LOG(INFO) << "[WINGS8OS] Reporting device UID for " << email;
   loader_ptr->DownloadToString(
       loader_factory.get(),
-      base::BindOnce(&UserSessionManager::OnJemaOSDeviceUidNotified,
+      base::BindOnce(&UserSessionManager::OnWings8OSDeviceUidNotified,
                      weak_factory_.GetWeakPtr(), std::move(loader)),
       64 * 1024);
 }
 
-void UserSessionManager::OnJemaOSDeviceUidNotified(
+void UserSessionManager::OnWings8OSDeviceUidNotified(
     std::unique_ptr<network::SimpleURLLoader> loader,
     std::unique_ptr<std::string> response_body) {
   if (!loader || !response_body) {
@@ -2948,11 +2948,11 @@ void UserSessionManager::OnJemaOSDeviceUidNotified(
     status = loader->ResponseInfo()->headers->response_code();
   }
   if (status < 200 || status >= 300) {
-    LOG(WARNING) << "[JEMAOS] Device UID notify failed (status " << status
+    LOG(WARNING) << "[WINGS8OS] Device UID notify failed (status " << status
                  << ")";
     return;
   }
-  LOG(INFO) << "[JEMAOS] Device UID reported to SaaS";
+  LOG(INFO) << "[WINGS8OS] Device UID reported to SaaS";
 }
 
 void UserSessionManager::StartTetherServiceIfPossible(Profile* profile) {
@@ -3066,8 +3066,8 @@ void UserSessionManager::RestorePendingUserSessions() {
     AccountType account_type = account_id.GetAccountType();
     if (account_type == AccountType::FLINT_ACCOUNT) {
       user_type = user_manager::UserType::kFlintAccount;
-    } else if (account_type == AccountType::JEMA_ACCOUNT) {
-      user_type = user_manager::UserType::kJemaAccount;
+    } else if (account_type == AccountType::WINGS8_ACCOUNT) {
+      user_type = user_manager::UserType::kWings8Account;
     }
     UserContext user_context =
         user ? UserContext(*user) : UserContext(user_type, account_id);
@@ -3179,8 +3179,8 @@ void UserSessionManager::DoBrowserLaunchInternal(Profile* profile,
     return;
   }
 
-  jemaos::prefs::ClearRebootMarkPrefs(g_browser_process->local_state());
-  jemaos::prefs::ClearOneShotProfilePrefs(profile->GetPrefs());
+  wings8os::prefs::ClearRebootMarkPrefs(g_browser_process->local_state());
+  wings8os::prefs::ClearOneShotProfilePrefs(profile->GetPrefs());
 
   if (RestartToApplyPerSessionFlagsIfNeed(profile, false)) {
     return;
@@ -3419,7 +3419,7 @@ void UserSessionManager::SetSwitchesForUser(
 void UserSessionManager::AppendAccountSwitchesIfNeed(
     const AccountId& account_id) {
   std::vector<std::string> switches;
-  jemaos::switches::AppendAccountSwitchesIfNeed(
+  wings8os::switches::AppendAccountSwitchesIfNeed(
       user_manager::UserManager::Get()->GetActiveUser()->GetAccountId(),
       &switches);
   if (switches.size() > 0) {

@@ -148,8 +148,8 @@ ApiKeyCache::ApiKeyCache(const DefaultApiKeys& default_api_keys) {
   base::UmaHistogramBoolean("Signin.APIKeyMatchesFeatureOnStartup",
                             api_key_from_feature == api_key_);
 
-  jemaos_api_key_ = CalculateKeyValue(default_api_keys.jemaos_api_key,
-                                      STRINGIZE_NO_EXPANSION(JEMAOS_API_KEY),
+  wings8os_api_key_ = CalculateKeyValue(default_api_keys.wings8os_api_key,
+                                      STRINGIZE_NO_EXPANSION(WINGS8OS_API_KEY),
                                       std::string(), nullptr, std::string(),
                                       environment.get(), command_line, gaia_config,
                                       default_api_keys.allow_override_via_environment,
@@ -239,16 +239,16 @@ ApiKeyCache::ApiKeyCache(const DefaultApiKeys& default_api_keys) {
       default_api_keys.allow_override_via_environment,
       default_api_keys.allow_unset_values);
 
-#if BUILDFLAG(IS_OPENJEMA)
-  std::string jemaos_default_client_id = CalculateKeyValue(
-      default_api_keys.jemaos_default_client_id,
-      STRINGIZE_NO_EXPANSION(JEMAOS_DEFAULT_CLIENT_ID), std::string(), nullptr,
+#if BUILDFLAG(IS_OPENWINGS8)
+  std::string wings8os_default_client_id = CalculateKeyValue(
+      default_api_keys.wings8os_default_client_id,
+      STRINGIZE_NO_EXPANSION(WINGS8OS_DEFAULT_CLIENT_ID), std::string(), nullptr,
       std::string(), environment.get(), command_line, gaia_config,
       default_api_keys.allow_override_via_environment,
       default_api_keys.allow_unset_values);
-   std::string jemaos_default_client_secret = CalculateKeyValue(
-      default_api_keys.jemaos_default_client_secret,
-      STRINGIZE_NO_EXPANSION(JEMAOS_DEFAULT_CLIENT_SECRET), std::string(),
+   std::string wings8os_default_client_secret = CalculateKeyValue(
+      default_api_keys.wings8os_default_client_secret,
+      STRINGIZE_NO_EXPANSION(WINGS8OS_DEFAULT_CLIENT_SECRET), std::string(),
       nullptr, std::string(), environment.get(), command_line, gaia_config,
       default_api_keys.allow_override_via_environment,
       default_api_keys.allow_unset_values);
@@ -274,18 +274,18 @@ ApiKeyCache::ApiKeyCache(const DefaultApiKeys& default_api_keys) {
       command_line, gaia_config,
       default_api_keys.allow_override_via_environment,
       default_api_keys.allow_unset_values);
-#if BUILDFLAG(IS_OPENJEMA)
-  client_ids_[CLIENT_JEMAOS_MAIN] = CalculateKeyValue(
-      default_api_keys.jemaos_client_id_main,
-      STRINGIZE_NO_EXPANSION(JEMAOS_CLIENT_ID_MAIN), std::string(),
-      ::switches::kOAuth2JemaOsClientID, jemaos_default_client_id, environment.get(),
+#if BUILDFLAG(IS_OPENWINGS8)
+  client_ids_[CLIENT_WINGS8OS_MAIN] = CalculateKeyValue(
+      default_api_keys.wings8os_client_id_main,
+      STRINGIZE_NO_EXPANSION(WINGS8OS_CLIENT_ID_MAIN), std::string(),
+      ::switches::kOAuth2Wings8OsClientID, wings8os_default_client_id, environment.get(),
       command_line, gaia_config,
       default_api_keys.allow_override_via_environment,
       default_api_keys.allow_unset_values);
-  client_secrets_[CLIENT_JEMAOS_MAIN] = CalculateKeyValue(
-      default_api_keys.jemaos_client_secret_main,
-      STRINGIZE_NO_EXPANSION(JEMAOS_CLIENT_SECRET_MAIN), std::string(),
-      ::switches::kOAuth2JemaOsClientSecret, jemaos_default_client_secret, environment.get(),
+  client_secrets_[CLIENT_WINGS8OS_MAIN] = CalculateKeyValue(
+      default_api_keys.wings8os_client_secret_main,
+      STRINGIZE_NO_EXPANSION(WINGS8OS_CLIENT_SECRET_MAIN), std::string(),
+      ::switches::kOAuth2Wings8OsClientSecret, wings8os_default_client_secret, environment.get(),
       command_line, gaia_config,
       default_api_keys.allow_override_via_environment,
       default_api_keys.allow_unset_values);
@@ -345,11 +345,11 @@ bool ApiKeyCache::HasAPIKeyConfigured() const {
   return api_key_ != DefaultApiKeys::kUnsetApiToken;
 }
 
-bool ApiKeyCache::HasJemaOSAPIKeyConfigured() const {
-  return jemaos_api_key_ != DefaultApiKeys::kUnsetApiToken;
+bool ApiKeyCache::HasWings8OSAPIKeyConfigured() const {
+  return wings8os_api_key_ != DefaultApiKeys::kUnsetApiToken;
 }
 
-#if !BUILDFLAG(IS_OPENJEMA)
+#if !BUILDFLAG(IS_OPENWINGS8)
 bool ApiKeyCache::HasOAuthClientConfigured() const {
   auto is_unset = [](const std::string& value) {
     return value == DefaultApiKeys::kUnsetApiToken;
@@ -359,10 +359,10 @@ bool ApiKeyCache::HasOAuthClientConfigured() const {
 }
 #endif
 
-#if BUILDFLAG(IS_OPENJEMA)
+#if BUILDFLAG(IS_OPENWINGS8)
 bool ApiKeyCache::HasOAuthClientConfigured() const {
   for (size_t client_id = 0; client_id < CLIENT_NUM_ITEMS; ++client_id) {
-    if (client_id == CLIENT_JEMAOS_MAIN) {
+    if (client_id == CLIENT_WINGS8OS_MAIN) {
       continue;
     }
     OAuth2Client client = static_cast<OAuth2Client>(client_id);
@@ -375,8 +375,8 @@ bool ApiKeyCache::HasOAuthClientConfigured() const {
   return true;
 }
 
-bool ApiKeyCache::HasJemaOAuthClientConfigured() const {
-  OAuth2Client client = CLIENT_JEMAOS_MAIN;
+bool ApiKeyCache::HasWings8OAuthClientConfigured() const {
+  OAuth2Client client = CLIENT_WINGS8OS_MAIN;
   if (GetOAuth2ClientID(client) == DefaultApiKeys::kUnsetApiToken ||
       GetOAuth2ClientSecret(client) == DefaultApiKeys::kUnsetApiToken) {
     return false;

@@ -27,7 +27,7 @@ namespace cryptohome {
 class Identification;
 }
 
-namespace jemaos::ash {
+namespace wings8os::ash {
 struct ShellState;
 }
 
@@ -237,7 +237,7 @@ class ArcSessionImpl : public ArcSession,
 
   void MayStartPolicyManager();
   void StartPolicyManager();
-  void OnStartPolicyManagerCommandFinished(std::optional<jemaos::ash::ShellState> state);
+  void OnStartPolicyManagerCommandFinished(std::optional<wings8os::ash::ShellState> state);
 
   // Request to stop ARC instance via DBus. Also backs up the ARC
   // bug report if |should_backup_log| is set to true.

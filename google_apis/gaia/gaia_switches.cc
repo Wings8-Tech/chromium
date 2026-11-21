@@ -15,9 +15,9 @@ const char kLsoUrl[]                        = "lso-url";
 const char kOAuthAccountManagerUrl[] = "oauth-account-manager-url";
 const char kOAuth2ClientID[] = "oauth2-client-id";
 const char kOAuth2ClientSecret[] = "oauth2-client-secret";
-#if BUILDFLAG(IS_OPENJEMA)
-const char kOAuth2JemaOsClientID[] = "oauth2-jemaos-client-id";
-const char kOAuth2JemaOsClientSecret[] = "oauth2-jemaos-client-secret";
+#if BUILDFLAG(IS_OPENWINGS8)
+const char kOAuth2Wings8OsClientID[] = "oauth2-wings8os-client-id";
+const char kOAuth2Wings8OsClientSecret[] = "oauth2-wings8os-client-secret";
 #endif
 
 }  // namespace switches

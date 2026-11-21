@@ -115,7 +115,7 @@ struct EnrollmentConfig {
     // deployment enrollment.
     MODE_REMOTE_DEPLOYMENT_MANUAL_FALLBACK = 22,
 
-    MODE_JEMA_LOCAL_FORCED = 23,
+    MODE_WINGS8_LOCAL_FORCED = 23,
   };
 
   // An enumeration of assigned upgrades that a device can after initial
@@ -150,7 +150,7 @@ struct EnrollmentConfig {
 
   static EnrollmentConfig GetDemoModeEnrollmentConfig();
 
-  static bool IsZeroTouchEnrollmentJemaForced();
+  static bool IsZeroTouchEnrollmentWings8Forced();
 
   EnrollmentConfig();
   EnrollmentConfig(const EnrollmentConfig& config);
@@ -175,7 +175,7 @@ struct EnrollmentConfig {
            mode == MODE_ATTESTATION_LOCAL_FORCED ||
            mode == MODE_ATTESTATION_SERVER_FORCED ||
            mode == MODE_INITIAL_SERVER_FORCED ||
-           mode == MODE_JEMA_LOCAL_FORCED ||
+           mode == MODE_WINGS8_LOCAL_FORCED ||
            mode == MODE_ATTESTATION_INITIAL_SERVER_FORCED ||
            mode == MODE_ATTESTATION_ROLLBACK_FORCED || mode == MODE_RECOVERY ||
            mode == MODE_ENROLLMENT_TOKEN_INITIAL_SERVER_FORCED ||
@@ -211,13 +211,13 @@ struct EnrollmentConfig {
            mode == MODE_REMOTE_DEPLOYMENT_SERVER_FORCED;
   }
 
-  bool is_mode_jema() const {
-    return mode == MODE_JEMA_LOCAL_FORCED;
+  bool is_mode_wings8() const {
+    return mode == MODE_WINGS8_LOCAL_FORCED;
   }
   // Whether this configuration's mode causes the device to automatically
   // enroll without user interaction.
   bool is_automatic_enrollment() const {
-    return is_mode_attestation() || is_mode_token() || is_mode_jema();
+    return is_mode_attestation() || is_mode_token() || is_mode_wings8();
   }
 
   // Whether this configuration is an automatic enrollment mode that has a
@@ -276,7 +276,7 @@ struct EnrollmentConfig {
   // Enrollment token to use for authentication (for Flex Auto Enrollment).
   std::string enrollment_token;
 
-  std::string jema_enrollment_token;
+  std::string wings8_enrollment_token;
 
   // Source of OOBE config, if the device has an OOBE configuration file and
   // that config influences enrollment.

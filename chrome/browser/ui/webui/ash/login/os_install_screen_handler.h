@@ -57,7 +57,7 @@ class OsInstallScreenHandler final : public BaseScreenHandler,
       ::login::LocalizedValuesBuilder* builder) override;
 
   void GetAdditionalParameters(base::Value::Dict* parameters) override;
-  void DeclareJemaInstallerLocalizedValues(
+  void DeclareWings8InstallerLocalizedValues(
       ::login::LocalizedValuesBuilder* builder);
 
   // OsInstallScreenView:

@@ -72,7 +72,7 @@
 #include "chrome/browser/ui/webui/ash/login/terms_of_service_screen_handler.h"
 #include "chrome/browser/ui/webui/ash/login/user_allowlist_check_screen_handler.h"
 #include "chrome/browser/ui/webui/ash/login/user_creation_screen_handler.h"
-#include "chrome/browser/ui/webui/ash/login/jema_local_signin_screen_handler.h"
+#include "chrome/browser/ui/webui/ash/login/wings8_local_signin_screen_handler.h"
 #include "chrome/common/pref_names.h"
 #include "chrome/grit/generated_resources.h"
 #include "chromeos/ash/components/attestation/attestation_flow_adaptive.h"
@@ -87,8 +87,8 @@
 #include "ui/base/ime/ash/input_method_manager.h"
 #include "ui/base/ime/ash/input_method_util.h"
 #include "ui/base/l10n/l10n_util.h"
-#include "jemaos/switches/account/account_switches.h"
-#include "jemaos/switches/account/toggle/account_type_toggle.h"
+#include "wings8os/switches/account/account_switches.h"
+#include "wings8os/switches/account/toggle/account_type_toggle.h"
 
 namespace ash {
 
@@ -393,7 +393,7 @@ void LoginDisplayHostCommon::StartKiosk(const KioskAppId& kiosk_app_id,
 }
 
 void LoginDisplayHostCommon::CompleteLogin(const UserContext& user_context) {
-  LOG(WARNING) << "[JEMAOS] LoginDisplayHostCommon::CompleteLogin called for: "
+  LOG(WARNING) << "[WINGS8OS] LoginDisplayHostCommon::CompleteLogin called for: "
                << user_context.GetAccountId()
                << ", has password: " << (user_context.GetKey() != nullptr)
                << ", auth_flow: " << user_context.GetAuthFlow();
@@ -721,12 +721,12 @@ void LoginDisplayHostCommon::ShowGaiaDialogCommon(
   }
 
   if (prefilled_account.is_valid()) {
-    jemaos::switches::ToggleJemaAccountFlagByAccountId(prefilled_account);
+    wings8os::switches::ToggleWings8AccountFlagByAccountId(prefilled_account);
   }
 
   SetGaiaInputMethods(prefilled_account);
 
-  if (!prefilled_account.is_valid() && !jemaos::switches::IsJemaAccountEnabled()) {
+  if (!prefilled_account.is_valid() && !wings8os::switches::IsWings8AccountEnabled()) {
     StartWizard(UserCreationView::kScreenId);
   } else {
     wizard_context_->gaia_config.prefilled_account = prefilled_account;
@@ -777,7 +777,7 @@ void LoginDisplayHostCommon::ShowLocalDialogCommon() {
   // if it's not gaia screen currently, then just go to local signin screen
   // otherwise, let gaia_screen handle the request
   if (current_screen->screen_id() != GaiaView::kScreenId) {
-    StartWizard(JemaLocalSigninView::kScreenId);
+    StartWizard(Wings8LocalSigninView::kScreenId);
     return;
   }
   GaiaScreen* gaia_screen = GetWizardController()->GetScreen<GaiaScreen>();

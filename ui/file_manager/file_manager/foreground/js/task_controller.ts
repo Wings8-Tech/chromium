@@ -585,7 +585,7 @@ export class TaskController {
     }
   }
 
-  async openFileWithJemaosAI(entries: Array<Entry|FilesAppEntry>) {
+  async openFileWithWings8osAI(entries: Array<Entry|FilesAppEntry>) {
     const task: chrome.fileManagerPrivate.FileTaskDescriptor = {
       appId: 'kdakbcblgfmbajedcadmjjjlkammcpaj',
       taskType: 'web',

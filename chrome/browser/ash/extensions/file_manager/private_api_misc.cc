@@ -91,7 +91,7 @@
 #include "ui/display/screen.h"
 #include "ui/shell_dialogs/select_file_dialog.h"
 #include "url/gurl.h"
-#include "jemaos/prefs/jemaos_pref_names.h"
+#include "wings8os/prefs/wings8os_pref_names.h"
 
 namespace extensions {
 namespace {
@@ -318,7 +318,7 @@ FileManagerPrivateGetPreferencesFunction::Run() {
       policy::local_user_files::LocalUserFilesAllowed();
   result.default_location =
       GetDefaultLocation(prefs->GetString(prefs::kFilesAppDefaultLocation));
-  result.jema_assistant_enabled = prefs->GetBoolean(jemaos::prefs::kJemaAssistantEnabled);
+  result.wings8_assistant_enabled = prefs->GetBoolean(wings8os::prefs::kWings8AssistantEnabled);
   result.sky_vault_migration_destination = GetSkyVaultMigrationDestination();
 
   return RespondNow(WithArguments(result.ToValue()));

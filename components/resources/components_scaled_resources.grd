@@ -23,11 +23,11 @@
         <part file="search_engine_choice_scaled_resources.grdp" />
       </if>
 
-      <if expr="openjema">
-        <part file="../../openjema/resources/components/version_ui/version_ui_scaled_resources.grdp" />
+      <if expr="openwings8">
+        <part file="../../openwings8/resources/components/version_ui/version_ui_scaled_resources.grdp" />
       </if>
-      <if expr="not openjema">
-        <part file="../../jemaos/resources/components/version_ui/version_ui_scaled_resources.grdp" />
+      <if expr="not openwings8">
+        <part file="../../wings8os/resources/components/version_ui/version_ui_scaled_resources.grdp" />
       </if>
 
       <!-- Generic resources -->

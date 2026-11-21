@@ -43,14 +43,14 @@ export class OobeWelcomeDialog extends OobeWelcomeDialogBase {
 
   static get properties(): PolymerElementProperties {
     return {
-      jemaosLayout: {
+      wings8osLayout: {
         // when pass this property to child component oobe-adaptive-dialog,
-        // `$` should be used, since the property `jemaosLayout` is not defined in oobe-adaptive-dialog,
-        // oobe-adaptive-dialog will not get `jemaosLayout`. With `$`, it will be passed as attribute
+        // `$` should be used, since the property `wings8osLayout` is not defined in oobe-adaptive-dialog,
+        // oobe-adaptive-dialog will not get `wings8osLayout`. With `$`, it will be passed as attribute
         type: Boolean,
         value: true,
         readOnly: true,
-        reflectToAttribute: true, // with this, in css of this component itself `:host([jemaos-layout])` will work
+        reflectToAttribute: true, // with this, in css of this component itself `:host([wings8os-layout])` will work
       },
       /**
        * Currently selected system language (display name).
@@ -121,7 +121,7 @@ export class OobeWelcomeDialog extends OobeWelcomeDialogBase {
     };
   }
 
-  private jemaosLayout: boolean;
+  private wings8osLayout: boolean;
   private currentLanguage: string;
   private timezoneButtonVisible: boolean;
   private debuggingLinkVisible: boolean;
@@ -369,7 +369,7 @@ export class OobeWelcomeDialog extends OobeWelcomeDialogBase {
    * Determines if AnimationSlot is needed for specific flow
    */
   private showAnimationSlot(): boolean {
-    return !this.isBootAnimation && !this.jemaosLayout;
+    return !this.isBootAnimation && !this.wings8osLayout;
   }
 }
 

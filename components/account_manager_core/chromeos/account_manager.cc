@@ -107,14 +107,14 @@ std::optional<::account_manager::AccountType> FromProtoAccountType(
                             ::account_manager::AccountType::kFlint),
                     "Underlying enum values must match");
       return ::account_manager::AccountType::kFlint;
-    case internal::AccountType::ACCOUNT_TYPE_JEMA:
+    case internal::AccountType::ACCOUNT_TYPE_WINGS8:
       static_assert(
           static_cast<int>(
-              internal::AccountType::ACCOUNT_TYPE_JEMA) ==
+              internal::AccountType::ACCOUNT_TYPE_WINGS8) ==
               static_cast<int>(
-                  ::account_manager::AccountType::kJema),
+                  ::account_manager::AccountType::kWings8),
                     "Underlying enum values must match");
-      return ::account_manager::AccountType::kJema;
+      return ::account_manager::AccountType::kWings8;
   }
 }
 
@@ -127,8 +127,8 @@ internal::AccountType ToProtoAccountType(
       return internal::AccountType::ACCOUNT_TYPE_ACTIVE_DIRECTORY;
     case ::account_manager::AccountType::kFlint:
       return internal::AccountType::ACCOUNT_TYPE_FLINT;
-    case ::account_manager::AccountType::kJema:
-      return internal::AccountType::ACCOUNT_TYPE_JEMA;
+    case ::account_manager::AccountType::kWings8:
+      return internal::AccountType::ACCOUNT_TYPE_WINGS8;
   }
 }
 

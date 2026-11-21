@@ -12,7 +12,7 @@
 #include "build/chromeos_buildflags.h"
 #include "chromeos/components/libsegmentation/buildflags.h"
 #include "chromeos/constants/chromeos_features.h"
-#include "jemaos/switches/misc/misc_switches.h"
+#include "wings8os/switches/misc/misc_switches.h"
 
 #if defined(ARCH_CPU_ARM_FAMILY)
 #include "base/command_line.h"
@@ -503,11 +503,11 @@ BASE_FEATURE(kCrostiniContainerless,
 // Refer to: chromiumos/src/platform2/login_manager/chrome_setup.cc
 BASE_FEATURE(kCrostiniGpuSupport,
              "CrostiniGpuSupport",
-             //---***JEMAOS BEGIN***---
-             // GPU acceleration for Crostini enabled by default on JemaOS
+             //---***WINGS8OS BEGIN***---
+             // GPU acceleration for Crostini enabled by default on Wings8OS
              // (equivalent of chrome://flags/#crostini-gpu-support = Enabled).
              base::FEATURE_ENABLED_BY_DEFAULT);
-             //---***JEMAOS END***---
+             //---***WINGS8OS END***---
 
 // Force enable recreating the LXD DB at LXD launch.
 BASE_FEATURE(kCrostiniResetLxdDb,
@@ -2391,8 +2391,8 @@ const base::FeatureParam<base::TimeDelta> kPhoneHubCameraRollThrottleInterval{
     &kPhoneHubCameraRoll, "PhoneHubCameraRollThrottleInterval",
     base::Seconds(2)};
 
-BASE_FEATURE(kJemaAssistant,
-             "JemaAssistant",
+BASE_FEATURE(kWings8Assistant,
+             "Wings8Assistant",
              base::FEATURE_ENABLED_BY_DEFAULT);
 
 // Enable PhoneHub features setup error handling, which handles different
@@ -4340,7 +4340,7 @@ bool IsOobePerksDiscoveryEnabled() {
 }
 
 bool IsOobeQuickStartEnabled() {
-  if (jemaos::switches::IsJemaCustomEnabled()) {
+  if (wings8os::switches::IsWings8CustomEnabled()) {
     return false;
   }
 
@@ -4419,9 +4419,9 @@ bool IsPhoneHubCameraRollEnabled() {
   return base::FeatureList::IsEnabled(kPhoneHubCameraRoll);
 }
 
-bool IsJemaAssistantEnabled() {
-  return base::FeatureList::IsEnabled(kJemaAssistant) &&
-         jemaos::switches::IsJemaCustomEnabled();
+bool IsWings8AssistantEnabled() {
+  return base::FeatureList::IsEnabled(kWings8Assistant) &&
+         wings8os::switches::IsWings8CustomEnabled();
 }
 
 bool IsPhoneHubMonochromeNotificationIconsEnabled() {

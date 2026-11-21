@@ -389,14 +389,14 @@
           <structure type="chrome_scaled_image" name="IDR_SUCCESS_GREEN_CHECKMARK" file="google_chrome/success_green_checkmark.png" />
         </if>
       </if>
-      <!--JEMAOS BEGIN-->
-      <if expr="openjema">
-        <part file="../../../openjema/resources/theme/app/jemaos_theme_resources.grdp" />
+      <!--WINGS8OS BEGIN-->
+      <if expr="openwings8">
+        <part file="../../../openwings8/resources/theme/app/wings8os_theme_resources.grdp" />
       </if>
-      <if expr="not openjema">
-        <part file="../../../jemaos/resources/theme/app/jemaos_theme_resources.grdp" />
+      <if expr="not openwings8">
+        <part file="../../../wings8os/resources/theme/app/wings8os_theme_resources.grdp" />
       </if>
-      <!--JEMAOS END-->
+      <!--WINGS8OS END-->
     </structures>
   </release>
 </grit>

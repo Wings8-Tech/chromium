@@ -319,14 +319,14 @@ void ArcAuthService::OnConnectionClosed() {
 
 void ArcAuthService::OnAuthorizationResult(mojom::ArcSignInResultPtr result,
                                            mojom::ArcSignInAccountPtr account) {
-  if ((!account || !account->is_initial_signin()) && profile_->IsJemaProfile()) {
+  if ((!account || !account->is_initial_signin()) && profile_->IsWings8Profile()) {
     VLOG(1) << __func__ << "force arc sigin success";
     result = arc::mojom::ArcSignInResult::NewSuccess(
                  arc::mojom::ArcSignInSuccess::SUCCESS);
   }
   ArcProvisioningResult provisioning_result(std::move(result));
 
-  if (account->is_initial_signin() || profile_->IsJemaProfile()) {
+  if (account->is_initial_signin() || profile_->IsWings8Profile()) {
     // UMA for initial signin is updated from ArcSessionManager.
     ArcSessionManager::Get()->OnProvisioningFinished(provisioning_result);
     return;
@@ -450,9 +450,9 @@ void ArcAuthService::RequestAccountInfo(const std::string& account_name,
 void ArcAuthService::FetchPrimaryAccountInfo(
     bool initial_signin,
     RequestPrimaryAccountInfoCallback callback) {
-  //---***JEMAOS BEGIN***---
+  //---***WINGS8OS BEGIN***---
   //bypass fetching the real account.
-  if (profile_ && profile_->IsJemaProfile()) {
+  if (profile_ && profile_->IsWings8Profile()) {
     const user_manager::User* user =
                      user_manager::UserManager::Get()->GetPrimaryUser();
     std::move(callback).Run(
@@ -463,7 +463,7 @@ void ArcAuthService::FetchPrimaryAccountInfo(
                           true /* is_managed */));
     return;
   }
-  //---***JEMAOS END***---
+  //---***WINGS8OS END***---
   const mojom::ChromeAccountType account_type = GetAccountType(profile_);
 
   if (IsArcOptInVerificationDisabled()) {

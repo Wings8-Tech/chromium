@@ -254,10 +254,10 @@ export class GaiaSigninElement extends GaiaSigninElementBase {
       },
       isAccountTypeSelectionRequired: {
         type: Boolean,
-        // <if expr="openjema or not use_jemaos_com">
+        // <if expr="openwings8 or not use_wings8os_com">
         value: true,
         // </if>
-        // <if expr="not openjema and use_jemaos_com">
+        // <if expr="not openwings8 and use_wings8os_com">
         value: false,
         // </if>
       },
@@ -267,7 +267,7 @@ export class GaiaSigninElement extends GaiaSigninElementBase {
       },
       selectedAccountType_: {
         type: String,
-        value: 'jema-local', // Default to JemaOS local account type
+        value: 'wings8-local', // Default to Wings8OS local account type
       }
       ,
 
@@ -371,10 +371,10 @@ export class GaiaSigninElement extends GaiaSigninElementBase {
      */
     this.pinDialogResultReported = false;
 
-    // <if expr="openjema or not use_jemaos_com">
+    // <if expr="openwings8 or not use_wings8os_com">
     this.initAccountTypeSelectionRequired = true;
     // </if>
-    // <if expr="not openjema and use_jemaos_com">
+    // <if expr="not openwings8 and use_wings8os_com">
     this.initAccountTypeSelectionRequired = false;
     // </if>
   }
@@ -405,10 +405,10 @@ export class GaiaSigninElement extends GaiaSigninElementBase {
 
   // eslint-disable-next-line @typescript-eslint/naming-convention
   override defaultUIStep(): string {
-    // <if expr="openjema or not use_jemaos_com">
+    // <if expr="openwings8 or not use_wings8os_com">
     return DialogMode.ACCOUNT_TYPE_SELECTION;
     // </if>
-    // <if expr="not openjema and use_jemaos_com">
+    // <if expr="not openwings8 and use_wings8os_com">
     return DialogMode.GAIA;
     // </if>
   }
@@ -612,7 +612,7 @@ export class GaiaSigninElement extends GaiaSigninElementBase {
       // refreshDialogStep_ will be called automatically by the observer
     }
 
-    // JemaOS: optionally hide the Google login button in the welcome flow.
+    // Wings8OS: optionally hide the Google login button in the welcome flow.
     if (data && 'hideGoogleLoginButton' in data) {
       this.hideGoogleLoginButton_ = !!data.hideGoogleLoginButton;
     }
@@ -672,8 +672,8 @@ export class GaiaSigninElement extends GaiaSigninElementBase {
     params.isFirstUser = !(data.enterpriseManagedDevice || data.hasDeviceOwner);
     params.obfuscatedOwnerId = data.obfuscatedOwnerId;
 
-    params.enableJemaAccount = data.enableJemaAccount;
-    params.disableResetJemaAccountFlag = data.enterpriseManagedDevice;
+    params.enableWings8Account = data.enableWings8Account;
+    params.disableResetWings8AccountFlag = data.enterpriseManagedDevice;
 
     this.authenticatorParams = params;
 
@@ -867,8 +867,8 @@ export class GaiaSigninElement extends GaiaSigninElementBase {
   checkIsDupEmail_(credentials: { email: string }) {
     const { email } = credentials;
     let targetAccountType = '';
-    if (this.authenticatorParams.enableJemaAccount) {
-      // kJema in account_id.cc
+    if (this.authenticatorParams.enableWings8Account) {
+      // kWings8 in account_id.cc
       targetAccountType = 'fy';
     } else {
       // kGoogle in account_id.cc
@@ -888,7 +888,7 @@ export class GaiaSigninElement extends GaiaSigninElementBase {
   }
 
   dupEmailErrorMessage_(dupEmail: string) {
-    return this.i18nAdvanced('jemaosAddUserDupEmailErrorMessage', {
+    return this.i18nAdvanced('wings8osAddUserDupEmailErrorMessage', {
       substitutions: [dupEmail],
     });
   }
@@ -1176,15 +1176,15 @@ export class GaiaSigninElement extends GaiaSigninElementBase {
       this.setUIStep(DialogMode.GAIA_DUP_EMAIL_ERROR);
       return;
     }
-    // Only set GAIA step for online accounts (Google and JemaOS online)
-    if (this.isAccountTypeSelected && (this.selectedAccountType_ === 'google' || this.selectedAccountType_ === 'jema')) {
+    // Only set GAIA step for online accounts (Google and Wings8OS online)
+    if (this.isAccountTypeSelected && (this.selectedAccountType_ === 'google' || this.selectedAccountType_ === 'wings8')) {
       this.setUIStep(DialogMode.GAIA);
       return;
     }
 
-    // For jema-local, bypass GAIA and navigate directly
-    if (this.isAccountTypeSelected && this.selectedAccountType_ === 'jema-local') {
-      console.log('[DEBUG] Navigating directly to JemaOS local signin');
+    // For wings8-local, bypass GAIA and navigate directly
+    if (this.isAccountTypeSelected && this.selectedAccountType_ === 'wings8-local') {
+      console.log('[DEBUG] Navigating directly to Wings8OS local signin');
       return;
     }
   }
@@ -1264,12 +1264,12 @@ export class GaiaSigninElement extends GaiaSigninElementBase {
     if (e.detail === 'google') {
       this.selectedAccountType_ = 'google';
       chrome.send('userSelectGoogleAccount');
-    } else if (e.detail === 'jema') {
-      this.selectedAccountType_ = 'jema';
+    } else if (e.detail === 'wings8') {
+      this.selectedAccountType_ = 'wings8';
       chrome.send('resetAccountFlag');
-    } else if (e.detail === 'jema-local') {
-      this.selectedAccountType_ = 'jema-local';
-      chrome.send('jemaLocalSignin');
+    } else if (e.detail === 'wings8-local') {
+      this.selectedAccountType_ = 'wings8-local';
+      chrome.send('wings8LocalSignin');
     }
     this.isAccountTypeSelected = true;
   }

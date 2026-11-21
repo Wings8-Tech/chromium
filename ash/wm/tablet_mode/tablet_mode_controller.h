@@ -205,11 +205,11 @@ class ASH_EXPORT TabletModeController
   // for more details.
   void SetEnabledForDev(bool enabled);
 
-  void SetEnabledByJema(bool enabled);
-  bool IsInJemaForceOnMode();
-  bool IsInJemaForceOffMode();
-  void SetDefaultBehaviorByJema();
-  void ResetBehaviorByJema();
+  void SetEnabledByWings8(bool enabled);
+  bool IsInWings8ForceOnMode();
+  bool IsInWings8ForceOffMode();
+  void SetDefaultBehaviorByWings8();
+  void ResetBehaviorByWings8();
   void OnResetBehaviorGetSwitchStates(
       std::optional<chromeos::PowerManagerClient::SwitchStates> result);
 

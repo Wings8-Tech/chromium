@@ -32,7 +32,7 @@
 #include "ui/message_center/message_center.h"
 #include "ui/message_center/public/cpp/notification.h"
 #include "ui/message_center/public/cpp/notification_delegate.h"
-#include "jemaos/switches/misc/misc_switches.h"
+#include "wings8os/switches/misc/misc_switches.h"
 
 namespace ash {
 
@@ -138,7 +138,7 @@ void PeripheralBatteryNotifier::OnUpdatedBatteryLevel(
        battery_info.type != PeripheralBatteryListener::BatteryInfo::
                                 PeripheralType::kStylusViaScreen) &&
       *battery_info.level == 0 &&
-      jemaos::switches::IsUnknownPeripheralBatteryNotificationDisabled()) {
+      wings8os::switches::IsUnknownPeripheralBatteryNotificationDisabled()) {
     return;
   }
   UpdateBattery(battery_info);

@@ -339,9 +339,9 @@ export class EnterpriseEnrollmentElement extends
     this.isManualEnrollment = (data.enrollment_mode === 'manual');
     this.isForced = data.is_enrollment_enforced;
     this.isAutoEnroll = data.attestationBased;
-    const isJemaBased = ('jemaBased' in data ? (!!data.jemaBased) : false);
-    this.isAutoEnroll = this.isAutoEnroll || isJemaBased;
-    this.isFallbackEnabled = !isJemaBased;
+    const isWings8Based = ('wings8Based' in data ? (!!data.wings8Based) : false);
+    this.isAutoEnroll = this.isAutoEnroll || isWings8Based;
+    this.isFallbackEnabled = !isWings8Based;
     this.hasAccountCheck =
         ((data.flow === 'enterpriseLicense') ||
          (data.flow === 'educationLicense'));

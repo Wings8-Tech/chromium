@@ -43,7 +43,7 @@ component("network") {
     "//components/user_manager",
     "//crypto",
     "//dbus",
-    "//jemaos/chromeos/ash/components/dbus/jemaos_shell_client",
+    "//wings8os/chromeos/ash/components/dbus/wings8os_shell_client",
     "//net",
     "//services/preferences/public/cpp",
     "//third_party/abseil-cpp:absl",

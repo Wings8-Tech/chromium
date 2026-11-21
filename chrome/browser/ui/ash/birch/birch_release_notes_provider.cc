@@ -18,7 +18,7 @@
 #include "chrome/common/pref_names.h"
 #include "components/prefs/pref_service.h"
 #include "ui/base/l10n/l10n_util.h"
-#include "jemaos/misc/jemaos_release_note_url.h"
+#include "wings8os/misc/wings8os_release_note_url.h"
 
 namespace ash {
 
@@ -58,7 +58,7 @@ void BirchReleaseNotesProvider::RequestBirchDataFetch() {
   items.emplace_back(
       l10n_util::GetStringUTF16(IDS_ASH_BIRCH_RELEASE_NOTES_TITLE),
       l10n_util::GetStringUTF16(IDS_ASH_BIRCH_RELEASE_NOTES_SUBTITLE),
-      GURL(jemaos::misc::BuildJemaReleaseNoteUrlWithPath()),
+      GURL(wings8os::misc::BuildWings8ReleaseNoteUrlWithPath()),
       first_seen_time_.value_or(base::Time::Min()));
 
   Shell::Get()->birch_model()->SetReleaseNotesItems(std::move(items));

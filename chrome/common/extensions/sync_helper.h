@@ -5,9 +5,9 @@
 #ifndef CHROME_COMMON_EXTENSIONS_SYNC_HELPER_H_
 #define CHROME_COMMON_EXTENSIONS_SYNC_HELPER_H_
 
-// ---***JEMAOS BEGIN***---
+// ---***WINGS8OS BEGIN***---
 class Profile;
-// ---***JEMAOS END***---
+// ---***WINGS8OS END***---
 
 namespace extensions {
 

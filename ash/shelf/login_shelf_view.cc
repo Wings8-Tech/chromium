@@ -69,9 +69,9 @@
 #include "ui/views/layout/fill_layout.h"
 #include "ui/views/view_class_properties.h"
 #include "ui/views/widget/widget.h"
-#include "jemaos/switches/misc/misc_constants.h"
-#include "jemaos/switches/misc/misc_switches.h"
-#include "jemaos/switches/account/account_switches.h"
+#include "wings8os/switches/misc/misc_constants.h"
+#include "wings8os/switches/misc/misc_switches.h"
+#include "wings8os/switches/account/account_switches.h"
 
 using session_manager::SessionState;
 
@@ -379,7 +379,7 @@ LoginShelfView::LoginShelfView() {
              base::BindRepeating(
                  &LoginScreenController::ShowDataRestoreScreen,
                  base::Unretained(Shell::Get()->login_screen_controller())),
-             IDS_ASH_DATA_RESTORE_BUTTON, kShelfJemaosDataRestoreButtonIcon);
+             IDS_ASH_DATA_RESTORE_BUTTON, kShelfWings8osDataRestoreButtonIcon);
 
   // Adds observers for states that affect the visibility of different buttons.
   shutdown_controller_observation_.Observe(Shell::Get()->shutdown_controller());
@@ -392,8 +392,8 @@ LoginShelfView::LoginShelfView() {
       FROM_HERE, {base::MayBlock(), base::TaskPriority::USER_VISIBLE},
       base::BindOnce(
         base::PathExists,
-        base::FilePath(jemaos::constants::kJemaOSRestoreScriptDirPath)),
-      base::BindOnce(&LoginShelfView::OnJemaOSRestoreScriptChecked,
+        base::FilePath(wings8os::constants::kWings8OSRestoreScriptDirPath)),
+      base::BindOnce(&LoginShelfView::OnWings8OSRestoreScriptChecked,
                      weak_ptr_factory_.GetWeakPtr()));
 
   GetViewAccessibility().SetRole(ax::mojom::Role::kToolbar);
@@ -405,7 +405,7 @@ LoginShelfView::~LoginShelfView() {
   ShelfConfig::Get()->RemoveObserver(this);
 }
 
-void LoginShelfView::OnJemaOSRestoreScriptChecked(bool is_restore_supported) {
+void LoginShelfView::OnWings8OSRestoreScriptChecked(bool is_restore_supported) {
   is_restore_supported_ = is_restore_supported;
   GetViewByID(kDataRestore)->SetVisible(ShouldShowDataRestoreButton());
 }
@@ -742,7 +742,7 @@ void LoginShelfView::UpdateAccessiblePreviousAndNextFocus() {
 bool LoginShelfView::ShouldShowGuestAndAppsButtons() const {
   bool dialog_state_allowed = false;
   if (dialog_state_ == OobeDialogState::USER_CREATION ||
-      dialog_state_ == OobeDialogState::JEMA_LOCAL_SIGNIN ||
+      dialog_state_ == OobeDialogState::WINGS8_LOCAL_SIGNIN ||
       dialog_state_ == OobeDialogState::GAIA_SIGNIN ||
       dialog_state_ == OobeDialogState::SETUP_CHILD ||
       dialog_state_ == OobeDialogState::ENROLL_TRIAGE ||
@@ -773,7 +773,7 @@ bool LoginShelfView::ShouldShowShutdownButton() const {
          dialog_state_ == OobeDialogState::ENROLLMENT_SUCCESS ||
          dialog_state_ == OobeDialogState::EXTENSION_LOGIN ||
          dialog_state_ == OobeDialogState::BLOCKING ||
-         dialog_state_ == OobeDialogState::JEMA_LOCAL_SIGNIN ||
+         dialog_state_ == OobeDialogState::WINGS8_LOCAL_SIGNIN ||
          (dialog_state_ == OobeDialogState::GAIA_SIGNIN &&
           is_first_signin_step_);
 }
@@ -819,7 +819,7 @@ bool LoginShelfView::ShouldShowGuestButton() const {
 }
 
 bool LoginShelfView::ShouldShowEnterpriseEnrollmentButton() const {
-  // JemaOS: the "Device enrollment" button is hidden from the login shelf
+  // Wings8OS: the "Device enrollment" button is hidden from the login shelf
   // (OOBE sign-in and user creation). Enrollment remains reachable through
   // the Ctrl+Alt+E accelerator.
   return false;
@@ -893,7 +893,7 @@ bool LoginShelfView::ShouldShowUseLocalAccountButton() const {
 }
 
 bool LoginShelfView::ShouldShowDataRestoreButton() const {
-  // JemaOS: the "Restore backup" button is hidden from the login shelf.
+  // Wings8OS: the "Restore backup" button is hidden from the login shelf.
   return false;
 }
 
@@ -916,8 +916,8 @@ bool LoginShelfView::ShouldShowOsInstallButton() const {
     return false;
   }
 
-  // Check if the OS Install button is hidden via JemaOS switch
-  if (jemaos::switches::IsOsInstallButtonHidden()) {
+  // Check if the OS Install button is hidden via Wings8OS switch
+  if (wings8os::switches::IsOsInstallButtonHidden()) {
     return false;
   }
 

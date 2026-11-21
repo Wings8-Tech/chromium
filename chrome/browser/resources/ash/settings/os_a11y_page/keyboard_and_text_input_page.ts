@@ -111,7 +111,7 @@ export class SettingsKeyboardAndTextInputPageElement extends
           const url = loadTimeData.getString("a11yLearnMoreUrl")
           return loadTimeData.getBoolean('isKioskModeActive') ?
               '' :
-              `${url}/turn-on-jemaos-device-accessibility-features/`;
+              `${url}/turn-on-wings8os-device-accessibility-features/`;
         },
       },
 

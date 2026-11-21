@@ -110,10 +110,10 @@
 #include "ui/views/style/typography.h"
 #include "ui/views/vector_icons.h"
 #include "ui/views/view.h"
-#include "jemaos/switches/misc/misc_switches.h"
+#include "wings8os/switches/misc/misc_switches.h"
 #include "base/system/sys_info.h"
 #include "base/timer/timer.h"
-#include "jemaos/prefs//jemaos_pref_names.h"
+#include "wings8os/prefs//wings8os_pref_names.h"
 #include "base/task/single_thread_task_runner.h"
 #include "ash/wm/lock_state_controller.h"
 
@@ -675,9 +675,9 @@ void LockContentsView::ShowEnterpriseDomainManager(
 }
 
 void LockContentsView::ShowAdbEnabled() {
-  // ---***JEMAOS BEGIN***---
-  if (jemaos::switches::IsJemaCustomEnabled()) return;
-  // ---***JEMAOS END***---
+  // ---***WINGS8OS BEGIN***---
+  if (wings8os::switches::IsWings8CustomEnabled()) return;
+  // ---***WINGS8OS END***---
   bottom_status_indicator_->SetText(
       l10n_util::GetStringUTF16(IDS_ASH_LOGIN_SCREEN_UNVERIFIED_CODE_WARNING));
   bottom_status_indicator_->GetViewAccessibility().SetRole(
@@ -805,9 +805,9 @@ bool LockContentsView::AcceleratorPressed(const ui::Accelerator& accelerator) {
 bool LockContentsView::IsOfflineSigninLastChromeSignout() const {
   PrefService* local_state = Shell::Get()->local_state();
   bool is_signout = false;
-  if (local_state->HasPrefPath(jemaos::prefs::kOfflineAutoSigninIsChromeLastSignout)) {
-    is_signout = local_state->GetBoolean(jemaos::prefs::kOfflineAutoSigninIsChromeLastSignout);
-    local_state->ClearPref(jemaos::prefs::kOfflineAutoSigninIsChromeLastSignout);
+  if (local_state->HasPrefPath(wings8os::prefs::kOfflineAutoSigninIsChromeLastSignout)) {
+    is_signout = local_state->GetBoolean(wings8os::prefs::kOfflineAutoSigninIsChromeLastSignout);
+    local_state->ClearPref(wings8os::prefs::kOfflineAutoSigninIsChromeLastSignout);
   }
   return is_signout;
 }
@@ -836,13 +836,13 @@ void LockContentsView::OnUsersChanged(const std::vector<LoginUserInfo>& users) {
     return;
   }
 
-  if (Shell::Get()->local_state()->GetBoolean(jemaos::prefs::kFactoryResetRequested)) {
+  if (Shell::Get()->local_state()->GetBoolean(wings8os::prefs::kFactoryResetRequested)) {
     OnUsersChangedInternal(users);
     return;
   }
 
-  const std::string account_id_key = Shell::Get()->local_state()->GetString(jemaos::prefs::kOfflineAutoSigninAccountIdKey);
-  const std::string encrypted_password = Shell::Get()->local_state()->GetString(jemaos::prefs::kOfflineAutoSigninPassword);
+  const std::string account_id_key = Shell::Get()->local_state()->GetString(wings8os::prefs::kOfflineAutoSigninAccountIdKey);
+  const std::string encrypted_password = Shell::Get()->local_state()->GetString(wings8os::prefs::kOfflineAutoSigninPassword);
   if (account_id_key.empty() || encrypted_password.empty()) {
     OnUsersChangedInternal(users);
     return;
@@ -852,16 +852,16 @@ void LockContentsView::OnUsersChanged(const std::vector<LoginUserInfo>& users) {
   // SystemSaltGetter::Get()->GetSystemSalt(
   //     base::BindOnce(&LockContentsView::OnGetSystemSalt,
   //                    weak_ptr_factory_.GetWeakPtr(), users, account_id_key, encrypted_password));
-  const int64_t delay = jemaos::switches::GetJemaOSAutoSigninDelay();
+  const int64_t delay = wings8os::switches::GetWings8OSAutoSigninDelay();
   if (delay == 0) {
-    OnGetSystemSalt(users, account_id_key, encrypted_password, "JEMAOS");
+    OnGetSystemSalt(users, account_id_key, encrypted_password, "WINGS8OS");
     return;
   }
   VLOG(2) << "Delay " << delay << " seconds to auto signin";
   base::SingleThreadTaskRunner::GetCurrentDefault()->PostDelayedTask(
           FROM_HERE,
           base::BindOnce(&LockContentsView::OnGetSystemSalt, weak_ptr_factory_.GetWeakPtr(),
-                        users, account_id_key, encrypted_password, "JEMAOS"),
+                        users, account_id_key, encrypted_password, "WINGS8OS"),
           base::Seconds(delay));
 }
 
@@ -922,8 +922,8 @@ void LockContentsView::OnOfflineAutoSigninComplete(const AccountId& account_id,
   } else {
     VLOG(3) << "auto signin failed, attempt to restart to fallback to normal login screen";
     // OnUsersChangedInternal(users);
-    Shell::Get()->local_state()->SetString(jemaos::prefs::kOfflineAutoSigninPassword, std::string());
-    Shell::Get()->local_state()->SetString(jemaos::prefs::kOfflineAutoSigninAccountIdKey,
+    Shell::Get()->local_state()->SetString(wings8os::prefs::kOfflineAutoSigninPassword, std::string());
+    Shell::Get()->local_state()->SetString(wings8os::prefs::kOfflineAutoSigninAccountIdKey,
                      std::string());
     Shell::Get()->lock_state_controller()->RequestRestart();
   }

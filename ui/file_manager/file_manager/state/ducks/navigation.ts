@@ -10,7 +10,7 @@ import {Slice} from '../../lib/base_store.js';
 import {type AndroidApp, DialogType, type NavigationKey, type NavigationRoot, NavigationSection, NavigationType, type State, type Volume} from '../../state/state.js';
 import {getMyFiles} from '../ducks/all_entries.js';
 import {driveRootEntryListKey, oneDriveFakeRootKey, recentRootKey, trashRootKey} from '../ducks/volumes.js';
-import {jemaDropRootKey} from '../ducks/volumes.js';
+import {wings8DropRootKey} from '../ducks/volumes.js';
 import {getEntry} from '../store.js';
 
 /**
@@ -81,24 +81,24 @@ function refreshNavigationRootsReducer(currentState: State): State {
   /** Set to avoid adding the same entry multiple times. */
   const processedEntryKeys = new Set<NavigationKey>();
 
-  const shouldShowJemaDrop = window.fileManager.dialogType === DialogType.FULL_PAGE;
-  if (shouldShowJemaDrop) {
-    // only show jemadrop when opening files app as a standalone app.
-    const jemaDropRoot = previousRoots.find(root => root.key === jemaDropRootKey);
-    if (jemaDropRoot) {
-      roots.push(jemaDropRoot);
-      processedEntryKeys.add(jemaDropRootKey);
+  const shouldShowWings8Drop = window.fileManager.dialogType === DialogType.FULL_PAGE;
+  if (shouldShowWings8Drop) {
+    // only show wings8drop when opening files app as a standalone app.
+    const wings8DropRoot = previousRoots.find(root => root.key === wings8DropRootKey);
+    if (wings8DropRoot) {
+      roots.push(wings8DropRoot);
+      processedEntryKeys.add(wings8DropRootKey);
     } else {
-      const jemaDropEntry =
-          getEntry(currentState, jemaDropRootKey) as FilesAppEntry | null;
-      if (jemaDropEntry) {
+      const wings8DropEntry =
+          getEntry(currentState, wings8DropRootKey) as FilesAppEntry | null;
+      if (wings8DropEntry) {
         roots.push({
-          key: jemaDropRootKey,
+          key: wings8DropRootKey,
           section: NavigationSection.TOP,
           separator: false,
-          type: NavigationType.JEMADROP,
+          type: NavigationType.WINGS8DROP,
         });
-        processedEntryKeys.add(jemaDropRootKey);
+        processedEntryKeys.add(wings8DropRootKey);
       }
     }
   }

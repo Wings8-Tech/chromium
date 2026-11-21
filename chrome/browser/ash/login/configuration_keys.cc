@@ -106,7 +106,7 @@ const char kSkipEnrollmentSuccessScreen[] = "skipEnrollmentSuccessScreen";
 // - "PACKAGING_TOOL"
 const char kSource[] = "source";
 
-const char kJemaEnrollmentToken[] = "jemaEnrollmentToken";
+const char kWings8EnrollmentToken[] = "wings8EnrollmentToken";
 
 using ValueType = base::Value::Type;
 
@@ -144,7 +144,7 @@ constexpr struct {
      ConfigurationHandlerSide::HANDLER_BOTH},
     {kEnrollmentToken, ValueType::STRING,
      ConfigurationHandlerSide::HANDLER_CPP},
-    {kJemaEnrollmentToken, ValueType::STRING,
+    {kWings8EnrollmentToken, ValueType::STRING,
      ConfigurationHandlerSide::HANDLER_CPP},
     {kSkipEnrollmentSuccessScreen, ValueType::BOOLEAN,
      ConfigurationHandlerSide::HANDLER_CPP},

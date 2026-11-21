@@ -192,7 +192,7 @@ void AssistantInteractionControllerImpl::OnDeepLinkReceived(
   if (type != DeepLinkType::kQuery)
     return;
 
-  if (ash::features::IsJemaAssistantEnabled()) {
+  if (ash::features::IsWings8AssistantEnabled()) {
     return;
   }
 
@@ -748,7 +748,7 @@ void AssistantInteractionControllerImpl::OnUiVisible(
   // is hotword since in such cases a voice interaction will already be in
   // progress.
   if (assistant::util::IsVoiceEntryPoint(entry_point, IsPreferVoice()) &&
-      !ash::features::IsJemaAssistantEnabled() &&
+      !ash::features::IsWings8AssistantEnabled() &&
       entry_point != AssistantEntryPoint::kHotword) {
     StartVoiceInteraction();
     return;

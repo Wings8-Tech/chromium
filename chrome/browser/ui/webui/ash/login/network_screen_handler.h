@@ -30,8 +30,8 @@ class NetworkScreenView {
   // Hides error messages showing no error state.
   virtual void ClearErrors() = 0;
 
-  // Called when JemaOS online account type is selected.
-  virtual void OnJemaosOnlineAccountSelected() = 0;
+  // Called when Wings8OS online account type is selected.
+  virtual void OnWings8osOnlineAccountSelected() = 0;
 
   virtual void SetQuickStartEntryPointVisibility(bool visible) = 0;
 
@@ -58,7 +58,7 @@ class NetworkScreenHandler final : public NetworkScreenView,
   void ShowScreenWithData(base::Value::Dict data) override;
   void ShowError(const std::u16string& message) override;
   void ClearErrors() override;
-  void OnJemaosOnlineAccountSelected() override;
+  void OnWings8osOnlineAccountSelected() override;
   void SetQuickStartEntryPointVisibility(bool visible) override;
   base::WeakPtr<NetworkScreenView> AsWeakPtr() override;
 

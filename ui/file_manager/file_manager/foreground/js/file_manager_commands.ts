@@ -35,7 +35,7 @@ import type {FilesTooltip} from '../elements/files_tooltip.js';
 import {type ActionsModel, CommonActionId, InternalActionId} from './actions_model.js';
 import {type CommandHandlerDeps, MenuCommandsForUma, recordMenuItemSelected} from './command_handler.js';
 import {canExecuteVisibleOnDriveInNormalAppModeOnly, containsNonInteractiveEntry, currentVolumeIsInteractive, getCommandEntries, getCommandEntry, getElementVolumeInfo, getEventEntry, getOnlyOneSelectedDirectory, getParentEntry, getSharesheetLaunchSource, hasCapability, isDriveEntries, isFromSelectionMenu, isOnlyMyDriveEntries, isOnTrashRoot, isRootEntry, shouldIgnoreEvents, shouldShowMenuItemsForEntry} from './file_manager_commands_util.js';
-import {isOnJemaDropRoot} from './file_manager_commands_util.js';
+import {isOnWings8DropRoot} from './file_manager_commands_util.js';
 import type {PasteWithDestDirectoryEvent} from './file_transfer_controller.js';
 import {getAllowedVolumeTypes, maybeStoreTimeOfFirstPin} from './holding_space_util.js';
 import {PathComponent} from './path_component.js';
@@ -293,7 +293,7 @@ export class NewFolderCommand extends FilesCommand {
   private busy_ = false;
 
   execute(event: CommandEvent, fileManager: CommandHandlerDeps) {
-    if (isOnTrashRoot(fileManager) || isOnJemaDropRoot(fileManager)) {
+    if (isOnTrashRoot(fileManager) || isOnWings8DropRoot(fileManager)) {
       return;
     }
     let targetDirectory: DirectoryEntry|FilesAppDirEntry|null|undefined;
@@ -394,7 +394,7 @@ export class NewFolderCommand extends FilesCommand {
   }
 
   override canExecute(event: CanExecuteEvent, fileManager: CommandHandlerDeps) {
-    if (isOnTrashRoot(fileManager) || isOnJemaDropRoot(fileManager)) {
+    if (isOnTrashRoot(fileManager) || isOnWings8DropRoot(fileManager)) {
       event.canExecute = false;
       event.command.setHidden(true);
       return;
@@ -1746,12 +1746,12 @@ export class ExtractAllCommand extends FilesCommand {
     }
   }
 }
-export class OpenWithJemaosAICommand extends FilesCommand {
+export class OpenWithWings8osAICommand extends FilesCommand {
   execute(_event: CommandEvent, fileManager: CommandHandlerDeps) {
     if (isOnTrashRoot(fileManager)) {
       return;
     }
-    if (!fileManager.jemaAssistantEnabled) {
+    if (!fileManager.wings8AssistantEnabled) {
       return;
     }
     const dirEntry = fileManager.getCurrentDirectoryEntry();
@@ -1762,7 +1762,7 @@ export class OpenWithJemaosAICommand extends FilesCommand {
                 null, fileManager.volumeManager))) {
       return;
     }
-    fileManager.taskController.openFileWithJemaosAI(selection.entries);
+    fileManager.taskController.openFileWithWings8osAI(selection.entries);
   }
 
   override canExecute(event: CanExecuteEvent, fileManager: CommandHandlerDeps) {
@@ -1771,7 +1771,7 @@ export class OpenWithJemaosAICommand extends FilesCommand {
       event.command.setHidden(true);
       return;
     }
-    if (!fileManager.jemaAssistantEnabled) {
+    if (!fileManager.wings8AssistantEnabled) {
       event.canExecute = false;
       event.command.setHidden(true);
       return;

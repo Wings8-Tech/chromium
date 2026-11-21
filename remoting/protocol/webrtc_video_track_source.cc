@@ -17,20 +17,20 @@ namespace remoting::protocol {
 
 namespace {
 
-// JEMAOS: cap the encoded video width. HiDPI hosts (e.g. 3000x2000) otherwise
+// WINGS8OS: cap the encoded video width. HiDPI hosts (e.g. 3000x2000) otherwise
 // encode ~6 megapixels per frame, which raises encoding cost, bandwidth and
 // latency. Downscaling to <=1920 wide cuts ~2.4x the pixels while the host
 // still reports its real desktop geometry for input mapping.
-constexpr int kJemaMaxEncodedWidth = 1920;
+constexpr int kWings8MaxEncodedWidth = 1920;
 
 std::unique_ptr<webrtc::DesktopFrame> MaybeDownscaleFrame(
     std::unique_ptr<webrtc::DesktopFrame> frame) {
   const webrtc::DesktopSize size = frame->size();
-  if (size.width() <= kJemaMaxEncodedWidth || size.height() <= 0) {
+  if (size.width() <= kWings8MaxEncodedWidth || size.height() <= 0) {
     return frame;
   }
 
-  int dst_width = kJemaMaxEncodedWidth;
+  int dst_width = kWings8MaxEncodedWidth;
   // Preserve aspect ratio and keep dimensions even (encoders require it).
   int dst_height = static_cast<int>(
       static_cast<int64_t>(size.height()) * dst_width / size.width());
@@ -132,7 +132,7 @@ void WebrtcVideoTrackSource::SendCapturedFrame(
     return;
   }
 
-  // JEMAOS: cap the encoded resolution before handing the frame to WebRTC.
+  // WINGS8OS: cap the encoded resolution before handing the frame to WebRTC.
   desktop_frame = MaybeDownscaleFrame(std::move(desktop_frame));
 
   webrtc::VideoFrame video_frame = WebrtcVideoFrameAdapter::CreateVideoFrame(

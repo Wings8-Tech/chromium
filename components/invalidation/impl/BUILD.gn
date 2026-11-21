@@ -61,7 +61,7 @@ static_library("impl") {
     "//net:net",
     "//services/network/public/cpp",
     "//services/network/public/mojom",
-    "//jemaos/switches",
+    "//wings8os/switches",
   ]
 }
 

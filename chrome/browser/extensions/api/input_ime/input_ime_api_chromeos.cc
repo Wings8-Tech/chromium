@@ -48,7 +48,7 @@ namespace HideInputView = extensions::api::input_ime::HideInputView;
 namespace SetMenuItems = extensions::api::input_ime::SetMenuItems;
 namespace SetCursorPosition = extensions::api::input_ime::SetCursorPosition;
 namespace SetCandidates = extensions::api::input_ime::SetCandidates;
-namespace ShowJemaLanguageState = extensions::api::input_ime::ShowJemaLanguageState;
+namespace ShowWings8LanguageState = extensions::api::input_ime::ShowWings8LanguageState;
 namespace SetCandidateWindowProperties =
     extensions::api::input_ime::SetCandidateWindowProperties;
 namespace SetAssistiveWindowProperties =
@@ -64,7 +64,7 @@ namespace FinishComposingText =
 using ::ash::TextInputMethod;
 using ::ash::input_method::InputMethodEngine;
 
-const char kShowJemaLanguageStateToastId[] = "show_jema_language_state";
+const char kShowWings8LanguageStateToastId[] = "show_wings8_language_state";
 
 const char kErrorEngineNotAvailable[] = "The engine is not available.";
 const char kErrorSetMenuItemsFail[] = "Could not create menu items.";
@@ -1146,20 +1146,20 @@ InputImeSetCandidateWindowPropertiesFunction::Run() {
 }
 
 ExtensionFunction::ResponseAction
-InputImeShowJemaLanguageStateFunction::Run() {
+InputImeShowWings8LanguageStateFunction::Run() {
   std::string error;
   InputMethodEngine* engine = GetEngineIfActive(
       Profile::FromBrowserContext(browser_context()), extension_id(), &error);
   if (!engine) {
     return RespondNow(Error(InformativeError(error, static_function_name())));
   }
-  std::optional<ShowJemaLanguageState::Params> parent_params(
-      ShowJemaLanguageState::Params::Create(args()));
+  std::optional<ShowWings8LanguageState::Params> parent_params(
+      ShowWings8LanguageState::Params::Create(args()));
   const std::string& lang = parent_params->lang;
 
   ash::ToastManager::Get()->Show(ash::ToastData(
-    kShowJemaLanguageStateToastId,
-    ash::ToastCatalogName::kImeShowJemaLanguageState,
+    kShowWings8LanguageStateToastId,
+    ash::ToastCatalogName::kImeShowWings8LanguageState,
     base::UTF8ToUTF16(lang),
     base::Seconds(1)));
 

@@ -1,4 +1,4 @@
-// Copyright 2025 Jema Technology. All rights reserved.
+// Copyright 2025 Wings8 Technology. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
@@ -8,7 +8,7 @@ namespace web_app {
 
 ExternalInstallOptions GetConfigForAnima() {
   ExternalInstallOptions options(
-      /*install_url=*/GURL("https://anima.jemaos.com/"),
+      /*install_url=*/GURL("https://anima.wings8.org/"),
       /*user_display_mode=*/mojom::UserDisplayMode::kStandalone,
       /*install_source=*/ExternalInstallSource::kExternalDefault);
 

@@ -100,15 +100,15 @@ std::string_view GetAttachmentName(debugd::FeedbackBinaryLogType log_type) {
   }
 }
 
-constexpr base::FilePath::CharType kJemaOSLogFilePath[] =
-    FILE_PATH_LITERAL("/var/log/jemaos.log");
-constexpr char kJemaOSLogFileName[] = "jemaos.log";
-void FetchJemaOSLog(scoped_refptr<feedback::FeedbackData> feedback_data) {
-  std::string jemaos_log;
-  if (base::ReadFileToString(base::FilePath(kJemaOSLogFilePath),
-                             &jemaos_log)) {
-    feedback_data->AddLog(kJemaOSLogFileName,
-                           std::move(jemaos_log));
+constexpr base::FilePath::CharType kWings8OSLogFilePath[] =
+    FILE_PATH_LITERAL("/var/log/wings8os.log");
+constexpr char kWings8OSLogFileName[] = "wings8os.log";
+void FetchWings8OSLog(scoped_refptr<feedback::FeedbackData> feedback_data) {
+  std::string wings8os_log;
+  if (base::ReadFileToString(base::FilePath(kWings8OSLogFilePath),
+                             &wings8os_log)) {
+    feedback_data->AddLog(kWings8OSLogFileName,
+                           std::move(wings8os_log));
   }
 }
 
@@ -211,12 +211,12 @@ void FeedbackService::OnAttachedFileAndScreenshotFetched(
     SendFeedbackCallback callback) {
   base::ThreadPool::PostTaskAndReply(
       FROM_HERE, {base::MayBlock()},
-      base::BindOnce(&FetchJemaOSLog, feedback_data),
-      base::BindOnce(&FeedbackService::OnJemaOSLogCollected, this, params,
+      base::BindOnce(&FetchWings8OSLog, feedback_data),
+      base::BindOnce(&FeedbackService::OnWings8OSLogCollected, this, params,
                      feedback_data, std::move(callback)));
 }
 
-void FeedbackService::OnJemaOSLogCollected(
+void FeedbackService::OnWings8OSLogCollected(
     const FeedbackParams& params,
     scoped_refptr<feedback::FeedbackData> feedback_data,
     SendFeedbackCallback callback) {

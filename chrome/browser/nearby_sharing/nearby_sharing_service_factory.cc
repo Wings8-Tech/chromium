@@ -75,7 +75,7 @@ bool NearbySharingServiceFactory::IsNearbyShareSupportedForBrowserContext(
     return false;
   }
 
-  if (profile->IsJemaProfile()) {
+  if (profile->IsWings8Profile()) {
     return false;
   }
 

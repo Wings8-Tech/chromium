@@ -113,13 +113,13 @@ class ChromeScaledImage(interface.GathererBase):
     for layout in layouts:
       for scale in scales:
         dir = '%s_%s_percent' % (layout, scale)
-#---***JEMAOS BEGIN***---
-        if str.find(self.rc_file, 'jemaos') != -1 or \
-           str.find(self.rc_file, 'openjema') != -1:
+#---***WINGS8OS BEGIN***---
+        if str.find(self.rc_file, 'wings8os') != -1 or \
+           str.find(self.rc_file, 'openwings8') != -1:
           path = str.replace(self.rc_file, 'CONTEXT', dir)
         else:
           path = os.path.join(dir, self.rc_file)
-#---***JEMAOS END***---
+#---***WINGS8OS END***---
         if os.path.exists(self.grd_node.ToRealPath(path)):
           return path, scale, req_scale
 

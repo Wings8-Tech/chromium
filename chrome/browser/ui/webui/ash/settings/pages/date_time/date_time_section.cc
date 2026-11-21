@@ -24,7 +24,7 @@
 #include "content/public/browser/web_ui_data_source.h"
 #include "ui/base/l10n/l10n_util.h"
 #include "ui/base/webui/web_ui_util.h"
-#include "jemaos/switches/urls/urls_constants.h"
+#include "wings8os/switches/urls/urls_constants.h"
 
 namespace ash::settings {
 
@@ -141,7 +141,7 @@ void DateTimeSection::AddLoadTimeData(content::WebUIDataSource* html_source) {
 
   html_source->AddString(
       "timeZoneSettingsLearnMoreURL",
-      base::ASCIIToUTF16(jemaos::constants::kTimeZoneSettingsLearnMoreURL));
+      base::ASCIIToUTF16(wings8os::constants::kTimeZoneSettingsLearnMoreURL));
 
   // Set the initial time zone to show.
   html_source->AddString("timeZoneName", system::GetCurrentTimezoneName());

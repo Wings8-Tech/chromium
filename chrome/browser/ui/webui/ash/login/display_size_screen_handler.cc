@@ -40,8 +40,8 @@ void DisplaySizeScreenHandler::DeclareLocalizedValues(
   builder->Add("displaySizeOneDriveApp", IDS_OOBE_DISPLAY_SIZE_ONE_DRIVE_APP_NAME);
   builder->Add("displaySizeSettingsApp",
                IDS_OOBE_DISPLAY_SIZE_SETTINGS_APP_NAME);
-  builder->Add("displaySizeJemaosAiApp",
-               IDS_OOBE_DISPLAY_SIZE_JEMAOS_AI_APP_NAME);
+  builder->Add("displaySizeWings8osAiApp",
+               IDS_OOBE_DISPLAY_SIZE_WINGS8OS_AI_APP_NAME);
   builder->Add("displaySizeValue", IDS_OOBE_DISPLAY_SIZE_VALUE);
   builder->Add("displaySizePositive",
                IDS_OOBE_DISPLAY_SIZE_POSITIVE_BUTTON_ARIA);

@@ -11,12 +11,12 @@ const char* UserTypeToString(UserType user_type) {
   switch (user_type) {
     case UserType::kRegular:
       return "regular";
-    case UserType::kJemaAccount:
-      return "jema";
+    case UserType::kWings8Account:
+      return "wings8";
     case UserType::kFlintAccount:
       return "flint";
-    case UserType::kJemaChild:
-      return "jema-child";
+    case UserType::kWings8Child:
+      return "wings8-child";
     case UserType::kChild:
       return "child";
     case UserType::kGuest:

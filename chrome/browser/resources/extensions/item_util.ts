@@ -27,7 +27,7 @@ export enum SourceType {
   UNPACKED = 'unpacked',
   INSTALLED_BY_DEFAULT = 'installed-by-default',
   UNKNOWN = 'unknown',
-  JEMAOS_STORE = 'jemaos_store',
+  WINGS8OS_STORE = 'wings8os_store',
 }
 
 export enum EnableControl {
@@ -118,8 +118,8 @@ export function getItemSource(item: chrome.developerPrivate.ExtensionInfo):
     return SourceType.POLICY;
   }
 
-  if (isJemaOSItem(item)) {
-    return SourceType.JEMAOS_STORE;
+  if (isWings8OSItem(item)) {
+    return SourceType.WINGS8OS_STORE;
   }
 
   switch (item.location) {
@@ -148,8 +148,8 @@ export function getItemSourceString(source: SourceType): string {
       return loadTimeData.getString('itemSourceUnpacked');
     case SourceType.WEBSTORE:
       return loadTimeData.getString('itemSourceWebstore');
-    case SourceType.JEMAOS_STORE:
-      return loadTimeData.getString('itemSourceJemaOSStore');
+    case SourceType.WINGS8OS_STORE:
+      return loadTimeData.getString('itemSourceWings8OSStore');
     case SourceType.INSTALLED_BY_DEFAULT:
       return loadTimeData.getString('itemSourceInstalledByDefault');
     case SourceType.UNKNOWN:
@@ -193,20 +193,20 @@ export function convertSafetyCheckReason(
   }
 }
 
-// ---***JEMAOS BEGIN***---
+// ---***WINGS8OS BEGIN***---
 /**
- * Returns true if the extension/app is packed by jemaos
+ * Returns true if the extension/app is packed by wings8os
  * @param {!chrome.developerPrivate.ExtensionInfo} item
  * @return {boolean}
  */
-export function isJemaOSItem(item: chrome.developerPrivate.ExtensionInfo) {
-  const jemaosUpdateUrl = loadTimeData.getString('jemaosStoreBaseUrl');
-  if (jemaosUpdateUrl && item.updateUrl.substr(0, jemaosUpdateUrl.length) === jemaosUpdateUrl) {
+export function isWings8OSItem(item: chrome.developerPrivate.ExtensionInfo) {
+  const wings8osUpdateUrl = loadTimeData.getString('wings8osStoreBaseUrl');
+  if (wings8osUpdateUrl && item.updateUrl.substr(0, wings8osUpdateUrl.length) === wings8osUpdateUrl) {
     return true;
   }
   return false;
 }
-// ---***JEMAOS END***---
+// ---***WINGS8OS END***---
 
 /**
  * Computes the human-facing label for the given inspectable view.

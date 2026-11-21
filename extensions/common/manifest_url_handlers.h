@@ -48,9 +48,9 @@ struct ManifestURL : public Extension::ManifestData {
   // Returns true if this extension's update URL is the extension gallery.
   static bool UpdatesFromGallery(const Extension* extension);
 
-  // ---***JEMAOS BEGIN***---
-  static bool UpdatesFromJemaOSGallery(const Extension* extension);
-  // ---***JEMAOS END***---
+  // ---***WINGS8OS BEGIN***---
+  static bool UpdatesFromWings8OSGallery(const Extension* extension);
+  // ---***WINGS8OS END***---
 
   // Returns the About Page for this extension.
   static const GURL& GetAboutPage(const Extension* extension);

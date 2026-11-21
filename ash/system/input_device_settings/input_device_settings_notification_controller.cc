@@ -309,8 +309,8 @@ bool ShouldBlockNotification() {
     case user_manager::UserType::kRegular:
     case user_manager::UserType::kChild:
     case user_manager::UserType::kFlintAccount:
-    case user_manager::UserType::kJemaAccount:
-    case user_manager::UserType::kJemaChild:
+    case user_manager::UserType::kWings8Account:
+    case user_manager::UserType::kWings8Child:
       return false;
   }
 }

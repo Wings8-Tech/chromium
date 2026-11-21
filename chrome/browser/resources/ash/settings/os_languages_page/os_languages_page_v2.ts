@@ -127,10 +127,10 @@ export class OsSettingsLanguagesPageV2Element extends
 
       languageSettingsV2Update2Enabled_: Boolean,
 
-      isJemaProfile_: {
+      isWings8Profile_: {
         type: Boolean,
         value() {
-          return loadTimeData.getBoolean('isJemaProfile');
+          return loadTimeData.getBoolean('isWings8Profile');
         },
       },
     };
@@ -451,8 +451,8 @@ export class OsSettingsLanguagesPageV2Element extends
         LanguagesPageInteraction.OPEN_WEB_LANGUAGES_LEARN_MORE);
   }
 
-  showManageGoogleAccountLanguage_(update2Enabled: boolean, isJemaProfile: boolean) {
-    return update2Enabled && !isJemaProfile;
+  showManageGoogleAccountLanguage_(update2Enabled: boolean, isWings8Profile: boolean) {
+    return update2Enabled && !isWings8Profile;
   }
 }
 

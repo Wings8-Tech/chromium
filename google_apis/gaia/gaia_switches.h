@@ -6,7 +6,7 @@
 #define GOOGLE_APIS_GAIA_GAIA_SWITCHES_H_
 
 #include "base/component_export.h"
-#include "jemaos/build/config/buildflags.h"
+#include "wings8os/build/config/buildflags.h"
 
 namespace switches {
 
@@ -45,9 +45,9 @@ COMPONENT_EXPORT(GOOGLE_APIS) extern const char kOAuth2ClientID[];
 // Specifies custom OAuth2 client secret for testing purposes.
 COMPONENT_EXPORT(GOOGLE_APIS) extern const char kOAuth2ClientSecret[];
 
-#if BUILDFLAG(IS_OPENJEMA)
-COMPONENT_EXPORT(GOOGLE_APIS) extern const char kOAuth2JemaOsClientID[];
-COMPONENT_EXPORT(GOOGLE_APIS) extern const char kOAuth2JemaOsClientSecret[];
+#if BUILDFLAG(IS_OPENWINGS8)
+COMPONENT_EXPORT(GOOGLE_APIS) extern const char kOAuth2Wings8OsClientID[];
+COMPONENT_EXPORT(GOOGLE_APIS) extern const char kOAuth2Wings8OsClientSecret[];
 #endif
 
 }  // namespace switches

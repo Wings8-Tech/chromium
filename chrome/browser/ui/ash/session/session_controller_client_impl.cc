@@ -275,7 +275,7 @@ void SessionControllerClientImpl::ShowMultiProfileLogin() {
   if (UserManager::Get()->GetActiveUser()->GetType() !=
       user_manager::UserType::kRegular &&
       UserManager::Get()->GetActiveUser()->GetType() !=
-      user_manager::UserType::kJemaAccount) {
+      user_manager::UserType::kWings8Account) {
     return;
   }
 

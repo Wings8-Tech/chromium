@@ -871,7 +871,7 @@ dictionary Preferences {
   boolean driveFsBulkPinningEnabled;
   boolean localUserFilesAllowed;
   DefaultLocation defaultLocation;
-  boolean jemaAssistantEnabled;
+  boolean wings8AssistantEnabled;
   CloudProvider skyVaultMigrationDestination;
 };
 
@@ -881,7 +881,7 @@ dictionary PreferencesChange {
   boolean? arcRemovableMediaAccessEnabled;
   DOMString[]? folderShortcuts;
   boolean? driveFsBulkPinningEnabled;
-  boolean? jemaAssistantEnabled;
+  boolean? wings8AssistantEnabled;
 };
 
 dictionary SearchParams {

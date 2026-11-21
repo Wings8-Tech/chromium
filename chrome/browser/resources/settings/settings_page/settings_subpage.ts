@@ -306,7 +306,7 @@ export class SettingsSubpageElement extends SettingsSubpageElementBase {
   }
 
   computeShowLearnMoreUrl_() {
-    return this.learnMoreUrl && !loadTimeData.getBoolean('isJemaProfile');
+    return this.learnMoreUrl && !loadTimeData.getBoolean('isWings8Profile');
   }
 }
 

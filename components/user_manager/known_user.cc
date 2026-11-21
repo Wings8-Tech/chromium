@@ -402,16 +402,16 @@ AccountId KnownUser::GetAccountId(const std::string& user_email,
                                                *stored_obj_guid);
     }
 
-    if (const std::string* stored_jema_id=
-          FindStringPath(account_id, kJemaIdKey)) {
+    if (const std::string* stored_wings8_id=
+          FindStringPath(account_id, kWings8IdKey)) {
       if (!id.empty()) {
-        DCHECK(account_type == AccountType::JEMA_ACCOUNT);
-        if (id != *stored_jema_id)
+        DCHECK(account_type == AccountType::WINGS8_ACCOUNT);
+        if (id != *stored_wings8_id)
           LOG(ERROR) << "User object guid has changed. Sync will not work.";
       }
 
-      return AccountId::FyFromUserEmailJemaId(sanitized_email,
-                                              *stored_jema_id);
+      return AccountId::FyFromUserEmailWings8Id(sanitized_email,
+                                              *stored_wings8_id);
     }
 
     if (const std::string* stored_flint_id =
@@ -431,12 +431,12 @@ AccountId KnownUser::GetAccountId(const std::string& user_email,
   switch (account_type) {
     case AccountType::GOOGLE:
       return AccountId::FromUserEmailGaiaId(sanitized_email, id);
-    case AccountType::JEMA_ACCOUNT:
+    case AccountType::WINGS8_ACCOUNT:
       if (const std::string* stored_email=
-          FindStringPath(AccountId::FyFromJemaId(id), kCanonicalEmail)) {
-        return AccountId::FyFromUserEmailJemaId(*stored_email, id);
+          FindStringPath(AccountId::FyFromWings8Id(id), kCanonicalEmail)) {
+        return AccountId::FyFromUserEmailWings8Id(*stored_email, id);
       }
-      return AccountId::FyFromUserEmailJemaId(sanitized_email, id);
+      return AccountId::FyFromUserEmailWings8Id(sanitized_email, id);
     case AccountType::FLINT_ACCOUNT:
       if (const std::string* stored_email =
           FindStringPath(AccountId::FtFromFlintId(id), kCanonicalEmail)) {
@@ -522,8 +522,8 @@ void KnownUser::UpdateId(const AccountId& account_id) {
     case AccountType::GOOGLE:
       SetStringPref(account_id, kGAIAIdKey, account_id.GetGaiaId());
       break;
-    case AccountType::JEMA_ACCOUNT:
-      SetStringPref(account_id, kJemaIdKey, account_id.GetJemaId());
+    case AccountType::WINGS8_ACCOUNT:
+      SetStringPref(account_id, kWings8IdKey, account_id.GetWings8Id());
       break;
     case AccountType::ACTIVE_DIRECTORY:
       SetStringPref(account_id, kObjGuidKey, account_id.GetObjGuid());
@@ -542,8 +542,8 @@ const std::string* KnownUser::FindGaiaID(const AccountId& account_id) {
   return FindStringPath(account_id, kGAIAIdKey);
 }
 
-const std::string* KnownUser::FindJemaID(const AccountId& account_id) {
-  return FindStringPath(account_id, kJemaIdKey);
+const std::string* KnownUser::FindWings8ID(const AccountId& account_id) {
+  return FindStringPath(account_id, kWings8IdKey);
 }
 
 void KnownUser::SetDeviceId(const AccountId& account_id,

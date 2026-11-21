@@ -26,7 +26,7 @@ std::optional<EntryPointDisplayReason> GetEntryPointDisplayReason(
 
   auto* profile =
       Profile::FromBrowserContext(web_contents->GetBrowserContext());
-  if (profile && profile->IsJemaProfile()) {
+  if (profile && profile->IsWings8Profile()) {
     return std::nullopt;
   }
 

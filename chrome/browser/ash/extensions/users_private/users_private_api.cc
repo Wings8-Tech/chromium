@@ -49,7 +49,7 @@ bool IsChild(Profile* profile) {
     return false;
 
   return user->GetType() == user_manager::UserType::kChild ||
-         user->GetType() == user_manager::UserType::kJemaChild;
+         user->GetType() == user_manager::UserType::kWings8Child;
 }
 
 bool IsOwnerProfile(Profile* profile) {

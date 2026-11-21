@@ -162,7 +162,7 @@
 #include "chrome/browser/ui/webui/certificate_manager_localized_strings_provider.h"
 #endif
 
-#include "jemaos/switches/urls/urls_constants.h"
+#include "wings8os/switches/urls/urls_constants.h"
 
 #if BUILDFLAG(IS_LINUX)
 #include "ui/linux/linux_ui_factory.h"
@@ -181,7 +181,7 @@
 #include "device/vr/public/cpp/features.h"
 #endif
 
-#include "jemaos/switches/urls/urls_constants.h"
+#include "wings8os/switches/urls/urls_constants.h"
 
 namespace settings {
 namespace {
@@ -593,11 +593,11 @@ void AddAppearanceStrings(content::WebUIDataSource* html_source,
                           tabs::GetTabSearchTrailingTabstrip(profile));
   html_source->AddBoolean("toolbarPinningEnabled",
                           features::IsToolbarPinningEnabled());
-  html_source->AddString("jemaosStoreBaseUrl",
-                         jemaos::constants::kJemaOSStoreBaseUrl);
+  html_source->AddString("wings8osStoreBaseUrl",
+                         wings8os::constants::kWings8OSStoreBaseUrl);
 
-  html_source->AddString("jemaosAccountBaseUrl",
-                         jemaos::constants::kJemaOSAccountBaseUrl);
+  html_source->AddString("wings8osAccountBaseUrl",
+                         wings8os::constants::kWings8OSAccountBaseUrl);
 
 #if BUILDFLAG(IS_LINUX)
   bool show_custom_chrome_frame = ui::OzonePlatform::GetInstance()
@@ -792,7 +792,7 @@ void AddResetStrings(content::WebUIDataSource* html_source, Profile* profile) {
                           is_reset_shortcuts_feature_enabled);
 
   html_source->AddString("resetPageLearnMoreUrl",
-                         jemaos::constants::kResetProfileSettingsLearnMoreURL);
+                         wings8os::constants::kResetProfileSettingsLearnMoreURL);
   html_source->AddString("resetProfileBannerLearnMoreUrl",
                          chrome::kAutomaticSettingsResetLearnMoreURL);
 }
@@ -1732,12 +1732,12 @@ void AddPeopleStrings(content::WebUIDataSource* html_source, Profile* profile) {
 
   html_source->AddLocalizedString(
       "peoplePageTitle",
-      profile->IsJemaProfile() ? IDS_SETTINGS_PEOPLE_JEMAOS : IDS_SETTINGS_PEOPLE);
+      profile->IsWings8Profile() ? IDS_SETTINGS_PEOPLE_WINGS8OS : IDS_SETTINGS_PEOPLE);
   // Add Google Account URL and include UTM parameter to signal the source of
   // the navigation.
   html_source->AddString(
       "googleAccountUrl",
-      net::AppendQueryParameter(GURL(profile->IsJemaProfile() ? jemaos::constants::kJemaOSAccountURL :
+      net::AppendQueryParameter(GURL(profile->IsWings8Profile() ? wings8os::constants::kWings8OSAccountURL :
       chrome::kGoogleAccountURL), "utm_source",
                                 "chrome-settings")
           .spec());
@@ -1760,11 +1760,11 @@ void AddPeopleStrings(content::WebUIDataSource* html_source, Profile* profile) {
   // Toggles the Chrome OS Account Manager submenu in the People section.
   html_source->AddBoolean("isAccountManagerEnabled",
                           ash::IsAccountManagerAvailable(profile)
-                          && !profile->IsJemaProfile());
-  html_source->AddBoolean("isJemaProfile", profile->IsJemaProfile());
+                          && !profile->IsWings8Profile());
+  html_source->AddBoolean("isWings8Profile", profile->IsWings8Profile());
   const user_manager::User* user =
       ash::ProfileHelper::Get()->GetUserByProfile(profile);
-  html_source->AddBoolean("isJemaLocalAccount",
+  html_source->AddBoolean("isWings8LocalAccount",
       user->GetType() == user_manager::UserType::kFlintAccount);
   html_source->AddString(
       "osSettingsAccountsPageUrl",
@@ -1863,7 +1863,7 @@ void AddPrivacyStrings(content::WebUIDataSource* html_source,
        IDS_SETTINGS_SAFEBROWSING_ENABLE_REPORTING_DESC},
       {"safeBrowsingEnhanced", IDS_SETTINGS_SAFEBROWSING_ENHANCED},
       {"safeBrowsingEnhancedDesc", IDS_SETTINGS_SAFEBROWSING_ENHANCED_DESC},
-      {"safeBrowsingEnhancedJemaDesc", IDS_SETTINGS_SAFEBROWSING_ENHANCED_JEMA_DESC},
+      {"safeBrowsingEnhancedWings8Desc", IDS_SETTINGS_SAFEBROWSING_ENHANCED_WINGS8_DESC},
       {"safeBrowsingEnhancedDescUpdated",
        IDS_SETTINGS_SAFEBROWSING_ENHANCED_DESC_UPDATED},
       {"safeBrowsingEnhancedExpandA11yLabel",
@@ -1914,7 +1914,7 @@ void AddPrivacyStrings(content::WebUIDataSource* html_source,
        IDS_SETTINGS_SAFEBROWSING_STANDARD_HELP_IMPROVE},
       {"safeBrowsingNone", IDS_SETTINGS_SAFEBROWSING_NONE},
       {"safeBrowsingNoneDesc", IDS_SETTINGS_SAFEBROWSING_NONE_DESC},
-      {"safeBrowsingNoneJemaDesc", IDS_SETTINGS_SAFEBROWSING_NONE_JEMA_DESC},
+      {"safeBrowsingNoneWings8Desc", IDS_SETTINGS_SAFEBROWSING_NONE_WINGS8_DESC},
       {"safeBrowsingDisableDialog",
        IDS_SETTINGS_SAFEBROWSING_DISABLE_DIALOG_TITLE},
       {"safeBrowsingDisableDialogDesc",
@@ -2355,9 +2355,9 @@ void AddSafetyHubStrings(content::WebUIDataSource* html_source) {
                          chrome::kSafetyHubHelpCenterURL);
 }
 
-// ---***JEMAOS BEGIN***---
+// ---***WINGS8OS BEGIN***---
 void AddSearchInSettingsStrings(content::WebUIDataSource* html_source, Profile* profile) {
-// ---***JEMAOS END***---
+// ---***WINGS8OS END***---
   static constexpr webui::LocalizedString kLocalizedStrings[] = {
       {"searchPrompt", IDS_SETTINGS_SEARCH_PROMPT},
       {"searchNoResults", IDS_SEARCH_NO_RESULTS},
@@ -2368,9 +2368,9 @@ void AddSearchInSettingsStrings(content::WebUIDataSource* html_source, Profile* 
 
   std::u16string help_text = l10n_util::GetStringFUTF16(
       IDS_SETTINGS_SEARCH_NO_RESULTS_HELP, chrome::kSettingsSearchHelpURL);
-  if (profile->IsJemaProfile()) {
+  if (profile->IsWings8Profile()) {
     help_text = l10n_util::GetStringFUTF16(
-      IDS_SETTINGS_SEARCH_NO_RESULTS_JEMAOS_HELP, base::UTF8ToUTF16(jemaos::constants::kJemaOSHelpURL));
+      IDS_SETTINGS_SEARCH_NO_RESULTS_WINGS8OS_HELP, base::UTF8ToUTF16(wings8os::constants::kWings8OSHelpURL));
   }
   html_source->AddString("searchNoResultsHelp", help_text);
 }
@@ -2394,8 +2394,8 @@ void AddSearchStrings(content::WebUIDataSource* html_source, Profile* profile) {
   };
   html_source->AddLocalizedStrings(kLocalizedStrings);
   html_source->AddString("searchExplanationLearnMoreURL",
-                         profile->IsJemaProfile() ?
-                         base::UTF8ToUTF16(jemaos::constants::kJemaOSHelpURL) :
+                         profile->IsWings8Profile() ?
+                         base::UTF8ToUTF16(wings8os::constants::kWings8OSHelpURL) :
                          chrome::kOmniboxLearnMoreURL);
 
   search_engines::SearchEngineChoiceService* search_engine_choice_service =

@@ -12,14 +12,14 @@ namespace remoting {
 // remoting/host/it2me/com.google.chrome.remote_assistance.json.jinja2
 // to keep the two lists in sync.
 const char* const kIt2MeOrigins[] = {
-    // ---***JEMAOS BEGIN***---
-    // JemaOS Remote Desktop (sovereign rebuild, our own signing key).
+    // ---***WINGS8OS BEGIN***---
+    // Wings8OS Remote Desktop (sovereign rebuild, our own signing key).
     "chrome-extension://bhgofkbdjhohckijphjdhjfpmmjbppja/",
     // remote desktop extension id, old, new, and dev (upstream FydeOS ids)
     "chrome-extension://ljkfnggfkjcmfpcpoomhmhkgeeakhgig/",
     "chrome-extension://fogdcaodknbhigpklbhepedofamkfbln/",
     "chrome-extension://ljacajndfccfgnfohlgkdphmbnpkjflk/",
-    // ---***JEMAOS END***---
+    // ---***WINGS8OS END***---
     "chrome-extension://inomeogfingihgjfjlpeplalcfajhgai/",
     "chrome-extension://hpodccmdligbeohchckkeajbfohibipg/"};
 

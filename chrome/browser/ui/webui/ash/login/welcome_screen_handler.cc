@@ -49,8 +49,8 @@
 #include "ui/base/resource/resource_bundle.h"
 #include "ui/chromeos/devicetype_utils.h"
 #include "base/system/sys_info.h"
-#include "jemaos/switches/misc//misc_switches.h"
-#include "jemaos/switches/misc/misc_constants.h"
+#include "wings8os/switches/misc//misc_switches.h"
+#include "wings8os/switches/misc/misc_constants.h"
 
 namespace ash {
 
@@ -272,7 +272,7 @@ void WelcomeScreenHandler::GetAdditionalParameters(base::Value::Dict* dict) {
 
   const std::string board = base::SysInfo::GetLsbReleaseBoardWithoutSuffix();
   dict->Set("lsbReleaseBoard", board);
-  dict->Set("nonForYouBoard", jemaos::switches::IsNonForYouBoard(board));
+  dict->Set("nonForYouBoard", wings8os::switches::IsNonForYouBoard(board));
 
   // If this switch is set allow to open advanced options and configure device
   // requisition.
@@ -319,10 +319,10 @@ base::Value::List WelcomeScreenHandler::GetTimezoneList() {
   CrosSettings::Get()->GetString(kSystemTimezone, &current_timezone_id);
 
   // If no explicit system timezone is stored yet, default the welcome screen
-  // timezone selection to the JemaOS default ("Europe/Paris") so that the time
+  // timezone selection to the Wings8OS default ("Europe/Paris") so that the time
   // shown on the welcome screen uses the France/Paris timezone.
   if (current_timezone_id.empty()) {
-    current_timezone_id = jemaos::constants::kJemaOSDefaultTimeZoneId;
+    current_timezone_id = wings8os::constants::kWings8OSDefaultTimeZoneId;
   }
 
   base::Value::List timezone_list;

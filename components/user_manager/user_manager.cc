@@ -137,9 +137,9 @@ UserType UserManager::CalculateUserType(const AccountId& account_id,
   if (user) {
     // This branch works for any other user type, including PUBLIC_ACCOUNT.
     const UserType user_type = user->GetType();
-    // ---***JEMAOS BEGIN***---
-    // Local Flint/Jema accounts are stored as GOOGLE accounts with
-    // "ft_id_"/"jema_id_" gaia id prefixes (for cryptohome compatibility).
+    // ---***WINGS8OS BEGIN***---
+    // Local Flint/Wings8 accounts are stored as GOOGLE accounts with
+    // "ft_id_"/"wings8_id_" gaia id prefixes (for cryptohome compatibility).
     // Accounts created before this mapping existed were registered as
     // kRegular, which wrongly subjects them to gaia-only logic (ephemeral
     // users cleanup, login-screen allowlist filtering, forced online
@@ -152,11 +152,11 @@ UserType UserManager::CalculateUserType(const AccountId& account_id,
         // "flint_id_" was a typo in older builds; those accounts are local.
         return UserType::kFlintAccount;
       }
-      if (gaia_id.starts_with("jema_id_")) {
-        return UserType::kJemaAccount;
+      if (gaia_id.starts_with("wings8_id_")) {
+        return UserType::kWings8Account;
       }
     }
-    // ---***JEMAOS END***---
+    // ---***WINGS8OS END***---
     if (user_type == UserType::kChild || user_type == UserType::kRegular) {
       const UserType new_user_type =
           is_child ? UserType::kChild : UserType::kRegular;
@@ -165,11 +165,11 @@ UserType UserManager::CalculateUserType(const AccountId& account_id,
                      << new_user_type;
       }
       return new_user_type;
-    } else if (user_type == UserType::kJemaChild || user_type == UserType::kJemaAccount) {
+    } else if (user_type == UserType::kWings8Child || user_type == UserType::kWings8Account) {
       const UserType new_user_type =
-          is_child ? UserType::kJemaChild : UserType::kJemaAccount;
+          is_child ? UserType::kWings8Child : UserType::kWings8Account;
       if (new_user_type != user_type) {
-        LOG(WARNING) << "JemaOS child user type has changed: " << user_type << " => "
+        LOG(WARNING) << "Wings8OS child user type has changed: " << user_type << " => "
                      << new_user_type;
       }
       return new_user_type;
@@ -188,7 +188,7 @@ UserType UserManager::CalculateUserType(const AccountId& account_id,
 
   // User is new
   if (is_child)
-    return account_id.GetAccountType() == AccountType::JEMA_ACCOUNT ? UserType::kJemaChild : UserType::kChild;
+    return account_id.GetAccountType() == AccountType::WINGS8_ACCOUNT ? UserType::kWings8Child : UserType::kChild;
 
   CHECK(account_id.GetAccountType() != AccountType::ACTIVE_DIRECTORY);
 
@@ -196,23 +196,23 @@ UserType UserManager::CalculateUserType(const AccountId& account_id,
     return UserType::kFlintAccount;
   }
 
-  if (account_id.GetAccountType() == AccountType::JEMA_ACCOUNT) {
-    return UserType::kJemaAccount;
+  if (account_id.GetAccountType() == AccountType::WINGS8_ACCOUNT) {
+    return UserType::kWings8Account;
   }
 
-  // ---***JEMAOS BEGIN***---
-  // Local Flint/Jema accounts use AccountType::GOOGLE (for cryptohome
+  // ---***WINGS8OS BEGIN***---
+  // Local Flint/Wings8 accounts use AccountType::GOOGLE (for cryptohome
   // compatibility) and are identified by their gaia id prefix.
   if (account_id.GetAccountType() == AccountType::GOOGLE) {
     const std::string& gaia_id = account_id.GetGaiaId();
     if (gaia_id.starts_with("ft_id_")) {
       return UserType::kFlintAccount;
     }
-    if (gaia_id.starts_with("jema_id_")) {
-      return UserType::kJemaAccount;
+    if (gaia_id.starts_with("wings8_id_")) {
+      return UserType::kWings8Account;
     }
   }
-  // ---***JEMAOS END***---
+  // ---***WINGS8OS END***---
 
   return UserType::kRegular;
 }
@@ -222,9 +222,9 @@ bool UserManager::IsUserAllowed(const user_manager::User& user,
                                 bool is_user_allowlisted) {
   DCHECK(user.GetType() == UserType::kRegular ||
          user.GetType() == UserType::kFlintAccount ||
-         user.GetType() == UserType::kJemaAccount ||
+         user.GetType() == UserType::kWings8Account ||
          user.GetType() == UserType::kGuest ||
-         user.GetType() == UserType::kJemaChild ||
+         user.GetType() == UserType::kWings8Child ||
          user.GetType() == UserType::kChild);
 
   if (user.GetType() == UserType::kGuest && !is_guest_allowed) {

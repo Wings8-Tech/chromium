@@ -474,7 +474,7 @@ void MetricReportingManager::InitPeriodicTelemetryCollector(
     base::TimeDelta default_rate,
     int rate_unit_to_ms,
     base::TimeDelta init_delay,
-    bool should_send_to_jema) {
+    bool should_send_to_wings8) {
   DCHECK_CALLED_ON_VALID_SEQUENCE(sequence_checker_);
   CHECK(!base::Contains(telemetry_collectors_, collector_name));
   if (!metric_report_queue) {
@@ -484,7 +484,7 @@ void MetricReportingManager::InitPeriodicTelemetryCollector(
   auto collector = delegate_->CreatePeriodicCollector(
       sampler, metric_report_queue, &reporting_settings_, enable_setting_path,
       enable_default_value, rate_setting_path, default_rate, rate_unit_to_ms,
-      init_delay, should_send_to_jema);
+      init_delay, should_send_to_wings8);
   telemetry_collectors_.insert({collector_name, std::move(collector)});
 }
 

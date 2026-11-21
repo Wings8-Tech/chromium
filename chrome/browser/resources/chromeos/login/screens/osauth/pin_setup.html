@@ -9,14 +9,14 @@ found in the LICENSE file.
   setup-pin-keyboard {
     margin-top: 37px;
   }
-  #setup[jemaos-layout] setup-pin-keyboard {
+  #setup[wings8os-layout] setup-pin-keyboard {
     margin-top: 0;
   }
 </style>
 
 <oobe-adaptive-dialog
-  jemaos-layout
-  animation-url="animations/jemaos_choose_pin.json"
+  wings8os-layout
+  animation-url="animations/wings8os_choose_pin.json"
   id="setup" role="dialog" for-step="start,confirm">
   <iron-icon slot="icon" icon="oobe-32:lock"></iron-icon>
   <h1 id="setupTitle" slot="title" for-step="start" aria-live="polite">
@@ -122,11 +122,11 @@ found in the LICENSE file.
 </oobe-adaptive-dialog>
 
 <oobe-adaptive-dialog id="doneDialog" role="dialog" for-step="done"
-    jemaos-layout
+    wings8os-layout
     footer-shrinkable>
   <iron-icon slot="icon" icon="oobe-32:lock"></iron-icon>
-  <iron-icon icon="oobe-illos:jemaos-pin-illo"
-      slot="jemaos-illustration"
+  <iron-icon icon="oobe-illos:wings8os-pin-illo"
+      slot="wings8os-illustration"
       class="illustration-jelly">
   </iron-icon>
   <h1 slot="title" aria-live="polite">

@@ -102,8 +102,8 @@ void AssistantUiControllerImpl::SetKeyboardTraversalMode(
 }
 
 void AssistantUiControllerImpl::ShowUi(AssistantEntryPoint entry_point) {
-  if (ash::features::IsJemaAssistantEnabled()) {
-    if (AssistantState::Get()->jema_assistant_enabled().value_or(false)) {
+  if (ash::features::IsWings8AssistantEnabled()) {
+    if (AssistantState::Get()->wings8_assistant_enabled().value_or(false)) {
       if (entry_point == AssistantEntryPoint::kDeepLink || entry_point == AssistantEntryPoint::kHotkey || entry_point == AssistantEntryPoint::kLauncherSearchBoxIcon) {
         model_.SetVisible(entry_point);
         return;

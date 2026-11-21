@@ -58,7 +58,7 @@
 // LINT.IfChange(UsageMetrics)
 #include "chrome/browser/ash/login/screens/account_selection_screen.h"
 #include "chrome/browser/ash/login/screens/add_child_screen.h"
-#include "chrome/browser/ash/login/screens/jema_local_signin_screen.h"
+#include "chrome/browser/ash/login/screens/wings8_local_signin_screen.h"
 #include "chrome/browser/ash/login/screens/data_restore_screen.h"
 #include "chrome/browser/ash/login/screens/ai_intro_screen.h"
 #include "chrome/browser/ash/login/screens/app_downloading_screen.h"
@@ -159,7 +159,7 @@
 #include "chrome/browser/ui/ash/system/system_tray_client_impl.h"
 #include "chrome/browser/ui/webui/ash/login/account_selection_screen_handler.h"
 #include "chrome/browser/ui/webui/ash/login/add_child_screen_handler.h"
-#include "chrome/browser/ui/webui/ash/login/jema_local_signin_screen_handler.h"
+#include "chrome/browser/ui/webui/ash/login/wings8_local_signin_screen_handler.h"
 #include "chrome/browser/ui/webui/ash/login/ai_intro_screen_handler.h"
 #include "chrome/browser/ui/webui/ash/login/app_downloading_screen_handler.h"
 #include "chrome/browser/ui/webui/ash/login/app_launch_splash_screen_handler.h"
@@ -271,12 +271,12 @@
 #include "services/service_manager/public/cpp/connector.h"
 #include "third_party/cros_system_api/dbus/service_constants.h"
 #include "ui/base/accelerators/accelerator.h"
-// ---***JEMAOS BEGIN***---
-#include "jemaos/switches/account/account_switches.h"
-#include "jemaos/switches/account/toggle/account_type_toggle.h"
-#include "jemaos/switches/misc/misc_switches.h"
-#include "jemaos/build/config/buildflags.h"
-// ---***JEMAOS END***---
+// ---***WINGS8OS BEGIN***---
+#include "wings8os/switches/account/account_switches.h"
+#include "wings8os/switches/account/toggle/account_type_toggle.h"
+#include "wings8os/switches/misc/misc_switches.h"
+#include "wings8os/build/config/buildflags.h"
+// ---***WINGS8OS END***---
 
 // Enable VLOG level 1.
 #undef ENABLED_VLOG_LEVEL
@@ -536,7 +536,7 @@ void WizardController::Init(OobeScreenId first_screen) {
       !user_manager::UserManager::Get()->GetUsers().empty();
   // Do not show the HID Detection screen if device is owned.
   if (!device_is_owned && HIDDetectionScreen::CanShowScreen() &&
-      !prescribed_enrollment_config_.is_mode_jema() &&
+      !prescribed_enrollment_config_.is_mode_wings8() &&
       first_screen == ash::OOBE_SCREEN_UNKNOWN) {
     // TODO(https://crbug.com/1275960): Move logic into
     // HIDDetectionScreen::MaybeSkip.
@@ -876,9 +876,9 @@ WizardController::CreateScreens() {
       base::BindRepeating(&WizardController::OnAddChildScreenExit,
                           weak_factory_.GetWeakPtr())));
 
-  append(std::make_unique<JemaLocalSigninScreen>(
-      oobe_ui->GetView<JemaLocalSigninScreenHandler>()->AsWeakPtr(),
-      base::BindRepeating(&WizardController::OnJemaLocalSigninScreenExit,
+  append(std::make_unique<Wings8LocalSigninScreen>(
+      oobe_ui->GetView<Wings8LocalSigninScreenHandler>()->AsWeakPtr(),
+      base::BindRepeating(&WizardController::OnWings8LocalSigninScreenExit,
                           weak_factory_.GetWeakPtr())));
 
   append(std::make_unique<EduCoexistenceLoginScreen>(
@@ -1119,7 +1119,7 @@ void WizardController::OnSignInFatalErrorScreenExit() {
 void WizardController::ShowLoginScreen() {
   VLOG(1) << "Showing login screen.";
   if (!wizard_context_->is_user_creation_enabled) {
-    jemaos::switches::EnableJemaAccountFlag();
+    wings8os::switches::EnableWings8AccountFlag();
   }
   UpdateStatusAreaVisibilityForScreen(GaiaView::kScreenId);
   GetLoginDisplayHost()->StartSignInScreen();
@@ -1281,12 +1281,12 @@ void WizardController::ShowAiIntroScreen() {
 }
 
 void WizardController::ShowGeminiIntroScreen() {
-  // --jema-hide-jema-ai
-  // JemaOS customization: skip the Gemini intro screen and jump directly to
+  // --wings8-hide-wings8-ai
+  // Wings8OS customization: skip the Gemini intro screen and jump directly to
   // CHOOBE ("Choose more features to set up").
   //
   // This ensures that when the flow reaches the screen titled
-  // "Introducing JemaOS AI, your OS level AI assistant", it immediately
+  // "Introducing Wings8OS AI, your OS level AI assistant", it immediately
   // advances to the CHOOBE screen.
   if (features::IsOobeChoobeEnabled()) {
     ShowChoobeScreen();
@@ -1488,16 +1488,16 @@ void WizardController::OnUserCreationScreenExit(
       ShowEnrollmentScreenIfEligible();
       break;
     case UserCreationScreen::Result::CANCEL:
-      // ---***JEMAOS BEGIN***---
-      if (!jemaos::switches::IsJemaAccountEnabled()) {
-        // back to jemaos signin webview page
-        jemaos::switches::EnableJemaAccountFlag();
+      // ---***WINGS8OS BEGIN***---
+      if (!wings8os::switches::IsWings8AccountEnabled()) {
+        // back to wings8os signin webview page
+        wings8os::switches::EnableWings8AccountFlag();
         GetScreen<GaiaScreen>()->LoadOnlineGaia();
         AdvanceToScreen(GaiaView::kScreenId);
       } else {
         LoginDisplayHost::default_host()->HideOobeDialog();
       }
-      // ---***JEMAOS END***---
+      // ---***WINGS8OS END***---
       break;
   }
 }
@@ -1535,7 +1535,7 @@ void WizardController::OnGaiaScreenExit(GaiaScreen::Result result) {
   OnScreenExit(GaiaView::kScreenId, GaiaScreen::GetResultString(result));
   switch (result) {
     case GaiaScreen::Result::USE_LOCAL_ACCOUNT:
-      AdvanceToScreen(JemaLocalSigninView::kScreenId);
+      AdvanceToScreen(Wings8LocalSigninView::kScreenId);
       break;
     case GaiaScreen::Result::BACK_CHILD:
       ShowAddChildScreen();
@@ -1558,7 +1558,7 @@ void WizardController::OnGaiaScreenExit(GaiaScreen::Result result) {
         if ((wizard_context_->is_user_creation_enabled ||
              !wizard_context_->is_add_person_flow) &&
             result == GaiaScreen::Result::BACK) {
-          if (!jemaos::switches::IsJemaAccountEnabled()) {
+          if (!wings8os::switches::IsWings8AccountEnabled()) {
             AdvanceToScreen(UserCreationView::kScreenId);
           } else {
             GetScreen<GaiaScreen>()->LoadOnlineGaia();
@@ -1596,8 +1596,8 @@ void WizardController::OnGaiaScreenExit(GaiaScreen::Result result) {
 
       // same build condition as
       // chrome/browser/resources/chromeos/login/screens/common/gaia_signin.js
-      // `<if expr="openjema or not use_jemaos_com">`
-      #if BUILDFLAG(IS_OPENJEMA) || !BUILDFLAG(USE_JEMAOS_COM)
+      // `<if expr="openwings8 or not use_wings8os_com">`
+      #if BUILDFLAG(IS_OPENWINGS8) || !BUILDFLAG(USE_WINGS8OS_COM)
             const bool might_exit =
               (result == GaiaScreen::Result::ACCOUNT_TYPE_SELECTION_BACK);;
       #else
@@ -1612,15 +1612,15 @@ void WizardController::OnGaiaScreenExit(GaiaScreen::Result result) {
            !wizard_context_->is_user_creation_enabled) ||
           (!LoginDisplayHost::default_host()->HasUserPods() &&
            gaia_page_defaults_to_saml)) {
-        if (!jemaos::switches::IsJemaAccountEnabled()) {
-          jemaos::switches::EnableJemaAccountFlag();
+        if (!wings8os::switches::IsWings8AccountEnabled()) {
+          wings8os::switches::EnableWings8AccountFlag();
         }
         GetScreen<GaiaScreen>()->Reset();
         LoginDisplayHost::default_host()->HideOobeDialog(
             gaia_page_defaults_to_saml);
       } else {
-        if (!jemaos::switches::IsJemaAccountEnabled()) {
-          jemaos::switches::EnableJemaAccountFlag();
+        if (!wings8os::switches::IsWings8AccountEnabled()) {
+          wings8os::switches::EnableWings8AccountFlag();
         }
         GetScreen<GaiaScreen>()->LoadOnlineGaia();
       }
@@ -1718,13 +1718,13 @@ void WizardController::OnSamlConfirmPasswordScreenExit(
   }
 }
 
-void WizardController::OnJemaLocalSigninScreenExit(
-    JemaLocalSigninScreen::Result result) {
-  OnScreenExit(JemaLocalSigninView::kScreenId,
-               JemaLocalSigninScreen::GetResultString(result));
+void WizardController::OnWings8LocalSigninScreenExit(
+    Wings8LocalSigninScreen::Result result) {
+  OnScreenExit(Wings8LocalSigninView::kScreenId,
+               Wings8LocalSigninScreen::GetResultString(result));
 
   // If user chose to go back to Account Type Selection, ensure GAIA shows it.
-  if (result == JemaLocalSigninScreen::Result::ACCOUNT_TYPE_SELECTION_BACK) {
+  if (result == Wings8LocalSigninScreen::Result::ACCOUNT_TYPE_SELECTION_BACK) {
     if (auto* oobe_ui = GetOobeUI()) {
       if (auto* gaia_handler = oobe_ui->GetView<GaiaScreenHandler>()) {
         gaia_handler->SetShowAccountTypeSelection(true);
@@ -2267,7 +2267,7 @@ void WizardController::OnNetworkScreenExit(NetworkScreen::Result result) {
     switch (result) {
       case NetworkScreen::Result::CONNECTED:
       case NetworkScreen::Result::NOT_APPLICABLE:
-        if (jemaos::switches::IsJemaCustomEnabled()) {
+        if (wings8os::switches::IsWings8CustomEnabled()) {
           ShowEulaScreen();
         } else {
           MaybeTakeTPMOwnership();
@@ -2288,7 +2288,7 @@ void WizardController::OnNetworkScreenExit(NetworkScreen::Result result) {
   switch (result) {
     case NetworkScreen::Result::CONNECTED:
     case NetworkScreen::Result::NOT_APPLICABLE:
-      if (jemaos::switches::IsJemaCustomEnabled()) {
+      if (wings8os::switches::IsWings8CustomEnabled()) {
         ShowEulaScreen();
       } else {
         MaybeTakeTPMOwnership();
@@ -2929,8 +2929,8 @@ void WizardController::OnGeminiIntroScreenExit(
     return;
   }
 
-  // --jema-hide-jema-ai
-  //  JemaOS customization: go directly to CHOOBE ("Choose more features to set
+  // --wings8-hide-wings8-ai
+  //  Wings8OS customization: go directly to CHOOBE ("Choose more features to set
   // up") after Gemini intro.
   if (features::IsOobeChoobeEnabled()) {
     ShowChoobeScreen();
@@ -3456,7 +3456,7 @@ void WizardController::AdvanceToScreen(OobeScreenId screen_id) {
              screen_id == LocaleSwitchView::kScreenId ||
              screen_id == RecoveryEligibilityView::kScreenId ||
              screen_id == OfflineLoginView::kScreenId ||
-             screen_id == JemaLocalSigninView::kScreenId ||
+             screen_id == Wings8LocalSigninView::kScreenId ||
              screen_id == OsInstallScreenView::kScreenId ||
              screen_id == OsTrialScreenView::kScreenId ||
              screen_id == DataRestoreScreenView::kScreenId ||
@@ -3707,7 +3707,7 @@ bool WizardController::SetOnTimeZoneResolvedForTesting(
 
 void WizardController::StartEnrollmentScreen() {
   if (!(current_screen_ && IsSigninScreen(current_screen_->screen_id()))) {
-    jemaos::switches::EnableJemaAccountFlag();
+    wings8os::switches::EnableWings8AccountFlag();
   }
 
   VLOG(1) << "Showing enrollment screen.";

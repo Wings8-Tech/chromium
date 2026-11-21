@@ -1,4 +1,4 @@
-// Copyright 2025 jema technology. All rights reserved.
+// Copyright 2025 wings8 technology. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
@@ -22,8 +22,8 @@ const AccountTypeSelectionScreenElementBase =
 
 const AccountTypeToSelect = {
   GOOGLE: 'google',
-  JEMA: 'jema',
-  JEMA_LOCAL: 'jema-local',
+  WINGS8: 'wings8',
+  WINGS8_LOCAL: 'wings8-local',
 };
 
 class AccountTypeSelection extends AccountTypeSelectionScreenElementBase {
@@ -73,9 +73,9 @@ class AccountTypeSelection extends AccountTypeSelectionScreenElementBase {
   override ready() {
     super.ready();
     this.checkInternetConnectivity_();
-    // Default to online JEMA account when online, local when offline
+    // Default to online WINGS8 account when online, local when offline
     this.selectedAccountType_ = this.isOnline_ ? 
-        AccountTypeToSelect.JEMA : AccountTypeToSelect.JEMA_LOCAL;
+        AccountTypeToSelect.WINGS8 : AccountTypeToSelect.WINGS8_LOCAL;
   }
 
   private computeHideLocalButton_(isOnline: boolean): boolean {
@@ -91,16 +91,16 @@ class AccountTypeSelection extends AccountTypeSelectionScreenElementBase {
     window.addEventListener('online', () => {
       this.isOnline_ = true;
       // Switch to online account if currently on local
-      if (this.selectedAccountType_ === AccountTypeToSelect.JEMA_LOCAL) {
-        this.selectedAccountType_ = AccountTypeToSelect.JEMA;
+      if (this.selectedAccountType_ === AccountTypeToSelect.WINGS8_LOCAL) {
+        this.selectedAccountType_ = AccountTypeToSelect.WINGS8;
       }
     });
     
     window.addEventListener('offline', () => {
       this.isOnline_ = false;
       // Switch to local account if currently on online
-      if (this.selectedAccountType_ === AccountTypeToSelect.JEMA) {
-        this.selectedAccountType_ = AccountTypeToSelect.JEMA_LOCAL;
+      if (this.selectedAccountType_ === AccountTypeToSelect.WINGS8) {
+        this.selectedAccountType_ = AccountTypeToSelect.WINGS8_LOCAL;
       }
     });
   }

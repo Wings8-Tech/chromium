@@ -50,11 +50,11 @@
 #include "chrome/browser/ash/login/wizard_context.h"
 #include "chrome/browser/ash/login/wizard_controller.h"
 #include "chrome/browser/browser_process.h"
-#include "chrome/browser/ui/ash/login/jema_password_validator.h"
+#include "chrome/browser/ui/ash/login/wings8_password_validator.h"
 #include "chromeos/ash/components/login/auth/password_update_flow.h"
 #include "chromeos/ash/components/login/auth/public/auth_callbacks.h"
 #include "chromeos/ash/components/login/auth/public/cryptohome_key_constants.h"
-#include "jemaos/prefs/jemaos_prefs.h"
+#include "wings8os/prefs/wings8os_prefs.h"
 #include "chrome/browser/certificate_provider/certificate_provider_service.h"
 #include "chrome/browser/certificate_provider/certificate_provider_service_factory.h"
 #include "chrome/browser/profiles/profile.h"
@@ -98,7 +98,7 @@
 #include "ui/events/keycodes/keyboard_codes_posix.h"
 #include "ui/gfx/native_widget_types.h"
 #include "ui/views/view.h"
-#include "jemaos/switches/account/toggle/account_type_toggle.h"
+#include "wings8os/switches/account/toggle/account_type_toggle.h"
 
 namespace ash {
 namespace {
@@ -587,7 +587,7 @@ void LoginDisplayHostMojo::ShowGaiaDialogImpl(
     gaia_reauth_account_id_ = prefilled_account;
   } else {
     gaia_reauth_account_id_.reset();
-    jemaos::switches::EnableJemaAccountFlag();
+    wings8os::switches::EnableWings8AccountFlag();
   }
   ShowGaiaDialogCommon(prefilled_account);
 
@@ -749,33 +749,33 @@ void LoginDisplayHostMojo::HandleAuthenticateUserWithPasswordOrPin(
   pending_auth_state_ =
       std::make_unique<AuthState>(account_id, std::move(callback));
 
-  //---***JEMAOS BEGIN***---
-  // Jema ONLINE account: if the typed password differs from the last one that
+  //---***WINGS8OS BEGIN***---
+  // Wings8 ONLINE account: if the typed password differs from the last one that
   // unlocked the vault, it may have been changed in the SaaS. Verify it online
   // and, on success, re-seal the vault (old -> new) with the standard
   // PasswordUpdateFlow before logging in. This never blocks: on any failure we
   // fall through to the normal local login below.
-  if (account_id.GetGaiaId().find("jema_id_") == 0 && !password.empty()) {
-    const std::string saved = jemaos::prefs::GetJemaAccountPassword(
+  if (account_id.GetGaiaId().find("wings8_id_") == 0 && !password.empty()) {
+    const std::string saved = wings8os::prefs::GetWings8AccountPassword(
         g_browser_process->local_state(), account_id.GetUserEmail());
     // Admin revocation gate: even with the correct (unchanged) password or a
     // PIN, refuse sign-in while the fleet admin has deactivated all seats.
     // Checked online BEFORE any local unlock; offline/other errors fall
     // through to normal login so a network hiccup never locks the user out.
     if (!saved.empty()) {
-      pending_jema_new_password_ = password;
-      pending_jema_old_password_ = saved;
-      pending_jema_authenticated_by_pin_ = authenticated_by_pin;
-      pending_jema_seat_gate_ = true;
-      JemaPasswordValidator::CheckSeatBlocked(
+      pending_wings8_new_password_ = password;
+      pending_wings8_old_password_ = saved;
+      pending_wings8_authenticated_by_pin_ = authenticated_by_pin;
+      pending_wings8_seat_gate_ = true;
+      Wings8PasswordValidator::CheckSeatBlocked(
           account_id.GetUserEmail(), saved,
-          base::BindOnce(&LoginDisplayHostMojo::OnJemaSeatGateChecked,
+          base::BindOnce(&LoginDisplayHostMojo::OnWings8SeatGateChecked,
                          weak_factory_.GetWeakPtr(), account_id, password,
                          authenticated_by_pin));
       return;
     }
   }
-  //---***JEMAOS END***---
+  //---***WINGS8OS END***---
 
   ContinueLoginWithPassword(account_id, password, authenticated_by_pin,
                             /*save_password=*/true);
@@ -814,71 +814,71 @@ void LoginDisplayHostMojo::ContinueLoginWithPassword(
     }
   }
 
-  //---***JEMAOS BEGIN***---
-  if (account_id.GetGaiaId().find("jema_id_") == 0 ||
+  //---***WINGS8OS BEGIN***---
+  if (account_id.GetGaiaId().find("wings8_id_") == 0 ||
       account_id.GetGaiaId().find("ft_id_") == 0 ||
       account_id.GetGaiaId().find("flint_id_") == 0) {
-    user_context.SetAuthFlow(UserContext::AUTH_FLOW_JEMA_ONLINE);
-    LOG(WARNING) << "Set AUTH_FLOW_JEMA_ONLINE for Jema/Flint account: "
+    user_context.SetAuthFlow(UserContext::AUTH_FLOW_WINGS8_ONLINE);
+    LOG(WARNING) << "Set AUTH_FLOW_WINGS8_ONLINE for Wings8/Flint account: "
                  << account_id.GetUserEmail() << " (gaia_id: " << account_id.GetGaiaId() << ")";
 
-    // Online Jema account: remember (OSCrypt-encrypted) the password that
+    // Online Wings8 account: remember (OSCrypt-encrypted) the password that
     // currently unlocks its cryptohome, so a SaaS password change can re-seal
     // the vault automatically without asking for the old password. Only saved
     // when the login is expected to succeed (never for a rejected password).
     if (save_password &&
-        account_id.GetGaiaId().find("jema_id_") == 0 && !password.empty()) {
-      jemaos::prefs::SaveJemaAccountPassword(g_browser_process->local_state(),
+        account_id.GetGaiaId().find("wings8_id_") == 0 && !password.empty()) {
+      wings8os::prefs::SaveWings8AccountPassword(g_browser_process->local_state(),
                                              account_id.GetUserEmail(),
                                              password);
     }
   }
-  //---***JEMAOS END***---
+  //---***WINGS8OS END***---
 
   // Ensure existing_user_controller_ is created before using it, especially
   // important for relogin scenarios where it might have been reset.
   GetExistingUserController()->Login(user_context, SigninSpecifics());
 }
 
-void LoginDisplayHostMojo::OnJemaSeatGateChecked(const AccountId& account_id,
+void LoginDisplayHostMojo::OnWings8SeatGateChecked(const AccountId& account_id,
                                                  const std::string& password,
                                                  bool authenticated_by_pin,
                                                  bool blocked) {
-  const std::string saved = pending_jema_old_password_;
-  pending_jema_seat_gate_ = false;
+  const std::string saved = pending_wings8_old_password_;
+  pending_wings8_seat_gate_ = false;
   if (blocked) {
-    LOG(WARNING) << "[JEMAOS] Login refused: seats deactivated by fleet admin "
+    LOG(WARNING) << "[WINGS8OS] Login refused: seats deactivated by fleet admin "
                  << "for " << account_id.GetUserEmail();
-    pending_jema_new_password_.clear();
-    pending_jema_old_password_.clear();
+    pending_wings8_new_password_.clear();
+    pending_wings8_old_password_.clear();
     OnAuthFailure(AuthFailure(AuthFailure::AUTH_DISABLED));
     return;
   }
   // Not revoked: continue the normal flow (password-change verification if
   // the typed password differs from the saved one, else local login).
   if (!saved.empty() && saved != password) {
-    JemaPasswordValidator::Validate(
+    Wings8PasswordValidator::Validate(
         account_id.GetUserEmail(), password,
-        base::BindOnce(&LoginDisplayHostMojo::OnJemaPasswordValidated,
+        base::BindOnce(&LoginDisplayHostMojo::OnWings8PasswordValidated,
                        weak_factory_.GetWeakPtr(), account_id));
     return;
   }
-  pending_jema_new_password_.clear();
-  pending_jema_old_password_.clear();
+  pending_wings8_new_password_.clear();
+  pending_wings8_old_password_.clear();
   ContinueLoginWithPassword(account_id, password, authenticated_by_pin,
                             /*save_password=*/true);
 }
 
-void LoginDisplayHostMojo::OnJemaPasswordValidated(const AccountId& account_id,
+void LoginDisplayHostMojo::OnWings8PasswordValidated(const AccountId& account_id,
                                                    bool ok) {
-  const std::string new_password = pending_jema_new_password_;
-  const std::string old_password = pending_jema_old_password_;
-  const bool authenticated_by_pin = pending_jema_authenticated_by_pin_;
-  pending_jema_new_password_.clear();
-  pending_jema_old_password_.clear();
+  const std::string new_password = pending_wings8_new_password_;
+  const std::string old_password = pending_wings8_old_password_;
+  const bool authenticated_by_pin = pending_wings8_authenticated_by_pin_;
+  pending_wings8_new_password_.clear();
+  pending_wings8_old_password_.clear();
 
   if (!ok || new_password.empty() || old_password.empty()) {
-    LOG(WARNING) << "[JEMAOS] Online verification refused for "
+    LOG(WARNING) << "[WINGS8OS] Online verification refused for "
                  << account_id.GetUserEmail()
                  << "; normal local login (wrong password will be reported)";
     ContinueLoginWithPassword(account_id, new_password, authenticated_by_pin,
@@ -897,7 +897,7 @@ void LoginDisplayHostMojo::OnJemaPasswordValidated(const AccountId& account_id,
   // The typed password is the new, SaaS-validated one: re-seal the vault from
   // the old to the new password (native ChromeOS mechanism), then log in.
   auto reseal_context = std::make_unique<UserContext>(*user);
-  reseal_context->SetAuthFlow(UserContext::AUTH_FLOW_JEMA_ONLINE);
+  reseal_context->SetAuthFlow(UserContext::AUTH_FLOW_WINGS8_ONLINE);
   reseal_context->SetIsUsingOAuth(false);
   reseal_context->SetKey(
       Key(Key::KEY_TYPE_PASSWORD_PLAIN, "" /*salt*/, new_password));
@@ -908,7 +908,7 @@ void LoginDisplayHostMojo::OnJemaPasswordValidated(const AccountId& account_id,
                                                 ->GetCurrentInputMethod()
                                                 .id());
 
-  LOG(WARNING) << "[JEMAOS] Re-sealing vault (old -> new) for "
+  LOG(WARNING) << "[WINGS8OS] Re-sealing vault (old -> new) for "
                << account_id.GetUserEmail();
   pending_password_update_flow_ = std::make_unique<PasswordUpdateFlow>();
   pending_password_update_flow_->Start(
@@ -918,7 +918,7 @@ void LoginDisplayHostMojo::OnJemaPasswordValidated(const AccountId& account_id,
              const AccountId account_id, std::string new_password,
              bool authenticated_by_pin,
              std::unique_ptr<UserContext> user_context) {
-            LOG(WARNING) << "[JEMAOS] Vault re-seal succeeded for "
+            LOG(WARNING) << "[WINGS8OS] Vault re-seal succeeded for "
                          << account_id.GetUserEmail();
             if (self) {
               self->ContinueLoginWithPassword(account_id, new_password,
@@ -934,7 +934,7 @@ void LoginDisplayHostMojo::OnJemaPasswordValidated(const AccountId& account_id,
              bool authenticated_by_pin,
              std::unique_ptr<UserContext> user_context,
              AuthenticationError error) {
-            LOG(WARNING) << "[JEMAOS] Vault re-seal failed for "
+            LOG(WARNING) << "[WINGS8OS] Vault re-seal failed for "
                          << account_id.GetUserEmail()
                          << "; falling back to local login";
             if (self) {

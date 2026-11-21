@@ -72,7 +72,7 @@
 #include "ui/gfx/image/image_util.h"
 #include "url/gurl.h"
 #include "url/mojom/url.mojom-forward.h"
-#include "jemaos/switches/misc/misc_constants.h"
+#include "wings8os/switches/misc/misc_constants.h"
 
 namespace ash::personalization_app {
 
@@ -145,7 +145,7 @@ void PersonalizationAppWallpaperProviderImpl::GetWallpaperAsJpegBytes(
 }
 
 bool PersonalizationAppWallpaperProviderImpl::IsEligibleForGooglePhotos() {
-  return GetUser(profile_)->HasGaiaAccount() && !profile_->IsJemaProfile();
+  return GetUser(profile_)->HasGaiaAccount() && !profile_->IsWings8Profile();
 }
 
 void PersonalizationAppWallpaperProviderImpl::MakeTransparent() {
@@ -293,11 +293,11 @@ void PersonalizationAppWallpaperProviderImpl::GetLocalImageThumbnail(
     return;
   }
 
-  const base::FilePath jema_path(jemaos::constants::kJemaOSWallpapersBasePath);
-  if (jema_path.IsParent(path)) {
+  const base::FilePath wings8_path(wings8os::constants::kWings8OSWallpapersBasePath);
+  if (wings8_path.IsParent(path)) {
     image_util::DecodeImageFile(
         base::BindOnce(
-            &PersonalizationAppWallpaperProviderImpl::OnGetJemaImage,
+            &PersonalizationAppWallpaperProviderImpl::OnGetWings8Image,
             weak_ptr_factory_.GetWeakPtr(), std::move(callback)),
         path);
     return;
@@ -941,10 +941,10 @@ void PersonalizationAppWallpaperProviderImpl::OnGetDefaultImage(
   std::move(callback).Run(GetBitmapJpegDataUrl(*resized.bitmap()));
 }
 
-void PersonalizationAppWallpaperProviderImpl::OnGetJemaImage(
+void PersonalizationAppWallpaperProviderImpl::OnGetWings8Image(
     GetDefaultImageThumbnailCallback callback,
     const gfx::ImageSkia& image) {
-  // same process with OnGetDefaultImage. be careful these jema images are not
+  // same process with OnGetDefaultImage. be careful these wings8 images are not
   // default image
   OnGetDefaultImage(std::move(callback), image);
 }

@@ -54,7 +54,7 @@
 #include "ui/base/resource/resource_bundle.h"
 #include "ui/message_center/public/cpp/notification.h"
 #include "ui/message_center/public/cpp/notification_delegate.h"
-#include "jemaos/switches/account/toggle/account_type_toggle.h"
+#include "wings8os/switches/account/toggle/account_type_toggle.h"
 
 namespace ash {
 namespace {
@@ -196,9 +196,9 @@ SigninErrorNotifier::SigninErrorNotifier(SigninErrorController* controller,
   error_controller_->AddObserver(this);
   const AccountId account_id =
       multi_user_util::GetAccountIdFromProfile(profile_);
-  // ---***JEMAOS BEGIN***---
-  jemaos::switches::ToggleJemaAccountFlagByAccountId(account_id);
-  // ---***JEMAOS END***---
+  // ---***WINGS8OS BEGIN***---
+  wings8os::switches::ToggleWings8AccountFlagByAccountId(account_id);
+  // ---***WINGS8OS END***---
   if (TokenHandleUtil::HasToken(account_id) &&
       !TokenHandleUtil::IsRecentlyChecked(account_id)) {
     token_handle_util_->IsReauthRequired(
@@ -265,15 +265,15 @@ void SigninErrorNotifier::OnErrorChanged() {
   const AccountId account_id =
       multi_user_util::GetAccountIdFromProfile(profile_);
   
-  // Skip reauth reason setting for Jema/Flint accounts - they don't have Google OAuth
+  // Skip reauth reason setting for Wings8/Flint accounts - they don't have Google OAuth
   const std::string& gaia_id = account_id.GetGaiaId();
-  const bool is_jema_or_flint_account = 
-      gaia_id.find("jema_id_") == 0 || gaia_id.find("ft_id_") == 0;
+  const bool is_wings8_or_flint_account = 
+      gaia_id.find("wings8_id_") == 0 || gaia_id.find("ft_id_") == 0;
   
-  if (is_jema_or_flint_account) {
-    LOG(WARNING) << "[JEMAOS] Skipping kSyncFailed reauth reason for Jema/Flint account: "
+  if (is_wings8_or_flint_account) {
+    LOG(WARNING) << "[WINGS8OS] Skipping kSyncFailed reauth reason for Wings8/Flint account: "
                  << account_id.GetUserEmail() << ", gaia_id: " << gaia_id;
-    // Don't set reauth reason or show error notification for Jema/Flint accounts
+    // Don't set reauth reason or show error notification for Wings8/Flint accounts
     return;
   }
   

@@ -472,19 +472,19 @@ export class FileTasks {
   }
 
   async mightShowApkAlert(fallback: () => void) {
-    const jemaosArcSettingAppId = 'iakadpgajjigiaojnbdmodlngmbkfhag';
+    const wings8osArcSettingAppId = 'iakadpgajjigiaojnbdmodlngmbkfhag';
     let appAvailable = false;
     try {
-      const app: chrome.management.ExtensionInfo = await chrome.management.get(jemaosArcSettingAppId);
+      const app: chrome.management.ExtensionInfo = await chrome.management.get(wings8osArcSettingAppId);
       if (!chrome.runtime.lastError && app.enabled) {
         appAvailable = true;
       }
     } catch (err: any) {
       console.error(err);
     }
-    console.log('jemaos arc app available:', appAvailable);
+    console.log('wings8os arc app available:', appAvailable);
     if (appAvailable) {
-      this.showArcAlert(jemaosArcSettingAppId);
+      this.showArcAlert(wings8osArcSettingAppId);
       return;
     }
     if (fallback) {

@@ -36,11 +36,11 @@ void CollectorBase::Collect(bool is_event_driven) {
       base::BindPostTaskToCurrentDefault(std::move(on_collected_cb)));
 }
 
-void CollectorBase::JemaHeartBeat() {
+void CollectorBase::Wings8HeartBeat() {
   CHECK(base::SequencedTaskRunner::HasCurrentDefault());
   CheckOnSequence();
 
-  sampler_->MaybeSendHeartBeatToJema();
+  sampler_->MaybeSendHeartBeatToWings8();
 }
 
 void CollectorBase::CheckOnSequence() const {

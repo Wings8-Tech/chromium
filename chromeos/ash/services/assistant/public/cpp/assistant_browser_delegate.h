@@ -85,7 +85,7 @@ class COMPONENT_EXPORT(ASSISTANT_SERVICE_PUBLIC) AssistantBrowserDelegate {
   // to OS Settings url which may cause deviation from this behavior.
   virtual void OpenUrl(GURL url) = 0;
 
-  virtual bool HandleQueryByJemaAssistant(const std::string& query) { return true; }
+  virtual bool HandleQueryByWings8Assistant(const std::string& query) { return true; }
 
 #if BUILDFLAG(ENABLE_CROS_LIBASSISTANT)
   // Requests a connection to Libassistant service interface via the browser.

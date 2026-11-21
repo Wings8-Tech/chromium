@@ -58,8 +58,8 @@
 #include "ui/base/l10n/l10n_util.h"
 #include "ui/base/resource/resource_bundle.h"
 #include "ui/base/webui/web_ui_util.h"
-#include "jemaos/switches/services/services_constants.h"
-#include "jemaos/switches/urls/urls_constants.h"
+#include "wings8os/switches/services/services_constants.h"
+#include "wings8os/switches/urls/urls_constants.h"
 
 #if BUILDFLAG(IS_CHROMEOS_ASH)
 #include "chrome/browser/ash/crosapi/browser_util.h"
@@ -249,7 +249,7 @@ content::WebUIDataSource* CreateAndAddExtensionsSource(Profile* profile,
       {"itemSourceSideloaded", IDS_EXTENSIONS_ITEM_SOURCE_SIDELOADED},
       {"itemSourceUnpacked", IDS_EXTENSIONS_ITEM_SOURCE_UNPACKED},
       {"itemSourceWebstore", IDS_EXTENSIONS_ITEM_SOURCE_WEBSTORE},
-      {"itemSourceJemaOSStore", IDS_EXTENSIONS_ITEM_SOURCE_JEMAOS_STORE},
+      {"itemSourceWings8OSStore", IDS_EXTENSIONS_ITEM_SOURCE_WINGS8OS_STORE},
       {"itemVersion", IDS_EXTENSIONS_ITEM_VERSION},
       {"itemReloaded", IDS_EXTENSIONS_ITEM_RELOADED},
       {"itemReloading", IDS_EXTENSIONS_ITEM_RELOADING},
@@ -416,8 +416,8 @@ content::WebUIDataSource* CreateAndAddExtensionsSource(Profile* profile,
 #endif
   };
 
-  source->AddString("jemaosStoreBaseUrl",
-      jemaos::constants::kJemaOSStoreBaseUrl);
+  source->AddString("wings8osStoreBaseUrl",
+      wings8os::constants::kWings8OSStoreBaseUrl);
 
   source->AddLocalizedStrings(kLocalizedStrings);
 
@@ -448,20 +448,20 @@ content::WebUIDataSource* CreateAndAddExtensionsSource(Profile* profile,
       base::ASCIIToUTF16(
           google_util::AppendGoogleLocaleParam(
               extension_urls::AppendUtmSource(
-                  GURL(extension_urls::GetJemaWebstoreExtensionsCategoryURL()),
+                  GURL(extension_urls::GetWings8WebstoreExtensionsCategoryURL()),
                   extension_urls::kExtensionsSidebarUtmSource),
               g_browser_process->GetApplicationLocale())
               .spec()));
   source->AddString(
       "hostPermissionsLearnMoreLink",
-      jemaos::constants::kRuntimeHostPermissionsHelpURL);
+      wings8os::constants::kRuntimeHostPermissionsHelpURL);
   source->AddBoolean(kInDevModeKey, in_dev_mode);
   source->AddBoolean(kShowActivityLogKey,
                      base::CommandLine::ForCurrentProcess()->HasSwitch(
                          ::switches::kEnableExtensionActivityLogging));
-  // ---***JEMAOS BEGIN***---
-  source->AddBoolean("jemaosAccountEnabled", profile && profile->IsJemaProfile());
-  // ---***JEMAOS END***---
+  // ---***WINGS8OS BEGIN***---
+  source->AddBoolean("wings8osAccountEnabled", profile && profile->IsWings8Profile());
+  // ---***WINGS8OS END***---
 
   source->AddString(kLoadTimeClassesKey, GetLoadTimeClasses(in_dev_mode));
 

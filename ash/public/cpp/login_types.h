@@ -99,7 +99,7 @@ enum class OobeDialogState {
   // ENROLL TRIAGE step for user creation screen.
   ENROLL_TRIAGE = 24,
 
-  JEMA_LOCAL_SIGNIN = 25,
+  WINGS8_LOCAL_SIGNIN = 25,
 };
 
 // Modes of the managed device, which is used to update the visibility of

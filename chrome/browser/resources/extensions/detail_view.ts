@@ -39,7 +39,7 @@ import type {Mv2DeprecationDelegate} from './mv2_deprecation_delegate.js';
 import {getMv2ExperimentStage, Mv2ExperimentStage} from './mv2_deprecation_util.js';
 import {navigation, Page} from './navigation_helper.js';
 import type {ExtensionsToggleRowElement} from './toggle_row.js';
-import {isJemaOSItem} from './item_util.js';
+import {isWings8OSItem} from './item_util.js';
 
 class DummyDetailViewDelegate extends DummyItemDelegate {
   dismissMv2DeprecationNotice() {}
@@ -414,7 +414,7 @@ export class ExtensionsDetailViewElement extends
   }
 
   protected computeSourceString_(): string {
-    if (isJemaOSItem(this.data)) {
+    if (isWings8OSItem(this.data)) {
       this.data.locationText = '';
     }
     return this.data.locationText ||

@@ -1,0 +1,16 @@
+// Copyright 2025 Wings8 Technology. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+#ifndef WINGS8OS_CHROME_BROWSER_WEB_APPLICATIONS_PREINSTALLED_WEB_APPS_WINGS8PDF_H_
+#define WINGS8OS_CHROME_BROWSER_WEB_APPLICATIONS_PREINSTALLED_WEB_APPS_WINGS8PDF_H_
+
+#include "chrome/browser/web_applications/external_install_options.h"
+
+namespace web_app {
+
+ExternalInstallOptions GetConfigForWings8PDF();
+
+}  // namespace web_app
+
+#endif  // WINGS8OS_CHROME_BROWSER_WEB_APPLICATIONS_PREINSTALLED_WEB_APPS_WINGS8PDF_H_

@@ -69,7 +69,7 @@ class MetricReportingManagerDelegateBase {
       base::TimeDelta default_rate,
       int rate_unit_to_ms,
       base::TimeDelta init_delay = base::TimeDelta(),
-      bool should_send_to_jema = false);
+      bool should_send_to_wings8 = false);
 
   // Creates a new collector for one shot metric collection. The rate is
   // controlled by the specified setting and we fall back to the defaults

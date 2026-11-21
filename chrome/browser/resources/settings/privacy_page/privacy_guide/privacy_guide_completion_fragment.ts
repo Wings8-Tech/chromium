@@ -127,8 +127,8 @@ export class PrivacyGuideCompletionFragmentElement extends
 
   /** Updates the completion card waa link depending on the signin state. */
   private updateWaaLink_(isSignedIn: boolean) {
-    const isJemaProfile = loadTimeData.getBoolean('isJemaProfile');
-    this.shouldShowWaa_ = isSignedIn && !isJemaProfile;
+    const isWings8Profile = loadTimeData.getBoolean('isWings8Profile');
+    this.shouldShowWaa_ = isSignedIn && !isWings8Profile;
   }
 
   private onBackButtonClick_(e: Event) {

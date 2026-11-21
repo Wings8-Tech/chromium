@@ -38,11 +38,11 @@ struct DefaultApiKeys {
   const char* google_api_key_boca;
 #endif
 
-  const char* jemaos_api_key;
+  const char* wings8os_api_key;
 
-#if BUILDFLAG(IS_OPENJEMA)
-  const char* jemaos_client_id_main;
-  const char* jemaos_client_secret_main;
+#if BUILDFLAG(IS_OPENWINGS8)
+  const char* wings8os_client_id_main;
+  const char* wings8os_client_secret_main;
 #endif
 
   const char* google_client_id_main;
@@ -54,9 +54,9 @@ struct DefaultApiKeys {
   const char* google_client_id_remoting_host;
   const char* google_client_secret_remoting_host;
 
-#if BUILDFLAG(IS_OPENJEMA)
-  const char* jemaos_default_client_id;
-  const char* jemaos_default_client_secret;
+#if BUILDFLAG(IS_OPENWINGS8)
+  const char* wings8os_default_client_id;
+  const char* wings8os_default_client_secret;
 #endif
 
   const char* google_default_client_id;

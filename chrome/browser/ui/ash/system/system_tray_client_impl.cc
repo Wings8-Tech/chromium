@@ -83,7 +83,7 @@
 #include "third_party/icu/source/i18n/unicode/timezone.h"
 #include "ui/events/event_constants.h"
 #include "url/gurl.h"
-#include "jemaos/switches/urls/urls_constants.h"
+#include "wings8os/switches/urls/urls_constants.h"
 
 using session_manager::SessionManager;
 using session_manager::SessionState;
@@ -549,7 +549,7 @@ void SystemTrayClientImpl::ShowGestureEducationHelp() {
   ash::LaunchSystemWebAppAsync(profile, ash::SystemWebAppType::HELP, params);
   */
   chrome::ScopedTabbedBrowserDisplayer displayer(profile);
-  ShowSingletonTab(displayer.browser(), GURL(jemaos::constants::kJemaNewGestureHelpURL));
+  ShowSingletonTab(displayer.browser(), GURL(wings8os::constants::kWings8NewGestureHelpURL));
 }
 
 void SystemTrayClientImpl::ShowPaletteHelp() {

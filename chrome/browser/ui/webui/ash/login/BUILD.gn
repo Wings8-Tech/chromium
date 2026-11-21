@@ -77,8 +77,8 @@ static_library("login") {
     "family_link_notice_screen_handler.h",
     "fingerprint_setup_screen_handler.cc",
     "fingerprint_setup_screen_handler.h",
-    "jema_local_signin_screen_handler.cc",
-    "jema_local_signin_screen_handler.h",
+    "wings8_local_signin_screen_handler.cc",
+    "wings8_local_signin_screen_handler.h",
     "data_restore_screen_handler.cc",
     "data_restore_screen_handler.h",
     "gaia_info_screen_handler.cc",
@@ -341,8 +341,8 @@ static_library("login") {
     "//ui/display/manager",
     "//ui/resources:webui_resources_grd",
     "//ui/strings:ui_strings",
-    "//jemaos/switches/account/toggle:account_toggle",
-    "//jemaos/prefs",
+    "//wings8os/switches/account/toggle:account_toggle",
+    "//wings8os/prefs",
   ]
 
   allow_circular_includes_from = [

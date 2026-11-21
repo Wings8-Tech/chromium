@@ -641,9 +641,9 @@ bool ThemeSyncableService::IsCurrentThemeSyncable() const {
                 .GetByID(theme_id)
           : nullptr;
   if (current_extension &&
-      // ---***JEMAOS BEGIN***---
+      // ---***WINGS8OS BEGIN***---
       !extensions::sync_helper::IsSyncable(current_extension, profile_)) {
-      // ---***JEMAOS END***---
+      // ---***WINGS8OS END***---
     DVLOG(1) << "Ignoring non-syncable extension: " << current_extension->id();
     return false;
   }

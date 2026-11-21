@@ -47,7 +47,7 @@ import {Router, routes} from '../router.js';
 import type {AboutPageBrowserProxy, AboutPageUpdateInfo, BrowserChannel, RegulatoryInfo, TpmFirmwareUpdateStatusChangedEvent, UpdateStatusChangedEvent} from './about_page_browser_proxy.js';
 import {AboutPageBrowserProxyImpl, browserChannelToI18nId, UpdateStatus} from './about_page_browser_proxy.js';
 import {PopupLicenseWindowProxy, PopupLicenseWindowProxyImpl, RenewalStatus} from './popup_license_window.js';
-import {JemaOSBoardNameTitleMap, JemaOSBoardNameTitleListWithI18n, JemaOSBoardNameReleaseNameMap} from './jemaos_board_name.js';
+import {Wings8OSBoardNameTitleMap, Wings8OSBoardNameTitleListWithI18n, Wings8OSBoardNameReleaseNameMap} from './wings8os_board_name.js';
 
 import {getTemplate} from './os_about_page.html.js';
 
@@ -69,7 +69,7 @@ export interface OsAboutPageElement {
   };
 }
 
-// jemaos/constants/jemaos_constants.h
+// wings8os/constants/wings8os_constants.h
 const LICENSE_STATE_TYPE = {
   kUnspecified: 0,
   kUnlicensed: 1,
@@ -240,14 +240,14 @@ export class OsAboutPageElement extends OsAboutPageBase {
         value: false,
       },
 
-// <if expr="jemaos_device">
-      jemaosDeviceSerialNumber_: {
+// <if expr="wings8os_device">
+      wings8osDeviceSerialNumber_: {
         type: String,
         value: () => {
-          if (!loadTimeData.valueExists('jemaosDeviceSerialNumber')) {
+          if (!loadTimeData.valueExists('wings8osDeviceSerialNumber')) {
             return '';
           }
-          return loadTimeData.getString('jemaosDeviceSerialNumber');
+          return loadTimeData.getString('wings8osDeviceSerialNumber');
         },
       },
 // </if>
@@ -353,12 +353,12 @@ export class OsAboutPageElement extends OsAboutPageBase {
         type: Boolean,
         value: false,
       },
-      // ---***JEMAOS BEGIN***---
+      // ---***WINGS8OS BEGIN***---
       isOwner_: {
         type: Boolean,
         value: true,
       },
-      jemaOTAToggleState_: {
+      wings8OTAToggleState_: {
         type: Boolean,
         value: true,
       },
@@ -371,13 +371,13 @@ export class OsAboutPageElement extends OsAboutPageBase {
       licenseStateType_: {
         type: Number,
         value() {
-          if (!loadTimeData.valueExists('aboutJemaOSLicenseState')) {
+          if (!loadTimeData.valueExists('aboutWings8OSLicenseState')) {
             return -1;
           }
-          return loadTimeData.getInteger('aboutJemaOSLicenseState');
+          return loadTimeData.getInteger('aboutWings8OSLicenseState');
         }
       },
-      // ---***JEMAOS END***---
+      // ---***WINGS8OS END***---
     };
   }
 
@@ -433,7 +433,7 @@ export class OsAboutPageElement extends OsAboutPageBase {
   private aboutBrowserProxy_: AboutPageBrowserProxy;
 
   private isOwner_: boolean;
-  private jemaOTAToggleState_: boolean;
+  private wings8OTAToggleState_: boolean;
 
   private renewalStatus_: string;
   private popupLicenseWindow_: PopupLicenseWindowProxy;
@@ -502,7 +502,7 @@ export class OsAboutPageElement extends OsAboutPageBase {
 
     this.popupLicenseWindow_.init();
 
-    this.jemaOTAToggleInit_();
+    this.wings8OTAToggleInit_();
   }
 
   override ready(): void {
@@ -668,9 +668,9 @@ export class OsAboutPageElement extends OsAboutPageBase {
       case RenewalStatus.CHECKING:
         return this.i18nAdvanced('aboutUpgradeCheckStarted');
       case RenewalStatus.SINGLE_UPGRADE:
-        return this.i18nAdvanced('aboutJemaOSOtaDisallowedRequiresOneTimePayment');
+        return this.i18nAdvanced('aboutWings8OSOtaDisallowedRequiresOneTimePayment');
       case RenewalStatus.LICENSE_EXPIRED:
-        return this.i18nAdvanced('aboutJemaOSOtaDisallowedByLicenseValidation');
+        return this.i18nAdvanced('aboutWings8OSOtaDisallowedByLicenseValidation');
       default:
         return this.i18nAdvanced('aboutUpgradeTryAgain');
     }
@@ -1088,27 +1088,27 @@ export class OsAboutPageElement extends OsAboutPageBase {
     extendedUpdatesObserver.observe(this.$.extendedUpdatesButton);
   }
 
-  getJemaOSVersion_(licenseStateType: number, hasEndOfLife: boolean): TrustedHTML {
+  getWings8OSVersion_(licenseStateType: number, hasEndOfLife: boolean): TrustedHTML {
     const licenseStateDesc = this.getLicenseDescription_(licenseStateType);
     if (licenseStateDesc && !hasEndOfLife) {
-      return this.i18nAdvanced('aboutJemaOSVersion', {
+      return this.i18nAdvanced('aboutWings8OSVersion', {
         substitutions: [
           this.i18n('aboutOsProductTitle'),
-          this.getTitleForJemaOSDeviceName_(),
-          this.i18n('aboutJemaOSVersionNumber'),
+          this.getTitleForWings8OSDeviceName_(),
+          this.i18n('aboutWings8OSVersionNumber'),
           licenseStateDesc,
-          this.i18n('aboutJemaOSPlatformVersion'),
-          this.i18n('aboutJemaOSChromiumVersion'),
+          this.i18n('aboutWings8OSPlatformVersion'),
+          this.i18n('aboutWings8OSChromiumVersion'),
         ]
       });
     }
-    return this.i18nAdvanced('aboutJemaOSVersionWithoutLicenseState', {
+    return this.i18nAdvanced('aboutWings8OSVersionWithoutLicenseState', {
       substitutions: [
         this.i18n('aboutOsProductTitle'),
-        this.getTitleForJemaOSDeviceName_(),
-        this.i18n('aboutJemaOSVersionNumber'),
-        this.i18n('aboutJemaOSPlatformVersion'),
-        this.i18n('aboutJemaOSChromiumVersion'),
+        this.getTitleForWings8OSDeviceName_(),
+        this.i18n('aboutWings8OSVersionNumber'),
+        this.i18n('aboutWings8OSPlatformVersion'),
+        this.i18n('aboutWings8OSChromiumVersion'),
       ]
     });
   }
@@ -1126,7 +1126,7 @@ export class OsAboutPageElement extends OsAboutPageBase {
   getI18nForTitle_(name: string): string {
     let result = '';
     if (!name) return '';
-    let obj = JemaOSBoardNameTitleListWithI18n.find(item => item.board === name);
+    let obj = Wings8OSBoardNameTitleListWithI18n.find(item => item.board === name);
     if (obj) {
       try {
         result = this.i18n(obj.key);
@@ -1137,14 +1137,14 @@ export class OsAboutPageElement extends OsAboutPageBase {
       }
     } else {
       // same with previous impl
-      return JemaOSBoardNameTitleMap[name] || '';
+      return Wings8OSBoardNameTitleMap[name] || '';
     }
   }
 
-  getTitleForJemaOSDeviceName_() {
-    const jemaosBoardName = loadTimeData.getString('aboutJemaOSBoardName') || '';
-    let name = this.tryRemoveSuffix_(jemaosBoardName);
-    let prefix = JemaOSBoardNameReleaseNameMap[name] || '';
+  getTitleForWings8OSDeviceName_() {
+    const wings8osBoardName = loadTimeData.getString('aboutWings8OSBoardName') || '';
+    let name = this.tryRemoveSuffix_(wings8osBoardName);
+    let prefix = Wings8OSBoardNameReleaseNameMap[name] || '';
     let title = this.getI18nForTitle_(name);
     if (!prefix && !title) {
       return name;
@@ -1162,49 +1162,49 @@ export class OsAboutPageElement extends OsAboutPageBase {
     return `${prefix} (${title})`;
    }
 
-  // <if expr="not use_jemaos_license">
+  // <if expr="not use_wings8os_license">
   getLicenseDescription_(_licenseStateType: number) {
     return '';
   }
   // </if>
-  // <if expr="use_jemaos_license">
+  // <if expr="use_wings8os_license">
   getLicenseDescription_(licenseStateType: number) {
     switch (licenseStateType) {
       case LICENSE_STATE_TYPE.kUnspecified:
         return '';
       case LICENSE_STATE_TYPE.kUnlicensed:
-        return this.i18n('aboutJemaOSLicenseStateUnlicensed');
+        return this.i18n('aboutWings8OSLicenseStateUnlicensed');
       case LICENSE_STATE_TYPE.kLicenseForYouTrial:
-        return this.i18n('aboutJemaOSLicenseStateForYouTrial');
+        return this.i18n('aboutWings8OSLicenseStateForYouTrial');
       case LICENSE_STATE_TYPE.kLicenseForYouValid:
-        return this.i18n('aboutJemaOSLicenseStateForYouValid');
+        return this.i18n('aboutWings8OSLicenseStateForYouValid');
       case LICENSE_STATE_TYPE.kLicenseForYouExpired:
-        return this.i18n('aboutJemaOSLicenseStateForYouExpired');
+        return this.i18n('aboutWings8OSLicenseStateForYouExpired');
       case LICENSE_STATE_TYPE.kLicenseForEnterpriseTrial:
-        return this.i18n('aboutJemaOSLicenseStateEnterpriseTrial');
+        return this.i18n('aboutWings8OSLicenseStateEnterpriseTrial');
       case LICENSE_STATE_TYPE.kLicenseForEnterpriseValid:
-        return this.i18n('aboutJemaOSLicenseStateEnterpriseValid');
+        return this.i18n('aboutWings8OSLicenseStateEnterpriseValid');
       case LICENSE_STATE_TYPE.kLicenseForEnterpriseExpired:
-        return this.i18n('aboutJemaOSLicenseStateEnterpriseExpired');
+        return this.i18n('aboutWings8OSLicenseStateEnterpriseExpired');
       default:
         return ''
     }
   }
   // </if>
 
-  jemaOTAToggleInit_() {
-    this.aboutBrowserProxy_.getEnabledJemaOTA().then(enabled => {
-      console.log('getEnabledJemaOTA', enabled);
-      this.jemaOTAToggleState_ = enabled;
+  wings8OTAToggleInit_() {
+    this.aboutBrowserProxy_.getEnabledWings8OTA().then(enabled => {
+      console.log('getEnabledWings8OTA', enabled);
+      this.wings8OTAToggleState_ = enabled;
     });
     this.addWebUiListener(
-        'jema-ota-enabled-changed',
-        this.onJemaOSOTASwitchChanged_.bind(this));
+        'wings8-ota-enabled-changed',
+        this.onWings8OSOTASwitchChanged_.bind(this));
   }
 
-  onJemaOSOTASwitchChanged_(enabled: boolean) {
-    console.log('onJemaOSOTASwitchChanged_', enabled);
-    this.jemaOTAToggleState_ = enabled;
+  onWings8OSOTASwitchChanged_(enabled: boolean) {
+    console.log('onWings8OSOTASwitchChanged_', enabled);
+    this.wings8OTAToggleState_ = enabled;
   }
 
   /*
@@ -1216,22 +1216,22 @@ export class OsAboutPageElement extends OsAboutPageBase {
   }
   */
 
-  onEnableJemaOTAChange_() {
-    this.jemaOTAToggleState_ = !this.jemaOTAToggleState_;
-    console.log('onEnableJemaOTAChange_', this.jemaOTAToggleState_);
-    this.aboutBrowserProxy_.enableJemaOTA(this.jemaOTAToggleState_);
+  onEnableWings8OTAChange_() {
+    this.wings8OTAToggleState_ = !this.wings8OTAToggleState_;
+    console.log('onEnableWings8OTAChange_', this.wings8OTAToggleState_);
+    this.aboutBrowserProxy_.enableWings8OTA(this.wings8OTAToggleState_);
   }
 
-  jemaosOTAStateMessage_() {
-    if (this.jemaOTAToggleState_) {
-      return this.i18nAdvanced('aboutJemaOsUpdateEnabled');
+  wings8osOTAStateMessage_() {
+    if (this.wings8OTAToggleState_) {
+      return this.i18nAdvanced('aboutWings8OsUpdateEnabled');
     } else {
       // return isOwner ? 'OTA disabled' : "Device owner disabled OTA";
-      return this.i18nAdvanced('aboutJemaOsUpdateDisabled');
+      return this.i18nAdvanced('aboutWings8OsUpdateDisabled');
     }
   }
 
-  canToggleJemaOTA_() {
+  canToggleWings8OTA_() {
     return this.isOwner_ && !(
       this.currentUpdateStatusEvent_.status === UpdateStatus.CHECKING ||
       this.currentUpdateStatusEvent_.status === UpdateStatus.UPDATING ||
@@ -1240,16 +1240,16 @@ export class OsAboutPageElement extends OsAboutPageBase {
     ) && this.currentUpdateStatusEvent_.progress === 0;
   }
 
-// <if expr="jemaos_device">
-  getJemaDeviceProductName_() {
-    const jemaosBoardName = loadTimeData.getString('aboutJemaOSBoardName') || '';
-    let name = this.tryRemoveSuffix_(jemaosBoardName);
-    let title = JemaOSBoardNameTitleMap[name] || '';
+// <if expr="wings8os_device">
+  getWings8DeviceProductName_() {
+    const wings8osBoardName = loadTimeData.getString('aboutWings8OSBoardName') || '';
+    let name = this.tryRemoveSuffix_(wings8osBoardName);
+    let title = Wings8OSBoardNameTitleMap[name] || '';
     return title;
   }
-  getJemaosDeviceWarrantyUrl_(jemaosDeviceSerialNumber: string) {
-    const url = loadTimeData.getString('jemaosProductWarrentyUrl');
-    return `${url}/${jemaosDeviceSerialNumber}`;
+  getWings8osDeviceWarrantyUrl_(wings8osDeviceSerialNumber: string) {
+    const url = loadTimeData.getString('wings8osProductWarrentyUrl');
+    return `${url}/${wings8osDeviceSerialNumber}`;
   }
 // </if>
 }

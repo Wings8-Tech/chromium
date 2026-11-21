@@ -26,7 +26,7 @@
 #include "components/sync/engine/syncer_error.h"
 #include "components/sync/protocol/sync_enums.pb.h"
 #include "net/http/http_status_code.h"
-#include "jemaos/switches/account/account_switches.h"
+#include "wings8os/switches/account/account_switches.h"
 
 namespace syncer {
 
@@ -119,7 +119,7 @@ bool Syncer::NormalSyncShare(DataTypeSet request_types,
   base::AutoReset<bool> is_syncing(&is_syncing_, true);
   HandleCycleBegin(cycle);
   if (nudge_tracker->IsGetUpdatesRequired(request_types) ||
-      jemaos::switches::IsJemaAccountEnabled()) {
+      wings8os::switches::IsWings8AccountEnabled()) {
     VLOG(1) << "Downloading types " << DataTypeSetToDebugString(request_types);
     if (!DownloadAndApplyUpdates(&request_types, cycle,
                                  NormalGetUpdatesDelegate(*nudge_tracker))) {

@@ -64,7 +64,7 @@ bool ShouldPrepareForRecovery(const AccountId& account_id) {
 }
 
 bool ShouldUseReauthEndpoint(const AccountId& account_id) {
-  if (account_id.GetAccountType() == AccountType::JEMA_ACCOUNT) {
+  if (account_id.GetAccountType() == AccountType::WINGS8_ACCOUNT) {
     return false;
   }
   // Use reauth endpoint when there is an existing user going through Gaia

@@ -243,7 +243,7 @@ export class SettingsStylusElement extends SettingsStylusElementBase {
   }
 
   private showStylusFindMoreApps_(arcEnabled: boolean) {
-    return arcEnabled && !loadTimeData.getBoolean('isJemaProfile');
+    return arcEnabled && !loadTimeData.getBoolean('isWings8Profile');
   }
 }
 

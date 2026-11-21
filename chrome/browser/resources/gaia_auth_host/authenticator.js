@@ -101,7 +101,7 @@ export let AuthCompletedCredentials;
  *   flow: string,
  *   ignoreCrOSIdpSetting: boolean,
  *   enableGaiaActionButtons: boolean,
- *   enableJemaAccount: boolean,
+ *   enableWings8Account: boolean,
  *   forceDarkMode: boolean,
  *   enterpriseEnrollmentDomain: string,
  *   samlAclUrl: string,
@@ -119,7 +119,7 @@ export let AuthCompletedCredentials;
 export let AuthParams;
 
 const SIGN_IN_HEADER = 'google-accounts-signin';
-const JEMAOS_SIGN_IN_HEADER = 'jemaos-accounts-signin';
+const WINGS8OS_SIGN_IN_HEADER = 'wings8os-accounts-signin';
 const EMBEDDED_FORM_HEADER = 'google-accounts-embedded';
 const SERVICE_ID = 'chromeoslogin';
 const BLANK_PAGE_URL = 'about:blank';
@@ -300,34 +300,34 @@ const messageHandlers = {
       { detail: { accountIdentifier: msg.accountIdentifier } }));
   },
   'userInfo'(msg) {
-    console.log('[JEMAOS-DEBUG] userInfo message received:', JSON.stringify(msg));
+    console.log('[WINGS8OS-DEBUG] userInfo message received:', JSON.stringify(msg));
     this.services_ = msg.services;
     this.servicesProvided_ = true;
     this.setEmail_(msg.email);
     this.gaiaId_ = msg.gaiaId || 'external_' + Date.now();
     this.sessionIndex_ = msg.sessionIndex || 'external_session';
-    this.services_ = msg.services || ['jemaos'];
+    this.services_ = msg.services || ['wings8os'];
 
-    // JEMAOS: Capture access token from userInfo for cookie injection.
-    this.jemaAccessToken_ = msg.accessToken || '';
-    // JEMAOS: Capture refresh token if the auth backend provides one, so the
+    // WINGS8OS: Capture access token from userInfo for cookie injection.
+    this.wings8AccessToken_ = msg.accessToken || '';
+    // WINGS8OS: Capture refresh token if the auth backend provides one, so the
     // access token can be renewed without forcing a new login.
-    this.jemaRefreshToken_ = msg.refreshToken || msg.refresh_token || '';
+    this.wings8RefreshToken_ = msg.refreshToken || msg.refresh_token || '';
 
-    console.log('[JEMAOS-DEBUG] userInfo - email:', msg.email, 'gaiaId:', msg.gaiaId, 'services:', msg.services);
-    console.log('[JEMAOS-DEBUG] userInfo - has passwordBase64:', !!msg.passwordBase64, 'has password:', !!msg.password);
+    console.log('[WINGS8OS-DEBUG] userInfo - email:', msg.email, 'gaiaId:', msg.gaiaId, 'services:', msg.services);
+    console.log('[WINGS8OS-DEBUG] userInfo - has passwordBase64:', !!msg.passwordBase64, 'has password:', !!msg.password);
 
     // Accept password from external auth payload if provided
     if (msg.passwordBase64) {
       this.password_ = msg.passwordBase64;
       this.passwordIsBase64_ = true;
-      console.log('[JEMAOS-DEBUG] userInfo - Set password from passwordBase64, length:', this.password_.length);
+      console.log('[WINGS8OS-DEBUG] userInfo - Set password from passwordBase64, length:', this.password_.length);
     } else if (msg.password) {
       this.password_ = msg.password;
       this.passwordIsBase64_ = false;
-      console.log('[JEMAOS-DEBUG] userInfo - Set password from password, length:', this.password_.length);
+      console.log('[WINGS8OS-DEBUG] userInfo - Set password from password, length:', this.password_.length);
     } else {
-      console.warn('[JEMAOS-WARNING] userInfo - NO PASSWORD PROVIDED in message!');
+      console.warn('[WINGS8OS-WARNING] userInfo - NO PASSWORD PROVIDED in message!');
     }
     if (!this.authCompletedFired_) {
       const metric = this.authFlow === AuthFlow.SAML ?
@@ -449,10 +449,10 @@ export class Authenticator extends EventTarget {
     /** @private {boolean}  Whether media access was requested. */
     this.videoEnabled_ = false;
 
-    // <if expr="openjema or not use_jemaos_com">
+    // <if expr="openwings8 or not use_wings8os_com">
     this.requireSelectAccountTypeAfterSignin_ = false;
     // </if>
-    // <if expr="not openjema and use_jemaos_com">
+    // <if expr="not openwings8 and use_wings8os_com">
     this.requireSelectAccountTypeAfterSignin_ = true;
     // </if>
 
@@ -488,7 +488,7 @@ export class Authenticator extends EventTarget {
     assert(this.webview_);
     this.selectedAccountType_ = null;
     this.enableGaiaActionButtons_ = false;
-    this.enableJemaAccount_ = true;
+    this.enableWings8Account_ = true;
     this.isExistedUser_ = false;
     this.deviceEnterpriseManaged_ = false;
     this.webviewEventManager_ = new WebviewEventManager();
@@ -793,7 +793,7 @@ export class Authenticator extends EventTarget {
     this.dontResizeNonEmbeddedPages = data.dontResizeNonEmbeddedPages;
     this.enableGaiaActionButtons_ = data.enableGaiaActionButtons;
 
-    this.enableJemaAccount_ = data.enableJemaAccount;
+    this.enableWings8Account_ = data.enableWings8Account;
     this.isExistedUser_ = data.email && data.readOnlyEmail;
     this.deviceEnterpriseManaged_ = data.enterpriseDomainManager || data.enterpriseEnrollmentDomain;
 
@@ -969,7 +969,7 @@ export class Authenticator extends EventTarget {
     if (data.autoReloadAttempts) {
       url = appendParam(url, 'auto_reload_attempts', data.autoReloadAttempts);
     }
-    if (!this.shouldWaitForJemaAccountTypeSelection_()) {
+    if (!this.shouldWaitForWings8AccountTypeSelection_()) {
       url = appendParam(url, 'skip_type_selection', '1');
     }
 
@@ -1152,17 +1152,17 @@ export class Authenticator extends EventTarget {
   handleExternalAuth_(e) {
     console.log('[DEBUG] Handling external auth:', e.data);
 
-    //---***JEMAOS BEGIN***---
-    // The Jema login page posts auth messages in several shapes:
+    //---***WINGS8OS BEGIN***---
+    // The Wings8 login page posts auth messages in several shapes:
     //   {type:"gaia_saml_api", call:{method:...}}   (SAML bridge)
     //   {method:...}                                 (direct postMessage)
     //   {payload:{call:{method:...}}}                (legacy wrapper)
-    // Only the legacy wrapper was extracted, so every Jema message was
+    // Only the legacy wrapper was extracted, so every Wings8 message was
     // silently dropped and the 'userInfo' handler (the only place capturing
     // the access token) was dead code: no token ever reached the device.
     const msg =
         e.data?.payload?.call || e.data?.call || e.data || {};
-    //---***JEMAOS END***---
+    //---***WINGS8OS END***---
     if (msg.method && msg.method in messageHandlers) {
       messageHandlers[msg.method].call(this, msg);
     }
@@ -1214,8 +1214,8 @@ export class Authenticator extends EventTarget {
     this.webview_.contentWindow.postMessage(payload, currentUrl);
   }
 
-  shouldWaitForJemaAccountTypeSelection_() {
-    return this.enableJemaAccount_ && !this.isExistedUser_ && !this.deviceEnterpriseManaged_ &&
+  shouldWaitForWings8AccountTypeSelection_() {
+    return this.enableWings8Account_ && !this.isExistedUser_ && !this.deviceEnterpriseManaged_ &&
       this.requireSelectAccountTypeAfterSignin_;
   }
 
@@ -1228,7 +1228,7 @@ export class Authenticator extends EventTarget {
     if (this.authCompletedFired_) {
       return;
     }
-    if (this.shouldWaitForJemaAccountTypeSelection_()) {
+    if (this.shouldWaitForWings8AccountTypeSelection_()) {
       if (!this.selectedAccountType_) {
         return;
       }
@@ -1379,32 +1379,32 @@ export class Authenticator extends EventTarget {
     // Ensure services is a valid array
     if (!this.services_ || !Array.isArray(this.services_)) {
       console.warn('[WARNING] Invalid services, setting default');
-      this.services_ = ['jemaos'];
+      this.services_ = ['wings8os'];
     }
 
     // Debug logging
-    console.log('[JEMAOS-DEBUG] onAuthCompleted_ called');
-    console.log('[JEMAOS-DEBUG] email:', this.email_);
-    console.log('[JEMAOS-DEBUG] gaiaId:', this.gaiaId_);
-    console.log('[JEMAOS-DEBUG] services:', JSON.stringify(this.services_));
-    console.log('[JEMAOS-DEBUG] password length:', (this.password_ || '').length);
-    console.log('[JEMAOS-DEBUG] isExistedUser:', this.isExistedUser_);
+    console.log('[WINGS8OS-DEBUG] onAuthCompleted_ called');
+    console.log('[WINGS8OS-DEBUG] email:', this.email_);
+    console.log('[WINGS8OS-DEBUG] gaiaId:', this.gaiaId_);
+    console.log('[WINGS8OS-DEBUG] services:', JSON.stringify(this.services_));
+    console.log('[WINGS8OS-DEBUG] password length:', (this.password_ || '').length);
+    console.log('[WINGS8OS-DEBUG] isExistedUser:', this.isExistedUser_);
 
-    // Check if this is a JEMA or Flint account
+    // Check if this is a WINGS8 or Flint account
     // Check both services list and gaia_id prefix as fallback
-    const isJemaOrFlint = this.services_.includes('jemaos') ||
+    const isWings8OrFlint = this.services_.includes('wings8os') ||
       this.services_.includes('flint') ||
-      (this.gaiaId_ && (this.gaiaId_.startsWith('jema_id_') ||
+      (this.gaiaId_ && (this.gaiaId_.startsWith('wings8_id_') ||
         this.gaiaId_.startsWith('ft_id_')));
 
-    console.log('[JEMAOS-DEBUG] isJemaOrFlint:', isJemaOrFlint);
+    console.log('[WINGS8OS-DEBUG] isWings8OrFlint:', isWings8OrFlint);
 
-    if (isJemaOrFlint) {
-      // Route Jema/Flint users to LOCAL account flow.
+    if (isWings8OrFlint) {
+      // Route Wings8/Flint users to LOCAL account flow.
       // Decode base64 password if needed to ensure plaintext is sent to the local handler.
       let localPassword = this.password_ || '';
 
-      console.log('[JEMAOS] Processing Jema/Flint auth, password length:', localPassword.length,
+      console.log('[WINGS8OS] Processing Wings8/Flint auth, password length:', localPassword.length,
         'services:', this.services_);
 
       if (this.passwordIsBase64_ && typeof localPassword === 'string' && localPassword.length > 0) {
@@ -1419,7 +1419,7 @@ export class Authenticator extends EventTarget {
             // Fallback: assume ASCII if TextDecoder is unavailable.
             localPassword = binary;
           }
-          console.log('[JEMAOS] Decoded base64 password, new length:', localPassword.length);
+          console.log('[WINGS8OS] Decoded base64 password, new length:', localPassword.length);
         } catch (e) {
           console.warn('[WARNING] Failed to decode base64 password, using raw value');
         }
@@ -1431,7 +1431,7 @@ export class Authenticator extends EventTarget {
 
       // Username can include domain; handler trims it.
       console.log('[DEBUG] completeFtAuthentication', newUser, this.email_ || '', 'password_length:', localPassword.length);
-      chrome.send('completeFtAuthentication', [newUser, this.email_ || '', localPassword, this.jemaAccessToken_ || '', this.jemaRefreshToken_ || '']);
+      chrome.send('completeFtAuthentication', [newUser, this.email_ || '', localPassword, this.wings8AccessToken_ || '', this.wings8RefreshToken_ || '']);
       return;
     }
 
@@ -1440,7 +1440,7 @@ export class Authenticator extends EventTarget {
       this.assertStringArray_(this.services_, 'services');
     } catch (e) {
       console.error('[FATAL] Services validation failed:', e);
-      this.services_ = ['jemaos']; // Set safe default
+      this.services_ = ['wings8os']; // Set safe default
     }
 
     let scrapedPasswords = [];

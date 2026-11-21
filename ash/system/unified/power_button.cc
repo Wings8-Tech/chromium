@@ -133,8 +133,8 @@ bool ShouldShowEmailMenuItem() {
   switch (user_session->user_info.type) {
     case user_manager::UserType::kRegular:
     case user_manager::UserType::kFlintAccount:
-    case user_manager::UserType::kJemaAccount:
-    case user_manager::UserType::kJemaChild:
+    case user_manager::UserType::kWings8Account:
+    case user_manager::UserType::kWings8Child:
     case user_manager::UserType::kChild:
       return true;
     case user_manager::UserType::kGuest:

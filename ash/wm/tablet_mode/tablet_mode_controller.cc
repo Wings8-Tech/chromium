@@ -263,7 +263,7 @@ constexpr TabletModeController::TabletModeBehavior kOnForDev{
         TabletModeController::ForcePhysicalTabletState::kForceTabletMode,
 };
 
-constexpr TabletModeController::TabletModeBehavior kOnForJemaSwitch{
+constexpr TabletModeController::TabletModeBehavior kOnForWings8Switch{
     /*use_sensor=*/false,
     /*observe_display_events=*/false,
     /*observe_pointer_device_events=*/false,
@@ -272,7 +272,7 @@ constexpr TabletModeController::TabletModeBehavior kOnForJemaSwitch{
     TabletModeController::ForcePhysicalTabletState::kForceTabletMode,
 };
 
-constexpr TabletModeController::TabletModeBehavior kOffForJemaSwitch{
+constexpr TabletModeController::TabletModeBehavior kOffForWings8Switch{
     /*use_sensor=*/false,
     /*observe_display_events=*/false,
     /*observe_pointer_device_events=*/false,
@@ -896,27 +896,27 @@ void TabletModeController::SetEnabledForDev(bool enabled) {
   SetIsInTabletPhysicalState(enabled);
 }
 
-void TabletModeController::SetEnabledByJema(bool enabled) {
-  tablet_mode_behavior_ = enabled ? kOnForJemaSwitch : kOffForJemaSwitch;
+void TabletModeController::SetEnabledByWings8(bool enabled) {
+  tablet_mode_behavior_ = enabled ? kOnForWings8Switch : kOffForWings8Switch;
   force_notify_events_blocking_changed_ = true;
 
   SetIsInTabletPhysicalState(enabled);
 }
 
-bool TabletModeController::IsInJemaForceOnMode() {
-  return tablet_mode_behavior_ == kOnForJemaSwitch;
+bool TabletModeController::IsInWings8ForceOnMode() {
+  return tablet_mode_behavior_ == kOnForWings8Switch;
 }
 
-bool TabletModeController::IsInJemaForceOffMode() {
-  return tablet_mode_behavior_ == kOffForJemaSwitch;
+bool TabletModeController::IsInWings8ForceOffMode() {
+  return tablet_mode_behavior_ == kOffForWings8Switch;
 }
 
-void TabletModeController::SetDefaultBehaviorByJema() {
+void TabletModeController::SetDefaultBehaviorByWings8() {
   tablet_mode_behavior_ = kDefault;
-  ResetBehaviorByJema();
+  ResetBehaviorByWings8();
 }
 
-void TabletModeController::ResetBehaviorByJema() {
+void TabletModeController::ResetBehaviorByWings8() {
   chromeos::PowerManagerClient* power_manager_client =
       chromeos::PowerManagerClient::Get();
   power_manager_client->GetSwitchStates(base::BindOnce(

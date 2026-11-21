@@ -1,0 +1,41 @@
+<style include="settings-shared">
+  .coming-soon-container {
+    padding: 20px;
+    text-align: center;
+  }
+
+  .coming-soon-text {
+    font-size: 16px;
+    color: var(--cr-secondary-text-color);
+  }
+</style>
+
+<os-settings-animated-pages id="pages" section="[[section_]]">
+  <div route-path="default">
+    <template is="dom-if" if="[[isWings8AiHidden_]]">
+      <settings-card header-text="$i18n{wings8AssistantPageTitle}">
+        <div class="coming-soon-container">
+          <span class="coming-soon-text">$i18n{wings8osComingSoon}</span>
+        </div>
+      </settings-card>
+    </template>
+    <template is="dom-if" if="[[!isWings8AiHidden_]]">
+      <settings-card header-text="$i18n{wings8AssistantPageTitle}">
+        <settings-toggle-button pref="{{prefs.wings8_assistant_enabled}}" id="wings8AssistantToggle"
+          label="$i18n{wings8AssistantToggleLabel}" sub-label="$i18n{wings8AssistantToggleSublabel}">
+        </settings-toggle-button>
+        <div class="hr"></div>
+        <settings-toggle-button disabled="[[!prefs.wings8_assistant_enabled.value]]"
+          pref="{{prefs.wings8_assistant_extra_accelerator_enabled}}" id="wings8AssistantExtraAcceleratorToggle"
+          label="$i18n{wings8AssistantBubbleShortcutToggleLabel}"
+          sub-label="$i18n{wings8AssistantBubbleShortcutToggleSublabel}">
+        </settings-toggle-button>
+        <div class="hr"></div>
+        <cr-link-row id="wings8osAiSettingsLink" disabled="[[!prefs.wings8_assistant_enabled.value]]"
+          label="$i18n{wings8AssistantSettingsInAppLabel}" sub-label="$i18n{wings8AssistantSettingsInAppSublabel}"
+          on-click="onSettingsClicked_" external>
+        </cr-link-row>
+      </settings-card>
+    </template>
+  </div>
+</os-settings-animated-pages>

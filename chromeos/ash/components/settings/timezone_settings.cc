@@ -30,8 +30,8 @@
 #include "base/task/thread_pool.h"
 #include "chromeos/ash/components/settings/timezone_settings_helper.h"
 
-#include "jemaos/switches/misc/misc_switches.h"
-#include "jemaos/switches/misc/misc_constants.h"
+#include "wings8os/switches/misc/misc_switches.h"
+#include "wings8os/switches/misc/misc_constants.h"
 
 namespace ash {
 namespace system {
@@ -420,11 +420,11 @@ TimezoneSettingsImpl* TimezoneSettingsImpl::GetInstance() {
 TimezoneSettingsImpl::TimezoneSettingsImpl() {
   std::string id = GetTimezoneIDAsString();
   if (id.empty()) {
-    //---***JEMAOS BEGIN***---
-    if (jemaos::switches::IsJemaCustomEnabled())
-       id = jemaos::constants::kJemaOSDefaultTimeZoneId;
+    //---***WINGS8OS BEGIN***---
+    if (wings8os::switches::IsWings8CustomEnabled())
+       id = wings8os::constants::kWings8OSDefaultTimeZoneId;
     else
-    //---***JEMAOS END***---
+    //---***WINGS8OS END***---
     id = kFallbackTimeZoneId;
     LOG(ERROR) << "Got an empty string for timezone, default to '" << id;
   }

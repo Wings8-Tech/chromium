@@ -329,7 +329,7 @@
         "parameters": []
       },
       {
-        "name": "showJemaLanguageState",
+        "name": "showWings8LanguageState",
         "type": "function",
         "description": "Show the ZH/EN language state as a toast message",
         "platforms": ["chromeos"],

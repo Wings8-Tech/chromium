@@ -24,7 +24,7 @@ USER_MANAGER_EXPORT extern const char kCanonicalEmail[];
 // Key of obfuscated GAIA id value.
 USER_MANAGER_EXPORT extern const char kGAIAIdKey[];
 
-USER_MANAGER_EXPORT extern const char kJemaIdKey[];
+USER_MANAGER_EXPORT extern const char kWings8IdKey[];
 
 USER_MANAGER_EXPORT extern const char kFlintIdKey[];
 // Key of obfuscated object guid value for Active Directory accounts.

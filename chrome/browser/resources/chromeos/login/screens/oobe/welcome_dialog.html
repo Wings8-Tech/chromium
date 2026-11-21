@@ -5,7 +5,7 @@ found in the LICENSE file.
 -->
 
 <style include="cr-shared-style oobe-dialog-host-styles">
-  :host(:not([jemaos-layout])) {
+  :host(:not([wings8os-layout])) {
     --oobe-welcome-dialog-horizontal-padding: 40px;
     box-sizing: border-box;
     height: var(--oobe-adaptive-dialog-height);
@@ -59,7 +59,7 @@ found in the LICENSE file.
     }
   }
 
-  :host-context([orientation='horizontal']):host([jemaos-layout]) #content #buttons {
+  :host-context([orientation='horizontal']):host([wings8os-layout]) #content #buttons {
     margin-left: -20px;
   }
 
@@ -152,7 +152,7 @@ found in the LICENSE file.
     margin-top: 16px;
   }
 
-  :host(:not([jemaos-layout])) #title {
+  :host(:not([wings8os-layout])) #title {
     color: var(--oobe-header-text-color);
     font-family: var(--oobe-header-font-family);
     font-size: var(--oobe-welcome-header-font-size);
@@ -160,7 +160,7 @@ found in the LICENSE file.
     margin-bottom: 0;
   }
   @media (orientation: landscape) {
-    :host(:not([jemaos-layout])) #title {
+    :host(:not([wings8os-layout])) #title {
       margin-top: 48px;
     }
   }
@@ -176,7 +176,7 @@ found in the LICENSE file.
     margin-top: auto;
   }
 
-  :host(:not([jemaos-layout])) #subtitle {
+  :host(:not([wings8os-layout])) #subtitle {
     color: var(--oobe-subheader-text-color);
     font-family: var(--oobe-header-font-family);
     font-size: var(--oobe-welcome-subheader-font-size);
@@ -185,7 +185,7 @@ found in the LICENSE file.
   }
 
   @media (orientation: landscape) {
-    :host(:not([jemaos-layout])) #subtitle {
+    :host(:not([wings8os-layout])) #subtitle {
       margin-bottom: 64px;
     }
   }
@@ -247,11 +247,11 @@ found in the LICENSE file.
   }
 </style>
 <oobe-adaptive-dialog id="dialog"
-    jemaos-layout$="[[jemaosLayout]]"
+    wings8os-layout$="[[wings8osLayout]]"
     animation-loop
     class="layout vertical">
-  <video id="video" slot="jemaos-illustration" class="oobe-illustration">
-    <source src="animations/jemaos_v20_welcome.mp4" />
+  <video id="video" slot="wings8os-illustration" class="oobe-illustration">
+    <source src="animations/wings8os_v20_welcome.mp4" />
   </video>
   <h1 id="title" slot="title" class="welcome-header-text">
     [[i18nDynamic(locale, 'welcomeScreenGreeting')]] v1

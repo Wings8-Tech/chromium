@@ -122,20 +122,20 @@ export class ConfirmationPageElement extends ConfirmationPageElementBase {
         this.handleEmitMetrics(FeedbackAppPostSubmitAction.kOpenDiagnosticsApp);
         break;
       case 'help':
-        // <if expr="not use_jemaos_com">
-        url = 'https://jematechnology.fr/help';
+        // <if expr="not use_wings8os_com">
+        url = 'https://wings8.org/help';
         // </if>
-        // <if expr="use_jemaos_com">
-        url = 'https://jemaos.com/help';
+        // <if expr="use_wings8os_com">
+        url = 'https://wings8.org/help';
         // </if>
         OpenWindowProxyImpl.getInstance().openUrl(`${url}?hl=${this.i18n('language') || 'en'}`);
         break;
-      case 'jemaosCommunity':
-        // <if expr="not use_jemaos_com">
-        url = 'https://community.jematechnology.fr';
+      case 'wings8osCommunity':
+        // <if expr="not use_wings8os_com">
+        url = 'https://community.wings8.org';
         // </if>
-        // <if expr="use_jemaos_com">
-        url = 'https://community.jemaos.com';
+        // <if expr="use_wings8os_com">
+        url = 'https://community.wings8.org';
         // </if>
         // If app locale is not available, default to en.
         OpenWindowProxyImpl.getInstance().openUrl(`${url}?hl=${this.i18n('language') || 'en'}`);

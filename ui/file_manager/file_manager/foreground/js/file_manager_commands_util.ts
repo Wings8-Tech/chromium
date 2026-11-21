@@ -414,12 +414,12 @@ export function isOnTrashRoot(fileManager: CommandHandlerDeps) {
   return isTrashRootType(currentRootType);
 }
 
-export function isOnJemaDropRoot(fileManager: CommandHandlerDeps) {
+export function isOnWings8DropRoot(fileManager: CommandHandlerDeps) {
   const currentRootType = fileManager.directoryModel.getCurrentRootType();
   if (!currentRootType) {
     return false;
   }
-  return currentRootType === RootType.JEMADROP;
+  return currentRootType === RootType.WINGS8DROP;
 }
 
 

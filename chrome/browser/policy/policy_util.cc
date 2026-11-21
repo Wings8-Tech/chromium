@@ -14,8 +14,8 @@
 #include "components/policy/core/common/cloud/policy_invalidation_scope.h"
 #include "components/prefs/pref_service.h"
 #include "url/gurl.h"
-#include "jemaos/switches/account/account_switches.h"
-#include "jemaos/switches/account/policy_constants.h"
+#include "wings8os/switches/account/account_switches.h"
+#include "wings8os/switches/account/policy_constants.h"
 
 namespace policy {
 
@@ -93,8 +93,8 @@ bool IsOriginInAllowlist(const GURL& url,
 
 std::string_view GetPolicyInvalidationProjectNumber(
     PolicyInvalidationScope scope) {
-  if (jemaos::switches::IsPolicyManagedByJema()) {
-    return jemaos::constants::kJemaOSPolicyFCMInvalidationSenderID;
+  if (wings8os::switches::IsPolicyManagedByWings8()) {
+    return wings8os::constants::kWings8OSPolicyFCMInvalidationSenderID;
   }
   if (IsDirectInvalidationEnabledForScope(scope)) {
     return kPolicyInvalidationProjectNumber;

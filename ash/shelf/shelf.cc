@@ -43,7 +43,7 @@
 #include "base/notreached.h"
 #include "ui/display/types/display_constants.h"
 #include "ui/gfx/geometry/rect.h"
-#include "ash/jemaos_ai/jemaos_ai_view.h"
+#include "ash/wings8os_ai/wings8os_ai_view.h"
 
 namespace ash {
 
@@ -487,8 +487,8 @@ void Shelf::CreateShelfWidget(aura::Window* root) {
   // function.
   hotseat_widget()->InitializeAccessibilityProperties();
 
-  if (ash::features::IsJemaAssistantEnabled()) {
-    jema_assistant_view_ = std::make_unique<JemaAssistantView>(shelf_container);
+  if (ash::features::IsWings8AssistantEnabled()) {
+    wings8_assistant_view_ = std::make_unique<Wings8AssistantView>(shelf_container);
   }
 }
 
@@ -507,7 +507,7 @@ void Shelf::ShutdownShelfWidget() {
   status_area_widget_.reset();
   navigation_widget_.reset();
   login_shelf_widget_.reset();
-  jema_assistant_view_.reset();
+  wings8_assistant_view_.reset();
 }
 
 void Shelf::DestroyShelfWidget() {

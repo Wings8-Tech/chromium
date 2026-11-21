@@ -43,9 +43,9 @@ export class PrivacyGuideMsbbFragmentElement extends
         notify: true,
       },
 
-      isJemaProfile_: {
+      isWings8Profile_: {
         type: Boolean,
-        value: () => loadTimeData.getBoolean('isJemaProfile'),
+        value: () => loadTimeData.getBoolean('isWings8Profile'),
       },
     };
   }

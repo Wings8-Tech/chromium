@@ -47,7 +47,7 @@
 #include "build/chromeos_buildflags.h"
 #if BUILDFLAG(IS_CHROMEOS_ASH)
 #include "ui/base/ime/ash/extension_ime_util.h"
-#include "jemaos/constants/jemaos_constants.h"
+#include "wings8os/constants/wings8os_constants.h"
 #endif
 
 ToolbarActionsModel::ToolbarActionsModel(
@@ -187,10 +187,10 @@ bool ToolbarActionsModel::ShouldAddExtension(
     return false;
 
 #if BUILDFLAG(IS_CHROMEOS_ASH)
-  if (ash::extension_ime_util::IsJemaOSProvidedIMEByExtensionId(extension->id())) {
+  if (ash::extension_ime_util::IsWings8OSProvidedIMEByExtensionId(extension->id())) {
     return false;
   }
-  if (jemaos::constants::ShouldHideExtensionById(extension->id())) {
+  if (wings8os::constants::ShouldHideExtensionById(extension->id())) {
     return false;
   }
 #endif

@@ -238,7 +238,7 @@ class ASH_EXPORT LoginShelfView : public views::View,
 
   void OnAddUserButtonClicked();
 
-  void OnJemaOSRestoreScriptChecked(bool is_restore_supported);
+  void OnWings8OSRestoreScriptChecked(bool is_restore_supported);
 
   OobeDialogState dialog_state_ = OobeDialogState::HIDDEN;
   bool allow_guest_ = true;

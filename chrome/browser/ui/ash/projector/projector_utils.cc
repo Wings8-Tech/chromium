@@ -25,7 +25,7 @@
 #include "content/public/browser/navigation_controller.h"
 #include "content/public/browser/web_contents.h"
 #include "content/public/browser/web_ui.h"
-#include "jemaos/switches/misc/misc_switches.h"
+#include "wings8os/switches/misc/misc_switches.h"
 
 namespace {
 
@@ -50,7 +50,7 @@ bool IsProjectorAllowedForProfile(const Profile* profile) {
 }
 
 bool IsProjectorAppEnabled(const Profile* profile) {
-  if (jemaos::switches::IsJemaCustomEnabled()) {
+  if (wings8os::switches::IsWings8CustomEnabled()) {
     return false;
   }
 

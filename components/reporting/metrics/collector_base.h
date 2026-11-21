@@ -29,7 +29,7 @@ class CollectorBase {
   // Collect metric data provided by `sampler_` asynchronously.
   virtual void Collect(bool is_event_driven);
 
-  virtual void JemaHeartBeat();
+  virtual void Wings8HeartBeat();
 
  protected:
   // Callback executed when metric data is collected.

@@ -64,8 +64,8 @@ User::User(const AccountId& account_id, UserType type)
   switch (type_) {
     case user_manager::UserType::kRegular:
     case user_manager::UserType::kFlintAccount:
-    case user_manager::UserType::kJemaAccount:
-    case user_manager::UserType::kJemaChild:
+    case user_manager::UserType::kWings8Account:
+    case user_manager::UserType::kWings8Child:
     case user_manager::UserType::kChild:
     case user_manager::UserType::kKioskApp:
     case user_manager::UserType::kWebKioskApp:
@@ -130,19 +130,19 @@ void User::UpdateType(UserType new_type) {
 }
 
 bool User::HasGaiaAccount() const {
-  return TypeHasGaiaAccount(GetType()) || IsJemaAccountUser();
+  return TypeHasGaiaAccount(GetType()) || IsWings8AccountUser();
 }
 
-bool User::IsJemaAccountUser() const {
-  return GetType() == UserType::kJemaAccount || GetType() == UserType::kJemaChild;
+bool User::IsWings8AccountUser() const {
+  return GetType() == UserType::kWings8Account || GetType() == UserType::kWings8Child;
 }
 
 bool User::IsFlintAccountUser() const {
   return GetType() == UserType::kFlintAccount;
 }
 
-bool User::IsJemaExtendAccountUser() const {
-  return GetType() == UserType::kFlintAccount || IsJemaAccountUser();
+bool User::IsWings8ExtendAccountUser() const {
+  return GetType() == UserType::kFlintAccount || IsWings8AccountUser();
 }
 
 bool User::IsChild() const {
@@ -160,8 +160,8 @@ bool User::CanLock() const {
   switch (type_) {
     case user_manager::UserType::kRegular:
     case user_manager::UserType::kFlintAccount:
-    case user_manager::UserType::kJemaAccount:
-    case user_manager::UserType::kJemaChild:
+    case user_manager::UserType::kWings8Account:
+    case user_manager::UserType::kWings8Child:
     case user_manager::UserType::kChild:
       if (!profile_prefs_) {
         return false;
@@ -206,8 +206,8 @@ bool User::has_gaia_account() const {
   switch (GetType()) {
     case user_manager::UserType::kRegular:
     case user_manager::UserType::kChild:
-    case user_manager::UserType::kJemaAccount:
-    case user_manager::UserType::kJemaChild:
+    case user_manager::UserType::kWings8Account:
+    case user_manager::UserType::kWings8Child:
       return true;
     case user_manager::UserType::kFlintAccount:
     case user_manager::UserType::kGuest:
@@ -273,8 +273,8 @@ bool User::IsDeviceLocalAccount() const {
   switch (type_) {
     case user_manager::UserType::kRegular:
     case user_manager::UserType::kFlintAccount:
-    case user_manager::UserType::kJemaAccount:
-    case user_manager::UserType::kJemaChild:
+    case user_manager::UserType::kWings8Account:
+    case user_manager::UserType::kWings8Child:
     case user_manager::UserType::kChild:
     case user_manager::UserType::kGuest:
       return false;
@@ -294,7 +294,7 @@ bool User::IsKioskType() const {
 User* User::CreateRegularUser(const AccountId& account_id,
                               const UserType type) {
   CHECK(type == UserType::kRegular || type == UserType::kChild || type == UserType::kFlintAccount ||
-        type == UserType::kJemaAccount || type == UserType::kJemaChild)
+        type == UserType::kWings8Account || type == UserType::kWings8Child)
       << "Invalid user type " << type;
 
   return new User(account_id, type);

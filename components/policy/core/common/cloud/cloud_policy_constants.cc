@@ -10,8 +10,8 @@
 #include "build/build_config.h"
 #include "build/chromeos_buildflags.h"
 #include "components/policy/core/common/policy_switches.h"
-#include "jemaos/switches/account/account_switches.h"
-#include "jemaos/switches/account/policy_constants.h"
+#include "wings8os/switches/account/account_switches.h"
+#include "wings8os/switches/account/policy_constants.h"
 
 namespace policy {
 
@@ -30,7 +30,7 @@ const char kParamPlatform[] = "platform";
 const char kParamRequest[] = "request";
 const char kParamRetry[] = "retry";
 const char kParamProfileID[] = "profileid";
-const char kParamJemaOsLicenseId[] = "jemaos_license_id";
+const char kParamWings8OsLicenseId[] = "wings8os_license_id";
 
 // Policy constants used in authorization header.
 const char kAuthHeader[] = "Authorization";
@@ -42,7 +42,7 @@ const char kOidcAuthHeaderPrefix[] = "GoogleDM3PAuth";
 const char kOidcAuthTokenHeaderPrefix[] = " oauth_token=";
 const char kOidcIdTokenHeaderPrefix[] = " id_token=";
 
-const char kJemaEnrollmentTokenAuthHeaderPrefix[] = "JemaEnrollmentToken token=";
+const char kWings8EnrollmentTokenAuthHeaderPrefix[] = "Wings8EnrollmentToken token=";
 
 // String constants for the device and app type we report to the server.
 const char kValueAppType[] = "Chrome";
@@ -169,13 +169,13 @@ const char kPolicyVerificationKeyHash[] = "1:356l7w";
 const char kDemoModeDomain[] = "cros-demo-mode.com";
 
 std::string GetPolicyVerificationKey() {
-  //---***JEMAOS BEGIN***---
-  if (jemaos::switches::IsPolicyManagedByJema()) {
+  //---***WINGS8OS BEGIN***---
+  if (wings8os::switches::IsPolicyManagedByWings8()) {
     const char *kKey = reinterpret_cast<const char*>(
-           jemaos::constants::kJemaOSPolicyVerificationKey);
-    return std::string(kKey, jemaos::constants::kJemaOSPolicyVerificationKeyLength);
+           wings8os::constants::kWings8OSPolicyVerificationKey);
+    return std::string(kKey, wings8os::constants::kWings8OSPolicyVerificationKeyLength);
   }
-  //---***JEMAOS END***---
+  //---***WINGS8OS END***---
   return std::string(reinterpret_cast<const char*>(kPolicyVerificationKey),
                      sizeof(kPolicyVerificationKey));
 }

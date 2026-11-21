@@ -48,8 +48,8 @@ enum MarketingOptInStep {
 interface MarketingScreenData {
   optInVisibility: boolean;
   optInDefaultState: boolean;
-  jemaOptInVisibility: boolean;
-  jemaOptInDefaultState: boolean;
+  wings8OptInVisibility: boolean;
+  wings8OptInDefaultState: boolean;
   legalFooterVisibility: boolean;
   cloudGamingDevice: boolean;
 }
@@ -85,7 +85,7 @@ export class MarketingOptIn extends MarketingScreenElementBase {
         value: false,
       },
 
-      jemaMarketingOptInVisible: {
+      wings8MarketingOptInVisible: {
         type: Boolean,
         value: false,
       },
@@ -112,7 +112,7 @@ export class MarketingOptIn extends MarketingScreenElementBase {
 
   private isA11ySettingsButtonVisible: boolean;
   private marketingOptInVisible: boolean;
-  private jemaMarketingOptInVisible: boolean;
+  private wings8MarketingOptInVisible: boolean;
   private hasLegalFooter: boolean;
   private isCloudGamingDevice: boolean;
 
@@ -158,14 +158,14 @@ export class MarketingOptIn extends MarketingScreenElementBase {
     super.onBeforeShow(data);
     this.marketingOptInVisible =
         'optInVisibility' in data && data.optInVisibility;
-    this.jemaMarketingOptInVisible =
-        'jemaOptInVisibility' in data && data.jemaOptInVisibility;
+    this.wings8MarketingOptInVisible =
+        'wings8OptInVisibility' in data && data.wings8OptInVisibility;
     this.shadowRoot!
         .querySelector<HTMLInputElement>('#chromebookUpdatesOption')!.checked =
         'optInDefaultState' in data && data.optInDefaultState;
     this.shadowRoot!
-        .querySelector<HTMLInputElement>('#jemaUpdatesOption')!.checked =
-        'jemaOptInDefaultState' in data && data.jemaOptInDefaultState;
+        .querySelector<HTMLInputElement>('#wings8UpdatesOption')!.checked =
+        'wings8OptInDefaultState' in data && data.wings8OptInDefaultState;
     this.hasLegalFooter =
         'legalFooterVisibility' in data && data.legalFooterVisibility;
     this.isCloudGamingDevice =
@@ -189,9 +189,9 @@ export class MarketingOptIn extends MarketingScreenElementBase {
     this.userActed([
       'get-started',
       this.shadowRoot!
-          .querySelector<HTMLInputElement>('#jemaUpdatesOption')!.checked,
+          .querySelector<HTMLInputElement>('#wings8UpdatesOption')!.checked,
       this.shadowRoot!
-          .querySelector<HTMLInputElement>('#jemaOSImprovementPlanOption')!.checked,
+          .querySelector<HTMLInputElement>('#wings8OSImprovementPlanOption')!.checked,
     ]);
   }
 

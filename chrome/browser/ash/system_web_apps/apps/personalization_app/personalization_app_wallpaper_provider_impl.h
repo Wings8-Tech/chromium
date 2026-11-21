@@ -229,7 +229,7 @@ class PersonalizationAppWallpaperProviderImpl
 
   void OnGetDefaultImage(GetDefaultImageThumbnailCallback callback,
                          const gfx::ImageSkia& image);
-  void OnGetJemaImage(GetDefaultImageThumbnailCallback callback,
+  void OnGetWings8Image(GetDefaultImageThumbnailCallback callback,
                          const gfx::ImageSkia& image);
 
   void OnGetLocalImages(GetLocalImagesCallback callback,

@@ -198,18 +198,18 @@ void LoginPerformer::DoPerformLogin(const UserContext& user_context,
   bool wildcard_match = false;
 
   const AccountId& account_id = user_context.GetAccountId();
-  //---***JEMAOS BEGIN***---
-  // Jema/Flint local accounts are not gaia users: they must not be subject to
+  //---***WINGS8OS BEGIN***---
+  // Wings8/Flint local accounts are not gaia users: they must not be subject to
   // the device user allowlist (kAccountsPrefUsers), which only contains gaia
   // emails and would silently reject local account logins on managed devices.
-  const bool is_jema_local_flow =
+  const bool is_wings8_local_flow =
       user_context.GetAuthFlow() == UserContext::AUTH_FLOW_FLINT_ACCOUNT ||
-      user_context.GetAuthFlow() == UserContext::AUTH_FLOW_JEMA_ONLINE ||
+      user_context.GetAuthFlow() == UserContext::AUTH_FLOW_WINGS8_ONLINE ||
       (account_id.GetAccountType() == AccountType::GOOGLE &&
        (account_id.GetGaiaId().starts_with("ft_id_") ||
-        account_id.GetGaiaId().starts_with("jema_id_")));
-  //---***JEMAOS END***---
-  if (!is_jema_local_flow &&
+        account_id.GetGaiaId().starts_with("wings8_id_")));
+  //---***WINGS8OS END***---
+  if (!is_wings8_local_flow &&
       !IsUserAllowlisted(account_id, &wildcard_match,
                          user_context.GetUserType())) {
     base::SequencedTaskRunner::GetCurrentDefault()->PostTask(
@@ -222,11 +222,11 @@ void LoginPerformer::DoPerformLogin(const UserContext& user_context,
                << account_id;
 
   // API-success/dev bypass before invoking authenticator: when running outside
-  // ChromeOS or with --jema-dev-skip-cryptohome, immediately treat user as
+  // ChromeOS or with --wings8-dev-skip-cryptohome, immediately treat user as
   // authenticated to avoid COULD_NOT_MOUNT_CRYPTOHOME on dev hosts.
   // const bool dev_bypass =
   //     !base::SysInfo::IsRunningOnChromeOS() ||
-  //     base::CommandLine::ForCurrentProcess()->HasSwitch("jema-dev-skip-cryptohome");
+  //     base::CommandLine::ForCurrentProcess()->HasSwitch("wings8-dev-skip-cryptohome");
   
   // if (dev_bypass) {
   //   LOG(WARNING) << "dev_bypass" 
@@ -240,27 +240,27 @@ void LoginPerformer::DoPerformLogin(const UserContext& user_context,
   switch (auth_mode_) {
     case AuthorizationMode::kExternal: {
       LOG(WARNING) << "kExternal" << user_context.GetAuthFlow();
-      //---***JEMAOS BEGIN***---
-      // For FlintAccount and JemaAccount users, check if user is known (existing)
+      //---***WINGS8OS BEGIN***---
+      // For FlintAccount and Wings8Account users, check if user is known (existing)
       // - For existing users, use StartAuthentication (AuthenticateToLogin) for proper relogin
       // - For new users, use StartLoginCompletion (CompleteLogin) for account creation
       if (user_context.GetAuthFlow() == UserContext::AUTH_FLOW_FLINT_ACCOUNT ||
-          user_context.GetAuthFlow() == UserContext::AUTH_FLOW_JEMA_ONLINE) {
+          user_context.GetAuthFlow() == UserContext::AUTH_FLOW_WINGS8_ONLINE) {
         const bool is_known_user = user_manager::UserManager::Get()->IsKnownUser(account_id);
         if (is_known_user) {
           // Existing user - use AuthenticateToLogin for relogin
-          LOG(WARNING) << "Existing Jema/Flint user relogin (kExternal), using AuthenticateToLogin: "
+          LOG(WARNING) << "Existing Wings8/Flint user relogin (kExternal), using AuthenticateToLogin: "
                        << account_id.GetUserEmail();
           StartAuthentication();
         } else {
           // New user - use CompleteLogin for account creation
-          LOG(WARNING) << "New Jema/Flint user (kExternal), using CompleteLogin: "
+          LOG(WARNING) << "New Wings8/Flint user (kExternal), using CompleteLogin: "
                        << account_id.GetUserEmail();
           StartLoginCompletion();
         }
         break;
       }
-      //---***JEMAOS END***---
+      //---***WINGS8OS END***---
       RunOnlineAllowlistCheck(
           account_id, wildcard_match, user_context.GetRefreshToken(),
           base::BindOnce(&LoginPerformer::StartLoginCompletion,
@@ -271,27 +271,27 @@ void LoginPerformer::DoPerformLogin(const UserContext& user_context,
     }
     case AuthorizationMode::kInternal:
       LOG(WARNING) << "kInternal" << user_context.GetAuthFlow();
-      //---***JEMAOS BEGIN***---
-      // For FlintAccount and JemaAccount users, check if user is known (existing)
+      //---***WINGS8OS BEGIN***---
+      // For FlintAccount and Wings8Account users, check if user is known (existing)
       // - For existing users, use StartAuthentication (AuthenticateToLogin) for proper relogin
       // - For new users, use StartLoginCompletion (CompleteLogin) for account creation
       if (user_context.GetAuthFlow() == UserContext::AUTH_FLOW_FLINT_ACCOUNT ||
-          user_context.GetAuthFlow() == UserContext::AUTH_FLOW_JEMA_ONLINE) {
+          user_context.GetAuthFlow() == UserContext::AUTH_FLOW_WINGS8_ONLINE) {
         const bool is_known_user = user_manager::UserManager::Get()->IsKnownUser(account_id);
         if (is_known_user) {
           // Existing user - use AuthenticateToLogin for relogin
-          LOG(WARNING) << "Existing Jema/Flint user relogin, using AuthenticateToLogin: "
+          LOG(WARNING) << "Existing Wings8/Flint user relogin, using AuthenticateToLogin: "
                        << account_id.GetUserEmail();
           StartAuthentication();
         } else {
           // New user - use CompleteLogin for account creation
-          LOG(WARNING) << "New Jema/Flint user, using CompleteLogin: "
+          LOG(WARNING) << "New Wings8/Flint user, using CompleteLogin: "
                        << account_id.GetUserEmail();
           StartLoginCompletion();
         }
         break;
       }
-      //---***JEMAOS END***---
+      //---***WINGS8OS END***---
       StartAuthentication();
       break;
   }
@@ -411,11 +411,11 @@ void LoginPerformer::StartLoginCompletion() {
   LOG(WARNING) << "StartLoginCompletion";
 
   // Dev bypass: when running outside ChromeOS (e.g., linux-chromeos) or when
-  // explicitly requested via --jema-dev-skip-cryptohome, allow Flint/Jema
+  // explicitly requested via --wings8-dev-skip-cryptohome, allow Flint/Wings8
   // accounts to proceed without invoking cryptohome-backed authenticator.
   // const bool dev_bypass =
   //     !base::SysInfo::IsRunningOnChromeOS() ||
-  //     base::CommandLine::ForCurrentProcess()->HasSwitch("jema-dev-skip-cryptohome");
+  //     base::CommandLine::ForCurrentProcess()->HasSwitch("wings8-dev-skip-cryptohome");
 
   // if (dev_bypass) {
   //   VLOG(1) << "Bypass is active: skipping cryptohome mount and treating "
@@ -433,18 +433,18 @@ void LoginPerformer::StartLoginCompletion() {
   EnsureAuthenticator();
   // DCHECK(authenticator_);
   LOG(WARNING) << "StartLoginCompletion: EnsureAuthenticator done";
-  // //---***JEMAOS BEGIN***---
-  // // For Jema/Flint accounts, use persistent local accounts (not ephemeral) so passwords
+  // //---***WINGS8OS BEGIN***---
+  // // For Wings8/Flint accounts, use persistent local accounts (not ephemeral) so passwords
   // // are stored and can be used for subsequent logins. The API is only used to verify
   // // if the user is blocked, while local password authentication handles account creation
   // // and login for both new and existing users.
   // const AccountId& account_id = user_context_.GetAccountId();
-  // const bool is_jema_account =
-  //     user_context_.GetAuthFlow() == UserContext::AUTH_FLOW_JEMA_ONLINE ||
-  //     account_id.GetGaiaId().find("jema_id_") == 0 ||
+  // const bool is_wings8_account =
+  //     user_context_.GetAuthFlow() == UserContext::AUTH_FLOW_WINGS8_ONLINE ||
+  //     account_id.GetGaiaId().find("wings8_id_") == 0 ||
   //     account_id.GetGaiaId().find("flint_id_") == 0;
   
-  // // Use normal ephemeral check (don't force ephemeral for Jema accounts)
+  // // Use normal ephemeral check (don't force ephemeral for Wings8 accounts)
   // // This allows persistent local accounts with stored passwords
   // bool use_ephemeral = user_manager::UserManager::Get()->IsEphemeralAccountId(account_id);
   
@@ -452,8 +452,8 @@ void LoginPerformer::StartLoginCompletion() {
   // // but we log this for debugging purposes
   // const bool is_known_user = user_manager::UserManager::Get()->IsKnownUser(account_id);
   
-  // if (is_jema_account) {
-  //   LOG(WARNING) << "Jema account login for: " << account_id.GetUserEmail()
+  // if (is_wings8_account) {
+  //   LOG(WARNING) << "Wings8 account login for: " << account_id.GetUserEmail()
   //                << " (ephemeral: " << use_ephemeral 
   //                << ", known: " << is_known_user << ")";
     
@@ -469,7 +469,7 @@ void LoginPerformer::StartLoginCompletion() {
   //                    << ", length: " << password.length()
   //                    << ", preview: " << password_preview;
   //     } else {
-  //       LOG(WARNING) << "[DEBUG] Empty password for Jema user: " 
+  //       LOG(WARNING) << "[DEBUG] Empty password for Wings8 user: " 
   //                    << account_id.GetUserEmail();
   //     }
   //   }
@@ -477,11 +477,11 @@ void LoginPerformer::StartLoginCompletion() {
   //   // Ensure password key is set for existing users - CompleteLogin requires it
   //   if (is_known_user && user_context_.GetKey()->GetKeyType() == Key::KEY_TYPE_PASSWORD_PLAIN) {
   //     if (user_context_.GetKey()->GetSecret().empty()) {
-  //       LOG(ERROR) << "Empty password key for existing Jema user: " << account_id.GetUserEmail();
+  //       LOG(ERROR) << "Empty password key for existing Wings8 user: " << account_id.GetUserEmail();
   //     }
   //   }
   // }
-  // //---***JEMAOS END***---
+  // //---***WINGS8OS END***---
   
   // if (!authenticator_) {
   //   LOG(ERROR) << "Authenticator is null, cannot proceed with login";
@@ -511,11 +511,11 @@ void LoginPerformer::StartAuthentication() {
   LOG(WARNING) << "StartAuthentication: auth_flow: " << user_context_.GetAuthFlow();
   LOG(WARNING) << "StartAuthentication: user_id_hash: " << user_context_.GetUserIDHash();
   // // Dev bypass: when running outside ChromeOS (e.g., linux-chromeos) or when
-  // // explicitly requested via --jema-dev-skip-cryptohome, allow Flint/Jema
+  // // explicitly requested via --wings8-dev-skip-cryptohome, allow Flint/Wings8
   // // accounts to proceed without invoking cryptohome-backed authenticator.
   // const bool dev_bypass =
   //     !base::SysInfo::IsRunningOnChromeOS() ||
-  //     base::CommandLine::ForCurrentProcess()->HasSwitch("jema-dev-skip-cryptohome");
+  //     base::CommandLine::ForCurrentProcess()->HasSwitch("wings8-dev-skip-cryptohome");
   // if (dev_bypass) {
   //   VLOG(1) << "Bypass active: skipping cryptohome auth and treating as success.";
   //   DCHECK(delegate_);

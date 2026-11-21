@@ -46,7 +46,7 @@ component("constants") {
   ]
 
   deps += [
-    "//jemaos/switches",
-    "//jemaos/build/config:buildflags",
+    "//wings8os/switches",
+    "//wings8os/build/config:buildflags",
   ]
 }

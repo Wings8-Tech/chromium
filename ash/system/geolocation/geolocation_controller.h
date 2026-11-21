@@ -184,9 +184,9 @@ class ASH_EXPORT GeolocationController
   // being able to retrieve a valid geoposition.
   void StoreCachedGeoposition() const;
 
-  // JemaOS timezone resolution via IP-based geolocation.
-  // Requests timezone information from JemaOS API based on coordinates.
-  void RequestTimezoneFromJemaOS(double latitude, double longitude);
+  // Wings8OS timezone resolution via IP-based geolocation.
+  // Requests timezone information from Wings8OS API based on coordinates.
+  void RequestTimezoneFromWings8OS(double latitude, double longitude);
 
   // Callback for the timezone API response.
   void OnTimezoneResponse(std::unique_ptr<std::string> response_body);
@@ -228,7 +228,7 @@ class ASH_EXPORT GeolocationController
 
   ScopedSessionObserver scoped_session_observer_;
 
-  // URL loader for JemaOS timezone API requests.
+  // URL loader for Wings8OS timezone API requests.
   std::unique_ptr<network::SimpleURLLoader> timezone_url_loader_;
 
   base::WeakPtrFactory<GeolocationController> weak_ptr_factory_{this};

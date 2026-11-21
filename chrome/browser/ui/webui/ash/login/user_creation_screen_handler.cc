@@ -77,12 +77,12 @@ void UserCreationScreenHandler::DeclareLocalizedValues(
       "userCreationEnrollTriageDeclineEnrollButtonLabel",
       IDS_OOBE_USER_CREATION_ENROLL_TRIAGE_DECLINE_ENROLL_BUTTON_LABEL);
 
-  // Local JemaOS account -- START
-  builder->Add("accountTypeSelectionLocalJemaOSTitle",
-               IDS_OOBE_ACCOUNT_TYPE_SELECTION_LOCAL_JEMAOS_TITLE);
-  builder->Add("accountTypeSelectionLocalJemaOSSubtitle",
-               IDS_OOBE_ACCOUNT_TYPE_SELECTION_LOCAL_JEMAOS_SUBTITLE);
-  // Local JemaOS account -- END
+  // Local Wings8OS account -- START
+  builder->Add("accountTypeSelectionLocalWings8OSTitle",
+               IDS_OOBE_ACCOUNT_TYPE_SELECTION_LOCAL_WINGS8OS_TITLE);
+  builder->Add("accountTypeSelectionLocalWings8OSSubtitle",
+               IDS_OOBE_ACCOUNT_TYPE_SELECTION_LOCAL_WINGS8OS_SUBTITLE);
+  // Local Wings8OS account -- END
 
   // Child Setup Strings
   builder->Add("userCreationChildSetupTitle",
@@ -108,10 +108,10 @@ void UserCreationScreenHandler::DeclareLocalizedValues(
                IDS_OOBE_ACCOUNT_TYPE_SELECTION_TITLE);
   builder->Add("accountTypeSelectionSubtitle",
                IDS_OOBE_ACCOUNT_TYPE_SELECTION_SUBTITLE);
-  builder->Add("accountTypeSelectionJemaOSTitle",
-               IDS_OOBE_ACCOUNT_TYPE_SELECTION_JEMAOS_TITLE);
-  builder->Add("accountTypeSelectionJemaOSSubtitle",
-               IDS_OOBE_ACCOUNT_TYPE_SELECTION_JEMAOS_SUBTITLE);
+  builder->Add("accountTypeSelectionWings8OSTitle",
+               IDS_OOBE_ACCOUNT_TYPE_SELECTION_WINGS8OS_TITLE);
+  builder->Add("accountTypeSelectionWings8OSSubtitle",
+               IDS_OOBE_ACCOUNT_TYPE_SELECTION_WINGS8OS_SUBTITLE);
   builder->Add("accountTypeSelectionGoogleTitle",
                IDS_OOBE_ACCOUNT_TYPE_SELECTION_GOOGLE_TITLE);
   builder->Add("accountTypeSelectionGoogleSubtitle",

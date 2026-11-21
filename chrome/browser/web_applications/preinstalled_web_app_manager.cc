@@ -676,8 +676,8 @@ void PreinstalledWebAppManager::Start(base::OnceClosure on_done) {
     return;                                                        // IN-TEST
   }
 
-  // JemaOS: route the startup pass through the serialized queue too. An
-  // out-of-startup SynchronizeNow() (Jema subscription resolution) may have
+  // Wings8OS: route the startup pass through the serialized queue too. An
+  // out-of-startup SynchronizeNow() (Wings8 subscription resolution) may have
   // started a pass first; running a second one concurrently would hit the
   // concurrent-sync CHECK in ExternallyManagedAppManager and crash.
   SynchronizeNow(

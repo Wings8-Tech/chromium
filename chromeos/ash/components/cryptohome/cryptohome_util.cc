@@ -13,7 +13,7 @@ const std::string GetCryptohomeId(const AccountId& account_id) {
     case AccountType::GOOGLE: {
       return account_id.GetUserEmail();
     }
-    case AccountType::JEMA_ACCOUNT:
+    case AccountType::WINGS8_ACCOUNT:
     case AccountType::FLINT_ACCOUNT: {
       return account_id.GetUserEmail();
     }

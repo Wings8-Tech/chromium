@@ -31,17 +31,17 @@ namespace remoting::protocol {
 
 namespace {
 
-// JEMAOS: authenticator that skips the SPAKE2 key exchange and uses the
+// WINGS8OS: authenticator that skips the SPAKE2 key exchange and uses the
 // access-code hash directly as the channel key. Both peers know it:
 //  - the host holds `shared_secret_hash`
 //    == HMAC-SHA256(support_id, support_id + host_secret)
-//  - the JemaOS web client reproduces it from the code the user typed.
+//  - the Wings8OS web client reproduces it from the code the user typed.
 // No message exchange is needed; SslHmacChannelAuthenticator below secures the
 // channels using that key, so a wrong code fails the channel handshake.
-class JemaosSecretAuthenticator : public Authenticator {
+class Wings8osSecretAuthenticator : public Authenticator {
  public:
-  JemaosSecretAuthenticator(const JemaosSecretAuthenticator&) = delete;
-  JemaosSecretAuthenticator& operator=(const JemaosSecretAuthenticator&) =
+  Wings8osSecretAuthenticator(const Wings8osSecretAuthenticator&) = delete;
+  Wings8osSecretAuthenticator& operator=(const Wings8osSecretAuthenticator&) =
       delete;
 
   static std::unique_ptr<Authenticator> CreateForHost(
@@ -51,12 +51,12 @@ class JemaosSecretAuthenticator : public Authenticator {
       scoped_refptr<RsaKeyPair> key_pair,
       const std::string& auth_key,
       State initial_state) {
-    auto* result = new JemaosSecretAuthenticator(local_cert, std::move(key_pair),
+    auto* result = new Wings8osSecretAuthenticator(local_cert, std::move(key_pair),
                                                  auth_key, initial_state);
     return base::WrapUnique(result);
   }
 
-  ~JemaosSecretAuthenticator() override = default;
+  ~Wings8osSecretAuthenticator() override = default;
 
   // Authenticator interface.
   CredentialsType credentials_type() const override {
@@ -95,7 +95,7 @@ class JemaosSecretAuthenticator : public Authenticator {
   }
 
  private:
-  JemaosSecretAuthenticator(const std::string& local_cert,
+  Wings8osSecretAuthenticator(const std::string& local_cert,
                             scoped_refptr<RsaKeyPair> key_pair,
                             const std::string& auth_key,
                             State initial_state)
@@ -279,8 +279,8 @@ void NegotiatingHostAuthenticator::CreateAuthenticator(
       std::move(resume_callback).Run();
       break;
 
-    case AuthenticationMethod::JEMAOS_SPAKE2_CURVE25519:
-      // JEMAOS: SPAKE2 path for the web client (same key derivation as the
+    case AuthenticationMethod::WINGS8OS_SPAKE2_CURVE25519:
+      // WINGS8OS: SPAKE2 path for the web client (same key derivation as the
       // shared-secret SPAKE2 method). Used only when the client advertises it.
       current_authenticator_ = Spake2Authenticator::CreateForHost(
           local_id_, remote_id_, config_->local_cert, config_->key_pair,
@@ -288,9 +288,9 @@ void NegotiatingHostAuthenticator::CreateAuthenticator(
       std::move(resume_callback).Run();
       break;
 
-    case AuthenticationMethod::JEMAOS_HMAC_SHA256:
-      // JEMAOS: SPAKE2-free path for the JemaOS web client.
-      current_authenticator_ = JemaosSecretAuthenticator::CreateForHost(
+    case AuthenticationMethod::WINGS8OS_HMAC_SHA256:
+      // WINGS8OS: SPAKE2-free path for the Wings8OS web client.
+      current_authenticator_ = Wings8osSecretAuthenticator::CreateForHost(
           local_id_, remote_id_, config_->local_cert, config_->key_pair,
           config_->shared_secret_hash, preferred_initial_state);
       std::move(resume_callback).Run();

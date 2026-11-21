@@ -92,7 +92,7 @@ class FeedbackService : public base::RefCountedThreadSafe<FeedbackService> {
       const FeedbackParams& params,
       scoped_refptr<feedback::FeedbackData> feedback_data,
       SendFeedbackCallback callback);
-  void OnJemaOSLogCollected(
+  void OnWings8OSLogCollected(
       const FeedbackParams& params,
       scoped_refptr<feedback::FeedbackData> feedback_data,
       SendFeedbackCallback callback);

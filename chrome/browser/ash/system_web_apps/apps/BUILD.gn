@@ -71,10 +71,10 @@ static_library("apps") {
   ]
 
   sources += [
-    "jema_assistant_app_info.cc",
-    "jema_assistant_app_info.h",
-    "jema_assistant_app_ui_delegate.cc",
-    "jema_assistant_app_ui_delegate.h",
+    "wings8_assistant_app_info.cc",
+    "wings8_assistant_app_info.h",
+    "wings8_assistant_app_ui_delegate.cc",
+    "wings8_assistant_app_ui_delegate.h",
   ]
 
   public_deps = [
@@ -99,7 +99,7 @@ static_library("apps") {
   ]
 
   public_deps += [
-    "//ash/webui/jema_assistant_app_ui",
+    "//ash/webui/wings8_assistant_app_ui",
   ]
 
   deps = [
@@ -193,7 +193,7 @@ static_library("apps") {
   ]
 
   deps += [
-    "//ash/webui/jema_assistant_app_ui/resources:resources",
+    "//ash/webui/wings8_assistant_app_ui/resources:resources",
   ]
 
   if (!is_official_build) {

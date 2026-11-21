@@ -10,7 +10,7 @@
 #include "base/functional/bind.h"
 #include "chromeos/ash/experiences/idle_detector/idle_detector.h"
 #include "chromeos/dbus/constants/dbus_switches.h"
-#include "jemaos/switches/misc/misc_switches.h"
+#include "wings8os/switches/misc/misc_switches.h"
 
 namespace ash {
 namespace {
@@ -33,7 +33,7 @@ void ChromeVoxHintDetector::StartIdleDetection() {
   if (switches::IsOOBEChromeVoxHintTimerDisabledForTesting()) {
     return;
   }
-  // if (jemaos::switches::IsJemaCustomEnabled()) {
+  // if (wings8os::switches::IsWings8CustomEnabled()) {
   //   return;
   // }
 

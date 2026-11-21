@@ -103,8 +103,8 @@ class PreinstalledWebAppManager {
   // installed apps.
   void Start(base::OnceClosure on_init_complete);
 
-  // JemaOS: re-runs the load+synchronize pass outside of startup. Used when
-  // the Jema subscription state (which gates the premium OEM PWAs) becomes
+  // Wings8OS: re-runs the load+synchronize pass outside of startup. Used when
+  // the Wings8 subscription state (which gates the premium OEM PWAs) becomes
   // known only after the startup pass has already run. Synchronize passes
   // are serialized: if one is already in progress (e.g. the startup pass),
   // the request is queued and executed once it completes. Running two
@@ -150,10 +150,10 @@ class PreinstalledWebAppManager {
 
   void LoadAndSynchronize(SynchronizeCallback callback);
 
-  // JemaOS: runs the next queued synchronize request when no pass is in
+  // Wings8OS: runs the next queued synchronize request when no pass is in
   // progress (serialization of SynchronizeNow, see above).
   void MaybeRunNextSynchronize();
-  // JemaOS: completion hook of a synchronize pass; clears
+  // Wings8OS: completion hook of a synchronize pass; clears
   // `synchronize_in_progress_` and drains queued requests.
   void OnSynchronizePassCompleted();
 
@@ -205,7 +205,7 @@ class PreinstalledWebAppManager {
   base::ObserverList<PreinstalledWebAppManager::Observer, /*check_empty=*/true>
       observers_;
 
-  // JemaOS: serialization state for synchronize passes (see SynchronizeNow).
+  // Wings8OS: serialization state for synchronize passes (see SynchronizeNow).
   bool synchronize_in_progress_ = false;
   std::vector<SynchronizeCallback> pending_synchronize_callbacks_;
 

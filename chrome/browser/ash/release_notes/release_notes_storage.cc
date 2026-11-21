@@ -23,7 +23,7 @@
 #include "content/public/common/content_switches.h"
 #include "google_apis/gaia/gaia_auth_util.h"
 #include "chromeos/version/version_loader.h"
-#include "jemaos/build/config/buildflags.h"
+#include "wings8os/build/config/buildflags.h"
 
 namespace {
 
@@ -39,8 +39,8 @@ std::string GetOSVersion() {
   return version.has_value() ? version.value() : std::string();
 }
 
-bool IsOpenJema() {
-#if BUILDFLAG(IS_OPENJEMA)
+bool IsOpenWings8() {
+#if BUILDFLAG(IS_OPENWINGS8)
   return true;
 #else
   return false;
@@ -73,7 +73,7 @@ bool IsEligibleProfile(Profile* profile) {
 
   // Otherwise, show the notification for Consumer profiles.
   return ash::ProfileHelper::Get()->GetUserByProfile(profile)->HasGaiaAccount() ||
-         ash::ProfileHelper::Get()->GetUserByProfile(profile)->IsJemaExtendAccountUser();
+         ash::ProfileHelper::Get()->GetUserByProfile(profile)->IsWings8ExtendAccountUser();
 }
 
 bool ShouldShowForCurrentChannel() {
@@ -91,7 +91,7 @@ void ReleaseNotesStorage::RegisterProfilePrefs(PrefRegistrySimple* registry) {
   registry->RegisterIntegerPref(
       prefs::kReleaseNotesSuggestionChipTimesLeftToShow, 0);
   registry->RegisterStringPref(
-      prefs::kJemaOSReleaseNotesLastShownVersion, "0.0.0.0");
+      prefs::kWings8OSReleaseNotesLastShownVersion, "0.0.0.0");
 }
 
 ReleaseNotesStorage::ReleaseNotesStorage(Profile* profile)
@@ -100,7 +100,7 @@ ReleaseNotesStorage::ReleaseNotesStorage(Profile* profile)
 ReleaseNotesStorage::~ReleaseNotesStorage() = default;
 
 bool ReleaseNotesStorage::ShouldNotify() {
-  if (IsOpenJema()) {
+  if (IsOpenWings8()) {
     return false;
   }
   // TODO(b/174514401): Make this server controlled.
@@ -117,7 +117,7 @@ bool ReleaseNotesStorage::ShouldNotify() {
     return false;
 
   base::Version last_version(
-      profile_->GetPrefs()->GetString(prefs::kJemaOSReleaseNotesLastShownVersion));
+      profile_->GetPrefs()->GetString(prefs::kWings8OSReleaseNotesLastShownVersion));
   base::Version current_version(GetOSVersion());
   if (!last_version.IsValid()) {
     VLOG(2) << "get last os version invalid, fallback to default 0.0.0.0";
@@ -152,7 +152,7 @@ void ReleaseNotesStorage::MarkNotificationShown() {
   profile_->GetPrefs()->SetInteger(
       prefs::kHelpAppNotificationLastShownMilestone, GetMilestone());
   profile_->GetPrefs()->SetString(
-      prefs::kJemaOSReleaseNotesLastShownVersion, GetOSVersion());
+      prefs::kWings8OSReleaseNotesLastShownVersion, GetOSVersion());
 }
 
 void ReleaseNotesStorage::StartShowingSuggestionChip() {

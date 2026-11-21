@@ -9,7 +9,7 @@
 #include "chrome/grit/branded_strings.h"
 #include "chrome/grit/generated_resources.h"
 #include "components/login/localized_values_builder.h"
-#include "jemaos/switches/misc/misc_switches.h"
+#include "wings8os/switches/misc/misc_switches.h"
 
 namespace ash {
 
@@ -35,7 +35,7 @@ void OsTrialScreenHandler::DeclareLocalizedValues(
 
 void OsTrialScreenHandler::Show() {
   base::Value::Dict data;
-  data.Set("isOsInstallAllowed", switches::IsOsInstallAllowed() && !jemaos::switches::IsOsInstallButtonHidden());
+  data.Set("isOsInstallAllowed", switches::IsOsInstallAllowed() && !wings8os::switches::IsOsInstallButtonHidden());
   ShowInWebUI(std::move(data));
 }
 

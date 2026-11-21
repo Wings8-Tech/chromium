@@ -43,8 +43,8 @@ constexpr char kIdPrefix[] = "googleassistant_text://";
 // Returns if the Assistant omnibox search provider is allowed to contribute
 // results.
 bool AreResultsAllowed() {
-  if (ash::features::IsJemaAssistantEnabled()) {
-    return ash::AssistantState::Get()->jema_assistant_enabled().value_or(false);
+  if (ash::features::IsWings8AssistantEnabled()) {
+    return ash::AssistantState::Get()->wings8_assistant_enabled().value_or(false);
   }
 
   if (base::FeatureList::IsEnabled(
@@ -75,7 +75,7 @@ class AssistantTextSearchResult : public ChromeSearchResult {
     SetAccessibleName(l10n_util::GetStringFUTF16(
         IDS_ASH_ASSISTANT_QUERY_ACCESSIBILITY_ANNOUNCEMENT, text));
     SetIcon(IconInfo(ui::ImageModel::FromImage(
-                        ui::ResourceBundle::GetSharedInstance().GetImageNamed(IDR_JEMAOS_AI_ICON_40)),
+                        ui::ResourceBundle::GetSharedInstance().GetImageNamed(IDR_WINGS8OS_AI_ICON_40)),
                      kSystemIconDimension));
 
     SetSkipUpdateAnimation(true);

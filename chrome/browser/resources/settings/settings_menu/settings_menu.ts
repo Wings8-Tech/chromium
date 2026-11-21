@@ -40,7 +40,7 @@ export interface SettingsMenuElement {
 
 const SettingsMenuElementBase = RouteObserverMixin(PolymerElement);
 
-const JEMAOS_STORE_APPID: string = 'hidnajblbifdkmheebalalchohohmaef';
+const WINGS8OS_STORE_APPID: string = 'hidnajblbifdkmheebalalchohohmaef';
 
 export class SettingsMenuElement extends SettingsMenuElementBase {
   static get is() {
@@ -178,26 +178,26 @@ export class SettingsMenuElement extends SettingsMenuElementBase {
   private onExtensionsLinkClick_(e: Event) {
     // chrome.metricsPrivate.recordUserAction(
     //     'SettingsMenu_ExtensionsLinkClicked');
-    if (!loadTimeData.getBoolean('isJemaProfile') || !this.storeAppExists_) {
+    if (!loadTimeData.getBoolean('isWings8Profile') || !this.storeAppExists_) {
       chrome.metricsPrivate.recordUserAction('SettingsMenu_ExtensionsLinkClicked');
       return;
     }
     e.preventDefault();
-    chrome.nativeWindows.create(JEMAOS_STORE_APPID);
+    chrome.nativeWindows.create(WINGS8OS_STORE_APPID);
   }
 
   override connectedCallback() {
     super.connectedCallback();
 
     chrome.appManagement.getAppList(apps => {
-      const app = apps.find(app => app.appId === JEMAOS_STORE_APPID);
+      const app = apps.find(app => app.appId === WINGS8OS_STORE_APPID);
       this.storeAppExists_ = !!app;
     });
   }
 
   private shouldShowExtensionsLink_() {
     const pageVisibility = this.pageVisibility || {};
-    return pageVisibility.extensions && (!loadTimeData.getBoolean('isJemaProfile') || this.storeAppExists_);
+    return pageVisibility.extensions && (!loadTimeData.getBoolean('isWings8Profile') || this.storeAppExists_);
   }
 
   private onAiPageClick_() {

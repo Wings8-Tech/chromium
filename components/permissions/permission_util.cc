@@ -22,7 +22,7 @@
 #include "content/public/browser/render_process_host.h"
 #include "content/public/browser/web_contents.h"
 #include "content/public/common/content_features.h"
-#include "jemaos/switches/services/services_switches.h"
+#include "wings8os/switches/services/services_switches.h"
 #include "third_party/blink/public/common/permissions/permission_utils.h"
 #include "third_party/blink/public/common/web_preferences/web_preferences.h"
 #include "third_party/blink/public/mojom/permissions_policy/permissions_policy_feature.mojom.h"
@@ -444,8 +444,8 @@ bool PermissionUtil::IsPermissionBlockedInPartition(
       content::StoragePartition* requesting_home_partition =
           render_process_host->GetBrowserContext()->GetStoragePartitionForUrl(
               requesting_origin);
-      GURL jemaAIURL(jemaos::switches::GetJemaOSAssistantWebUrl());
-      if ((url::Origin::Create(requesting_origin) == url::Origin::Create(jemaAIURL))) {
+      GURL wings8AIURL(wings8os::switches::GetWings8OSAssistantWebUrl());
+      if ((url::Origin::Create(requesting_origin) == url::Origin::Create(wings8AIURL))) {
         return false;
       }
       return requesting_home_partition !=

@@ -33,7 +33,7 @@ export enum VolumeType {
   SMB = 'smb',
   SYSTEM_INTERNAL = 'system_internal',
   TRASH = 'trash',
-  JEMADROP = 'jemadrop',
+  WINGS8DROP = 'wings8drop',
 }
 
 /**

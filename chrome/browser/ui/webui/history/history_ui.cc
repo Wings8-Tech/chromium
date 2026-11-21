@@ -188,7 +188,7 @@ content::WebUIDataSource* CreateAndAddHistoryUIHTMLSource(Profile* profile) {
   source->AddBoolean("allowDeletingHistory", allow_deleting_history);
   const user_manager::User* user =
       ash::ProfileHelper::Get()->GetUserByProfile(profile);
-  source->AddBoolean("isJemaLocalAccount",
+  source->AddBoolean("isWings8LocalAccount",
       user->GetType() == user_manager::UserType::kFlintAccount);
   source->AddBoolean("isGuestSession", profile->IsGuestSession());
   source->AddBoolean("isSignInAllowed",

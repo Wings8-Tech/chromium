@@ -46,7 +46,7 @@ class ErrorScreen : public BaseScreen,
   // with removing the global variables for the offline login allowance.
   void DisallowOfflineLogin();
 
-  void AllowJemaLocalSignin(bool allowed);
+  void AllowWings8LocalSignin(bool allowed);
 
   // Toggles the offline sign-in.
   static void AllowOfflineLogin(bool allowed);

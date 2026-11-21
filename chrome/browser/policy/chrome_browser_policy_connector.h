@@ -61,9 +61,9 @@ class ChromeBrowserPolicyConnector : public BrowserPolicyConnector {
   void Init(PrefService* local_state,
             scoped_refptr<network::SharedURLLoaderFactory> url_loader_factory)
       override;
-  // ---***JEMAOS BEGIN***---
+  // ---***WINGS8OS BEGIN***---
   void ResetDeviceManagementServiceConfiguration();
-  // ---***JEMAOS END***---
+  // ---***WINGS8OS END***---
 
   // Called to signal the browser has started.
   virtual void OnBrowserStarted();

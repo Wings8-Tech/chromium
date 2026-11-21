@@ -8,8 +8,8 @@
 #include "base/command_line.h"
 #include "base/logging.h"
 #include "remoting/base/buildflags.h"
-#include "jemaos/switches/account/account_constants.h"
-#include "jemaos/switches/account/account_switches.h"
+#include "wings8os/switches/account/account_constants.h"
+#include "wings8os/switches/account/account_switches.h"
 
 #if BUILDFLAG(REMOTING_INTERNAL)
 #include "remoting/internal/base/service_urls.h"
@@ -52,12 +52,12 @@ ServiceUrls::ServiceUrls()
       remoting_cloud_public_endpoint_(kRemotingCloudPublicEndpoint),
       remoting_cloud_private_endpoint_(kRemotingCloudPrivateEndpoint),
       remoting_server_endpoint_(kRemotingServerEndpoint) {
-  // JEMAOS: par defaut, on utilise TOUJOURS notre infrastructure, quel que
-  // soit le type de compte (local, Google ou Jema). Le fork est ainsi
+  // WINGS8OS: par defaut, on utilise TOUJOURS notre infrastructure, quel que
+  // soit le type de compte (local, Google ou Wings8). Le fork est ainsi
   // totalement souverain, sans dependre du parcours de connexion.
-  ftl_server_endpoint_ = jemaos::constants::kDefaultJemaFtlServerEndpoint;
+  ftl_server_endpoint_ = wings8os::constants::kDefaultWings8FtlServerEndpoint;
   remoting_server_endpoint_ =
-      jemaos::constants::kDefaultJemaRemotingServerEndpoint;
+      wings8os::constants::kDefaultWings8RemotingServerEndpoint;
 #if BUILDFLAG(REMOTING_INTERNAL)
   remoting_corp_endpoint_ = internal::GetRemotingCorpApiUrl();
 #endif
@@ -112,14 +112,14 @@ ServiceUrls* remoting::ServiceUrls::GetInstance() {
 }
 
 void ServiceUrls::ResetServerEndpoints() {
-  // JEMAOS: nos endpoints, toujours (quel que soit le type de compte).
+  // WINGS8OS: nos endpoints, toujours (quel que soit le type de compte).
   // L'ancien comportement rebasculait sur Google si le compte n'etait pas un
-  // compte Jema, ce qui empechait un appareil en compte local/Google de
+  // compte Wings8, ce qui empechait un appareil en compte local/Google de
   // contacter notre infrastructure.
-  // Les switches --jema-ftl-server-endpoint / --jema-remoting-server-endpoint
+  // Les switches --wings8-ftl-server-endpoint / --wings8-remoting-server-endpoint
   // restent honores pour surcharger les endpoints en debug.
-  ftl_server_endpoint_ = jemaos::switches::GetJemaFtlServerEndpoint();
-  remoting_server_endpoint_ = jemaos::switches::GetJemaRemotingServerEndpoint();
+  ftl_server_endpoint_ = wings8os::switches::GetWings8FtlServerEndpoint();
+  remoting_server_endpoint_ = wings8os::switches::GetWings8RemotingServerEndpoint();
 }
 
 }  // namespace remoting

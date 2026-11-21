@@ -28,7 +28,7 @@
 #include "mojo/public/cpp/bindings/pending_receiver.h"
 #include "mojo/public/cpp/bindings/receiver.h"
 #include "mojo/public/cpp/bindings/remote_set.h"
-#include "jemaos/chromeos/ash/components/dbus/jemaos_shell_client/shell_state.h"
+#include "wings8os/chromeos/ash/components/dbus/wings8os_shell_client/shell_state.h"
 
 namespace network {
 
@@ -221,11 +221,11 @@ class COMPONENT_EXPORT(CHROMEOS_ASH_COMPONENTS_FWUPD) FirmwareUpdateManager
   void RequestDevices();
 
   void ShellClientRequestUpdates();
-  void OnShellClientGetUpdates(std::optional<jemaos::ash::ShellState> state);
-  void OnShellClientUpdateFirmwareStarted(std::optional<jemaos::ash::ShellState> state);
+  void OnShellClientGetUpdates(std::optional<wings8os::ash::ShellState> state);
+  void OnShellClientUpdateFirmwareStarted(std::optional<wings8os::ash::ShellState> state);
   void ScheduleGetTaskOutputAndState(int32_t task_id);
   void QueryShellTaskState(int32_t task_id);
-  void OnGetShellClientTaskState(int32_t task_id, std::optional<jemaos::ash::ShellState> state);
+  void OnGetShellClientTaskState(int32_t task_id, std::optional<wings8os::ash::ShellState> state);
   void StartInstallByShellClient(const std::string& device_id);
 
   // Query the fwupd DBus client for updates for a certain device.
