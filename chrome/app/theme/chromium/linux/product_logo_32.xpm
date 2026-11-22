@@ -2,7 +2,7 @@
 static char * linux_icon_chromium_32_xpm[] = {
 "32 32 10 1",
 " 	c None",
-"A	c #0a1f4a"
+"A	c #0B1F4B"
 "B	c #16336b"
 "C	c #f59e0b"
 "D	c #f97316"
