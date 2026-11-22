@@ -219,9 +219,9 @@ void RegisterProfilePrefs(PrefRegistrySimple* registry,
     registry->RegisterStringPref(::prefs::kLiveCaptionLanguageCode,
                                  speech::kUsEnglishLocale);
     registry->RegisterStringPref(language::prefs::kApplicationLocale,
-                                 std::string());
+                                 std::string("en-US"));
     registry->RegisterStringPref(language::prefs::kPreferredLanguages,
-                                 std::string());
+                                 std::string("en-US"));
     registry->RegisterIntegerPref(prefs::kAltEventRemappedToRightClick, 0);
     registry->RegisterIntegerPref(
         prefs::kHMRConsentStatus,

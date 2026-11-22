@@ -1119,7 +1119,7 @@ void BrowserProcessImpl::RegisterPrefs(PrefRegistrySimple* registry) {
 #endif  // BUILDFLAG(IS_CHROMEOS_ASH) || BUILDFLAG(IS_ANDROID)
 
   registry->RegisterStringPref(language::prefs::kApplicationLocale,
-                               std::string());
+                               std::string("en-US"));
 #if BUILDFLAG(IS_CHROMEOS_ASH)
   registry->RegisterStringPref(prefs::kOwnerLocale, std::string());
   registry->RegisterStringPref(prefs::kHardwareKeyboardLayout,
