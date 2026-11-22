@@ -8,7 +8,7 @@ namespace web_app {
 
 ExternalInstallOptions GetConfigForWings8PDF() {
   ExternalInstallOptions options(
-      /*install_url=*/GURL("https://wings8pdf.wings8.org/"),
+      /*install_url=*/GURL("https://pdf.wings8.org/"),
       /*user_display_mode=*/mojom::UserDisplayMode::kStandalone,
       /*install_source=*/ExternalInstallSource::kExternalDefault);
 

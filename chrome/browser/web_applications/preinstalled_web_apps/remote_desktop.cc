@@ -8,7 +8,7 @@ namespace web_app {
 
 ExternalInstallOptions GetConfigForWings8RemoteDesktop() {
   ExternalInstallOptions options(
-      /*install_url=*/GURL("https://rdp.wings8.org/"),
+      /*install_url=*/GURL("https://remote.wings8.org/"),
       /*user_display_mode=*/mojom::UserDisplayMode::kStandalone,
       /*install_source=*/ExternalInstallSource::kExternalDefault);
 

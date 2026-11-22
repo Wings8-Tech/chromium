@@ -17,7 +17,7 @@ const char kWings8OSStoreBaseUrl[] = "https://chromewebstore.google.com/category
 const char kWings8OSAccountBaseUrl[] = "https://86db242e-958e-432e-a6c2-0b19a92beeb6.auth-app.wings8tech.com";
 
 const char kWings8OSForumURL[] = "https://wings8.org/";
-const char kWings8OSRemoteDesktopURL[] = "https://rdp.wings8.org/";
+const char kWings8OSRemoteDesktopURL[] = "https://remote.wings8.org/";
 const char kWings8OSNotesAppURL[] = "https://wings8.org"; // https://notes.wings8.org
 const char kWings8OSHelpURL[] = "https://wings8.org/?ospath=help/";
 const char kWings8OSReleaseNotesURL[] = "https://wings8.org/?ospath=release";
@@ -84,7 +84,7 @@ const char kWings8OSStoreBaseUrl[] = "https://chromewebstore.google.com";
 const char kWings8OSAccountBaseUrl[] = "https://86db242e-958e-432e-a6c2-0b19a92beeb6.auth-app.wings8tech.com";
 
 const char kWings8OSForumURL[] = "https://wings8.org/"; // https://community.wings8.org/
-const char kWings8OSRemoteDesktopURL[] = "https://rdp.wings8.org/";
+const char kWings8OSRemoteDesktopURL[] = "https://remote.wings8.org/";
 const char kWings8OSNotesAppURL[] = "https://wings8.org"; // https://notes.wings8.org
 const char kWings8OSHelpURL[] = "https://wings8.org/?ospath=help/";
 const char kWings8OSReleaseNotesURL[] = "https://wings8.org/?ospath=release";

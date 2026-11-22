@@ -8,7 +8,7 @@ namespace web_app {
 
 ExternalInstallOptions GetConfigForQuickText() {
   ExternalInstallOptions options(
-      /*install_url=*/GURL("https://textapp.wings8.org/"),
+      /*install_url=*/GURL("https://quicktext.wings8.org/"),
       /*user_display_mode=*/mojom::UserDisplayMode::kStandalone,
       /*install_source=*/ExternalInstallSource::kExternalDefault);
 

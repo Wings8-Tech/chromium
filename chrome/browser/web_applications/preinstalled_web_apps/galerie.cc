@@ -8,7 +8,7 @@ namespace web_app {
 
 ExternalInstallOptions GetConfigForGalerie() {
   ExternalInstallOptions options(
-      /*install_url=*/GURL("https://gallery.wings8.org/"),
+      /*install_url=*/GURL("https://galerie.wings8.org/"),
       /*user_display_mode=*/mojom::UserDisplayMode::kStandalone,
       /*install_source=*/ExternalInstallSource::kExternalDefault);
 

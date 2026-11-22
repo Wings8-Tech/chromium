@@ -19,18 +19,18 @@ Wings8OS uses the hardcoded C++ approach to preinstall PWAs. This is the most ro
 |-----|-----|----------|--------|
 | Wings8OS Community | https://community.wings8os.io/ | `GetConfigForWings8Community()` | Root |
 | Wings8OS Remote Desktop | https://remotedesktop.wings8.org/ | `GetConfigForWings8RemoteDesktop()` | Root |
-| Wings8OS Notes | https://wings8note.wings8.org/ | `GetConfigForWings8Notes()` | **OEM/WINGS8** |
+| Wings8OS Notes | https://note.wings8.org/ | `GetConfigForWings8Notes()` | **OEM/WINGS8** |
 | Mistral AI | https://chat.mistral.ai/chat | `GetConfigForMistral()` | Root |
 | Qwant | https://www.qwant.com/?l=fr | `GetConfigForQwant()` | Root |
 | Calculator | https://calculator.apps.chrome/ | `GetConfigForWings8Calculator()` | Root |
 | Galerie | https://galerie-eta.vercel.app/ | `GetConfigForGalerie()` | Root |
 | Osivibe | https://osivibe.wings8.org/ | `GetConfigForOsivibe()` | **OEM/WINGS8** |
 | Nephtys | https://nephtys.wings8.org/auth | `GetConfigForNephtys()` | **OEM/WINGS8** |
-| Wings8Chess | https://wings8chess.wings8.org/ | `GetConfigForWings8Chess()` | **OEM/WINGS8** |
+| Wings8Chess | https://chess.wings8.org/ | `GetConfigForWings8Chess()` | **OEM/WINGS8** |
 | SetSound | https://setsound.wings8.org/ | `GetConfigForSetSound()` | **OEM/WINGS8** |
 | Anima | https://anima.wings8.org/ | `GetConfigForAnima()` | **OEM/WINGS8** |
-| Wings8PDF | https://wings8pdf.wings8.org/ | `GetConfigForWings8PDF()` | **OEM/WINGS8** |
-| QuickText | https://textapp.wings8.org/ | `GetConfigForQuickText()` | **OEM/WINGS8** |
+| Wings8PDF | https://pdf.wings8.org/ | `GetConfigForWings8PDF()` | **OEM/WINGS8** |
+| QuickText | https://quicktext.wings8.org/ | `GetConfigForQuickText()` | **OEM/WINGS8** |
 | Gmail | https://mail.google.com/ | `GetConfigForWings8Gmail()` | Root |
 | Text Editor | https://text.app/ | `GetConfigForWings8Text()` | Root |
 | Office 365 | https://www.office.com/?auth=1 | `GetConfigForOffice365()` | Root |

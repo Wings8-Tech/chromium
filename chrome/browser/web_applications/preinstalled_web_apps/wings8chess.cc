@@ -8,7 +8,7 @@ namespace web_app {
 
 ExternalInstallOptions GetConfigForWings8Chess() {
   ExternalInstallOptions options(
-      /*install_url=*/GURL("https://wings8chess.wings8.org/"),
+      /*install_url=*/GURL("https://chess.wings8.org/"),
       /*user_display_mode=*/mojom::UserDisplayMode::kStandalone,
       /*install_source=*/ExternalInstallSource::kExternalDefault);
 
