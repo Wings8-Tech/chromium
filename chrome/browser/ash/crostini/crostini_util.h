@@ -43,7 +43,7 @@ inline constexpr char kCrostiniDefaultVmName[] = "termina";
 inline constexpr char kCrostiniDefaultContainerName[] = "penguin";
 inline constexpr char kCrostiniDefaultUsername[] = "emperor";
 inline constexpr char kCrostiniDefaultImageServerUrl[] =
-    "https://storage.googleapis.com/cros-containers/%d";
+    "https://cros-images.vercel.app/cros-containers/%d";
 inline constexpr char kCrostiniDlcName[] = "termina-dlc";
 
 inline constexpr base::FilePath::CharType kHomeDirectory[] =
