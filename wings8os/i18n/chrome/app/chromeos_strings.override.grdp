@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <!-- override chrome/app/chromeos_strings.grdp, included from generated_resources.grd -->
 <grit-part>
   <!-- === Welcome / Network / Trial === -->
@@ -10,10 +10,10 @@
       Bienvenue sur <ph name="DEVICE_OS">$1<ex>Wings8OS</ex></ph>
     </message>
     <message name="IDS_NETWORK_SELECTION_TITLE" desc="Title of network selection screen" meaning="A title of the dialog where user should select network to connect to Internet">
-      Connectez-vous pour profiter de toutes les fonctionnalités de votre dispositif Wings8
+      Connectez-vous pour profiter de toutes les fonctionnalitÃ©s de votre dispositif Wings8
     </message>
     <message name="IDS_OS_TRIAL_TRY_TITLE" desc="Title of the install option in the install or try screen, the first screen of the ChromeOS Flex Installation flow">
-      Démarrer sur Wings8OS
+      DÃ©marrer sur Wings8OS
     </message>
   </if>
   <if expr="lang != 'fr' and lang != 'fr-CA'">
@@ -35,7 +35,7 @@
   <if expr="openwings8">
     <if expr="lang == 'fr' or lang == 'fr-CA'">
       <message name="IDS_LOGIN_API_KEYS_NOTICE" desc="Notice displayed on the login screen in case if API keys are missing.">
-        Vous ne pourrez pas ajouter d'utilisateurs car les clés API Google et Wings8OS sont manquantes. Voir <ph name="DETAILS_URL">$1<ex>http://www.example.com</ex></ph> pour plus de détails.
+        Vous ne pourrez pas ajouter d'utilisateurs car les clÃ©s API Google et Wings8OS sont manquantes. Voir <ph name="DETAILS_URL">$1<ex>http://www.example.com</ex></ph> pour plus de dÃ©tails.
       </message>
     </if>
     <if expr="lang != 'fr' and lang != 'fr-CA'">
@@ -48,7 +48,7 @@
   <!-- === Local State error (powerwash required) === -->
   <if expr="lang == 'fr' or lang == 'fr-CA'">
     <message name="IDS_LOCAL_STATE_ERROR_TEXT_1" desc="Text for notification that all local files will be deleted while Wings8OS account and any synced data won't be affected.">
-      La réinitialisation de votre appareil n'a aucune incidence sur vos comptes Wings8OS ni sur leurs données synchronisées. Toutefois, tous les fichiers enregistrés en local sur votre appareil vont être supprimés.
+      La rÃ©initialisation de votre appareil n'a aucune incidence sur vos comptes Wings8OS ni sur leurs donnÃ©es synchronisÃ©es. Toutefois, tous les fichiers enregistrÃ©s en local sur votre appareil vont Ãªtre supprimÃ©s.
     </message>
   </if>
   <if expr="lang != 'fr' and lang != 'fr-CA'">
@@ -60,7 +60,7 @@
   <!-- === Marketing opt-in === -->
   <if expr="lang == 'fr' or lang == 'fr-CA'">
     <message name="IDS_LOGIN_MARKETING_OPT_IN_SCREEN_SUBTITLE" desc="The sub-title of the dialog that allows user to opt-in into several Google marketing options.">
-      Recevez des conseils et mises à jour pour votre <ph name="DEVICE_TYPE">$1<ex>Wings8OS device</ex></ph> de la part de Wings8 Technology
+      Recevez des conseils et mises Ã  jour pour votre <ph name="DEVICE_TYPE">$1<ex>Wings8OS device</ex></ph> de la part de Wings8 Technology
     </message>
   </if>
   <if expr="lang != 'fr' and lang != 'fr-CA'">
@@ -84,16 +84,16 @@
       Installer les applications Android
     </message>
     <message name="IDS_ARC_OOBE_TERMS_LOAD_ERROR" desc="Load error message of the Arc Terms OOBE dialog.">
-      Oups, problèmes de connexion. Veuillez réessayer.
+      Oups, problÃ¨mes de connexion. Veuillez rÃ©essayer.
     </message>
     <message name="IDS_LOGIN_APP_DOWNLOADING_SCREEN_DESCRIPTION" desc="The description of the 'App Downloading' section">
       Vous pouvez trouver d'autres applications pour votre appareil dans n'importe quelle boutique d'applications Android tierce de votre choix.
     </message>
     <message name="IDS_ARC_ANDROID_MANAGEMENT_REQUIRED_ERROR" desc="Error message shown when Android management is required for an unmanaged Chrome OS user.">
-      Votre organisation n'a pas activé le support Android pour votre compte. Contactez votre administrateur pour plus d'informations.
+      Votre organisation n'a pas activÃ© le support Android pour votre compte. Contactez votre administrateur pour plus d'informations.
     </message>
     <message name="IDS_ARC_DATA_REMOVAL_CONFIRMATION_HEADING" desc="Heading text in the content area of the confirmation for data removal in case ARC comes to wrong state.">
-      Pour utiliser les applications Android, vous devez d'abord restaurer vos applications. Certaines données peuvent avoir été perdues.
+      Pour utiliser les applications Android, vous devez d'abord restaurer vos applications. Certaines donnÃ©es peuvent avoir Ã©tÃ© perdues.
     </message>
     <message name="IDS_ARC_MANAGED_PROVISION_NOTIFICATION_MESSAGE" desc="Notification shown to user during ARC provision when the ARC opt-in flow happens silently due to enterprise policies.">
       Installation du support Android sur votre <ph name="DEVICE_TYPE">$1<ex>Wings8OS device</ex></ph>. Cela peut prendre quelques minutes.
@@ -135,9 +135,9 @@
   <if expr="openwings8">
     <if expr="lang == 'fr' or lang == 'fr-CA'">
       <message name="IDS_USER_IMAGE_SCREEN_DESCRIPTION" desc="Description text for the oobe/login user image selection dialog.">
-        Prenez une nouvelle photo ou choisissez une photo ou une icône existante.
+        Prenez une nouvelle photo ou choisissez une photo ou une icÃ´ne existante.
         <ph name="LINE_BREAK">&lt;br&gt;&lt;br&gt;</ph>
-        Cette image apparaîtra sur l'écran de connexion et l'écran de verrouillage de votre appareil openWings8.
+        Cette image apparaÃ®tra sur l'Ã©cran de connexion et l'Ã©cran de verrouillage de votre appareil openWings8.
       </message>
     </if>
     <if expr="lang != 'fr' and lang != 'fr-CA'">
@@ -150,10 +150,10 @@
     <if expr="not use_wings8os_com">
       <if expr="lang == 'fr' or lang == 'fr-CA'">
         <message name="IDS_EULA_TPM_DESCRIPTION" desc="Dialog box text">
-          Votre ordinateur contient un module de sécurité TPM (Trusted Platform Module), utilisé pour implémenter de nombreuses fonctionnalités de sécurité essentielles dans openWings8. Visitez le Centre d'aide openWings8 pour en savoir plus : https://wings8.org/help/
+          Votre ordinateur contient un module de sÃ©curitÃ© TPM (Trusted Platform Module), utilisÃ© pour implÃ©menter de nombreuses fonctionnalitÃ©s de sÃ©curitÃ© essentielles dans openWings8. Visitez le Centre d'aide openWings8 pour en savoir plus : https://wings8.org/help/
         </message>
         <message name="IDS_EULA_SECURE_MODULE_DESCRIPTION" desc="Description of what a secure module does in the eula page.">
-          Votre ordinateur contient un module de sécurité, utilisé pour implémenter de nombreuses fonctionnalités de sécurité essentielles dans openWings8. Visitez le Centre d'aide openWings8 pour en savoir plus : https://wings8.org/help/
+          Votre ordinateur contient un module de sÃ©curitÃ©, utilisÃ© pour implÃ©menter de nombreuses fonctionnalitÃ©s de sÃ©curitÃ© essentielles dans openWings8. Visitez le Centre d'aide openWings8 pour en savoir plus : https://wings8.org/help/
         </message>
       </if>
       <if expr="lang != 'fr' and lang != 'fr-CA'">
@@ -168,10 +168,10 @@
     <if expr="use_wings8os_com">
       <if expr="lang == 'fr' or lang == 'fr-CA'">
         <message name="IDS_EULA_TPM_DESCRIPTION" desc="Dialog box text">
-          Votre ordinateur contient un module de sécurité TPM (Trusted Platform Module), utilisé pour implémenter de nombreuses fonctionnalités de sécurité essentielles dans openWings8. Visitez le Centre d'aide openWings8 pour en savoir plus : https://wings8.org/help/
+          Votre ordinateur contient un module de sÃ©curitÃ© TPM (Trusted Platform Module), utilisÃ© pour implÃ©menter de nombreuses fonctionnalitÃ©s de sÃ©curitÃ© essentielles dans openWings8. Visitez le Centre d'aide openWings8 pour en savoir plus : https://wings8.org/help/
         </message>
         <message name="IDS_EULA_SECURE_MODULE_DESCRIPTION" desc="Description of what a secure module does in the eula page.">
-          Votre ordinateur contient un module de sécurité, utilisé pour implémenter de nombreuses fonctionnalités de sécurité essentielles dans openWings8. Visitez le Centre d'aide openWings8 pour en savoir plus : https://wings8.org/help/
+          Votre ordinateur contient un module de sÃ©curitÃ©, utilisÃ© pour implÃ©menter de nombreuses fonctionnalitÃ©s de sÃ©curitÃ© essentielles dans openWings8. Visitez le Centre d'aide openWings8 pour en savoir plus : https://wings8.org/help/
         </message>
       </if>
       <if expr="lang != 'fr' and lang != 'fr-CA'">
@@ -185,39 +185,39 @@
     </if>
     <if expr="lang == 'fr' or lang == 'fr-CA'">
       <message name="IDS_ENABLE_DEBUGGING_HELP" desc="Help content of the enable debugging features dialog.">
-        <ph name="BEGIN_H3">&lt;h3&gt;</ph>Fonctionnalités de débogage<ph name="END_H3">&lt;/h3&gt;</ph>
+        <ph name="BEGIN_H3">&lt;h3&gt;</ph>FonctionnalitÃ©s de dÃ©bogage<ph name="END_H3">&lt;/h3&gt;</ph>
         <ph name="BR">&lt;br&gt;</ph>
-        Vous pouvez activer les fonctionnalités de débogage sur votre appareil openWings8 afin d'installer et de tester du code personnalisé. Cela vous permettra de :<ph name="BR">&lt;br&gt;</ph>
+        Vous pouvez activer les fonctionnalitÃ©s de dÃ©bogage sur votre appareil openWings8 afin d'installer et de tester du code personnalisÃ©. Cela vous permettra de :<ph name="BR">&lt;br&gt;</ph>
         <ph name="BEGIN_LIST">&lt;ul&gt;</ph>
-          <ph name="LIST_ITEM">&lt;li&gt;</ph>Supprimer la vérification rootfs pour pouvoir modifier les fichiers du système
-          <ph name="LIST_ITEM">&lt;li&gt;</ph>Activer l'accès SSH à l'appareil avec les clés de test standard pour utiliser des outils comme <ph name="BEGIN_CODE">&lt;span style=&quot;color:grey;font-family:monospace&quot;&gt;</ph>&apos;cros flash&apos;<ph name="END_CODE">&lt;/span&gt;</ph>
-          <ph name="LIST_ITEM">&lt;li&gt;</ph>Activer le démarrage depuis USB pour installer une image OS depuis une clé USB
-          <ph name="LIST_ITEM">&lt;li&gt;</ph>Définir le mot de passe root dev et système sur une valeur personnalisée pour un accès SSH manuel
+          <ph name="LIST_ITEM">&lt;li&gt;</ph>Supprimer la vÃ©rification rootfs pour pouvoir modifier les fichiers du systÃ¨me
+          <ph name="LIST_ITEM">&lt;li&gt;</ph>Activer l'accÃ¨s SSH Ã  l'appareil avec les clÃ©s de test standard pour utiliser des outils comme <ph name="BEGIN_CODE">&lt;span style=&quot;color:grey;font-family:monospace&quot;&gt;</ph>&apos;cros flash&apos;<ph name="END_CODE">&lt;/span&gt;</ph>
+          <ph name="LIST_ITEM">&lt;li&gt;</ph>Activer le dÃ©marrage depuis USB pour installer une image OS depuis une clÃ© USB
+          <ph name="LIST_ITEM">&lt;li&gt;</ph>DÃ©finir le mot de passe root dev et systÃ¨me sur une valeur personnalisÃ©e pour un accÃ¨s SSH manuel
         <ph name="END_LIST">&lt;/ul&gt;</ph>
         <ph name="BR">&lt;br&gt;</ph>
-        Une fois activées, la plupart des fonctionnalités de débogage resteront actives même après un powerwash ou un effacement des données sur un appareil géré par l'entreprise. Pour désactiver complètement toutes les fonctionnalités de débogage, effectuez le processus de restauration openWings8 (https://wings8.org/help/).
+        Une fois activÃ©es, la plupart des fonctionnalitÃ©s de dÃ©bogage resteront actives mÃªme aprÃ¨s un powerwash ou un effacement des donnÃ©es sur un appareil gÃ©rÃ© par l'entreprise. Pour dÃ©sactiver complÃ¨tement toutes les fonctionnalitÃ©s de dÃ©bogage, effectuez le processus de restauration openWings8 (https://wings8.org/help/).
         <ph name="BR">&lt;br&gt;</ph>
         <ph name="BR">&lt;br&gt;</ph>
-        Pour plus d'informations sur les fonctionnalités de débogage, consultez :<ph name="BR">&lt;br&gt;</ph>
+        Pour plus d'informations sur les fonctionnalitÃ©s de dÃ©bogage, consultez :<ph name="BR">&lt;br&gt;</ph>
         https://www.chromium.org/chromium-os/how-tos-and-troubleshooting/debugging-features
         <ph name="BR">&lt;br&gt;</ph>
         <ph name="BR">&lt;br&gt;</ph>
-        <ph name="BEGIN_BOLD">&lt;b&gt;</ph>Remarque :<ph name="END_BOLD">&lt;/b&gt;</ph>  Le système redémarrera pendant le processus.
+        <ph name="BEGIN_BOLD">&lt;b&gt;</ph>Remarque :<ph name="END_BOLD">&lt;/b&gt;</ph>  Le systÃ¨me redÃ©marrera pendant le processus.
       </message>
       <message name="IDS_AD_DEVICE_NAME_INPUT_LABEL" desc="Admin-facing. Label for device name input field on the Active Directory domain join screen. User should tell us the name of their device.">
         Nom de l'appareil openWings8
       </message>
       <message name="IDS_AD_BOARD_NOT_SUPPORTED" desc="Admin-facing. Alert message that the Chromebook model is not supported for Active Directory">
-        L'intégration openWings8 <ph name="MS_AD_NAME">Microsoft® Active Directory®</ph> n'est prise en charge que sur les plateformes x86_64. Les appareils openWings8 basés sur une plateforme ARM ou x86 ne supportent pas cette fonctionnalité.
+        L'intÃ©gration openWings8 <ph name="MS_AD_NAME">MicrosoftÂ® Active DirectoryÂ®</ph> n'est prise en charge que sur les plateformes x86_64. Les appareils openWings8 basÃ©s sur une plateforme ARM ou x86 ne supportent pas cette fonctionnalitÃ©.
       </message>
       <message name="IDS_ARC_SIGN_IN_BAD_AUTHENTICATION_ERROR" desc="Android sign-in error because of bad authentification">
-        Impossible de vérifier votre compte. Veuillez réessayer ou redémarrer votre appareil openWings8.
+        Impossible de vÃ©rifier votre compte. Veuillez rÃ©essayer ou redÃ©marrer votre appareil openWings8.
       </message>
       <message name="IDS_ARC_SERVER_COMMUNICATION_ERROR" desc="Android sign-in error because of server communication error">
-        Impossible de se connecter au serveur. Veuillez vérifier votre connexion réseau et réessayer. Si le problème persiste, redémarrez votre appareil openWings8.
+        Impossible de se connecter au serveur. Veuillez vÃ©rifier votre connexion rÃ©seau et rÃ©essayer. Si le problÃ¨me persiste, redÃ©marrez votre appareil openWings8.
       </message>
       <message name="IDS_HATS_NOTIFICATION_TITLE" desc="The title of the notification for Happiness Tracking Survey.">
-        Aidez-nous à améliorer openWings8
+        Aidez-nous Ã  amÃ©liorer openWings8
       </message>
       <message name="IDS_ARC_NOTIFICATION_DISPLAY_SOURCE" desc="Context title of the first-run notification that enables Android apps.">
         Android pour openWings8
@@ -232,10 +232,10 @@
         Compte Android openWings8
       </message>
       <message name="IDS_ARC_OPT_IN_ACTIVE_DIRECTORY_AUTH_DESC" desc="Description displayed in opt-in dialog to inform an Active Directory user that they may have to enter their credentials">
-        Pour activer l'accès de votre compte à la boutique Android openWings8, veuillez vous authentifier auprès de votre fournisseur d'identité.
+        Pour activer l'accÃ¨s de votre compte Ã  la boutique Android openWings8, veuillez vous authentifier auprÃ¨s de votre fournisseur d'identitÃ©.
       </message>
       <message name="IDS_ECHO_CONSENT_DIALOG_TEXT" desc="Dialog text shown when user is asked to give consent to proceed with redeeming an ECHO offer.">
-        <ph name="SERVICE_NAME">$1<ex>Google Drive</ex></ph> souhaite vérifier si vous utilisez un appareil openWings8 éligible.
+        <ph name="SERVICE_NAME">$1<ex>Google Drive</ex></ph> souhaite vÃ©rifier si vous utilisez un appareil openWings8 Ã©ligible.
       </message>
     </if>
     <if expr="lang != 'fr' and lang != 'fr-CA'">
@@ -263,7 +263,7 @@
         openWings8 device name
       </message>
       <message name="IDS_AD_BOARD_NOT_SUPPORTED" desc="Admin-facing. Alert message that the Chromebook model is not supported for Active Directory">
-        openWings8 <ph name="MS_AD_NAME">Microsoft® Active Directory®</ph> integration is only supported on x86_64 platforms. openWings8 devices built on top of an ARM or x86 platform do not support this functionality.
+        openWings8 <ph name="MS_AD_NAME">MicrosoftÂ® Active DirectoryÂ®</ph> integration is only supported on x86_64 platforms. openWings8 devices built on top of an ARM or x86 platform do not support this functionality.
       </message>
       <message name="IDS_ARC_SIGN_IN_BAD_AUTHENTICATION_ERROR" desc="Android sign-in error because of bad authentification">
         Couldn't verify your account. Please try again or restart your openWings8 device.
@@ -311,13 +311,13 @@
     </if>
     <if expr="lang == 'fr' or lang == 'fr-CA'">
       <message name="IDS_ENABLE_DEBUGGING_SETUP_MESSAGE" desc="Setup message in dialog for enabling debugging features.">
-      Vous activez les fonctionnalités de débogage openWings8 qui configureront le démon sshd et activeront le démarrage depuis les clés USB.
+      Vous activez les fonctionnalitÃ©s de dÃ©bogage openWings8 qui configureront le dÃ©mon sshd et activeront le dÃ©marrage depuis les clÃ©s USB.
       </message>
       <message name="IDS_WRONG_HWID_SCREEN_MESSAGE_FIRST_PART" desc="Warning message shown on screen notifying about malformed hardware ID. First paragraph.">
-        Malheureusement, votre ordinateur est configuré avec un identifiant matériel malformé. Cela empêche openWings8 de se mettre à jour avec les derniers correctifs de sécurité et votre ordinateur <ph name="BEGIN_BOLD">$1</ph>peut être vulnérable aux attaques malveillantes<ph name="END_BOLD">$2</ph>.
+        Malheureusement, votre ordinateur est configurÃ© avec un identifiant matÃ©riel malformÃ©. Cela empÃªche openWings8 de se mettre Ã  jour avec les derniers correctifs de sÃ©curitÃ© et votre ordinateur <ph name="BEGIN_BOLD">$1</ph>peut Ãªtre vulnÃ©rable aux attaques malveillantes<ph name="END_BOLD">$2</ph>.
       </message>
       <message name="IDS_FILEMANAGER_APP_DESCRIPTION" desc="Description for the File Manager app.">
-        L'application Fichiers offre un accès rapide aux fichiers enregistrés sur Google Drive, un stockage externe ou votre appareil openWings8.
+        L'application Fichiers offre un accÃ¨s rapide aux fichiers enregistrÃ©s sur Google Drive, un stockage externe ou votre appareil openWings8.
       </message>
     </if>
     <if expr="lang != 'fr' and lang != 'fr-CA'">
@@ -339,9 +339,9 @@
   <if expr="not openwings8">
     <if expr="lang == 'fr' or lang == 'fr-CA'">
       <message name="IDS_USER_IMAGE_SCREEN_DESCRIPTION" desc="Description text for the oobe/login user image selection dialog.">
-        Prenez une nouvelle photo ou choisissez une photo ou une icône existante.
+        Prenez une nouvelle photo ou choisissez une photo ou une icÃ´ne existante.
         <ph name="LINE_BREAK">&lt;br&gt;&lt;br&gt;</ph>
-        Cette image apparaîtra sur l'écran de connexion et l'écran de verrouillage de votre appareil Wings8OS.
+        Cette image apparaÃ®tra sur l'Ã©cran de connexion et l'Ã©cran de verrouillage de votre appareil Wings8OS.
       </message>
     </if>
     <if expr="lang != 'fr' and lang != 'fr-CA'">
@@ -354,10 +354,10 @@
     <if expr="not use_wings8os_com">
       <if expr="lang == 'fr' or lang == 'fr-CA'">
         <message name="IDS_EULA_TPM_DESCRIPTION" desc="Dialog box text">
-          Votre ordinateur contient un module de sécurité TPM (Trusted Platform Module), utilisé pour implémenter de nombreuses fonctionnalités de sécurité essentielles dans Wings8OS. Visitez le Centre d'aide Wings8OS pour en savoir plus : https://wings8.org/help/
+          Votre ordinateur contient un module de sÃ©curitÃ© TPM (Trusted Platform Module), utilisÃ© pour implÃ©menter de nombreuses fonctionnalitÃ©s de sÃ©curitÃ© essentielles dans Wings8OS. Visitez le Centre d'aide Wings8OS pour en savoir plus : https://wings8.org/help/
         </message>
         <message name="IDS_EULA_SECURE_MODULE_DESCRIPTION" desc="Description of what a secure module does in the eula page.">
-          Votre ordinateur contient un module de sécurité, utilisé pour implémenter de nombreuses fonctionnalités de sécurité essentielles dans Wings8OS. Visitez le Centre d'aide Wings8OS pour en savoir plus : https://wings8.org/help/
+          Votre ordinateur contient un module de sÃ©curitÃ©, utilisÃ© pour implÃ©menter de nombreuses fonctionnalitÃ©s de sÃ©curitÃ© essentielles dans Wings8OS. Visitez le Centre d'aide Wings8OS pour en savoir plus : https://wings8.org/help/
         </message>
       </if>
       <if expr="lang != 'fr' and lang != 'fr-CA'">
@@ -372,10 +372,10 @@
     <if expr="use_wings8os_com">
       <if expr="lang == 'fr' or lang == 'fr-CA'">
         <message name="IDS_EULA_TPM_DESCRIPTION" desc="Dialog box text">
-          Votre ordinateur contient un module de sécurité TPM (Trusted Platform Module), utilisé pour implémenter de nombreuses fonctionnalités de sécurité essentielles dans Wings8OS. Visitez le Centre d'aide Wings8OS pour en savoir plus : https://wings8.org/help/
+          Votre ordinateur contient un module de sÃ©curitÃ© TPM (Trusted Platform Module), utilisÃ© pour implÃ©menter de nombreuses fonctionnalitÃ©s de sÃ©curitÃ© essentielles dans Wings8OS. Visitez le Centre d'aide Wings8OS pour en savoir plus : https://wings8.org/help/
         </message>
         <message name="IDS_EULA_SECURE_MODULE_DESCRIPTION" desc="Description of what a secure module does in the eula page.">
-          Votre ordinateur contient un module de sécurité, utilisé pour implémenter de nombreuses fonctionnalités de sécurité essentielles dans Wings8OS. Visitez le Centre d'aide Wings8OS pour en savoir plus : https://wings8.org/help/
+          Votre ordinateur contient un module de sÃ©curitÃ©, utilisÃ© pour implÃ©menter de nombreuses fonctionnalitÃ©s de sÃ©curitÃ© essentielles dans Wings8OS. Visitez le Centre d'aide Wings8OS pour en savoir plus : https://wings8.org/help/
         </message>
       </if>
       <if expr="lang != 'fr' and lang != 'fr-CA'">
@@ -389,39 +389,39 @@
     </if>
     <if expr="lang == 'fr' or lang == 'fr-CA'">
       <message name="IDS_ENABLE_DEBUGGING_HELP" desc="Help content of the enable debugging features dialog.">
-        <ph name="BEGIN_H3">&lt;h3&gt;</ph>Fonctionnalités de débogage<ph name="END_H3">&lt;/h3&gt;</ph>
+        <ph name="BEGIN_H3">&lt;h3&gt;</ph>FonctionnalitÃ©s de dÃ©bogage<ph name="END_H3">&lt;/h3&gt;</ph>
         <ph name="BR">&lt;br&gt;</ph>
-        Vous pouvez activer les fonctionnalités de débogage sur votre appareil Wings8OS afin d'installer et de tester du code personnalisé. Cela vous permettra de :<ph name="BR">&lt;br&gt;</ph>
+        Vous pouvez activer les fonctionnalitÃ©s de dÃ©bogage sur votre appareil Wings8OS afin d'installer et de tester du code personnalisÃ©. Cela vous permettra de :<ph name="BR">&lt;br&gt;</ph>
         <ph name="BEGIN_LIST">&lt;ul&gt;</ph>
-          <ph name="LIST_ITEM">&lt;li&gt;</ph>Supprimer la vérification rootfs pour pouvoir modifier les fichiers du système
-          <ph name="LIST_ITEM">&lt;li&gt;</ph>Activer l'accès SSH à l'appareil avec les clés de test standard pour utiliser des outils comme <ph name="BEGIN_CODE">&lt;span style=&quot;color:grey;font-family:monospace&quot;&gt;</ph>&apos;cros flash&apos;<ph name="END_CODE">&lt;/span&gt;</ph>
-          <ph name="LIST_ITEM">&lt;li&gt;</ph>Activer le démarrage depuis USB pour installer une image OS depuis une clé USB
-          <ph name="LIST_ITEM">&lt;li&gt;</ph>Définir le mot de passe root dev et système sur une valeur personnalisée pour un accès SSH manuel
+          <ph name="LIST_ITEM">&lt;li&gt;</ph>Supprimer la vÃ©rification rootfs pour pouvoir modifier les fichiers du systÃ¨me
+          <ph name="LIST_ITEM">&lt;li&gt;</ph>Activer l'accÃ¨s SSH Ã  l'appareil avec les clÃ©s de test standard pour utiliser des outils comme <ph name="BEGIN_CODE">&lt;span style=&quot;color:grey;font-family:monospace&quot;&gt;</ph>&apos;cros flash&apos;<ph name="END_CODE">&lt;/span&gt;</ph>
+          <ph name="LIST_ITEM">&lt;li&gt;</ph>Activer le dÃ©marrage depuis USB pour installer une image OS depuis une clÃ© USB
+          <ph name="LIST_ITEM">&lt;li&gt;</ph>DÃ©finir le mot de passe root dev et systÃ¨me sur une valeur personnalisÃ©e pour un accÃ¨s SSH manuel
         <ph name="END_LIST">&lt;/ul&gt;</ph>
         <ph name="BR">&lt;br&gt;</ph>
-        Une fois activées, la plupart des fonctionnalités de débogage resteront actives même après un powerwash ou un effacement des données sur un appareil géré par l'entreprise. Pour désactiver complètement toutes les fonctionnalités de débogage, effectuez le processus de restauration Wings8OS (https://wings8.org/help/).
+        Une fois activÃ©es, la plupart des fonctionnalitÃ©s de dÃ©bogage resteront actives mÃªme aprÃ¨s un powerwash ou un effacement des donnÃ©es sur un appareil gÃ©rÃ© par l'entreprise. Pour dÃ©sactiver complÃ¨tement toutes les fonctionnalitÃ©s de dÃ©bogage, effectuez le processus de restauration Wings8OS (https://wings8.org/help/).
         <ph name="BR">&lt;br&gt;</ph>
         <ph name="BR">&lt;br&gt;</ph>
-        Pour plus d'informations sur les fonctionnalités de débogage, consultez :<ph name="BR">&lt;br&gt;</ph>
+        Pour plus d'informations sur les fonctionnalitÃ©s de dÃ©bogage, consultez :<ph name="BR">&lt;br&gt;</ph>
         https://www.chromium.org/chromium-os/how-tos-and-troubleshooting/debugging-features
         <ph name="BR">&lt;br&gt;</ph>
         <ph name="BR">&lt;br&gt;</ph>
-        <ph name="BEGIN_BOLD">&lt;b&gt;</ph>Remarque :<ph name="END_BOLD">&lt;/b&gt;</ph>  Le système redémarrera pendant le processus.
+        <ph name="BEGIN_BOLD">&lt;b&gt;</ph>Remarque :<ph name="END_BOLD">&lt;/b&gt;</ph>  Le systÃ¨me redÃ©marrera pendant le processus.
       </message>
       <message name="IDS_AD_DEVICE_NAME_INPUT_LABEL" desc="Admin-facing. Label for device name input field on the Active Directory domain join screen. User should tell us the name of their device.">
         Nom de l'appareil Wings8OS
       </message>
       <message name="IDS_AD_BOARD_NOT_SUPPORTED" desc="Admin-facing. Alert message that the Chromebook model is not supported for Active Directory">
-        L'intégration Wings8OS <ph name="MS_AD_NAME">Microsoft® Active Directory®</ph> n'est prise en charge que sur les plateformes x86_64. Les appareils Wings8OS basés sur une plateforme ARM ou x86 ne supportent pas cette fonctionnalité.
+        L'intÃ©gration Wings8OS <ph name="MS_AD_NAME">MicrosoftÂ® Active DirectoryÂ®</ph> n'est prise en charge que sur les plateformes x86_64. Les appareils Wings8OS basÃ©s sur une plateforme ARM ou x86 ne supportent pas cette fonctionnalitÃ©.
       </message>
       <message name="IDS_ARC_SIGN_IN_BAD_AUTHENTICATION_ERROR" desc="Android sign-in error because of bad authentification">
-        Impossible de vérifier votre compte. Veuillez réessayer ou redémarrer votre appareil Wings8OS.
+        Impossible de vÃ©rifier votre compte. Veuillez rÃ©essayer ou redÃ©marrer votre appareil Wings8OS.
       </message>
       <message name="IDS_ARC_SERVER_COMMUNICATION_ERROR" desc="Android sign-in error because of server communication error">
-        Impossible de se connecter au serveur. Veuillez vérifier votre connexion réseau et réessayer. Si le problème persiste, redémarrez votre appareil Wings8OS.
+        Impossible de se connecter au serveur. Veuillez vÃ©rifier votre connexion rÃ©seau et rÃ©essayer. Si le problÃ¨me persiste, redÃ©marrez votre appareil Wings8OS.
       </message>
       <message name="IDS_HATS_NOTIFICATION_TITLE" desc="The title of the notification for Happiness Tracking Survey.">
-        Aidez-nous à améliorer Wings8OS
+        Aidez-nous Ã  amÃ©liorer Wings8OS
       </message>
       <message name="IDS_ARC_NOTIFICATION_DISPLAY_SOURCE" desc="Context title of the first-run notification that enables Android apps.">
         Android pour Wings8OS
@@ -436,10 +436,10 @@
         Compte Android Wings8OS
       </message>
       <message name="IDS_ARC_OPT_IN_ACTIVE_DIRECTORY_AUTH_DESC" desc="Description displayed in opt-in dialog to inform an Active Directory user that they may have to enter their credentials">
-        Pour activer l'accès de votre compte à la boutique Android Wings8OS, veuillez vous authentifier auprès de votre fournisseur d'identité.
+        Pour activer l'accÃ¨s de votre compte Ã  la boutique Android Wings8OS, veuillez vous authentifier auprÃ¨s de votre fournisseur d'identitÃ©.
       </message>
       <message name="IDS_ECHO_CONSENT_DIALOG_TEXT" desc="Dialog text shown when user is asked to give consent to proceed with redeeming an ECHO offer.">
-        <ph name="SERVICE_NAME">$1<ex>Google Drive</ex></ph> souhaite vérifier si vous utilisez un appareil Wings8OS éligible.
+        <ph name="SERVICE_NAME">$1<ex>Google Drive</ex></ph> souhaite vÃ©rifier si vous utilisez un appareil Wings8OS Ã©ligible.
       </message>
     </if>
     <if expr="lang != 'fr' and lang != 'fr-CA'">
@@ -467,7 +467,7 @@
         Wings8OS device name
       </message>
       <message name="IDS_AD_BOARD_NOT_SUPPORTED" desc="Admin-facing. Alert message that the Chromebook model is not supported for Active Directory">
-        Wings8OS <ph name="MS_AD_NAME">Microsoft® Active Directory®</ph> integration is only supported on x86_64 platforms. Wings8OS devices built on top of an ARM or x86 platform do not support this functionality.
+        Wings8OS <ph name="MS_AD_NAME">MicrosoftÂ® Active DirectoryÂ®</ph> integration is only supported on x86_64 platforms. Wings8OS devices built on top of an ARM or x86 platform do not support this functionality.
       </message>
       <message name="IDS_ARC_SIGN_IN_BAD_AUTHENTICATION_ERROR" desc="Android sign-in error because of bad authentification">
         Couldn't verify your account. Please try again or restart your Wings8OS device.
@@ -515,13 +515,13 @@
     </if>
     <if expr="lang == 'fr' or lang == 'fr-CA'">
       <message name="IDS_ENABLE_DEBUGGING_SETUP_MESSAGE" desc="Setup message in dialog for enabling debugging features.">
-      Vous activez les fonctionnalités de débogage Wings8OS qui configureront le démon sshd et activeront le démarrage depuis les clés USB.
+      Vous activez les fonctionnalitÃ©s de dÃ©bogage Wings8OS qui configureront le dÃ©mon sshd et activeront le dÃ©marrage depuis les clÃ©s USB.
       </message>
       <message name="IDS_WRONG_HWID_SCREEN_MESSAGE_FIRST_PART" desc="Warning message shown on screen notifying about malformed hardware ID. First paragraph.">
-        Malheureusement, votre ordinateur est configuré avec un identifiant matériel malformé. Cela empêche Wings8OS de se mettre à jour avec les derniers correctifs de sécurité et votre ordinateur <ph name="BEGIN_BOLD">$1</ph>peut être vulnérable aux attaques malveillantes<ph name="END_BOLD">$2</ph>.
+        Malheureusement, votre ordinateur est configurÃ© avec un identifiant matÃ©riel malformÃ©. Cela empÃªche Wings8OS de se mettre Ã  jour avec les derniers correctifs de sÃ©curitÃ© et votre ordinateur <ph name="BEGIN_BOLD">$1</ph>peut Ãªtre vulnÃ©rable aux attaques malveillantes<ph name="END_BOLD">$2</ph>.
       </message>
       <message name="IDS_FILEMANAGER_APP_DESCRIPTION" desc="Description for the File Manager app.">
-        L'application Fichiers offre un accès rapide aux fichiers enregistrés sur Google Drive, un stockage externe ou votre appareil Wings8OS.
+        L'application Fichiers offre un accÃ¨s rapide aux fichiers enregistrÃ©s sur Google Drive, un stockage externe ou votre appareil Wings8OS.
       </message>
     </if>
     <if expr="lang != 'fr' and lang != 'fr-CA'">
@@ -540,13 +540,13 @@
   <!-- === OS Trial subtitle === -->
   <if expr="lang == 'fr' or lang == 'fr-CA'">
     <message name="IDS_OS_TRIAL_SUBTITLE" desc="Subtitle of the install or try screen, the first screen of the ChromeOS Flex Installation flow">
-      <ph name="BEGIN_PARAGRAPH1">&lt;p&gt;</ph><ph name="DEVICE_OS">$1<ex>Wings8OS</ex></ph> est un système d'exploitation français, souverain et open core, spécialement conçu pour fonctionner exclusivement sur le dispositif Wings8. Il s'exécute en natif sur votre appareil, sans nécessiter d'installation sur disque dur.<ph name="END_PARAGRAPH1">&lt;/p&gt;</ph>
-      <ph name="BEGIN_PARAGRAPH2">&lt;p&gt;</ph>Il offre une gestion intelligente de la mémoire virtuelle, ce qui permet d'optimiser les performances même lorsque la RAM physique est limitée. De plus, en cas de panne du disque dur, votre appareil Wings8 assure automatiquement la continuité de service.<ph name="END_PARAGRAPH2">&lt;/p&gt;</ph>
+      <ph name="BEGIN_PARAGRAPH1">&lt;p&gt;</ph><ph name="DEVICE_OS">$1<ex>Wings8OS</ex></ph> est un systÃ¨me d'exploitation franÃ§ais, souverain et open core, spÃ©cialement conÃ§u pour fonctionner exclusivement sur le dispositif Wings8. Il s'exÃ©cute en natif sur votre appareil, sans nÃ©cessiter d'installation sur disque dur.<ph name="END_PARAGRAPH1">&lt;/p&gt;</ph>
+      <ph name="BEGIN_PARAGRAPH2">&lt;p&gt;</ph>Il offre une gestion intelligente de la mÃ©moire virtuelle, ce qui permet d'optimiser les performances mÃªme lorsque la RAM physique est limitÃ©e. De plus, en cas de panne du disque dur, votre appareil Wings8 assure automatiquement la continuitÃ© de service.<ph name="END_PARAGRAPH2">&lt;/p&gt;</ph>
     </message>
   </if>
   <if expr="lang != 'fr' and lang != 'fr-CA'">
     <message name="IDS_OS_TRIAL_SUBTITLE" desc="Subtitle of the install or try screen, the first screen of the ChromeOS Flex Installation flow">
-      <ph name="BEGIN_PARAGRAPH1">&lt;p&gt;</ph><ph name="DEVICE_OS">$1<ex>Wings8OS</ex></ph> is a French, sovereign, and open-core operating system, specially designed to run exclusively on the Wings8 device. It runs natively on your device, without requiring installation on a hard drive.<ph name="END_PARAGRAPH1">&lt;/p&gt;</ph>
+      <ph name="BEGIN_PARAGRAPH1">&lt;p&gt;</ph><ph name="DEVICE_OS">$1<ex>Wings8OS</ex></ph> is an India sovereign and open-core operating system, specially designed to run exclusively on the Wings8 device. It runs natively on your device, without requiring installation on a hard drive.<ph name="END_PARAGRAPH1">&lt;/p&gt;</ph>
       <ph name="BEGIN_PARAGRAPH2">&lt;p&gt;</ph>It offers intelligent virtual memory management, which optimises performance even when physical RAM is limited. Additionally, in the event of a hard drive failure, your Wings8 device automatically ensures service continuity.<ph name="END_PARAGRAPH2">&lt;/p&gt;</ph>
     </message>
   </if>
@@ -558,10 +558,10 @@
         Bienvenue sur Steam pour appareil openWings8
       </message>
       <message name="IDS_BOREALIS_INSTALLER_CONFIRMATION_MESSAGE" desc="Body text shown in the installer for 'Steam for Chromebook'.">
-        Il s'agit d'un programme bêta. Vous pouvez maintenant utiliser Steam pour jouer à certains jeux sur votre appareil openWings8.
+        Il s'agit d'un programme bÃªta. Vous pouvez maintenant utiliser Steam pour jouer Ã  certains jeux sur votre appareil openWings8.
       </message>
       <message name="IDS_BOREALIS_INSTALLER_ERROR_UPDATE" desc="Body for Steam (noun, name of app) installer when installation fails due to device being out of date.">
-        Assurez-vous que votre openWings8 est à jour. Ensuite, redémarrez votre appareil openWings8 et réessayez.
+        Assurez-vous que votre openWings8 est Ã  jour. Ensuite, redÃ©marrez votre appareil openWings8 et rÃ©essayez.
       </message>
       <message name="IDS_BOREALIS_INSTALLER_ONGOING_TITLE" desc="Title for installer while Steam (noun, name of app) is installing.">
         Configuration de Steam sur l'appareil openWings8
@@ -570,16 +570,16 @@
         Profitez du jeu sur votre appareil openWings8
       </message>
       <message name="IDS_BOREALIS_INSTALLER_ERROR_TITLE" desc="Title for installer when Steam (noun, name of app) fails to install.">
-        Un problème est survenu lors de la configuration de Steam sur l'appareil openWings8
+        Un problÃ¨me est survenu lors de la configuration de Steam sur l'appareil openWings8
       </message>
       <message name="IDS_BOREALIS_INSTALLER_ERROR_REBOOT" desc="Body for Steam (noun, name of app) installer when a restart is needed.">
-        Veuillez redémarrer votre appareil pour utiliser Steam sur l'appareil openWings8
+        Veuillez redÃ©marrer votre appareil pour utiliser Steam sur l'appareil openWings8
       </message>
       <message name="IDS_BOREALIS_INSTALLER_ERROR_STARTUP" desc="Body for Steam (noun, name of app) installer when installation fails trying to start up after installing">
-        Impossible de lancer Steam sur l'appareil openWings8. Veuillez réessayer
+        Impossible de lancer Steam sur l'appareil openWings8. Veuillez rÃ©essayer
       </message>
       <message name="IDS_BOREALIS_DISALLOWED_HARDWARE" desc="Message shown to the user when 'Steam for Chromebook' is disabled on their device">
-        Steam (bêta) n'est pas disponible sur votre appareil openWings8.
+        Steam (bÃªta) n'est pas disponible sur votre appareil openWings8.
       </message>
     </if>
     <if expr="lang != 'fr' and lang != 'fr-CA'">
@@ -620,10 +620,10 @@
         Bienvenue sur Steam pour appareil Wings8OS
       </message>
       <message name="IDS_BOREALIS_INSTALLER_CONFIRMATION_MESSAGE" desc="Body text shown in the installer for 'Steam for Chromebook'.">
-        Il s'agit d'un programme bêta. Vous pouvez maintenant utiliser Steam pour jouer à certains jeux sur votre appareil Wings8OS.
+        Il s'agit d'un programme bÃªta. Vous pouvez maintenant utiliser Steam pour jouer Ã  certains jeux sur votre appareil Wings8OS.
       </message>
       <message name="IDS_BOREALIS_INSTALLER_ERROR_UPDATE" desc="Body for Steam (noun, name of app) installer when installation fails due to device being out of date.">
-        Assurez-vous que votre Wings8OS est à jour. Ensuite, redémarrez votre appareil Wings8OS et réessayez.
+        Assurez-vous que votre Wings8OS est Ã  jour. Ensuite, redÃ©marrez votre appareil Wings8OS et rÃ©essayez.
       </message>
       <message name="IDS_BOREALIS_INSTALLER_ONGOING_TITLE" desc="Title for installer while Steam (noun, name of app) is installing.">
         Configuration de Steam sur l'appareil Wings8OS
@@ -632,16 +632,16 @@
         Profitez du jeu sur votre appareil Wings8OS
       </message>
       <message name="IDS_BOREALIS_INSTALLER_ERROR_TITLE" desc="Title for installer when Steam (noun, name of app) fails to install.">
-        Un problème est survenu lors de la configuration de Steam sur l'appareil Wings8OS
+        Un problÃ¨me est survenu lors de la configuration de Steam sur l'appareil Wings8OS
       </message>
       <message name="IDS_BOREALIS_INSTALLER_ERROR_REBOOT" desc="Body for Steam (noun, name of app) installer when a restart is needed.">
-        Veuillez redémarrer votre appareil pour utiliser Steam sur l'appareil Wings8OS
+        Veuillez redÃ©marrer votre appareil pour utiliser Steam sur l'appareil Wings8OS
       </message>
       <message name="IDS_BOREALIS_INSTALLER_ERROR_STARTUP" desc="Body for Steam (noun, name of app) installer when installation fails trying to start up after installing">
-        Impossible de lancer Steam sur l'appareil Wings8OS. Veuillez réessayer
+        Impossible de lancer Steam sur l'appareil Wings8OS. Veuillez rÃ©essayer
       </message>
       <message name="IDS_BOREALIS_DISALLOWED_HARDWARE" desc="Message shown to the user when 'Steam for Chromebook' is disabled on their device">
-        Steam (bêta) n'est pas disponible sur votre appareil Wings8OS.
+        Steam (bÃªta) n'est pas disponible sur votre appareil Wings8OS.
       </message>
     </if>
     <if expr="lang != 'fr' and lang != 'fr-CA'">
@@ -678,10 +678,10 @@
   <!-- === Crostini / Linux === -->
   <if expr="lang == 'fr' or lang == 'fr-CA'">
     <message name="IDS_CROSTINI_INSTALLER_NEED_UPDATE_TITLE" desc="Title shown in the Crostini installer dialog when the VM fails to install because the device must be updated">
-      Mise à jour Wings8OS requise
+      Mise Ã  jour Wings8OS requise
     </message>
     <message name="IDS_CROSTINI_INSTALLER_NEED_UPDATE_ERROR" desc="Text shown in the Crostini installer dialog when the VM fails to install because the device must be updated first">
-      Pour terminer la configuration de Linux, mettez à jour Wings8OS et réessayez.
+      Pour terminer la configuration de Linux, mettez Ã  jour Wings8OS et rÃ©essayez.
     </message>
   </if>
   <if expr="lang != 'fr' and lang != 'fr-CA'">
@@ -696,10 +696,10 @@
   <!-- === Bluetooth pairing === -->
   <if expr="lang == 'fr' or lang == 'fr-CA'">
     <message name="IDS_BLUETOOTH_PAIRING_LEARN_MORE" desc="Bluetooth pairing dialog: Message informing the user on what actions to take in order to see a device in the list of available devices.">
-      Assurez-vous que votre appareil Bluetooth est en mode d'appairage et à proximité. N'appairez que des appareils de confiance. Les appareils appairés sont visibles par tous les comptes sur cet <ph name="DEVICE_TYPE">$1</ph>. <ph name="BEGIN_LINK_LEARN_MORE">&lt;a target="_blank" href="$2"&gt;</ph>En savoir plus<ph name="END_LINK_LEARN_MORE">&lt;/a&gt;</ph>
+      Assurez-vous que votre appareil Bluetooth est en mode d'appairage et Ã  proximitÃ©. N'appairez que des appareils de confiance. Les appareils appairÃ©s sont visibles par tous les comptes sur cet <ph name="DEVICE_TYPE">$1</ph>. <ph name="BEGIN_LINK_LEARN_MORE">&lt;a target="_blank" href="$2"&gt;</ph>En savoir plus<ph name="END_LINK_LEARN_MORE">&lt;/a&gt;</ph>
     </message>
     <message name="IDS_BLUETOOTH_PAIRING_DESCRIPTION" desc="Bluetooth pairing dialog: Message informing the user on what actions to take in order to see a device in the list of available devices.">
-      Assurez-vous que votre appareil Bluetooth est en mode d'appairage et à proximité. N'appairez que des appareils de confiance. Les appareils appairés sont visibles par tous les comptes sur cet <ph name="DEVICE_TYPE">$1</ph>.
+      Assurez-vous que votre appareil Bluetooth est en mode d'appairage et Ã  proximitÃ©. N'appairez que des appareils de confiance. Les appareils appairÃ©s sont visibles par tous les comptes sur cet <ph name="DEVICE_TYPE">$1</ph>.
     </message>
   </if>
   <if expr="lang != 'fr' and lang != 'fr-CA'">
@@ -714,7 +714,7 @@
   <!-- === Enterprise enrollment === -->
   <if expr="lang == 'fr' or lang == 'fr-CA'">
     <message name="IDS_ENTERPRISE_ENROLLMENT_KIOSK_CONFIRM_MESSAGE" desc="Message of kiosk confirm enrollment screen.">
-      Vous utiliserez une mise à niveau kiosque et affichage qui ne permet à l'appareil de fonctionner qu'en mode kiosque ou affichage. Si vous souhaitez que les utilisateurs se connectent à l'appareil, veuillez revenir en arrière et vous inscrire avec un appareil business+.
+      Vous utiliserez une mise Ã  niveau kiosque et affichage qui ne permet Ã  l'appareil de fonctionner qu'en mode kiosque ou affichage. Si vous souhaitez que les utilisateurs se connectent Ã  l'appareil, veuillez revenir en arriÃ¨re et vous inscrire avec un appareil business+.
     </message>
     <message name="IDS_ENTERPRISE_ENROLLMENT_MISSING_LICENSES_ERROR" desc="Error message to show when the domain the device is trying to enroll into has expired or exhausted licenses.">
       Vous n'avez pas assez de licences pour inscrire cet appareil. Veuillez contacter le service commercial pour en acheter davantage. Si vous pensez que ce message est une erreur, veuillez contacter le support.
@@ -732,10 +732,10 @@
   <!-- === Gemini / Wings8OS AI === -->
   <if expr="lang == 'fr' or lang == 'fr-CA'">
     <message name="IDS_GEMINI_INTRO_TITLE" desc="The title of the gemini intro dialog">
-      Découvrez Wings8OS AI, votre assistant IA au niveau du système
+      DÃ©couvrez Wings8OS AI, votre assistant IA au niveau du systÃ¨me
     </message>
     <message name="IDS_GEMINI_INTRO_SUBTITLE" desc="The subtitle of the gemini intro dialog">
-      <ph name="BEGIN_PARAGRAPH1">&lt;p&gt;</ph>Lancez une conversation rapide dans Wings8OS AI pour commencer à écrire, planifier, apprendre et bien plus encore en créant divers assistants IA. Wings8OS AI est également accessible en appuyant sur Ctrl + C + C n'importe où pour des actions rapides personnalisables.<ph name="END_PARAGRAPH1">&lt;/p&gt;</ph>
+      <ph name="BEGIN_PARAGRAPH1">&lt;p&gt;</ph>Lancez une conversation rapide dans Wings8OS AI pour commencer Ã  Ã©crire, planifier, apprendre et bien plus encore en crÃ©ant divers assistants IA. Wings8OS AI est Ã©galement accessible en appuyant sur Ctrl + C + C n'importe oÃ¹ pour des actions rapides personnalisables.<ph name="END_PARAGRAPH1">&lt;/p&gt;</ph>
       <ph name="BEGIN_PARAGRAPH2">&lt;p&gt;</ph>Pour utiliser Wings8OS AI, vous devez vous connecter avec un compte Wings8OS. Si vous n'en avez pas encore, vous pouvez vous inscrire gratuitement.<ph name="END_PARAGRAPH2">&lt;/p&gt;</ph>
     </message>
   </if>
@@ -753,10 +753,10 @@
   <if expr="openwings8">
     <if expr="lang == 'fr' or lang == 'fr-CA'">
       <message name="IDS_OOBE_CHROMEVOX_HINT_ANNOUNCEMENT_TEXT_LAPTOP_EXPANDED" desc="The new string spoken when the ChromeVox hint is activated when the device is in laptop mode." is_accessibility_with_no_ui="true">
-        Le lecteur d'écran openWings8, ChromeVox, est principalement utilisé par les personnes aveugles ou malvoyantes pour lire le texte affiché à l'écran avec un synthétiseur vocal ou un afficheur braille. Appuyez sur la barre d'espace pour activer ChromeVox. Une fois ChromeVox activé, vous suivrez une visite guidée rapide.
+        Le lecteur d'Ã©cran openWings8, ChromeVox, est principalement utilisÃ© par les personnes aveugles ou malvoyantes pour lire le texte affichÃ© Ã  l'Ã©cran avec un synthÃ©tiseur vocal ou un afficheur braille. Appuyez sur la barre d'espace pour activer ChromeVox. Une fois ChromeVox activÃ©, vous suivrez une visite guidÃ©e rapide.
       </message>
       <message name="IDS_OOBE_CHROMEVOX_HINT_ANNOUNCEMENT_TEXT_TABLET_EXPANDED" desc="The new string spoken when the ChromeVox hint is activated when the device is in tablet mode." is_accessibility_with_no_ui="true">
-        Le lecteur d'écran openWings8, ChromeVox, est principalement utilisé par les personnes aveugles ou malvoyantes pour lire le texte affiché à l'écran avec un synthétiseur vocal ou un afficheur braille. Maintenez les deux touches de volume enfoncées pendant cinq secondes pour activer ChromeVox. Une fois ChromeVox activé, vous suivrez une visite guidée rapide.
+        Le lecteur d'Ã©cran openWings8, ChromeVox, est principalement utilisÃ© par les personnes aveugles ou malvoyantes pour lire le texte affichÃ© Ã  l'Ã©cran avec un synthÃ©tiseur vocal ou un afficheur braille. Maintenez les deux touches de volume enfoncÃ©es pendant cinq secondes pour activer ChromeVox. Une fois ChromeVox activÃ©, vous suivrez une visite guidÃ©e rapide.
       </message>
     </if>
     <if expr="lang != 'fr' and lang != 'fr-CA'">
@@ -773,10 +773,10 @@
   <if expr="not openwings8">
     <if expr="lang == 'fr' or lang == 'fr-CA'">
       <message name="IDS_OOBE_CHROMEVOX_HINT_ANNOUNCEMENT_TEXT_LAPTOP_EXPANDED" desc="The new string spoken when the ChromeVox hint is activated when the device is in laptop mode." is_accessibility_with_no_ui="true">
-        Le lecteur d'écran Wings8OS, ChromeVox, est principalement utilisé par les personnes aveugles ou malvoyantes pour lire le texte affiché à l'écran avec un synthétiseur vocal ou un afficheur braille. Appuyez sur la barre d'espace pour activer ChromeVox. Une fois ChromeVox activé, vous suivrez une visite guidée rapide.
+        Le lecteur d'Ã©cran Wings8OS, ChromeVox, est principalement utilisÃ© par les personnes aveugles ou malvoyantes pour lire le texte affichÃ© Ã  l'Ã©cran avec un synthÃ©tiseur vocal ou un afficheur braille. Appuyez sur la barre d'espace pour activer ChromeVox. Une fois ChromeVox activÃ©, vous suivrez une visite guidÃ©e rapide.
       </message>
       <message name="IDS_OOBE_CHROMEVOX_HINT_ANNOUNCEMENT_TEXT_TABLET_EXPANDED" desc="The new string spoken when the ChromeVox hint is activated when the device is in tablet mode." is_accessibility_with_no_ui="true">
-        Le lecteur d'écran Wings8OS, ChromeVox, est principalement utilisé par les personnes aveugles ou malvoyantes pour lire le texte affiché à l'écran avec un synthétiseur vocal ou un afficheur braille. Maintenez les deux touches de volume enfoncées pendant cinq secondes pour activer ChromeVox. Une fois ChromeVox activé, vous suivrez une visite guidée rapide.
+        Le lecteur d'Ã©cran Wings8OS, ChromeVox, est principalement utilisÃ© par les personnes aveugles ou malvoyantes pour lire le texte affichÃ© Ã  l'Ã©cran avec un synthÃ©tiseur vocal ou un afficheur braille. Maintenez les deux touches de volume enfoncÃ©es pendant cinq secondes pour activer ChromeVox. Une fois ChromeVox activÃ©, vous suivrez une visite guidÃ©e rapide.
       </message>
     </if>
     <if expr="lang != 'fr' and lang != 'fr-CA'">
@@ -792,7 +792,7 @@
   <!-- === PIN setup === -->
   <if expr="lang == 'fr' or lang == 'fr-CA'">
     <message name="IDS_DISCOVER_PIN_SETUP_PIN_AS_MAIN_FACTOR_SUBTITLE" desc="A sub-title of the dialog asking the user to set up a PIN as the main factor for signing in.">
-      Au lieu de saisir le mot de passe de votre compte en ligne pour vous connecter, vous pouvez créer un code PIN pour cet <ph name="DEVICE_TYPE">$1<ex>Chromebook</ex></ph>
+      Au lieu de saisir le mot de passe de votre compte en ligne pour vous connecter, vous pouvez crÃ©er un code PIN pour cet <ph name="DEVICE_TYPE">$1<ex>Chromebook</ex></ph>
     </message>
   </if>
   <if expr="lang != 'fr' and lang != 'fr-CA'">
@@ -804,7 +804,7 @@
   <!-- === OneDrive / Files app === -->
   <if expr="lang == 'fr' or lang == 'fr-CA'">
     <message name="IDS_CONNECT_TO_ONEDRIVE_BODY_TEXT" desc="Explanation text for a dialog which allows the user to connect Files app and Microsoft OneDrive storage.">
-      Associez OneDrive à l'appli Fichiers pour gérer vos documents stockés depuis votre PC Wings8. Vous devez vous connecter avec votre compte Microsoft.
+      Associez OneDrive Ã  l'appli Fichiers pour gÃ©rer vos documents stockÃ©s depuis votre PC Wings8. Vous devez vous connecter avec votre compte Microsoft.
     </message>
     <message name="IDS_OFFICE_WELCOME_BODY_TEXT" desc="Body text for the welcome dialog when the user sets up Microsoft Office for the first time.">
       <ph name="LINK_BEGIN">&lt;a href="https://support.google.com/chromebook?p=edit_office_files" target="_blank"&gt;</ph>En savoir plus<ph name="LINK_END">&lt;/a&gt;</ph> sur Microsoft 365 pour votre PC Wings8.
@@ -820,3 +820,4 @@
   </if>
 
 </grit-part>
+

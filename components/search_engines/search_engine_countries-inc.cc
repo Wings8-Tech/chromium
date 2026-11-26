@@ -375,8 +375,8 @@ constexpr EngineAndTier engines_FO[] = {
 
 // France
 constexpr EngineAndTier engines_FR[] = {
-    {SearchEngineTier::kTopEngines, &qwant}, // ← DEFAULT
-    {SearchEngineTier::kTopEngines, &google},
+    {SearchEngineTier::kTopEngines, &google}, // DEFAULT
+    {SearchEngineTier::kTopEngines, &qwant},
     {SearchEngineTier::kTopEngines, &brave},
     {SearchEngineTier::kTopEngines, &ecosia},
     {SearchEngineTier::kTopEngines, &bing},
