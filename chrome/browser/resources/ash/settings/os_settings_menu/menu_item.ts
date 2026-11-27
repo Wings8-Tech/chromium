@@ -42,6 +42,12 @@ export class OsSettingsMenuItemElement extends PolymerElement {
         value: '',
       },
 
+      /** Optional full-color icon image URL. */
+      iconSrc: {
+        type: String,
+        value: '',
+      },
+
       label: {
         type: String,
         value: '',
@@ -80,6 +86,7 @@ export class OsSettingsMenuItemElement extends PolymerElement {
   }
 
   icon: string;
+  iconSrc: string;
   path: string;
   label: string;
   sublabel: string;
