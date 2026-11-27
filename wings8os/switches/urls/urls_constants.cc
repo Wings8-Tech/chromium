@@ -14,7 +14,7 @@ const char kWings8OSHomePageUrl[] = "https://wings8.org";
 const char kOpenWings8HomePageUrl[] = "https://wings8.org";
 
 const char kWings8OSStoreBaseUrl[] = "https://chromewebstore.google.com/category/extensions";
-const char kWings8OSAccountBaseUrl[] = "https://86db242e-958e-432e-a6c2-0b19a92beeb6.auth-app.wings8tech.com";
+const char kWings8OSAccountBaseUrl[] = "https://auth-app.wings8tech.com/86db242e-958e-432e-a6c2-0b19a92beeb6";
 
 const char kWings8OSForumURL[] = "https://wings8.org/";
 const char kWings8OSRemoteDesktopURL[] = "https://remote.wings8.org/";
@@ -81,7 +81,7 @@ const char kOpenWings8HomePageUrl[] = "https://wings8.org/"; // https://wings8.o
 // NOTE: Keep this without a trailing slash because callers append their own
 // paths/query params.
 const char kWings8OSStoreBaseUrl[] = "https://chromewebstore.google.com";
-const char kWings8OSAccountBaseUrl[] = "https://86db242e-958e-432e-a6c2-0b19a92beeb6.auth-app.wings8tech.com";
+const char kWings8OSAccountBaseUrl[] = "https://auth-app.wings8tech.com/86db242e-958e-432e-a6c2-0b19a92beeb6";
 
 const char kWings8OSForumURL[] = "https://wings8.org/"; // https://community.wings8.org/
 const char kWings8OSRemoteDesktopURL[] = "https://remote.wings8.org/";
@@ -105,9 +105,9 @@ const char kControlledScrollingHelpURL[] = "https://wings8.org/?ospath=docs/manu
 const char kTimeZoneSettingsLearnMoreURL[] = "https://wings8.org/?ospath=help/manual/customize-settings/appearance/set-the-date-and-time/";
 const char kResetProfileSettingsLearnMoreURL[] = "https://wings8.org/?ospath=help/manual/customize-settings/privacy/reset-chromium-settings-to-default/";
 const char kCrosBatterySaverLearnMoreURL[] = "https://wings8.org/?ospath=help/manual/customize-settings/advanced-settings/battery-saver/";
-const char kWings8OSAccountURL[] = "https://86db242e-958e-432e-a6c2-0b19a92beeb6.auth-app.wings8tech.com";
-const char kWings8OSAccountChooserURL[] = "https://86db242e-958e-432e-a6c2-0b19a92beeb6.auth-app.wings8tech.com";
-const char kWings8OSPasswordManagerURL[] = "https://86db242e-958e-432e-a6c2-0b19a92beeb6.auth-app.wings8tech.com";
+const char kWings8OSAccountURL[] = "https://auth-app.wings8tech.com/86db242e-958e-432e-a6c2-0b19a92beeb6";
+const char kWings8OSAccountChooserURL[] = "https://auth-app.wings8tech.com/86db242e-958e-432e-a6c2-0b19a92beeb6";
+const char kWings8OSPasswordManagerURL[] = "https://auth-app.wings8tech.com/86db242e-958e-432e-a6c2-0b19a92beeb6";
 
 const char kGoogleDriveBuyStorageUrl[] = "https://wings8.org/?ospath=docs/knowledge-base";
 const char kGoogleDriveOverviewUrl[] = "https://wings8.org/?ospath=docs/knowledge-base";

@@ -9,15 +9,15 @@ namespace wings8os::constants {
 
 #if BUILDFLAG(USE_WINGS8OS_COM)
 
-const char kDefaultWings8OSGaiaUrl[] = "https://8ab03d25-4808-4e5e-bf86-c9739f5b65eb.auth-app.wings8tech.com";
-const char kDefaultWings8OSApisBaseUrl[] = "https://8ab03d25-4808-4e5e-bf86-c9739f5b65eb.auth-app.wings8tech.com";
-const char kDefaultWings8OSDeviceManagementServerUrl[] = "https://8ab03d25-4808-4e5e-bf86-c9739f5b65eb.auth-app.wings8tech.com/devicemanagement";
+const char kDefaultWings8OSGaiaUrl[] = "https://auth-app.wings8tech.com/8ab03d25-4808-4e5e-bf86-c9739f5b65eb";
+const char kDefaultWings8OSApisBaseUrl[] = "https://auth-app.wings8tech.com/8ab03d25-4808-4e5e-bf86-c9739f5b65eb";
+const char kDefaultWings8OSDeviceManagementServerUrl[] = "https://auth-app.wings8tech.com/8ab03d25-4808-4e5e-bf86-c9739f5b65eb/devicemanagement";
 const char kDefaultWings8OSRealtimeReportingServerUrl[] =
   "https://apis.wings8.org/report/events";
 const char kDefaultWings8OSEncryptedReportingServerUrl[] =
   "https://apis.wings8.org/report/record";
-const char kWings8OSSyncDevServerUrl[] = "https://8ab03d25-4808-4e5e-bf86-c9739f5b65eb.auth-app.wings8tech.com/chrome-sync";
-const char kWings8OSSyncServerUrl[] = "https://8ab03d25-4808-4e5e-bf86-c9739f5b65eb.auth-app.wings8tech.com/chrome-sync";
+const char kWings8OSSyncDevServerUrl[] = "https://auth-app.wings8tech.com/8ab03d25-4808-4e5e-bf86-c9739f5b65eb/chrome-sync";
+const char kWings8OSSyncServerUrl[] = "https://auth-app.wings8tech.com/8ab03d25-4808-4e5e-bf86-c9739f5b65eb/chrome-sync";
 const char kDefaultWings8OSFamilyLinkApisUrl[] =
   "https://familylink-apis.wings8.org/kidsmanagement/v1/";
 
@@ -26,7 +26,7 @@ const char kDefaultWings8RemotingServerEndpoint[] = "remoting.wings8.org";
 
 #else
 
-const char kDefaultWings8OSGaiaUrl[] = "https://8ab03d25-4808-4e5e-bf86-c9739f5b65eb.auth-app.wings8tech.com";
+const char kDefaultWings8OSGaiaUrl[] = "https://auth-app.wings8tech.com/8ab03d25-4808-4e5e-bf86-c9739f5b65eb";
 const char kDefaultWings8OSApisBaseUrl[] = "https://apis.wings8.org";
 const char kDefaultWings8OSDeviceManagementServerUrl[] =
   "https://policy.wings8.org";
