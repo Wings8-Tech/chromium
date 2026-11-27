@@ -63,6 +63,7 @@ interface MenuItemData {
   section: routesMojom.Section;
   path: string;
   icon: string;
+  iconSrc?: string;
   label: string;
 
   // Sublabels should only exist when OsSettingsRevampWayfinding is enabled.
