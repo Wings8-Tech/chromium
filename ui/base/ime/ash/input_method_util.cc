@@ -719,12 +719,6 @@ void InputMethodUtil::UpdateHardwareLayoutCache() {
   hardware_layouts_ = cached_hardware_layouts_;
   GetMigratedInputMethodIDs(&hardware_layouts_);
 
-  // Wings8OS: always offer the US keyboard first so OOBE defaults to
-  // xkb:us::eng even when the VPD still carries a legacy FR layout.
-  if (hardware_layouts_.empty() || hardware_layouts_.front() != "xkb:us::eng") {
-    hardware_layouts_.insert(hardware_layouts_.begin(), "xkb:us::eng");
-  }
-
   bool has_xkb = false;
   for (const auto& hardware_layout : hardware_layouts_) {
     if (IsLoginKeyboard(hardware_layout)) {
@@ -757,10 +751,6 @@ void InputMethodUtil::UpdateHardwareLayoutCache() {
     if (hardware_layouts_.empty() || has_xkb) {
       hardware_layouts_.insert(hardware_layouts_.begin(), fallback_id);
     }
-  }
-
-  if (hardware_login_layouts_.front() != "xkb:us::eng") {
-    hardware_login_layouts_.insert(hardware_login_layouts_.begin(), "xkb:us::eng");
   }
 }
 
